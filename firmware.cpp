@@ -28,7 +28,8 @@ class FirmwareUsb {
 		FirmwareUsb();
 		void ConnectFirmware();
 		void PrintUsbDev();
-		void SendDataFirmware();
+		void SendDataFirmware(const uint32_t time) const;
+		//void resp_init()
 		~FirmwareUsb();
 
 	private:
@@ -51,7 +52,7 @@ void FirmwareUsb::ConnectFirmware() {
 	handle = hid_open(product_id, vendor_id, NULL);
 	if(!handle) {
 		cout << "Unable to open device" << endl;
-		return;
+		throw exception();
 	}
 
 	usb_str[0] = 0x0000;
@@ -83,11 +84,11 @@ void FirmwareUsb::ConnectFirmware() {
 	printf("Indexed String 1: %ls\n", usb_str);
 }
 
-void FirmwareUsb::SendDataFirmware() {
+void FirmwareUsb::SendDataFirmware(const uint32_t time) const {
 	int res;
 	static uint8_t *data;
 	RESP_INIT(TestScreen);
-	resp->delay_time = 5;
+	resp->delay_time = time;
 	msg_write(MessageType_MessageType_TestScreen, resp);
 	
 	data = msg_out_data();
@@ -129,8 +130,8 @@ FirmwareUsb::~FirmwareUsb() {
 int main()
 {
 	FirmwareUsb firmware;
-//	firmware.PrintUsbDev();
+	firmware.PrintUsbDev();
 	firmware.ConnectFirmware();
-	firmware.SendDataFirmware();
+	firmware.SendDataFirmware(5);
 	return 0;
 }
