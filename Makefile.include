@@ -7,47 +7,16 @@ OPTFLAGS  = -Os -g
 CFLAGS   += $(OPTFLAGS) \
             -W \
             -Wall \
-            -Wextra \
-            -Wimplicit-function-declaration \
-            -Wredundant-decls \
-            -Wstrict-prototypes \
-            -Wundef \
-            -Wshadow \
-            -Wpointer-arith \
-            -Wformat \
-            -Wreturn-type \
-            -Wsign-compare \
-            -Wmultichar \
-            -Wformat-nonliteral \
-            -Winit-self \
-            -Wuninitialized \
-            -Wformat-security \
-            -Werror \
-            -fno-common \
-            -fno-exceptions \
-            -fvisibility=internal \
-            -ffunction-sections \
-            -fdata-sections \
-            -fstack-protector-all \
-            -mcpu=cortex-m3 \
-            -mthumb \
-            -msoft-float \
+		    -I$(TOP_DIR)\
+			-I$(TOP_DIR)/protob	
 
+CLIBS 	  = -lhidapi-libusb
+#CLIBS	 += -lhidapi-hiddraw
 
-LDFLAGS  += --static \
-            -Wl,--start-group \
-            -lc \
-            -lgcc \
-            -lnosys \
-            -Wl,--end-group \
-            -L$(TOP_DIR) \
-            -T$(LDSCRIPT) \
-            -nostartfiles \
-            -Wl,--gc-sections \
-            -mthumb \
-            -msoft-float
+all: $(NAME)
 
-all: firmware
+$(NAME): $(OBJS)
+	$(CC) -o $(NAME) $(OBJS) $(CFLAGS) $(CLIBS)
 
 %.o: %.cpp Makefile
 	$(CC) $(CFLAGS) -o $@ -c $<
@@ -56,7 +25,4 @@ all: firmware
 	$(CC) $(CFLAGS) -o $@ -c $<
 
 clean:
-	rm -f $(OBJS)
-	rm -f *.a
-	rm -f *.elf
-	rm -f *.list
+	rm -f $(OBJS) $(NAME)
