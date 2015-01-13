@@ -8,7 +8,10 @@ static uint8_t msg_resp[MSG_OUT_SIZE];
 #define RESP_INIT(TYPE) TYPE *resp = (TYPE *)msg_resp; memset(resp, 0, sizeof(TYPE));
 
 static struct option opts[] = {
-	{"time", 1, NULL, 't'},
+	{"help",	0, NULL, 'h'},
+	{"print", 	0, NULL, 'p'},
+	{"version", 0, NULL, 'v'},
+	{"time", 	1, NULL, 't'},
 	{0, 0, 0, 0}
 };
 

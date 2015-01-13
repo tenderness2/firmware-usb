@@ -14,6 +14,7 @@
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
+#include <cerrno>
 #include <hidapi/hidapi.h>
 
 #include "messages.pb.h"
@@ -121,19 +122,54 @@ void test(uint32_t time)
 
 }
 
+static inline void help(void)
+{
+	fprintf(stderr, "Usage: dfu-util [options] ...\n"
+			"  -h --help\t\t\tPrint this help message\n"
+			"  -v --version\t\t\tPrint the version number\n"
+			"  -p --print\t\t\tList currently usb devices\n");
+	fprintf(stderr, "  -t --time\t\t\tTest BWallet Screen time \n"
+			"  -E --detach-delay seconds\tTime to wait before reopening a device after detach\n"
+			"  -d --device <vendor>:<product>[,<vendor_dfu>:<product_dfu>]\n"
+			"\t\t\t\tSpecify Vendor/Product ID(s) of DFU device\n"
+			"  -c --cfg <config_nr>\t\tSpecify the Configuration of DFU device\n"
+			"  -i --intf <intf_nr>\t\tSpecify the DFU Interface number\n"
+			"  -S --serial <serial_string>[,<serial_string_dfu>]\n"
+			"\t\t\t\tSpecify Serial String of DFU device\n"
+			"  -a --alt <alt>\t\tSpecify the Altsetting of the DFU Interface\n"
+			"\t\t\t\tby name or by number\n");
+	exit(64);
+
+}
+
+static inline void PrintDev(void)
+{
+
+}
+
 int main(int argc, char *argv[])
 {
 	setvbuf(stdout, NULL, _IONBF, 0);
 
 	while(1) {
 		int c, option_index = 0;
-		c = getopt_long(argc, argv, "t:", opts, &option_index);
+		c = getopt_long(argc, argv, "hpvt:", opts, &option_index);
 		if(c == -1)
 			break;
 
 		switch(c) {
+			case 'h' :
+				help();
+				break;
+			case 'p' :
+				PrintDev();
+				break;
 			case 't' :
 				test(atoi(optarg));
+				break;
+			default :
+				help();
+				break;
 		}
 	}
 
