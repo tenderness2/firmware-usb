@@ -174,7 +174,7 @@ FirmwareUpload_payload_t	protob/messages.pb.h	/^} FirmwareUpload_payload_t;$/;"	
 FirmwareUpload_payload_tag	protob/messages.pb.h	584;"	d
 FirmwareUpload_size	protob/messages.pb.h	737;"	d
 FirmwareUsb	firmware.cpp	/^FirmwareUsb::FirmwareUsb(): product_id(0x534c), vendor_id(0x0001) {$/;"	f	class:FirmwareUsb
-FirmwareUsb	firmware.cpp	/^class FirmwareUsb {$/;"	c	file:
+FirmwareUsb	firmware.hpp	/^class FirmwareUsb {$/;"	c
 GetAddress	protob/messages.pb.h	/^} GetAddress;$/;"	t	typeref:struct:_GetAddress
 GetAddress_address_n_tag	protob/messages.pb.h	585;"	d
 GetAddress_coin_name_default	protob/messages.pb.c	/^const char GetAddress_coin_name_default[17] = "Bitcoin";$/;"	v
@@ -404,6 +404,7 @@ PublicKey_fields	protob/messages.pb.c	/^const pb_field_t PublicKey_fields[3] = {
 PublicKey_node_tag	protob/messages.pb.h	606;"	d
 PublicKey_size	protob/messages.pb.h	713;"	d
 PublicKey_xpub_tag	protob/messages.pb.h	607;"	d
+RESP_INIT	firmware.hpp	6;"	d
 RecoveryDevice	protob/messages.pb.h	/^} RecoveryDevice;$/;"	t	typeref:struct:_RecoveryDevice
 RecoveryDevice_enforce_wordlist_tag	protob/messages.pb.h	613;"	d
 RecoveryDevice_fields	protob/messages.pb.c	/^const pb_field_t RecoveryDevice_fields[7] = {$/;"	v
@@ -433,6 +434,7 @@ ResetDevice_strength_tag	protob/messages.pb.h	615;"	d
 STATIC_ASSERT	protob/pb.h	115;"	d
 STATIC_ASSERT_MSG	protob/pb.h	116;"	d
 STATIC_ASSERT_MSG_	protob/pb.h	117;"	d
+SendDataFirmware	firmware.cpp	/^void FirmwareUsb::SendDataFirmware(const uint32_t time) const {$/;"	f	class:FirmwareUsb
 SignMessage	protob/messages.pb.h	/^} SignMessage;$/;"	t	typeref:struct:_SignMessage
 SignMessage_address_n_tag	protob/messages.pb.h	620;"	d
 SignMessage_coin_name_default	protob/messages.pb.c	/^const char SignMessage_coin_name_default[17] = "Bitcoin";$/;"	v
@@ -635,6 +637,7 @@ _VerifyMessage	protob/messages.pb.h	/^typedef struct _VerifyMessage {$/;"	s
 _WipeDevice	protob/messages.pb.h	/^typedef struct _WipeDevice {$/;"	s
 _WordAck	protob/messages.pb.h	/^typedef struct _WordAck {$/;"	s
 _WordRequest	protob/messages.pb.h	/^typedef struct _WordRequest {$/;"	s
+__FIRMWARE_H__	firmware.hpp	3;"	d
 __MESSAGES_H__	messages.hpp	2;"	d
 _pb_bytes_array_t	protob/pb.h	/^struct _pb_bytes_array_t {$/;"	s
 _pb_callback_t	protob/pb.h	/^struct _pb_callback_t {$/;"	s
@@ -732,7 +735,7 @@ coin_shortcut	protob/types.pb.h	/^    char coin_shortcut[9];$/;"	m	struct:_CoinT
 coins	protob/messages.pb.h	/^    CoinType coins[4];$/;"	m	struct:_Features
 coins_count	protob/messages.pb.h	/^    size_t coins_count;$/;"	m	struct:_Features
 cpu_sn	protob/messages.pb.h	/^    char cpu_sn[25];$/;"	m	struct:_Features
-cur_dev	firmware.cpp	/^		struct hid_device_info *devs, *cur_dev;$/;"	m	class:FirmwareUsb	typeref:struct:FirmwareUsb::	file:
+cur_dev	firmware.hpp	/^		struct hid_device_info *devs, *cur_dev;$/;"	m	class:FirmwareUsb	typeref:struct:FirmwareUsb::
 data	protob/messages.pb.h	/^    char data[256];$/;"	m	struct:_ButtonRequest
 data_offset	protob/pb.h	/^    pb_size_t data_offset; \/* Offset of field data, relative to previous field. *\/$/;"	m	struct:_pb_field_t
 data_size	protob/pb.h	/^    pb_size_t data_size; \/* Data size in bytes for a single item *\/$/;"	m	struct:_pb_field_t
@@ -751,7 +754,7 @@ dest	protob/pb.h	/^    void *dest;$/;"	m	struct:_pb_extension_t
 dest_struct	protob/pb_decode.c	/^    void *dest_struct; \/* Pointer to the destination structure to decode to *\/$/;"	m	struct:__anon5	file:
 details	protob/messages.pb.h	/^    TxRequestDetailsType details;$/;"	m	struct:_TxRequest
 device_id	protob/messages.pb.h	/^    char device_id[25];$/;"	m	struct:_Features
-devs	firmware.cpp	/^		struct hid_device_info *devs, *cur_dev;$/;"	m	class:FirmwareUsb	typeref:struct:FirmwareUsb::hid_device_info	file:
+devs	firmware.hpp	/^		struct hid_device_info *devs, *cur_dev;$/;"	m	class:FirmwareUsb	typeref:struct:FirmwareUsb::hid_device_info
 dir	messages.cpp	/^	char dir;$/;"	m	struct:MessagesMap_t	file:
 display_only	protob/messages.pb.h	/^    bool display_only;$/;"	m	struct:_EncryptMessage
 display_random	protob/messages.pb.h	/^    bool display_random;$/;"	m	struct:_ResetDevice
@@ -785,7 +788,7 @@ find_extension_field	protob/pb_decode.c	/^static bool checkreturn find_extension
 fingerprint	protob/types.pb.h	/^    uint32_t fingerprint;$/;"	m	struct:_HDNodeType
 found	protob/pb.h	/^    bool found;$/;"	m	struct:_pb_extension_t
 funcs	protob/pb.h	/^    } funcs;$/;"	m	struct:_pb_callback_t	typeref:union:_pb_callback_t::__anon33
-handle	firmware.cpp	/^		hid_device *handle;$/;"	m	class:FirmwareUsb	file:
+handle	firmware.hpp	/^		hid_device *handle;$/;"	m	class:FirmwareUsb
 has_address	protob/messages.pb.h	/^    bool has_address;$/;"	m	struct:_MessageSignature
 has_address	protob/messages.pb.h	/^    bool has_address;$/;"	m	struct:_VerifyMessage
 has_address	protob/types.pb.h	/^    bool has_address;$/;"	m	struct:_TxOutputType
@@ -929,7 +932,7 @@ language	protob/storage.pb.h	/^    char language[17];$/;"	m	struct:_Storage
 layout	protob/messages.pb.h	/^    DebugLinkState_layout_t layout;$/;"	m	struct:_DebugLinkState
 level	protob/messages.pb.h	/^    uint32_t level;$/;"	m	struct:_DebugLinkLog
 lock_time	protob/types.pb.h	/^    uint32_t lock_time;$/;"	m	struct:_TransactionType
-main	firmware.cpp	/^int main()$/;"	f
+main	firmware.cpp	/^int main(int argc, char *argv[])$/;"	f
 major_version	protob/messages.pb.h	/^    uint32_t major_version;$/;"	m	struct:_Features
 matrix	protob/messages.pb.h	/^    char matrix[10];$/;"	m	struct:_DebugLinkState
 max_size	protob/pb_encode.h	/^    size_t max_size;      \/* Limit number of output bytes written (or use SIZE_MAX). *\/$/;"	m	struct:_pb_ostream_t
@@ -953,6 +956,7 @@ msg_out_data	messages.cpp	/^uint8_t *msg_out_data(void)$/;"	f
 msg_out_end	messages.cpp	/^static uint32_t msg_out_end = 0;$/;"	v	file:
 msg_out_pad	messages.cpp	/^inline void msg_out_pad(void)$/;"	f
 msg_out_start	messages.cpp	/^static uint32_t msg_out_start = 0;$/;"	v	file:
+msg_resp	firmware.hpp	/^static uint8_t msg_resp[MSG_OUT_SIZE];$/;"	v
 msg_write	messages.hpp	10;"	d
 msg_write_common	messages.cpp	/^bool msg_write_common(char type, uint16_t msg_id, const void *msg_ptr)$/;"	f
 multisig	protob/types.pb.h	/^    MultisigRedeemScriptType multisig;$/;"	m	struct:_TxInputType
@@ -1073,7 +1077,7 @@ prev_hash	protob/types.pb.h	/^    TxInputType_prev_hash_t prev_hash;$/;"	m	struc
 prev_index	protob/types.pb.h	/^    uint32_t prev_index;$/;"	m	struct:_TxInputType
 private_key	protob/types.pb.h	/^    HDNodeType_private_key_t private_key;$/;"	m	struct:_HDNodeType
 process_func	messages.cpp	/^	void (*process_func)(void *ptr);$/;"	m	struct:MessagesMap_t	file:
-product_id	firmware.cpp	/^		int product_id ;$/;"	m	class:FirmwareUsb	file:
+product_id	firmware.hpp	/^		int product_id ;$/;"	m	class:FirmwareUsb
 ptr	protob/pb.h	/^    const void *ptr;$/;"	m	struct:_pb_field_t
 pubkey	protob/messages.pb.h	/^    EncryptMessage_pubkey_t pubkey;$/;"	m	struct:_EncryptMessage
 pubkeys	protob/types.pb.h	/^    MultisigRedeemScriptType_pubkeys_t pubkeys[5];$/;"	m	struct:_MultisigRedeemScriptType
@@ -1151,7 +1155,7 @@ type	protob/pb.h	/^    const pb_extension_type_t *type;$/;"	m	struct:_pb_extensi
 type	protob/pb.h	/^    pb_type_t type;$/;"	m	struct:_pb_field_t
 value	protob/messages.pb.h	/^    CipherKeyValue_value_t value;$/;"	m	struct:_CipherKeyValue
 vendor	protob/messages.pb.h	/^    char vendor[33];$/;"	m	struct:_Features
-vendor_id	firmware.cpp	/^		int vendor_id ;$/;"	m	class:FirmwareUsb	file:
+vendor_id	firmware.hpp	/^		int vendor_id ;$/;"	m	class:FirmwareUsb
 version	protob/storage.pb.h	/^    uint32_t version;$/;"	m	struct:_Storage
 version	protob/types.pb.h	/^    uint32_t version;$/;"	m	struct:_TransactionType
 wire_debug_in	protob/types.pb.c	/^    bool wire_debug_in;$/;"	m	struct:__anon3	file:

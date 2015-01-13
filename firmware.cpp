@@ -12,32 +12,15 @@
 
 #include <iostream>
 #include <cstdio>
+#include <cstdlib>
 #include <cstring>
 #include <hidapi/hidapi.h>
 
 #include "messages.pb.h"
 #include "messages.hpp"
+#include "firmware.hpp"
 
 using namespace std;
-
-static uint8_t msg_resp[MSG_OUT_SIZE];
-#define RESP_INIT(TYPE) TYPE *resp = (TYPE *)msg_resp; memset(resp, 0, sizeof(TYPE));
-
-class FirmwareUsb {
-	public :
-		FirmwareUsb();
-		void ConnectFirmware();
-		void PrintUsbDev();
-		void SendDataFirmware(const uint32_t time) const;
-		//void resp_init()
-		~FirmwareUsb();
-
-	private:
-		struct hid_device_info *devs, *cur_dev;
-		hid_device *handle;
-		int product_id ;
-		int vendor_id ;
-};
 
 FirmwareUsb::FirmwareUsb(): product_id(0x534c), vendor_id(0x0001) {
 	cout << "FirmwareUsb init" << endl;
@@ -84,25 +67,27 @@ void FirmwareUsb::ConnectFirmware() {
 	printf("Indexed String 1: %ls\n", usb_str);
 }
 
-void FirmwareUsb::SendDataFirmware(const uint32_t time) const {
+void FirmwareUsb::SendDataFirmware() const {
+
 	int res;
 	static uint8_t *data;
-	RESP_INIT(TestScreen);
-	resp->delay_time = time;
-	msg_write(MessageType_MessageType_TestScreen, resp);
-	
+
 	data = msg_out_data();
 	hid_set_nonblocking(handle, 1);
 	res = hid_write(handle, data, 64);
-	/*
-	int i;
-	for(i = 0; i < 64; i++ )
-		printf(" %x", data[i]);
-	*/
+
 	if(res < 0){
 		cout << "Unable to write ";
 		printf("%ls \n", hid_error(handle));
 	}
+}
+
+
+void FirmwareUsb::RespInit(FirmwareUsb const &data, uint32_t time) const{
+	RESP_INIT(TestScreen);
+	resp->delay_time = time;
+	msg_write(MessageType_MessageType_TestScreen, resp);
+	data.SendDataFirmware();
 }
 
 void FirmwareUsb::PrintUsbDev() {
@@ -127,11 +112,30 @@ FirmwareUsb::~FirmwareUsb() {
 	hid_exit();
 }
 
-int main()
+void test(uint32_t time)
 {
 	FirmwareUsb firmware;
-	firmware.PrintUsbDev();
+//	firmware.PrintUsbDev();
 	firmware.ConnectFirmware();
-	firmware.SendDataFirmware(5);
+	firmware.RespInit(firmware, time);
+
+}
+
+int main(int argc, char *argv[])
+{
+	setvbuf(stdout, NULL, _IONBF, 0);
+
+	while(1) {
+		int c, option_index = 0;
+		c = getopt_long(argc, argv, "t:", opts, &option_index);
+		if(c == -1)
+			break;
+
+		switch(c) {
+			case 't' :
+				test(atoi(optarg));
+		}
+	}
+
 	return 0;
 }
