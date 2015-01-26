@@ -85,14 +85,6 @@ void FirmwareUsb::SendDataFirmware() const {
 	hid_close(handle);
 }
 
-
-void FirmwareUsb::RespInit(FirmwareUsb const *data, uint32_t time) const{
-	RESP_INIT(TestScreen);
-	resp->delay_time = time;
-	msg_write(MessageType_MessageType_TestScreen, resp);
-	data->SendDataFirmware();
-}
-
 void FirmwareUsb::PrintUsbDev() {
 	devs = hid_enumerate(0x0, 0x0);
 	cur_dev = devs;
@@ -114,90 +106,3 @@ FirmwareUsb::~FirmwareUsb() {
 	hid_exit();
 }
 
-static void PrintVersion(void)
-{
-	printf("verfiy 0.0.1\n\n");
-	printf("Copyright 2015 kevin for Bidingxing.ltd\n"
-			"This program is Bidingxing.ltd to verfiy bootloader and firmware data communication\n\n\n");
-
-}
-
-
-static void ScreeTest(uint32_t time)
-{
-	FirmwareUsb *firmware = new FirmwareUsb();
-	firmware->ConnectFirmware();
-	firmware->RespInit(firmware, time);
-	delete firmware;
-}
-
-static void test()
-{
-	FirmwareUsb *firmware = new FirmwareUsb();
-	firmware->Data.ScreenTest(5);
-	delete firmware;
-}
-
-static inline void Help(void)
-{
-	fprintf(stderr, "Usage: dfu-util [options] ...\n"
-			"  -h --help\t\t\tPrint this help message\n"
-			"  -v --version\t\t\tPrint the version number\n"
-			"  -p --print\t\t\tList currently usb devices\n");
-	fprintf(stderr, "  -t --time\t\t\tTest BWallet Screen time \n");
-	exit(EX_USAGE);
-
-}
-
-static inline void PrintDev(void)
-{
-	FirmwareUsb *firmware = new FirmwareUsb();
-	firmware->PrintUsbDev();
-	delete firmware;
-}
-
-int main(int argc, char *argv[])
-{
-	enum mode mode = MODE_NONE;
-	setvbuf(stdout, NULL, _IONBF, 0);
-
-	if(argc == 1)
-		Help();
-
-	while(1) {
-		int c, option_index = 0;
-		c = getopt_long(argc, argv, "fhpvt:", opts, &option_index);
-		if(c == -1)
-			break;
-
-		switch(c) {
-			case 'h' :
-				Help();
-				break;
-			case 'p' :
-				mode = MODE_PRINTDEV;
-				PrintDev();
-				break;
-			case 't' :
-				mode = MODE_SCREEN;
-				ScreeTest(atoi(optarg));
-				break;
-			case 'v' :
-				mode = MODE_VERSION;
-				PrintVersion();
-				break;
-			case 'f' :
-				mode = MODE_FUNC;
-				test();
-				break;
-			default :
-				Help();
-				break;
-		}
-	}
-
-	if(mode == MODE_NONE)
-		Help();
-
-	return 0;
-}

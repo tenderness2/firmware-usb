@@ -60,7 +60,6 @@ CoinType_fields	protob/types.pb.c	/^const pb_field_t CoinType_fields[5] = {$/;"	
 CoinType_maxfee_kb_tag	protob/types.pb.h	224;"	d
 CoinType_size	protob/types.pb.h	276;"	d
 ConnectFirmware	firmware.cpp	/^void FirmwareUsb::ConnectFirmware() {$/;"	f	class:FirmwareUsb
-Data	firmware.hpp	/^		TrafficData Data;$/;"	m	class:FirmwareUsb
 DebugLinkDecision	protob/messages.pb.h	/^} DebugLinkDecision;$/;"	t	typeref:struct:_DebugLinkDecision
 DebugLinkDecision_fields	protob/messages.pb.c	/^const pb_field_t DebugLinkDecision_fields[2] = {$/;"	v
 DebugLinkDecision_size	protob/messages.pb.h	739;"	d
@@ -203,6 +202,7 @@ HDNodeType_private_key_tag	protob/types.pb.h	229;"	d
 HDNodeType_public_key_t	protob/types.pb.h	/^} HDNodeType_public_key_t;$/;"	t	typeref:struct:__anon4
 HDNodeType_public_key_tag	protob/types.pb.h	230;"	d
 HDNodeType_size	protob/types.pb.h	275;"	d
+Help	main.cpp	/^static inline void Help(void)$/;"	f	file:
 Initialize	protob/messages.pb.h	/^} Initialize;$/;"	t	typeref:struct:_Initialize
 Initialize_fields	protob/messages.pb.c	/^const pb_field_t Initialize_fields[1] = {$/;"	v
 Initialize_size	protob/messages.pb.h	695;"	d
@@ -220,11 +220,11 @@ LoadDevice_passphrase_protection_tag	protob/messages.pb.h	593;"	d
 LoadDevice_pin_tag	protob/messages.pb.h	592;"	d
 LoadDevice_size	protob/messages.pb.h	717;"	d
 LoadDevice_skip_checksum_tag	protob/messages.pb.h	596;"	d
-MODE_FUNC	firmware.hpp	/^	MODE_FUNC,$/;"	e	enum:mode
-MODE_NONE	firmware.hpp	/^	MODE_NONE,$/;"	e	enum:mode
-MODE_PRINTDEV	firmware.hpp	/^	MODE_PRINTDEV,$/;"	e	enum:mode
-MODE_SCREEN	firmware.hpp	/^	MODE_SCREEN,$/;"	e	enum:mode
-MODE_VERSION	firmware.hpp	/^	MODE_VERSION,$/;"	e	enum:mode
+MODE_FUNC	main.cpp	/^	MODE_FUNC,$/;"	e	enum:mode	file:
+MODE_NONE	main.cpp	/^	MODE_NONE,$/;"	e	enum:mode	file:
+MODE_PRINTDEV	main.cpp	/^	MODE_PRINTDEV,$/;"	e	enum:mode	file:
+MODE_SCREEN	main.cpp	/^	MODE_SCREEN,$/;"	e	enum:mode	file:
+MODE_VERSION	main.cpp	/^	MODE_VERSION,$/;"	e	enum:mode	file:
 MSG_OUT_SIZE	messages.hpp	7;"	d
 MessageFields	messages.cpp	/^const pb_field_t *MessageFields(char type, char dir, uint16_t msg_id)$/;"	f
 MessageSignature	protob/messages.pb.h	/^} MessageSignature;$/;"	t	typeref:struct:_MessageSignature
@@ -404,14 +404,15 @@ Ping_message_tag	protob/messages.pb.h	602;"	d
 Ping_passphrase_protection_tag	protob/messages.pb.h	605;"	d
 Ping_pin_protection_tag	protob/messages.pb.h	604;"	d
 Ping_size	protob/messages.pb.h	700;"	d
-PrintDev	firmware.cpp	/^static inline void PrintDev(void)$/;"	f	file:
+PrintDev	main.cpp	/^static inline void PrintDev(void)$/;"	f	file:
 PrintUsbDev	firmware.cpp	/^void FirmwareUsb::PrintUsbDev() {$/;"	f	class:FirmwareUsb
+PrintVersion	main.cpp	/^static void PrintVersion(void)$/;"	f	file:
 PublicKey	protob/messages.pb.h	/^} PublicKey;$/;"	t	typeref:struct:_PublicKey
 PublicKey_fields	protob/messages.pb.c	/^const pb_field_t PublicKey_fields[3] = {$/;"	v
 PublicKey_node_tag	protob/messages.pb.h	606;"	d
 PublicKey_size	protob/messages.pb.h	713;"	d
 PublicKey_xpub_tag	protob/messages.pb.h	607;"	d
-RESP_INIT	firmware.hpp	9;"	d
+RESP_INIT	traffic.hpp	10;"	d
 RecoveryDevice	protob/messages.pb.h	/^} RecoveryDevice;$/;"	t	typeref:struct:_RecoveryDevice
 RecoveryDevice_enforce_wordlist_tag	protob/messages.pb.h	613;"	d
 RecoveryDevice_fields	protob/messages.pb.c	/^const pb_field_t RecoveryDevice_fields[7] = {$/;"	v
@@ -438,12 +439,11 @@ ResetDevice_pin_protection_tag	protob/messages.pb.h	617;"	d
 ResetDevice_size	protob/messages.pb.h	718;"	d
 ResetDevice_strength_default	protob/messages.pb.c	/^const uint32_t ResetDevice_strength_default = 128u;$/;"	v
 ResetDevice_strength_tag	protob/messages.pb.h	615;"	d
-RespInit	firmware.cpp	/^void FirmwareUsb::RespInit(FirmwareUsb const *data, uint32_t time) const{$/;"	f	class:FirmwareUsb
 STATIC_ASSERT	protob/pb.h	115;"	d
 STATIC_ASSERT_MSG	protob/pb.h	116;"	d
 STATIC_ASSERT_MSG_	protob/pb.h	117;"	d
-ScreeTest	firmware.cpp	/^static void ScreeTest(uint32_t time)$/;"	f	file:
-ScreenTest	traffic.hpp	/^		void ScreenTest(uint32_t time){$/;"	f	class:TrafficData
+ScreeTest	main.cpp	/^static void ScreeTest(uint32_t time)$/;"	f	file:
+ScreenTest	traffic.cpp	/^void TrafficData::ScreenTest(uint32_t time){$/;"	f	class:TrafficData
 SendDataFirmware	firmware.cpp	/^void FirmwareUsb::SendDataFirmware() const {$/;"	f	class:FirmwareUsb
 SignMessage	protob/messages.pb.h	/^} SignMessage;$/;"	t	typeref:struct:_SignMessage
 SignMessage_address_n_tag	protob/messages.pb.h	620;"	d
@@ -491,7 +491,7 @@ TestScreen_delay_time_default	protob/messages.pb.c	/^const uint32_t TestScreen_d
 TestScreen_delay_time_tag	protob/messages.pb.h	632;"	d
 TestScreen_fields	protob/messages.pb.c	/^const pb_field_t TestScreen_fields[2] = {$/;"	v
 TestScreen_size	protob/messages.pb.h	738;"	d
-TrafficData	traffic.hpp	/^		TrafficData(){$/;"	f	class:TrafficData
+TrafficData	traffic.cpp	/^TrafficData::TrafficData(){$/;"	f	class:TrafficData
 TrafficData	traffic.hpp	/^class TrafficData {$/;"	c
 TransactionType	protob/types.pb.h	/^} TransactionType;$/;"	t	typeref:struct:_TransactionType
 TransactionType_bin_outputs_tag	protob/types.pb.h	253;"	d
@@ -799,6 +799,7 @@ field_index	protob/pb_decode.c	/^    unsigned field_index; \/* Zero-based index 
 fields	messages.cpp	/^	const pb_field_t *fields;$/;"	m	struct:MessagesMap_t	file:
 find_extension_field	protob/pb_decode.c	/^static bool checkreturn find_extension_field(pb_field_iterator_t *iter)$/;"	f	file:
 fingerprint	protob/types.pb.h	/^    uint32_t fingerprint;$/;"	m	struct:_HDNodeType
+firmware	traffic.hpp	/^		Firmware firmware;$/;"	m	class:TrafficData
 found	protob/pb.h	/^    bool found;$/;"	m	struct:_pb_extension_t
 funcs	protob/pb.h	/^    } funcs;$/;"	m	struct:_pb_callback_t	typeref:union:_pb_callback_t::__anon33
 handle	firmware.hpp	/^		hid_device *handle;$/;"	m	class:FirmwareUsb
@@ -918,7 +919,6 @@ has_vendor	protob/messages.pb.h	/^    bool has_vendor;$/;"	m	struct:_Features
 has_version	protob/types.pb.h	/^    bool has_version;$/;"	m	struct:_TransactionType
 has_word_count	protob/messages.pb.h	/^    bool has_word_count;$/;"	m	struct:_RecoveryDevice
 has_xpub	protob/messages.pb.h	/^    bool has_xpub;$/;"	m	struct:_PublicKey
-help	firmware.cpp	/^static inline void help(void)$/;"	f	file:
 imported	protob/messages.pb.h	/^    bool imported;$/;"	m	struct:_Features
 imported	protob/storage.pb.h	/^    bool imported;$/;"	m	struct:_Storage
 initialize_pointer_field	protob/pb_decode.c	/^static void initialize_pointer_field(void *pItem, pb_field_iterator_t *iter)$/;"	f	file:
@@ -946,7 +946,7 @@ language	protob/storage.pb.h	/^    char language[17];$/;"	m	struct:_Storage
 layout	protob/messages.pb.h	/^    DebugLinkState_layout_t layout;$/;"	m	struct:_DebugLinkState
 level	protob/messages.pb.h	/^    uint32_t level;$/;"	m	struct:_DebugLinkLog
 lock_time	protob/types.pb.h	/^    uint32_t lock_time;$/;"	m	struct:_TransactionType
-main	firmware.cpp	/^int main(int argc, char *argv[])$/;"	f
+main	main.cpp	/^int main(int argc, char *argv[])$/;"	f
 major_version	protob/messages.pb.h	/^    uint32_t major_version;$/;"	m	struct:_Features
 matrix	protob/messages.pb.h	/^    char matrix[10];$/;"	m	struct:_DebugLinkState
 max_size	protob/pb_encode.h	/^    size_t max_size;      \/* Limit number of output bytes written (or use SIZE_MAX). *\/$/;"	m	struct:_pb_ostream_t
@@ -962,7 +962,7 @@ minor_version	protob/messages.pb.h	/^    uint32_t minor_version;$/;"	m	struct:_F
 mnemonic	protob/messages.pb.h	/^    char mnemonic[241];$/;"	m	struct:_DebugLinkState
 mnemonic	protob/messages.pb.h	/^    char mnemonic[241];$/;"	m	struct:_LoadDevice
 mnemonic	protob/storage.pb.h	/^    char mnemonic[241];$/;"	m	struct:_Storage
-mode	firmware.hpp	/^enum mode {$/;"	g
+mode	main.cpp	/^enum mode {$/;"	g	file:
 msg_id	messages.cpp	/^	uint16_t msg_id;$/;"	m	struct:MessagesMap_t	file:
 msg_out	messages.cpp	/^static uint8_t msg_out[MSG_OUT_SIZE];$/;"	v	file:
 msg_out_append	messages.cpp	/^inline void msg_out_append(uint8_t c)$/;"	f
@@ -971,7 +971,7 @@ msg_out_data	messages.cpp	/^uint8_t *msg_out_data(void)$/;"	f
 msg_out_end	messages.cpp	/^static uint32_t msg_out_end = 0;$/;"	v	file:
 msg_out_pad	messages.cpp	/^inline void msg_out_pad(void)$/;"	f
 msg_out_start	messages.cpp	/^static uint32_t msg_out_start = 0;$/;"	v	file:
-msg_resp	firmware.hpp	/^static uint8_t msg_resp[MSG_OUT_SIZE];$/;"	v
+msg_resp	traffic.hpp	/^static uint8_t msg_resp[MSG_OUT_SIZE];$/;"	v
 msg_write	messages.hpp	10;"	d
 msg_write_common	messages.cpp	/^bool msg_write_common(char type, uint16_t msg_id, const void *msg_ptr)$/;"	f
 multisig	protob/types.pb.h	/^    MultisigRedeemScriptType multisig;$/;"	m	struct:_TxInputType
@@ -980,7 +980,7 @@ node	protob/messages.pb.h	/^    HDNodeType node;$/;"	m	struct:_DebugLinkState
 node	protob/messages.pb.h	/^    HDNodeType node;$/;"	m	struct:_LoadDevice
 node	protob/messages.pb.h	/^    HDNodeType node;$/;"	m	struct:_PublicKey
 node	protob/storage.pb.h	/^    HDNodeType node;$/;"	m	struct:_Storage
-opts	firmware.hpp	/^static struct option opts[] = {$/;"	v	typeref:struct:option
+opts	main.cpp	/^static struct option opts[] = {$/;"	v	typeref:struct:option	file:
 outputs	protob/messages.pb.h	/^    TxOutputType outputs[0];$/;"	m	struct:_SimpleSignTx
 outputs	protob/types.pb.h	/^    TxOutputType outputs[1];$/;"	m	struct:_TransactionType
 outputs_cnt	protob/types.pb.h	/^    uint32_t outputs_cnt;$/;"	m	struct:_TransactionType
@@ -1091,7 +1091,6 @@ pin_protection	protob/messages.pb.h	/^    bool pin_protection;$/;"	m	struct:_Res
 pos	protob/pb_decode.c	/^    const pb_field_t *pos; \/* Current position of the iterator *\/$/;"	m	struct:__anon1	file:
 prev_hash	protob/types.pb.h	/^    TxInputType_prev_hash_t prev_hash;$/;"	m	struct:_TxInputType
 prev_index	protob/types.pb.h	/^    uint32_t prev_index;$/;"	m	struct:_TxInputType
-print_version	firmware.cpp	/^static void print_version(void)$/;"	f	file:
 private_key	protob/types.pb.h	/^    HDNodeType_private_key_t private_key;$/;"	m	struct:_HDNodeType
 process_func	messages.cpp	/^	void (*process_func)(void *ptr);$/;"	m	struct:MessagesMap_t	file:
 product_id	firmware.hpp	/^		int product_id ;$/;"	m	class:FirmwareUsb
@@ -1160,7 +1159,6 @@ state	protob/pb_decode.h	/^    void *state; \/* Free field for use by callback i
 state	protob/pb_encode.h	/^    void *state;          \/* Free field for use by callback implementation. *\/$/;"	m	struct:_pb_ostream_t
 strength	protob/messages.pb.h	/^    uint32_t strength;$/;"	m	struct:_ResetDevice
 tag	protob/pb.h	/^    pb_size_t tag;$/;"	m	struct:_pb_field_t
-test	firmware.cpp	/^static void test()$/;"	f	file:
 text	protob/messages.pb.h	/^    char text[256];$/;"	m	struct:_DebugLinkLog
 transactions	protob/messages.pb.h	/^    TransactionType transactions[0];$/;"	m	struct:_SimpleSignTx
 transactions_count	protob/messages.pb.h	/^    size_t transactions_count;$/;"	m	struct:_SimpleSignTx
@@ -1201,4 +1199,4 @@ word_count	protob/messages.pb.h	/^    uint32_t word_count;$/;"	m	struct:_Recover
 xpub	protob/messages.pb.h	/^    char xpub[113];$/;"	m	struct:_PublicKey
 yes_no	protob/messages.pb.h	/^    bool yes_no;$/;"	m	struct:_DebugLinkDecision
 ~FirmwareUsb	firmware.cpp	/^FirmwareUsb::~FirmwareUsb() {$/;"	f	class:FirmwareUsb
-~TrafficData	traffic.hpp	/^		~TrafficData() {$/;"	f	class:TrafficData
+~TrafficData	traffic.cpp	/^TrafficData::~TrafficData() {$/;"	f	class:TrafficData

@@ -1,6 +1,8 @@
 
 NAME  = firmware
 
+OBJS += main.o
+OBJS += traffic.o
 OBJS += firmware.o
 OBJS += messages.o
 OBJS += protob/pb_decode.o

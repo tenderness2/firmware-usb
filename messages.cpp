@@ -67,7 +67,6 @@ inline void msg_out_append(uint8_t c)
 		msg_out_end = (msg_out_end + 1) % (MSG_OUT_SIZE / 64);
 
 	}
-
 }
 
 inline void msg_out_pad(void)
