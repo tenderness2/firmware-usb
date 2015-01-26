@@ -15,6 +15,7 @@
 #include <cstdlib>
 #include <cstring>
 #include <cerrno>
+#include <sysexits.h>
 #include <hidapi/hidapi.h>
 
 #include "messages.pb.h"
@@ -29,6 +30,11 @@ FirmwareUsb::FirmwareUsb(): product_id(0x534c), vendor_id(0x0001) {
 		throw exception();
 }
 
+/*
+FirmwareUsb::FirmwareUsb(TrafficData &data) {
+	TrafficData *data = new TrafficData(); 
+}
+*/
 void FirmwareUsb::ConnectFirmware() {
 	int res;
 	const int MAX_STR = 255;
@@ -81,14 +87,15 @@ void FirmwareUsb::SendDataFirmware() const {
 		cout << "Unable to write ";
 		printf("%ls \n", hid_error(handle));
 	}
+	hid_close(handle);
 }
 
 
-void FirmwareUsb::RespInit(FirmwareUsb const &data, uint32_t time) const{
+void FirmwareUsb::RespInit(FirmwareUsb const *data, uint32_t time) const{
 	RESP_INIT(TestScreen);
 	resp->delay_time = time;
 	msg_write(MessageType_MessageType_TestScreen, resp);
-	data.SendDataFirmware();
+	data->SendDataFirmware();
 }
 
 void FirmwareUsb::PrintUsbDev() {
@@ -109,17 +116,31 @@ void FirmwareUsb::PrintUsbDev() {
 
 FirmwareUsb::~FirmwareUsb() {
 	cout << "FirmwareUsb exit" <<endl;
-	hid_close(handle);
 	hid_exit();
 }
 
-void test(uint32_t time)
+static void print_version(void)
 {
-	FirmwareUsb firmware;
-//	firmware.PrintUsbDev();
-	firmware.ConnectFirmware();
-	firmware.RespInit(firmware, time);
+	printf("verfiy 0.0.1\n\n");
+	printf("Copyright 2015 kevin for Bidingxing.ltd\n"
+			"This program is Bidingxing.ltd to verfiy bootloader and firmware data communication\n\n\n");
 
+}
+
+
+static void ScreeTest(uint32_t time)
+{
+	FirmwareUsb *firmware = new FirmwareUsb();
+	firmware->ConnectFirmware();
+	firmware->RespInit(firmware, time);
+	delete firmware;
+}
+
+static void test()
+{
+	FirmwareUsb *firmware = new FirmwareUsb();
+	firmware->Data.ScreenTest(5);
+	delete firmware;
 }
 
 static inline void help(void)
@@ -128,32 +149,29 @@ static inline void help(void)
 			"  -h --help\t\t\tPrint this help message\n"
 			"  -v --version\t\t\tPrint the version number\n"
 			"  -p --print\t\t\tList currently usb devices\n");
-	fprintf(stderr, "  -t --time\t\t\tTest BWallet Screen time \n"
-			"  -E --detach-delay seconds\tTime to wait before reopening a device after detach\n"
-			"  -d --device <vendor>:<product>[,<vendor_dfu>:<product_dfu>]\n"
-			"\t\t\t\tSpecify Vendor/Product ID(s) of DFU device\n"
-			"  -c --cfg <config_nr>\t\tSpecify the Configuration of DFU device\n"
-			"  -i --intf <intf_nr>\t\tSpecify the DFU Interface number\n"
-			"  -S --serial <serial_string>[,<serial_string_dfu>]\n"
-			"\t\t\t\tSpecify Serial String of DFU device\n"
-			"  -a --alt <alt>\t\tSpecify the Altsetting of the DFU Interface\n"
-			"\t\t\t\tby name or by number\n");
-	exit(64);
+	fprintf(stderr, "  -t --time\t\t\tTest BWallet Screen time \n");
+	exit(EX_USAGE);
 
 }
 
 static inline void PrintDev(void)
 {
-
+	FirmwareUsb *firmware = new FirmwareUsb();
+	firmware->PrintUsbDev();
+	delete firmware;
 }
 
 int main(int argc, char *argv[])
 {
+	enum mode mode = MODE_NONE;
 	setvbuf(stdout, NULL, _IONBF, 0);
+
+	if(argc == 1)
+		help();
 
 	while(1) {
 		int c, option_index = 0;
-		c = getopt_long(argc, argv, "hpvt:", opts, &option_index);
+		c = getopt_long(argc, argv, "fhpvt:", opts, &option_index);
 		if(c == -1)
 			break;
 
@@ -162,16 +180,29 @@ int main(int argc, char *argv[])
 				help();
 				break;
 			case 'p' :
+				mode = MODE_PRINTDEV;
 				PrintDev();
 				break;
 			case 't' :
-				test(atoi(optarg));
+				mode = MODE_SCREEN;
+				ScreeTest(atoi(optarg));
+				break;
+			case 'v' :
+				mode = MODE_VERSION;
+				print_version();
+				break;
+			case 'f' :
+				mode = MODE_FUNC;
+				test();
 				break;
 			default :
 				help();
 				break;
 		}
 	}
+
+	if(mode == MODE_NONE)
+		help();
 
 	return 0;
 }

@@ -59,7 +59,9 @@ CoinType_coin_shortcut_tag	protob/types.pb.h	222;"	d
 CoinType_fields	protob/types.pb.c	/^const pb_field_t CoinType_fields[5] = {$/;"	v
 CoinType_maxfee_kb_tag	protob/types.pb.h	224;"	d
 CoinType_size	protob/types.pb.h	276;"	d
-ConnectFirmware	firmware.cpp	/^void FirmwareUsb::ConnectFirmware() {$/;"	f	class:FirmwareUsb
+ConnectFirmware	firmware.cpp	/^void FirmwareUsb::ConnectFirmware() {$/;"	f	class:FirmwareUsb	signature:()
+ConnectFirmware	firmware.hpp	/^		void ConnectFirmware();$/;"	p	class:FirmwareUsb	access:public	signature:()
+Data	firmware.hpp	/^		TrafficData Data;$/;"	m	class:FirmwareUsb	access:public
 DebugLinkDecision	protob/messages.pb.h	/^} DebugLinkDecision;$/;"	t	typeref:struct:_DebugLinkDecision
 DebugLinkDecision_fields	protob/messages.pb.c	/^const pb_field_t DebugLinkDecision_fields[2] = {$/;"	v
 DebugLinkDecision_size	protob/messages.pb.h	739;"	d
@@ -173,8 +175,27 @@ FirmwareUpload_fields	protob/messages.pb.c	/^const pb_field_t FirmwareUpload_fie
 FirmwareUpload_payload_t	protob/messages.pb.h	/^} FirmwareUpload_payload_t;$/;"	t	typeref:struct:__anon27
 FirmwareUpload_payload_tag	protob/messages.pb.h	584;"	d
 FirmwareUpload_size	protob/messages.pb.h	737;"	d
-FirmwareUsb	firmware.cpp	/^FirmwareUsb::FirmwareUsb(): product_id(0x534c), vendor_id(0x0001) {$/;"	f	class:FirmwareUsb
+FirmwareUsb	firmware.cpp	/^FirmwareUsb::FirmwareUsb(): product_id(0x534c), vendor_id(0x0001) {$/;"	f	class:FirmwareUsb	signature:()
+FirmwareUsb	firmware.hpp	/^		FirmwareUsb();$/;"	p	class:FirmwareUsb	access:public	signature:()
 FirmwareUsb	firmware.hpp	/^class FirmwareUsb {$/;"	c
+FirmwareUsb::ConnectFirmware	firmware.cpp	/^void FirmwareUsb::ConnectFirmware() {$/;"	f	class:FirmwareUsb	signature:()
+FirmwareUsb::ConnectFirmware	firmware.hpp	/^		void ConnectFirmware();$/;"	p	class:FirmwareUsb	access:public	signature:()
+FirmwareUsb::Data	firmware.hpp	/^		TrafficData Data;$/;"	m	class:FirmwareUsb	access:public
+FirmwareUsb::FirmwareUsb	firmware.cpp	/^FirmwareUsb::FirmwareUsb(): product_id(0x534c), vendor_id(0x0001) {$/;"	f	class:FirmwareUsb	signature:()
+FirmwareUsb::FirmwareUsb	firmware.hpp	/^		FirmwareUsb();$/;"	p	class:FirmwareUsb	access:public	signature:()
+FirmwareUsb::PrintUsbDev	firmware.cpp	/^void FirmwareUsb::PrintUsbDev() {$/;"	f	class:FirmwareUsb	signature:()
+FirmwareUsb::PrintUsbDev	firmware.hpp	/^		void PrintUsbDev();$/;"	p	class:FirmwareUsb	access:public	signature:()
+FirmwareUsb::RespInit	firmware.cpp	/^void FirmwareUsb::RespInit(FirmwareUsb const *data, uint32_t time) const{$/;"	f	class:FirmwareUsb	signature:(FirmwareUsb const *data, uint32_t time) const
+FirmwareUsb::RespInit	firmware.hpp	/^		void RespInit(FirmwareUsb const *data, uint32_t time) const;$/;"	p	class:FirmwareUsb	access:public	signature:(FirmwareUsb const *data, uint32_t time) const
+FirmwareUsb::SendDataFirmware	firmware.cpp	/^void FirmwareUsb::SendDataFirmware() const {$/;"	f	class:FirmwareUsb	signature:() const
+FirmwareUsb::SendDataFirmware	firmware.hpp	/^		void SendDataFirmware() const;$/;"	p	class:FirmwareUsb	access:public	signature:() const
+FirmwareUsb::cur_dev	firmware.hpp	/^		struct hid_device_info *devs, *cur_dev;$/;"	m	class:FirmwareUsb	typeref:struct:FirmwareUsb::	access:private
+FirmwareUsb::devs	firmware.hpp	/^		struct hid_device_info *devs, *cur_dev;$/;"	m	class:FirmwareUsb	typeref:struct:FirmwareUsb::hid_device_info	access:private
+FirmwareUsb::handle	firmware.hpp	/^		hid_device *handle;$/;"	m	class:FirmwareUsb	access:private
+FirmwareUsb::product_id	firmware.hpp	/^		int product_id ;$/;"	m	class:FirmwareUsb	access:private
+FirmwareUsb::vendor_id	firmware.hpp	/^		int vendor_id ;$/;"	m	class:FirmwareUsb	access:private
+FirmwareUsb::~FirmwareUsb	firmware.cpp	/^FirmwareUsb::~FirmwareUsb() {$/;"	f	class:FirmwareUsb	signature:()
+FirmwareUsb::~FirmwareUsb	firmware.hpp	/^		~FirmwareUsb();$/;"	p	class:FirmwareUsb	access:public	signature:()
 GetAddress	protob/messages.pb.h	/^} GetAddress;$/;"	t	typeref:struct:_GetAddress
 GetAddress_address_n_tag	protob/messages.pb.h	585;"	d
 GetAddress_coin_name_default	protob/messages.pb.c	/^const char GetAddress_coin_name_default[17] = "Bitcoin";$/;"	v
@@ -219,8 +240,13 @@ LoadDevice_passphrase_protection_tag	protob/messages.pb.h	593;"	d
 LoadDevice_pin_tag	protob/messages.pb.h	592;"	d
 LoadDevice_size	protob/messages.pb.h	717;"	d
 LoadDevice_skip_checksum_tag	protob/messages.pb.h	596;"	d
+MODE_FUNC	firmware.hpp	/^	MODE_FUNC,$/;"	e	enum:mode
+MODE_NONE	firmware.hpp	/^	MODE_NONE,$/;"	e	enum:mode
+MODE_PRINTDEV	firmware.hpp	/^	MODE_PRINTDEV,$/;"	e	enum:mode
+MODE_SCREEN	firmware.hpp	/^	MODE_SCREEN,$/;"	e	enum:mode
+MODE_VERSION	firmware.hpp	/^	MODE_VERSION,$/;"	e	enum:mode
 MSG_OUT_SIZE	messages.hpp	7;"	d
-MessageFields	messages.cpp	/^const pb_field_t *MessageFields(char type, char dir, uint16_t msg_id)$/;"	f
+MessageFields	messages.cpp	/^const pb_field_t *MessageFields(char type, char dir, uint16_t msg_id)$/;"	f	signature:(char type, char dir, uint16_t msg_id)
 MessageSignature	protob/messages.pb.h	/^} MessageSignature;$/;"	t	typeref:struct:_MessageSignature
 MessageSignature_address_tag	protob/messages.pb.h	597;"	d
 MessageSignature_fields	protob/messages.pb.c	/^const pb_field_t MessageSignature_fields[3] = {$/;"	v
@@ -279,6 +305,11 @@ MessageType_MessageType_WordAck	protob/messages.pb.h	/^    MessageType_MessageTy
 MessageType_MessageType_WordRequest	protob/messages.pb.h	/^    MessageType_MessageType_WordRequest = 46,$/;"	e	enum:_MessageType
 MessagesMap	messages.cpp	/^static const struct MessagesMap_t MessagesMap[] = {$/;"	v	typeref:struct:MessagesMap_t	file:
 MessagesMap_t	messages.cpp	/^struct MessagesMap_t {$/;"	s	file:
+MessagesMap_t::dir	messages.cpp	/^	char dir;$/;"	m	struct:MessagesMap_t	file:	access:public
+MessagesMap_t::fields	messages.cpp	/^	const pb_field_t *fields;$/;"	m	struct:MessagesMap_t	file:	access:public
+MessagesMap_t::msg_id	messages.cpp	/^	uint16_t msg_id;$/;"	m	struct:MessagesMap_t	file:	access:public
+MessagesMap_t::process_func	messages.cpp	/^	void (*process_func)(void *ptr);$/;"	m	struct:MessagesMap_t	file:	access:public
+MessagesMap_t::type	messages.cpp	/^	char type;$/;"	m	struct:MessagesMap_t	file:	access:public
 MultisigRedeemScriptType	protob/types.pb.h	/^} MultisigRedeemScriptType;$/;"	t	typeref:struct:_MultisigRedeemScriptType
 MultisigRedeemScriptType_fields	protob/types.pb.c	/^const pb_field_t MultisigRedeemScriptType_fields[3] = {$/;"	v
 MultisigRedeemScriptType_pubkeys_t	protob/types.pb.h	/^} MultisigRedeemScriptType_pubkeys_t;$/;"	t	typeref:struct:__anon9
@@ -398,13 +429,15 @@ Ping_message_tag	protob/messages.pb.h	602;"	d
 Ping_passphrase_protection_tag	protob/messages.pb.h	605;"	d
 Ping_pin_protection_tag	protob/messages.pb.h	604;"	d
 Ping_size	protob/messages.pb.h	700;"	d
-PrintUsbDev	firmware.cpp	/^void FirmwareUsb::PrintUsbDev() {$/;"	f	class:FirmwareUsb
+PrintDev	firmware.cpp	/^static inline void PrintDev(void)$/;"	f	file:	signature:(void)
+PrintUsbDev	firmware.cpp	/^void FirmwareUsb::PrintUsbDev() {$/;"	f	class:FirmwareUsb	signature:()
+PrintUsbDev	firmware.hpp	/^		void PrintUsbDev();$/;"	p	class:FirmwareUsb	access:public	signature:()
 PublicKey	protob/messages.pb.h	/^} PublicKey;$/;"	t	typeref:struct:_PublicKey
 PublicKey_fields	protob/messages.pb.c	/^const pb_field_t PublicKey_fields[3] = {$/;"	v
 PublicKey_node_tag	protob/messages.pb.h	606;"	d
 PublicKey_size	protob/messages.pb.h	713;"	d
 PublicKey_xpub_tag	protob/messages.pb.h	607;"	d
-RESP_INIT	firmware.hpp	6;"	d
+RESP_INIT	firmware.hpp	9;"	d
 RecoveryDevice	protob/messages.pb.h	/^} RecoveryDevice;$/;"	t	typeref:struct:_RecoveryDevice
 RecoveryDevice_enforce_wordlist_tag	protob/messages.pb.h	613;"	d
 RecoveryDevice_fields	protob/messages.pb.c	/^const pb_field_t RecoveryDevice_fields[7] = {$/;"	v
@@ -431,10 +464,14 @@ ResetDevice_pin_protection_tag	protob/messages.pb.h	617;"	d
 ResetDevice_size	protob/messages.pb.h	718;"	d
 ResetDevice_strength_default	protob/messages.pb.c	/^const uint32_t ResetDevice_strength_default = 128u;$/;"	v
 ResetDevice_strength_tag	protob/messages.pb.h	615;"	d
+RespInit	firmware.cpp	/^void FirmwareUsb::RespInit(FirmwareUsb const *data, uint32_t time) const{$/;"	f	class:FirmwareUsb	signature:(FirmwareUsb const *data, uint32_t time) const
+RespInit	firmware.hpp	/^		void RespInit(FirmwareUsb const *data, uint32_t time) const;$/;"	p	class:FirmwareUsb	access:public	signature:(FirmwareUsb const *data, uint32_t time) const
 STATIC_ASSERT	protob/pb.h	115;"	d
 STATIC_ASSERT_MSG	protob/pb.h	116;"	d
 STATIC_ASSERT_MSG_	protob/pb.h	117;"	d
-SendDataFirmware	firmware.cpp	/^void FirmwareUsb::SendDataFirmware(const uint32_t time) const {$/;"	f	class:FirmwareUsb
+ScreeTest	firmware.cpp	/^static void ScreeTest(uint32_t time)$/;"	f	file:	signature:(uint32_t time)
+SendDataFirmware	firmware.cpp	/^void FirmwareUsb::SendDataFirmware() const {$/;"	f	class:FirmwareUsb	signature:() const
+SendDataFirmware	firmware.hpp	/^		void SendDataFirmware() const;$/;"	p	class:FirmwareUsb	access:public	signature:() const
 SignMessage	protob/messages.pb.h	/^} SignMessage;$/;"	t	typeref:struct:_SignMessage
 SignMessage_address_n_tag	protob/messages.pb.h	620;"	d
 SignMessage_coin_name_default	protob/messages.pb.c	/^const char SignMessage_coin_name_default[17] = "Bitcoin";$/;"	v
@@ -458,6 +495,7 @@ SimpleSignTx_inputs_tag	protob/messages.pb.h	626;"	d
 SimpleSignTx_outputs_tag	protob/messages.pb.h	627;"	d
 SimpleSignTx_size	protob/messages.pb.h	733;"	d
 SimpleSignTx_transactions_tag	protob/messages.pb.h	628;"	d
+SrceenTest	traffic.hpp	/^		void SrceenTest(uint32_t time){$/;"	f	class:TrafficData	access:public	signature:(uint32_t time)
 Storage	protob/storage.pb.h	/^} Storage;$/;"	t	typeref:struct:_Storage
 Storage_fields	protob/storage.pb.c	/^const pb_field_t Storage_fields[10] = {$/;"	v
 Storage_imported_tag	protob/storage.pb.h	46;"	d
@@ -481,6 +519,11 @@ TestScreen_delay_time_default	protob/messages.pb.c	/^const uint32_t TestScreen_d
 TestScreen_delay_time_tag	protob/messages.pb.h	632;"	d
 TestScreen_fields	protob/messages.pb.c	/^const pb_field_t TestScreen_fields[2] = {$/;"	v
 TestScreen_size	protob/messages.pb.h	738;"	d
+TrafficData	traffic.hpp	/^		TrafficData(){$/;"	f	class:TrafficData	access:public	signature:()
+TrafficData	traffic.hpp	/^class TrafficData {$/;"	c
+TrafficData::SrceenTest	traffic.hpp	/^		void SrceenTest(uint32_t time){$/;"	f	class:TrafficData	access:public	signature:(uint32_t time)
+TrafficData::TrafficData	traffic.hpp	/^		TrafficData(){$/;"	f	class:TrafficData	access:public	signature:()
+TrafficData::~TrafficData	traffic.hpp	/^		~TrafficData() {$/;"	f	class:TrafficData	access:public	signature:()
 TransactionType	protob/types.pb.h	/^} TransactionType;$/;"	t	typeref:struct:_TransactionType
 TransactionType_bin_outputs_tag	protob/types.pb.h	253;"	d
 TransactionType_fields	protob/types.pb.c	/^const pb_field_t TransactionType_fields[8] = {$/;"	v
@@ -566,41 +609,202 @@ WordRequest	protob/messages.pb.h	/^} WordRequest;$/;"	t	typeref:struct:_WordRequ
 WordRequest_fields	protob/messages.pb.c	/^const pb_field_t WordRequest_fields[1] = {$/;"	v
 WordRequest_size	protob/messages.pb.h	722;"	d
 _Address	protob/messages.pb.h	/^typedef struct _Address {$/;"	s
+_Address::address	protob/messages.pb.h	/^    char address[35];$/;"	m	struct:_Address	access:public
 _ApplySettings	protob/messages.pb.h	/^typedef struct _ApplySettings {$/;"	s
+_ApplySettings::has_label	protob/messages.pb.h	/^    bool has_label;$/;"	m	struct:_ApplySettings	access:public
+_ApplySettings::has_language	protob/messages.pb.h	/^    bool has_language;$/;"	m	struct:_ApplySettings	access:public
+_ApplySettings::label	protob/messages.pb.h	/^    char label[33];$/;"	m	struct:_ApplySettings	access:public
+_ApplySettings::language	protob/messages.pb.h	/^    char language[17];$/;"	m	struct:_ApplySettings	access:public
 _ButtonAck	protob/messages.pb.h	/^typedef struct _ButtonAck {$/;"	s
+_ButtonAck::dummy_field	protob/messages.pb.h	/^    uint8_t dummy_field;$/;"	m	struct:_ButtonAck	access:public
 _ButtonRequest	protob/messages.pb.h	/^typedef struct _ButtonRequest {$/;"	s
+_ButtonRequest::code	protob/messages.pb.h	/^    ButtonRequestType code;$/;"	m	struct:_ButtonRequest	access:public
+_ButtonRequest::data	protob/messages.pb.h	/^    char data[256];$/;"	m	struct:_ButtonRequest	access:public
+_ButtonRequest::has_code	protob/messages.pb.h	/^    bool has_code;$/;"	m	struct:_ButtonRequest	access:public
+_ButtonRequest::has_data	protob/messages.pb.h	/^    bool has_data;$/;"	m	struct:_ButtonRequest	access:public
 _ButtonRequestType	protob/types.pb.h	/^typedef enum _ButtonRequestType {$/;"	g
 _Cancel	protob/messages.pb.h	/^typedef struct _Cancel {$/;"	s
+_Cancel::dummy_field	protob/messages.pb.h	/^    uint8_t dummy_field;$/;"	m	struct:_Cancel	access:public
 _ChangePin	protob/messages.pb.h	/^typedef struct _ChangePin {$/;"	s
+_ChangePin::has_remove	protob/messages.pb.h	/^    bool has_remove;$/;"	m	struct:_ChangePin	access:public
+_ChangePin::remove	protob/messages.pb.h	/^    bool remove;$/;"	m	struct:_ChangePin	access:public
 _CipherKeyValue	protob/messages.pb.h	/^typedef struct _CipherKeyValue {$/;"	s
+_CipherKeyValue::address_n	protob/messages.pb.h	/^    uint32_t address_n[8];$/;"	m	struct:_CipherKeyValue	access:public
+_CipherKeyValue::address_n_count	protob/messages.pb.h	/^    size_t address_n_count;$/;"	m	struct:_CipherKeyValue	access:public
+_CipherKeyValue::ask_on_decrypt	protob/messages.pb.h	/^    bool ask_on_decrypt;$/;"	m	struct:_CipherKeyValue	access:public
+_CipherKeyValue::ask_on_encrypt	protob/messages.pb.h	/^    bool ask_on_encrypt;$/;"	m	struct:_CipherKeyValue	access:public
+_CipherKeyValue::encrypt	protob/messages.pb.h	/^    bool encrypt;$/;"	m	struct:_CipherKeyValue	access:public
+_CipherKeyValue::has_ask_on_decrypt	protob/messages.pb.h	/^    bool has_ask_on_decrypt;$/;"	m	struct:_CipherKeyValue	access:public
+_CipherKeyValue::has_ask_on_encrypt	protob/messages.pb.h	/^    bool has_ask_on_encrypt;$/;"	m	struct:_CipherKeyValue	access:public
+_CipherKeyValue::has_encrypt	protob/messages.pb.h	/^    bool has_encrypt;$/;"	m	struct:_CipherKeyValue	access:public
+_CipherKeyValue::has_key	protob/messages.pb.h	/^    bool has_key;$/;"	m	struct:_CipherKeyValue	access:public
+_CipherKeyValue::has_value	protob/messages.pb.h	/^    bool has_value;$/;"	m	struct:_CipherKeyValue	access:public
+_CipherKeyValue::key	protob/messages.pb.h	/^    char key[256];$/;"	m	struct:_CipherKeyValue	access:public
+_CipherKeyValue::value	protob/messages.pb.h	/^    CipherKeyValue_value_t value;$/;"	m	struct:_CipherKeyValue	access:public
 _ClearSession	protob/messages.pb.h	/^typedef struct _ClearSession {$/;"	s
+_ClearSession::dummy_field	protob/messages.pb.h	/^    uint8_t dummy_field;$/;"	m	struct:_ClearSession	access:public
 _CoinType	protob/types.pb.h	/^typedef struct _CoinType {$/;"	s
+_CoinType::address_type	protob/types.pb.h	/^    uint32_t address_type;$/;"	m	struct:_CoinType	access:public
+_CoinType::coin_name	protob/types.pb.h	/^    char coin_name[17];$/;"	m	struct:_CoinType	access:public
+_CoinType::coin_shortcut	protob/types.pb.h	/^    char coin_shortcut[9];$/;"	m	struct:_CoinType	access:public
+_CoinType::has_address_type	protob/types.pb.h	/^    bool has_address_type;$/;"	m	struct:_CoinType	access:public
+_CoinType::has_coin_name	protob/types.pb.h	/^    bool has_coin_name;$/;"	m	struct:_CoinType	access:public
+_CoinType::has_coin_shortcut	protob/types.pb.h	/^    bool has_coin_shortcut;$/;"	m	struct:_CoinType	access:public
+_CoinType::has_maxfee_kb	protob/types.pb.h	/^    bool has_maxfee_kb;$/;"	m	struct:_CoinType	access:public
+_CoinType::maxfee_kb	protob/types.pb.h	/^    uint64_t maxfee_kb;$/;"	m	struct:_CoinType	access:public
 _DebugLinkDecision	protob/messages.pb.h	/^typedef struct _DebugLinkDecision {$/;"	s
+_DebugLinkDecision::yes_no	protob/messages.pb.h	/^    bool yes_no;$/;"	m	struct:_DebugLinkDecision	access:public
 _DebugLinkGetState	protob/messages.pb.h	/^typedef struct _DebugLinkGetState {$/;"	s
+_DebugLinkGetState::dummy_field	protob/messages.pb.h	/^    uint8_t dummy_field;$/;"	m	struct:_DebugLinkGetState	access:public
 _DebugLinkLog	protob/messages.pb.h	/^typedef struct _DebugLinkLog {$/;"	s
+_DebugLinkLog::bucket	protob/messages.pb.h	/^    char bucket[33];$/;"	m	struct:_DebugLinkLog	access:public
+_DebugLinkLog::has_bucket	protob/messages.pb.h	/^    bool has_bucket;$/;"	m	struct:_DebugLinkLog	access:public
+_DebugLinkLog::has_level	protob/messages.pb.h	/^    bool has_level;$/;"	m	struct:_DebugLinkLog	access:public
+_DebugLinkLog::has_text	protob/messages.pb.h	/^    bool has_text;$/;"	m	struct:_DebugLinkLog	access:public
+_DebugLinkLog::level	protob/messages.pb.h	/^    uint32_t level;$/;"	m	struct:_DebugLinkLog	access:public
+_DebugLinkLog::text	protob/messages.pb.h	/^    char text[256];$/;"	m	struct:_DebugLinkLog	access:public
 _DebugLinkState	protob/messages.pb.h	/^typedef struct _DebugLinkState {$/;"	s
+_DebugLinkState::has_layout	protob/messages.pb.h	/^    bool has_layout;$/;"	m	struct:_DebugLinkState	access:public
+_DebugLinkState::has_matrix	protob/messages.pb.h	/^    bool has_matrix;$/;"	m	struct:_DebugLinkState	access:public
+_DebugLinkState::has_mnemonic	protob/messages.pb.h	/^    bool has_mnemonic;$/;"	m	struct:_DebugLinkState	access:public
+_DebugLinkState::has_node	protob/messages.pb.h	/^    bool has_node;$/;"	m	struct:_DebugLinkState	access:public
+_DebugLinkState::has_passphrase_protection	protob/messages.pb.h	/^    bool has_passphrase_protection;$/;"	m	struct:_DebugLinkState	access:public
+_DebugLinkState::has_pin	protob/messages.pb.h	/^    bool has_pin;$/;"	m	struct:_DebugLinkState	access:public
+_DebugLinkState::has_recovery_fake_word	protob/messages.pb.h	/^    bool has_recovery_fake_word;$/;"	m	struct:_DebugLinkState	access:public
+_DebugLinkState::has_recovery_word_pos	protob/messages.pb.h	/^    bool has_recovery_word_pos;$/;"	m	struct:_DebugLinkState	access:public
+_DebugLinkState::has_reset_entropy	protob/messages.pb.h	/^    bool has_reset_entropy;$/;"	m	struct:_DebugLinkState	access:public
+_DebugLinkState::has_reset_word	protob/messages.pb.h	/^    bool has_reset_word;$/;"	m	struct:_DebugLinkState	access:public
+_DebugLinkState::layout	protob/messages.pb.h	/^    DebugLinkState_layout_t layout;$/;"	m	struct:_DebugLinkState	access:public
+_DebugLinkState::matrix	protob/messages.pb.h	/^    char matrix[10];$/;"	m	struct:_DebugLinkState	access:public
+_DebugLinkState::mnemonic	protob/messages.pb.h	/^    char mnemonic[241];$/;"	m	struct:_DebugLinkState	access:public
+_DebugLinkState::node	protob/messages.pb.h	/^    HDNodeType node;$/;"	m	struct:_DebugLinkState	access:public
+_DebugLinkState::passphrase_protection	protob/messages.pb.h	/^    bool passphrase_protection;$/;"	m	struct:_DebugLinkState	access:public
+_DebugLinkState::pin	protob/messages.pb.h	/^    char pin[10];$/;"	m	struct:_DebugLinkState	access:public
+_DebugLinkState::recovery_fake_word	protob/messages.pb.h	/^    char recovery_fake_word[12];$/;"	m	struct:_DebugLinkState	access:public
+_DebugLinkState::recovery_word_pos	protob/messages.pb.h	/^    uint32_t recovery_word_pos;$/;"	m	struct:_DebugLinkState	access:public
+_DebugLinkState::reset_entropy	protob/messages.pb.h	/^    DebugLinkState_reset_entropy_t reset_entropy;$/;"	m	struct:_DebugLinkState	access:public
+_DebugLinkState::reset_word	protob/messages.pb.h	/^    char reset_word[12];$/;"	m	struct:_DebugLinkState	access:public
 _DebugLinkStop	protob/messages.pb.h	/^typedef struct _DebugLinkStop {$/;"	s
+_DebugLinkStop::dummy_field	protob/messages.pb.h	/^    uint8_t dummy_field;$/;"	m	struct:_DebugLinkStop	access:public
 _DecryptMessage	protob/messages.pb.h	/^typedef struct _DecryptMessage {$/;"	s
+_DecryptMessage::address_n	protob/messages.pb.h	/^    uint32_t address_n[8];$/;"	m	struct:_DecryptMessage	access:public
+_DecryptMessage::address_n_count	protob/messages.pb.h	/^    size_t address_n_count;$/;"	m	struct:_DecryptMessage	access:public
+_DecryptMessage::has_message	protob/messages.pb.h	/^    bool has_message;$/;"	m	struct:_DecryptMessage	access:public
+_DecryptMessage::message	protob/messages.pb.h	/^    DecryptMessage_message_t message;$/;"	m	struct:_DecryptMessage	access:public
 _EncryptMessage	protob/messages.pb.h	/^typedef struct _EncryptMessage {$/;"	s
+_EncryptMessage::address_n	protob/messages.pb.h	/^    uint32_t address_n[8];$/;"	m	struct:_EncryptMessage	access:public
+_EncryptMessage::address_n_count	protob/messages.pb.h	/^    size_t address_n_count;$/;"	m	struct:_EncryptMessage	access:public
+_EncryptMessage::display_only	protob/messages.pb.h	/^    bool display_only;$/;"	m	struct:_EncryptMessage	access:public
+_EncryptMessage::has_display_only	protob/messages.pb.h	/^    bool has_display_only;$/;"	m	struct:_EncryptMessage	access:public
+_EncryptMessage::has_message	protob/messages.pb.h	/^    bool has_message;$/;"	m	struct:_EncryptMessage	access:public
+_EncryptMessage::has_pubkey	protob/messages.pb.h	/^    bool has_pubkey;$/;"	m	struct:_EncryptMessage	access:public
+_EncryptMessage::message	protob/messages.pb.h	/^    EncryptMessage_message_t message;$/;"	m	struct:_EncryptMessage	access:public
+_EncryptMessage::pubkey	protob/messages.pb.h	/^    EncryptMessage_pubkey_t pubkey;$/;"	m	struct:_EncryptMessage	access:public
 _Entropy	protob/messages.pb.h	/^typedef struct _Entropy {$/;"	s
+_Entropy::entropy	protob/messages.pb.h	/^    Entropy_entropy_t entropy;$/;"	m	struct:_Entropy	access:public
 _EntropyAck	protob/messages.pb.h	/^typedef struct _EntropyAck {$/;"	s
+_EntropyAck::entropy	protob/messages.pb.h	/^    EntropyAck_entropy_t entropy;$/;"	m	struct:_EntropyAck	access:public
+_EntropyAck::has_entropy	protob/messages.pb.h	/^    bool has_entropy;$/;"	m	struct:_EntropyAck	access:public
 _EntropyRequest	protob/messages.pb.h	/^typedef struct _EntropyRequest {$/;"	s
+_EntropyRequest::dummy_field	protob/messages.pb.h	/^    uint8_t dummy_field;$/;"	m	struct:_EntropyRequest	access:public
 _EstimateTxSize	protob/messages.pb.h	/^typedef struct _EstimateTxSize {$/;"	s
+_EstimateTxSize::coin_name	protob/messages.pb.h	/^    char coin_name[17];$/;"	m	struct:_EstimateTxSize	access:public
+_EstimateTxSize::has_coin_name	protob/messages.pb.h	/^    bool has_coin_name;$/;"	m	struct:_EstimateTxSize	access:public
+_EstimateTxSize::inputs_count	protob/messages.pb.h	/^    uint32_t inputs_count;$/;"	m	struct:_EstimateTxSize	access:public
+_EstimateTxSize::outputs_count	protob/messages.pb.h	/^    uint32_t outputs_count;$/;"	m	struct:_EstimateTxSize	access:public
 _Failure	protob/messages.pb.h	/^typedef struct _Failure {$/;"	s
+_Failure::code	protob/messages.pb.h	/^    FailureType code;$/;"	m	struct:_Failure	access:public
+_Failure::has_code	protob/messages.pb.h	/^    bool has_code;$/;"	m	struct:_Failure	access:public
+_Failure::has_message	protob/messages.pb.h	/^    bool has_message;$/;"	m	struct:_Failure	access:public
+_Failure::message	protob/messages.pb.h	/^    char message[256];$/;"	m	struct:_Failure	access:public
 _FailureType	protob/types.pb.h	/^typedef enum _FailureType {$/;"	g
 _Features	protob/messages.pb.h	/^typedef struct _Features {$/;"	s
+_Features::bootloader_hash	protob/messages.pb.h	/^    Features_bootloader_hash_t bootloader_hash;$/;"	m	struct:_Features	access:public
+_Features::bootloader_mode	protob/messages.pb.h	/^    bool bootloader_mode;$/;"	m	struct:_Features	access:public
+_Features::coins	protob/messages.pb.h	/^    CoinType coins[4];$/;"	m	struct:_Features	access:public
+_Features::coins_count	protob/messages.pb.h	/^    size_t coins_count;$/;"	m	struct:_Features	access:public
+_Features::cpu_sn	protob/messages.pb.h	/^    char cpu_sn[25];$/;"	m	struct:_Features	access:public
+_Features::device_id	protob/messages.pb.h	/^    char device_id[25];$/;"	m	struct:_Features	access:public
+_Features::has_bootloader_hash	protob/messages.pb.h	/^    bool has_bootloader_hash;$/;"	m	struct:_Features	access:public
+_Features::has_bootloader_mode	protob/messages.pb.h	/^    bool has_bootloader_mode;$/;"	m	struct:_Features	access:public
+_Features::has_cpu_sn	protob/messages.pb.h	/^    bool has_cpu_sn;$/;"	m	struct:_Features	access:public
+_Features::has_device_id	protob/messages.pb.h	/^    bool has_device_id;$/;"	m	struct:_Features	access:public
+_Features::has_imported	protob/messages.pb.h	/^    bool has_imported;$/;"	m	struct:_Features	access:public
+_Features::has_initialized	protob/messages.pb.h	/^    bool has_initialized;$/;"	m	struct:_Features	access:public
+_Features::has_label	protob/messages.pb.h	/^    bool has_label;$/;"	m	struct:_Features	access:public
+_Features::has_language	protob/messages.pb.h	/^    bool has_language;$/;"	m	struct:_Features	access:public
+_Features::has_major_version	protob/messages.pb.h	/^    bool has_major_version;$/;"	m	struct:_Features	access:public
+_Features::has_minor_version	protob/messages.pb.h	/^    bool has_minor_version;$/;"	m	struct:_Features	access:public
+_Features::has_passphrase_protection	protob/messages.pb.h	/^    bool has_passphrase_protection;$/;"	m	struct:_Features	access:public
+_Features::has_patch_version	protob/messages.pb.h	/^    bool has_patch_version;$/;"	m	struct:_Features	access:public
+_Features::has_pin_protection	protob/messages.pb.h	/^    bool has_pin_protection;$/;"	m	struct:_Features	access:public
+_Features::has_revision	protob/messages.pb.h	/^    bool has_revision;$/;"	m	struct:_Features	access:public
+_Features::has_vendor	protob/messages.pb.h	/^    bool has_vendor;$/;"	m	struct:_Features	access:public
+_Features::imported	protob/messages.pb.h	/^    bool imported;$/;"	m	struct:_Features	access:public
+_Features::initialized	protob/messages.pb.h	/^    bool initialized;$/;"	m	struct:_Features	access:public
+_Features::label	protob/messages.pb.h	/^    char label[33];$/;"	m	struct:_Features	access:public
+_Features::language	protob/messages.pb.h	/^    char language[17];$/;"	m	struct:_Features	access:public
+_Features::major_version	protob/messages.pb.h	/^    uint32_t major_version;$/;"	m	struct:_Features	access:public
+_Features::minor_version	protob/messages.pb.h	/^    uint32_t minor_version;$/;"	m	struct:_Features	access:public
+_Features::passphrase_protection	protob/messages.pb.h	/^    bool passphrase_protection;$/;"	m	struct:_Features	access:public
+_Features::patch_version	protob/messages.pb.h	/^    uint32_t patch_version;$/;"	m	struct:_Features	access:public
+_Features::pin_protection	protob/messages.pb.h	/^    bool pin_protection;$/;"	m	struct:_Features	access:public
+_Features::revision	protob/messages.pb.h	/^    Features_revision_t revision;$/;"	m	struct:_Features	access:public
+_Features::vendor	protob/messages.pb.h	/^    char vendor[33];$/;"	m	struct:_Features	access:public
 _FirmwareErase	protob/messages.pb.h	/^typedef struct _FirmwareErase {$/;"	s
+_FirmwareErase::dummy_field	protob/messages.pb.h	/^    uint8_t dummy_field;$/;"	m	struct:_FirmwareErase	access:public
 _FirmwareUpload	protob/messages.pb.h	/^typedef struct _FirmwareUpload {$/;"	s
+_FirmwareUpload::payload	protob/messages.pb.h	/^    FirmwareUpload_payload_t payload;$/;"	m	struct:_FirmwareUpload	access:public
 _GetAddress	protob/messages.pb.h	/^typedef struct _GetAddress {$/;"	s
+_GetAddress::address_n	protob/messages.pb.h	/^    uint32_t address_n[8];$/;"	m	struct:_GetAddress	access:public
+_GetAddress::address_n_count	protob/messages.pb.h	/^    size_t address_n_count;$/;"	m	struct:_GetAddress	access:public
+_GetAddress::coin_name	protob/messages.pb.h	/^    char coin_name[17];$/;"	m	struct:_GetAddress	access:public
+_GetAddress::has_coin_name	protob/messages.pb.h	/^    bool has_coin_name;$/;"	m	struct:_GetAddress	access:public
+_GetAddress::has_show_display	protob/messages.pb.h	/^    bool has_show_display;$/;"	m	struct:_GetAddress	access:public
+_GetAddress::show_display	protob/messages.pb.h	/^    bool show_display;$/;"	m	struct:_GetAddress	access:public
 _GetEntropy	protob/messages.pb.h	/^typedef struct _GetEntropy {$/;"	s
+_GetEntropy::size	protob/messages.pb.h	/^    uint32_t size;$/;"	m	struct:_GetEntropy	access:public
 _GetPublicKey	protob/messages.pb.h	/^typedef struct _GetPublicKey {$/;"	s
+_GetPublicKey::address_n	protob/messages.pb.h	/^    uint32_t address_n[8];$/;"	m	struct:_GetPublicKey	access:public
+_GetPublicKey::address_n_count	protob/messages.pb.h	/^    size_t address_n_count;$/;"	m	struct:_GetPublicKey	access:public
 _HDNodeType	protob/types.pb.h	/^typedef struct _HDNodeType {$/;"	s
+_HDNodeType::chain_code	protob/types.pb.h	/^    HDNodeType_chain_code_t chain_code;$/;"	m	struct:_HDNodeType	access:public
+_HDNodeType::child_num	protob/types.pb.h	/^    uint32_t child_num;$/;"	m	struct:_HDNodeType	access:public
+_HDNodeType::depth	protob/types.pb.h	/^    uint32_t depth;$/;"	m	struct:_HDNodeType	access:public
+_HDNodeType::fingerprint	protob/types.pb.h	/^    uint32_t fingerprint;$/;"	m	struct:_HDNodeType	access:public
+_HDNodeType::has_private_key	protob/types.pb.h	/^    bool has_private_key;$/;"	m	struct:_HDNodeType	access:public
+_HDNodeType::has_public_key	protob/types.pb.h	/^    bool has_public_key;$/;"	m	struct:_HDNodeType	access:public
+_HDNodeType::private_key	protob/types.pb.h	/^    HDNodeType_private_key_t private_key;$/;"	m	struct:_HDNodeType	access:public
+_HDNodeType::public_key	protob/types.pb.h	/^    HDNodeType_public_key_t public_key;$/;"	m	struct:_HDNodeType	access:public
 _Initialize	protob/messages.pb.h	/^typedef struct _Initialize {$/;"	s
+_Initialize::dummy_field	protob/messages.pb.h	/^    uint8_t dummy_field;$/;"	m	struct:_Initialize	access:public
 _InputScriptType	protob/types.pb.h	/^typedef enum _InputScriptType {$/;"	g
 _LoadDevice	protob/messages.pb.h	/^typedef struct _LoadDevice {$/;"	s
+_LoadDevice::has_label	protob/messages.pb.h	/^    bool has_label;$/;"	m	struct:_LoadDevice	access:public
+_LoadDevice::has_language	protob/messages.pb.h	/^    bool has_language;$/;"	m	struct:_LoadDevice	access:public
+_LoadDevice::has_mnemonic	protob/messages.pb.h	/^    bool has_mnemonic;$/;"	m	struct:_LoadDevice	access:public
+_LoadDevice::has_node	protob/messages.pb.h	/^    bool has_node;$/;"	m	struct:_LoadDevice	access:public
+_LoadDevice::has_passphrase_protection	protob/messages.pb.h	/^    bool has_passphrase_protection;$/;"	m	struct:_LoadDevice	access:public
+_LoadDevice::has_pin	protob/messages.pb.h	/^    bool has_pin;$/;"	m	struct:_LoadDevice	access:public
+_LoadDevice::has_skip_checksum	protob/messages.pb.h	/^    bool has_skip_checksum;$/;"	m	struct:_LoadDevice	access:public
+_LoadDevice::label	protob/messages.pb.h	/^    char label[33];$/;"	m	struct:_LoadDevice	access:public
+_LoadDevice::language	protob/messages.pb.h	/^    char language[17];$/;"	m	struct:_LoadDevice	access:public
+_LoadDevice::mnemonic	protob/messages.pb.h	/^    char mnemonic[241];$/;"	m	struct:_LoadDevice	access:public
+_LoadDevice::node	protob/messages.pb.h	/^    HDNodeType node;$/;"	m	struct:_LoadDevice	access:public
+_LoadDevice::passphrase_protection	protob/messages.pb.h	/^    bool passphrase_protection;$/;"	m	struct:_LoadDevice	access:public
+_LoadDevice::pin	protob/messages.pb.h	/^    char pin[10];$/;"	m	struct:_LoadDevice	access:public
+_LoadDevice::skip_checksum	protob/messages.pb.h	/^    bool skip_checksum;$/;"	m	struct:_LoadDevice	access:public
 _MessageSignature	protob/messages.pb.h	/^typedef struct _MessageSignature {$/;"	s
+_MessageSignature::address	protob/messages.pb.h	/^    char address[35];$/;"	m	struct:_MessageSignature	access:public
+_MessageSignature::has_address	protob/messages.pb.h	/^    bool has_address;$/;"	m	struct:_MessageSignature	access:public
+_MessageSignature::has_signature	protob/messages.pb.h	/^    bool has_signature;$/;"	m	struct:_MessageSignature	access:public
+_MessageSignature::signature	protob/messages.pb.h	/^    MessageSignature_signature_t signature;$/;"	m	struct:_MessageSignature	access:public
 _MessageType	protob/messages.pb.h	/^typedef enum _MessageType {$/;"	g
 _MultisigRedeemScriptType	protob/types.pb.h	/^typedef struct _MultisigRedeemScriptType {$/;"	s
+_MultisigRedeemScriptType::pubkeys	protob/types.pb.h	/^    MultisigRedeemScriptType_pubkeys_t pubkeys[5];$/;"	m	struct:_MultisigRedeemScriptType	access:public
+_MultisigRedeemScriptType::pubkeys_count	protob/types.pb.h	/^    size_t pubkeys_count;$/;"	m	struct:_MultisigRedeemScriptType	access:public
+_MultisigRedeemScriptType::signatures	protob/types.pb.h	/^    MultisigRedeemScriptType_signatures_t signatures[4];$/;"	m	struct:_MultisigRedeemScriptType	access:public
+_MultisigRedeemScriptType::signatures_count	protob/types.pb.h	/^    size_t signatures_count;$/;"	m	struct:_MultisigRedeemScriptType	access:public
 _OutputScriptType	protob/types.pb.h	/^typedef enum _OutputScriptType {$/;"	g
 _PB_DECODE_H_	protob/pb_decode.h	7;"	d
 _PB_ENCODE_H_	protob/pb_encode.h	7;"	d
@@ -609,577 +813,894 @@ _PB_MESSAGES_PB_H_	protob/messages.pb.h	5;"	d
 _PB_STORAGE_PB_H_	protob/storage.pb.h	5;"	d
 _PB_TYPES_PB_H_	protob/types.pb.h	5;"	d
 _PassphraseAck	protob/messages.pb.h	/^typedef struct _PassphraseAck {$/;"	s
+_PassphraseAck::passphrase	protob/messages.pb.h	/^    char passphrase[51];$/;"	m	struct:_PassphraseAck	access:public
 _PassphraseRequest	protob/messages.pb.h	/^typedef struct _PassphraseRequest {$/;"	s
+_PassphraseRequest::dummy_field	protob/messages.pb.h	/^    uint8_t dummy_field;$/;"	m	struct:_PassphraseRequest	access:public
 _PinMatrixAck	protob/messages.pb.h	/^typedef struct _PinMatrixAck {$/;"	s
+_PinMatrixAck::pin	protob/messages.pb.h	/^    char pin[10];$/;"	m	struct:_PinMatrixAck	access:public
 _PinMatrixRequest	protob/messages.pb.h	/^typedef struct _PinMatrixRequest {$/;"	s
+_PinMatrixRequest::has_type	protob/messages.pb.h	/^    bool has_type;$/;"	m	struct:_PinMatrixRequest	access:public
+_PinMatrixRequest::type	protob/messages.pb.h	/^    PinMatrixRequestType type;$/;"	m	struct:_PinMatrixRequest	access:public
 _PinMatrixRequestType	protob/types.pb.h	/^typedef enum _PinMatrixRequestType {$/;"	g
 _Ping	protob/messages.pb.h	/^typedef struct _Ping {$/;"	s
+_Ping::button_protection	protob/messages.pb.h	/^    bool button_protection;$/;"	m	struct:_Ping	access:public
+_Ping::has_button_protection	protob/messages.pb.h	/^    bool has_button_protection;$/;"	m	struct:_Ping	access:public
+_Ping::has_message	protob/messages.pb.h	/^    bool has_message;$/;"	m	struct:_Ping	access:public
+_Ping::has_passphrase_protection	protob/messages.pb.h	/^    bool has_passphrase_protection;$/;"	m	struct:_Ping	access:public
+_Ping::has_pin_protection	protob/messages.pb.h	/^    bool has_pin_protection;$/;"	m	struct:_Ping	access:public
+_Ping::message	protob/messages.pb.h	/^    char message[256];$/;"	m	struct:_Ping	access:public
+_Ping::passphrase_protection	protob/messages.pb.h	/^    bool passphrase_protection;$/;"	m	struct:_Ping	access:public
+_Ping::pin_protection	protob/messages.pb.h	/^    bool pin_protection;$/;"	m	struct:_Ping	access:public
 _PublicKey	protob/messages.pb.h	/^typedef struct _PublicKey {$/;"	s
+_PublicKey::has_xpub	protob/messages.pb.h	/^    bool has_xpub;$/;"	m	struct:_PublicKey	access:public
+_PublicKey::node	protob/messages.pb.h	/^    HDNodeType node;$/;"	m	struct:_PublicKey	access:public
+_PublicKey::xpub	protob/messages.pb.h	/^    char xpub[113];$/;"	m	struct:_PublicKey	access:public
 _RecoveryDevice	protob/messages.pb.h	/^typedef struct _RecoveryDevice {$/;"	s
+_RecoveryDevice::enforce_wordlist	protob/messages.pb.h	/^    bool enforce_wordlist;$/;"	m	struct:_RecoveryDevice	access:public
+_RecoveryDevice::has_enforce_wordlist	protob/messages.pb.h	/^    bool has_enforce_wordlist;$/;"	m	struct:_RecoveryDevice	access:public
+_RecoveryDevice::has_label	protob/messages.pb.h	/^    bool has_label;$/;"	m	struct:_RecoveryDevice	access:public
+_RecoveryDevice::has_language	protob/messages.pb.h	/^    bool has_language;$/;"	m	struct:_RecoveryDevice	access:public
+_RecoveryDevice::has_passphrase_protection	protob/messages.pb.h	/^    bool has_passphrase_protection;$/;"	m	struct:_RecoveryDevice	access:public
+_RecoveryDevice::has_pin_protection	protob/messages.pb.h	/^    bool has_pin_protection;$/;"	m	struct:_RecoveryDevice	access:public
+_RecoveryDevice::has_word_count	protob/messages.pb.h	/^    bool has_word_count;$/;"	m	struct:_RecoveryDevice	access:public
+_RecoveryDevice::label	protob/messages.pb.h	/^    char label[33];$/;"	m	struct:_RecoveryDevice	access:public
+_RecoveryDevice::language	protob/messages.pb.h	/^    char language[17];$/;"	m	struct:_RecoveryDevice	access:public
+_RecoveryDevice::passphrase_protection	protob/messages.pb.h	/^    bool passphrase_protection;$/;"	m	struct:_RecoveryDevice	access:public
+_RecoveryDevice::pin_protection	protob/messages.pb.h	/^    bool pin_protection;$/;"	m	struct:_RecoveryDevice	access:public
+_RecoveryDevice::word_count	protob/messages.pb.h	/^    uint32_t word_count;$/;"	m	struct:_RecoveryDevice	access:public
 _RequestType	protob/types.pb.h	/^typedef enum _RequestType {$/;"	g
 _ResetDevice	protob/messages.pb.h	/^typedef struct _ResetDevice {$/;"	s
+_ResetDevice::display_random	protob/messages.pb.h	/^    bool display_random;$/;"	m	struct:_ResetDevice	access:public
+_ResetDevice::has_display_random	protob/messages.pb.h	/^    bool has_display_random;$/;"	m	struct:_ResetDevice	access:public
+_ResetDevice::has_label	protob/messages.pb.h	/^    bool has_label;$/;"	m	struct:_ResetDevice	access:public
+_ResetDevice::has_language	protob/messages.pb.h	/^    bool has_language;$/;"	m	struct:_ResetDevice	access:public
+_ResetDevice::has_passphrase_protection	protob/messages.pb.h	/^    bool has_passphrase_protection;$/;"	m	struct:_ResetDevice	access:public
+_ResetDevice::has_pin_protection	protob/messages.pb.h	/^    bool has_pin_protection;$/;"	m	struct:_ResetDevice	access:public
+_ResetDevice::has_strength	protob/messages.pb.h	/^    bool has_strength;$/;"	m	struct:_ResetDevice	access:public
+_ResetDevice::label	protob/messages.pb.h	/^    char label[33];$/;"	m	struct:_ResetDevice	access:public
+_ResetDevice::language	protob/messages.pb.h	/^    char language[17];$/;"	m	struct:_ResetDevice	access:public
+_ResetDevice::passphrase_protection	protob/messages.pb.h	/^    bool passphrase_protection;$/;"	m	struct:_ResetDevice	access:public
+_ResetDevice::pin_protection	protob/messages.pb.h	/^    bool pin_protection;$/;"	m	struct:_ResetDevice	access:public
+_ResetDevice::strength	protob/messages.pb.h	/^    uint32_t strength;$/;"	m	struct:_ResetDevice	access:public
 _SignMessage	protob/messages.pb.h	/^typedef struct _SignMessage {$/;"	s
+_SignMessage::address_n	protob/messages.pb.h	/^    uint32_t address_n[8];$/;"	m	struct:_SignMessage	access:public
+_SignMessage::address_n_count	protob/messages.pb.h	/^    size_t address_n_count;$/;"	m	struct:_SignMessage	access:public
+_SignMessage::coin_name	protob/messages.pb.h	/^    char coin_name[17];$/;"	m	struct:_SignMessage	access:public
+_SignMessage::has_coin_name	protob/messages.pb.h	/^    bool has_coin_name;$/;"	m	struct:_SignMessage	access:public
+_SignMessage::message	protob/messages.pb.h	/^    SignMessage_message_t message;$/;"	m	struct:_SignMessage	access:public
 _SignTx	protob/messages.pb.h	/^typedef struct _SignTx {$/;"	s
+_SignTx::coin_name	protob/messages.pb.h	/^    char coin_name[17];$/;"	m	struct:_SignTx	access:public
+_SignTx::has_coin_name	protob/messages.pb.h	/^    bool has_coin_name;$/;"	m	struct:_SignTx	access:public
+_SignTx::inputs_count	protob/messages.pb.h	/^    uint32_t inputs_count;$/;"	m	struct:_SignTx	access:public
+_SignTx::outputs_count	protob/messages.pb.h	/^    uint32_t outputs_count;$/;"	m	struct:_SignTx	access:public
 _SimpleSignTx	protob/messages.pb.h	/^typedef struct _SimpleSignTx {$/;"	s
+_SimpleSignTx::coin_name	protob/messages.pb.h	/^    char coin_name[17];$/;"	m	struct:_SimpleSignTx	access:public
+_SimpleSignTx::has_coin_name	protob/messages.pb.h	/^    bool has_coin_name;$/;"	m	struct:_SimpleSignTx	access:public
+_SimpleSignTx::inputs	protob/messages.pb.h	/^    TxInputType inputs[0];$/;"	m	struct:_SimpleSignTx	access:public
+_SimpleSignTx::inputs_count	protob/messages.pb.h	/^    size_t inputs_count;$/;"	m	struct:_SimpleSignTx	access:public
+_SimpleSignTx::outputs	protob/messages.pb.h	/^    TxOutputType outputs[0];$/;"	m	struct:_SimpleSignTx	access:public
+_SimpleSignTx::outputs_count	protob/messages.pb.h	/^    size_t outputs_count;$/;"	m	struct:_SimpleSignTx	access:public
+_SimpleSignTx::transactions	protob/messages.pb.h	/^    TransactionType transactions[0];$/;"	m	struct:_SimpleSignTx	access:public
+_SimpleSignTx::transactions_count	protob/messages.pb.h	/^    size_t transactions_count;$/;"	m	struct:_SimpleSignTx	access:public
 _Storage	protob/storage.pb.h	/^typedef struct _Storage {$/;"	s
+_Storage::has_imported	protob/storage.pb.h	/^    bool has_imported;$/;"	m	struct:_Storage	access:public
+_Storage::has_label	protob/storage.pb.h	/^    bool has_label;$/;"	m	struct:_Storage	access:public
+_Storage::has_language	protob/storage.pb.h	/^    bool has_language;$/;"	m	struct:_Storage	access:public
+_Storage::has_mnemonic	protob/storage.pb.h	/^    bool has_mnemonic;$/;"	m	struct:_Storage	access:public
+_Storage::has_node	protob/storage.pb.h	/^    bool has_node;$/;"	m	struct:_Storage	access:public
+_Storage::has_passphrase_protection	protob/storage.pb.h	/^    bool has_passphrase_protection;$/;"	m	struct:_Storage	access:public
+_Storage::has_pin	protob/storage.pb.h	/^    bool has_pin;$/;"	m	struct:_Storage	access:public
+_Storage::has_pin_failed_attempts	protob/storage.pb.h	/^    bool has_pin_failed_attempts;$/;"	m	struct:_Storage	access:public
+_Storage::imported	protob/storage.pb.h	/^    bool imported;$/;"	m	struct:_Storage	access:public
+_Storage::label	protob/storage.pb.h	/^    char label[33];$/;"	m	struct:_Storage	access:public
+_Storage::language	protob/storage.pb.h	/^    char language[17];$/;"	m	struct:_Storage	access:public
+_Storage::mnemonic	protob/storage.pb.h	/^    char mnemonic[241];$/;"	m	struct:_Storage	access:public
+_Storage::node	protob/storage.pb.h	/^    HDNodeType node;$/;"	m	struct:_Storage	access:public
+_Storage::passphrase_protection	protob/storage.pb.h	/^    bool passphrase_protection;$/;"	m	struct:_Storage	access:public
+_Storage::pin	protob/storage.pb.h	/^    char pin[10];$/;"	m	struct:_Storage	access:public
+_Storage::pin_failed_attempts	protob/storage.pb.h	/^    uint32_t pin_failed_attempts;$/;"	m	struct:_Storage	access:public
+_Storage::version	protob/storage.pb.h	/^    uint32_t version;$/;"	m	struct:_Storage	access:public
 _Success	protob/messages.pb.h	/^typedef struct _Success {$/;"	s
+_Success::has_message	protob/messages.pb.h	/^    bool has_message;$/;"	m	struct:_Success	access:public
+_Success::has_payload	protob/messages.pb.h	/^    bool has_payload;$/;"	m	struct:_Success	access:public
+_Success::message	protob/messages.pb.h	/^    char message[256];$/;"	m	struct:_Success	access:public
+_Success::payload	protob/messages.pb.h	/^    Success_payload_t payload;$/;"	m	struct:_Success	access:public
 _TestScreen	protob/messages.pb.h	/^typedef struct _TestScreen {$/;"	s
+_TestScreen::delay_time	protob/messages.pb.h	/^    uint32_t delay_time;$/;"	m	struct:_TestScreen	access:public
 _TransactionType	protob/types.pb.h	/^typedef struct _TransactionType {$/;"	s
+_TransactionType::bin_outputs	protob/types.pb.h	/^    TxOutputBinType bin_outputs[1];$/;"	m	struct:_TransactionType	access:public
+_TransactionType::bin_outputs_count	protob/types.pb.h	/^    size_t bin_outputs_count;$/;"	m	struct:_TransactionType	access:public
+_TransactionType::has_inputs_cnt	protob/types.pb.h	/^    bool has_inputs_cnt;$/;"	m	struct:_TransactionType	access:public
+_TransactionType::has_lock_time	protob/types.pb.h	/^    bool has_lock_time;$/;"	m	struct:_TransactionType	access:public
+_TransactionType::has_outputs_cnt	protob/types.pb.h	/^    bool has_outputs_cnt;$/;"	m	struct:_TransactionType	access:public
+_TransactionType::has_version	protob/types.pb.h	/^    bool has_version;$/;"	m	struct:_TransactionType	access:public
+_TransactionType::inputs	protob/types.pb.h	/^    TxInputType inputs[1];$/;"	m	struct:_TransactionType	access:public
+_TransactionType::inputs_cnt	protob/types.pb.h	/^    uint32_t inputs_cnt;$/;"	m	struct:_TransactionType	access:public
+_TransactionType::inputs_count	protob/types.pb.h	/^    size_t inputs_count;$/;"	m	struct:_TransactionType	access:public
+_TransactionType::lock_time	protob/types.pb.h	/^    uint32_t lock_time;$/;"	m	struct:_TransactionType	access:public
+_TransactionType::outputs	protob/types.pb.h	/^    TxOutputType outputs[1];$/;"	m	struct:_TransactionType	access:public
+_TransactionType::outputs_cnt	protob/types.pb.h	/^    uint32_t outputs_cnt;$/;"	m	struct:_TransactionType	access:public
+_TransactionType::outputs_count	protob/types.pb.h	/^    size_t outputs_count;$/;"	m	struct:_TransactionType	access:public
+_TransactionType::version	protob/types.pb.h	/^    uint32_t version;$/;"	m	struct:_TransactionType	access:public
 _TxAck	protob/messages.pb.h	/^typedef struct _TxAck {$/;"	s
+_TxAck::has_tx	protob/messages.pb.h	/^    bool has_tx;$/;"	m	struct:_TxAck	access:public
+_TxAck::tx	protob/messages.pb.h	/^    TransactionType tx;$/;"	m	struct:_TxAck	access:public
 _TxInputType	protob/types.pb.h	/^typedef struct _TxInputType {$/;"	s
+_TxInputType::address_n	protob/types.pb.h	/^    uint32_t address_n[8];$/;"	m	struct:_TxInputType	access:public
+_TxInputType::address_n_count	protob/types.pb.h	/^    size_t address_n_count;$/;"	m	struct:_TxInputType	access:public
+_TxInputType::has_multisig	protob/types.pb.h	/^    bool has_multisig;$/;"	m	struct:_TxInputType	access:public
+_TxInputType::has_script_sig	protob/types.pb.h	/^    bool has_script_sig;$/;"	m	struct:_TxInputType	access:public
+_TxInputType::has_script_type	protob/types.pb.h	/^    bool has_script_type;$/;"	m	struct:_TxInputType	access:public
+_TxInputType::has_sequence	protob/types.pb.h	/^    bool has_sequence;$/;"	m	struct:_TxInputType	access:public
+_TxInputType::multisig	protob/types.pb.h	/^    MultisigRedeemScriptType multisig;$/;"	m	struct:_TxInputType	access:public
+_TxInputType::prev_hash	protob/types.pb.h	/^    TxInputType_prev_hash_t prev_hash;$/;"	m	struct:_TxInputType	access:public
+_TxInputType::prev_index	protob/types.pb.h	/^    uint32_t prev_index;$/;"	m	struct:_TxInputType	access:public
+_TxInputType::script_sig	protob/types.pb.h	/^    TxInputType_script_sig_t script_sig;$/;"	m	struct:_TxInputType	access:public
+_TxInputType::script_type	protob/types.pb.h	/^    InputScriptType script_type;$/;"	m	struct:_TxInputType	access:public
+_TxInputType::sequence	protob/types.pb.h	/^    uint32_t sequence;$/;"	m	struct:_TxInputType	access:public
 _TxOutputBinType	protob/types.pb.h	/^typedef struct _TxOutputBinType {$/;"	s
+_TxOutputBinType::amount	protob/types.pb.h	/^    uint64_t amount;$/;"	m	struct:_TxOutputBinType	access:public
+_TxOutputBinType::script_pubkey	protob/types.pb.h	/^    TxOutputBinType_script_pubkey_t script_pubkey;$/;"	m	struct:_TxOutputBinType	access:public
 _TxOutputType	protob/types.pb.h	/^typedef struct _TxOutputType {$/;"	s
+_TxOutputType::address	protob/types.pb.h	/^    char address[35];$/;"	m	struct:_TxOutputType	access:public
+_TxOutputType::address_n	protob/types.pb.h	/^    uint32_t address_n[8];$/;"	m	struct:_TxOutputType	access:public
+_TxOutputType::address_n_count	protob/types.pb.h	/^    size_t address_n_count;$/;"	m	struct:_TxOutputType	access:public
+_TxOutputType::amount	protob/types.pb.h	/^    uint64_t amount;$/;"	m	struct:_TxOutputType	access:public
+_TxOutputType::has_address	protob/types.pb.h	/^    bool has_address;$/;"	m	struct:_TxOutputType	access:public
+_TxOutputType::script_type	protob/types.pb.h	/^    OutputScriptType script_type;$/;"	m	struct:_TxOutputType	access:public
 _TxRequest	protob/messages.pb.h	/^typedef struct _TxRequest {$/;"	s
+_TxRequest::details	protob/messages.pb.h	/^    TxRequestDetailsType details;$/;"	m	struct:_TxRequest	access:public
+_TxRequest::has_details	protob/messages.pb.h	/^    bool has_details;$/;"	m	struct:_TxRequest	access:public
+_TxRequest::has_request_type	protob/messages.pb.h	/^    bool has_request_type;$/;"	m	struct:_TxRequest	access:public
+_TxRequest::has_serialized	protob/messages.pb.h	/^    bool has_serialized;$/;"	m	struct:_TxRequest	access:public
+_TxRequest::request_type	protob/messages.pb.h	/^    RequestType request_type;$/;"	m	struct:_TxRequest	access:public
+_TxRequest::serialized	protob/messages.pb.h	/^    TxRequestSerializedType serialized;$/;"	m	struct:_TxRequest	access:public
 _TxRequestDetailsType	protob/types.pb.h	/^typedef struct _TxRequestDetailsType {$/;"	s
+_TxRequestDetailsType::has_request_index	protob/types.pb.h	/^    bool has_request_index;$/;"	m	struct:_TxRequestDetailsType	access:public
+_TxRequestDetailsType::has_tx_hash	protob/types.pb.h	/^    bool has_tx_hash;$/;"	m	struct:_TxRequestDetailsType	access:public
+_TxRequestDetailsType::request_index	protob/types.pb.h	/^    uint32_t request_index;$/;"	m	struct:_TxRequestDetailsType	access:public
+_TxRequestDetailsType::tx_hash	protob/types.pb.h	/^    TxRequestDetailsType_tx_hash_t tx_hash;$/;"	m	struct:_TxRequestDetailsType	access:public
 _TxRequestSerializedType	protob/types.pb.h	/^typedef struct _TxRequestSerializedType {$/;"	s
+_TxRequestSerializedType::has_serialized_tx	protob/types.pb.h	/^    bool has_serialized_tx;$/;"	m	struct:_TxRequestSerializedType	access:public
+_TxRequestSerializedType::has_signature	protob/types.pb.h	/^    bool has_signature;$/;"	m	struct:_TxRequestSerializedType	access:public
+_TxRequestSerializedType::has_signature_index	protob/types.pb.h	/^    bool has_signature_index;$/;"	m	struct:_TxRequestSerializedType	access:public
+_TxRequestSerializedType::serialized_tx	protob/types.pb.h	/^    TxRequestSerializedType_serialized_tx_t serialized_tx;$/;"	m	struct:_TxRequestSerializedType	access:public
+_TxRequestSerializedType::signature	protob/types.pb.h	/^    TxRequestSerializedType_signature_t signature;$/;"	m	struct:_TxRequestSerializedType	access:public
+_TxRequestSerializedType::signature_index	protob/types.pb.h	/^    uint32_t signature_index;$/;"	m	struct:_TxRequestSerializedType	access:public
 _TxSize	protob/messages.pb.h	/^typedef struct _TxSize {$/;"	s
+_TxSize::has_tx_size	protob/messages.pb.h	/^    bool has_tx_size;$/;"	m	struct:_TxSize	access:public
+_TxSize::tx_size	protob/messages.pb.h	/^    uint32_t tx_size;$/;"	m	struct:_TxSize	access:public
 _VerifyMessage	protob/messages.pb.h	/^typedef struct _VerifyMessage {$/;"	s
+_VerifyMessage::address	protob/messages.pb.h	/^    char address[35];$/;"	m	struct:_VerifyMessage	access:public
+_VerifyMessage::has_address	protob/messages.pb.h	/^    bool has_address;$/;"	m	struct:_VerifyMessage	access:public
+_VerifyMessage::has_message	protob/messages.pb.h	/^    bool has_message;$/;"	m	struct:_VerifyMessage	access:public
+_VerifyMessage::has_signature	protob/messages.pb.h	/^    bool has_signature;$/;"	m	struct:_VerifyMessage	access:public
+_VerifyMessage::message	protob/messages.pb.h	/^    VerifyMessage_message_t message;$/;"	m	struct:_VerifyMessage	access:public
+_VerifyMessage::signature	protob/messages.pb.h	/^    VerifyMessage_signature_t signature;$/;"	m	struct:_VerifyMessage	access:public
 _WipeDevice	protob/messages.pb.h	/^typedef struct _WipeDevice {$/;"	s
+_WipeDevice::dummy_field	protob/messages.pb.h	/^    uint8_t dummy_field;$/;"	m	struct:_WipeDevice	access:public
 _WordAck	protob/messages.pb.h	/^typedef struct _WordAck {$/;"	s
+_WordAck::word	protob/messages.pb.h	/^    char word[12];$/;"	m	struct:_WordAck	access:public
 _WordRequest	protob/messages.pb.h	/^typedef struct _WordRequest {$/;"	s
+_WordRequest::dummy_field	protob/messages.pb.h	/^    uint8_t dummy_field;$/;"	m	struct:_WordRequest	access:public
 __FIRMWARE_H__	firmware.hpp	3;"	d
 __MESSAGES_H__	messages.hpp	2;"	d
+__TRAFFIC_H__	traffic.hpp	2;"	d
+__anon10::bytes	protob/types.pb.h	/^    uint8_t bytes[80];$/;"	m	struct:__anon10	access:public
+__anon10::size	protob/types.pb.h	/^    size_t size;$/;"	m	struct:__anon10	access:public
+__anon11::bytes	protob/types.pb.h	/^    uint8_t bytes[520];$/;"	m	struct:__anon11	access:public
+__anon11::size	protob/types.pb.h	/^    size_t size;$/;"	m	struct:__anon11	access:public
+__anon12::bytes	protob/types.pb.h	/^    uint8_t bytes[32];$/;"	m	struct:__anon12	access:public
+__anon12::size	protob/types.pb.h	/^    size_t size;$/;"	m	struct:__anon12	access:public
+__anon13::bytes	protob/types.pb.h	/^    uint8_t bytes[80];$/;"	m	struct:__anon13	access:public
+__anon13::size	protob/types.pb.h	/^    size_t size;$/;"	m	struct:__anon13	access:public
+__anon14::bytes	protob/types.pb.h	/^    uint8_t bytes[1024];$/;"	m	struct:__anon14	access:public
+__anon14::size	protob/types.pb.h	/^    size_t size;$/;"	m	struct:__anon14	access:public
+__anon15::bytes	protob/types.pb.h	/^    uint8_t bytes[32];$/;"	m	struct:__anon15	access:public
+__anon15::size	protob/types.pb.h	/^    size_t size;$/;"	m	struct:__anon15	access:public
+__anon16::bytes	protob/types.pb.h	/^    uint8_t bytes[520];$/;"	m	struct:__anon16	access:public
+__anon16::size	protob/types.pb.h	/^    size_t size;$/;"	m	struct:__anon16	access:public
+__anon17::bytes	protob/messages.pb.h	/^    uint8_t bytes[1024];$/;"	m	struct:__anon17	access:public
+__anon17::size	protob/messages.pb.h	/^    size_t size;$/;"	m	struct:__anon17	access:public
+__anon18::bytes	protob/messages.pb.h	/^    uint8_t bytes[1024];$/;"	m	struct:__anon18	access:public
+__anon18::size	protob/messages.pb.h	/^    size_t size;$/;"	m	struct:__anon18	access:public
+__anon19::bytes	protob/messages.pb.h	/^    uint8_t bytes[128];$/;"	m	struct:__anon19	access:public
+__anon19::size	protob/messages.pb.h	/^    size_t size;$/;"	m	struct:__anon19	access:public
+__anon1::wire_in	protob/types.pb.c	/^    bool wire_in;$/;"	m	struct:__anon1	file:	access:public
+__anon20::bytes	protob/messages.pb.h	/^    uint8_t bytes[1024];$/;"	m	struct:__anon20	access:public
+__anon20::size	protob/messages.pb.h	/^    size_t size;$/;"	m	struct:__anon20	access:public
+__anon21::bytes	protob/messages.pb.h	/^    uint8_t bytes[65];$/;"	m	struct:__anon21	access:public
+__anon21::size	protob/messages.pb.h	/^    size_t size;$/;"	m	struct:__anon21	access:public
+__anon22::bytes	protob/messages.pb.h	/^    uint8_t bytes[1024];$/;"	m	struct:__anon22	access:public
+__anon22::size	protob/messages.pb.h	/^    size_t size;$/;"	m	struct:__anon22	access:public
+__anon23::bytes	protob/messages.pb.h	/^    uint8_t bytes[1024];$/;"	m	struct:__anon23	access:public
+__anon23::size	protob/messages.pb.h	/^    size_t size;$/;"	m	struct:__anon23	access:public
+__anon24::bytes	protob/messages.pb.h	/^    uint8_t bytes[128];$/;"	m	struct:__anon24	access:public
+__anon24::size	protob/messages.pb.h	/^    size_t size;$/;"	m	struct:__anon24	access:public
+__anon25::bytes	protob/messages.pb.h	/^    uint8_t bytes[20];$/;"	m	struct:__anon25	access:public
+__anon25::size	protob/messages.pb.h	/^    size_t size;$/;"	m	struct:__anon25	access:public
+__anon26::bytes	protob/messages.pb.h	/^    uint8_t bytes[32];$/;"	m	struct:__anon26	access:public
+__anon26::size	protob/messages.pb.h	/^    size_t size;$/;"	m	struct:__anon26	access:public
+__anon27::bytes	protob/messages.pb.h	/^    uint8_t bytes[0];$/;"	m	struct:__anon27	access:public
+__anon27::size	protob/messages.pb.h	/^    size_t size;$/;"	m	struct:__anon27	access:public
+__anon28::bytes	protob/messages.pb.h	/^    uint8_t bytes[65];$/;"	m	struct:__anon28	access:public
+__anon28::size	protob/messages.pb.h	/^    size_t size;$/;"	m	struct:__anon28	access:public
+__anon29::bytes	protob/messages.pb.h	/^    uint8_t bytes[256];$/;"	m	struct:__anon29	access:public
+__anon29::size	protob/messages.pb.h	/^    size_t size;$/;"	m	struct:__anon29	access:public
+__anon2::wire_out	protob/types.pb.c	/^    bool wire_out;$/;"	m	struct:__anon2	file:	access:public
+__anon30::bytes	protob/messages.pb.h	/^    uint8_t bytes[1024];$/;"	m	struct:__anon30	access:public
+__anon30::size	protob/messages.pb.h	/^    size_t size;$/;"	m	struct:__anon30	access:public
+__anon31::bytes	protob/messages.pb.h	/^    uint8_t bytes[65];$/;"	m	struct:__anon31	access:public
+__anon31::size	protob/messages.pb.h	/^    size_t size;$/;"	m	struct:__anon31	access:public
+__anon32::bytes	protob/messages.pb.h	/^    uint8_t bytes[256];$/;"	m	struct:__anon32	access:public
+__anon32::size	protob/messages.pb.h	/^    size_t size;$/;"	m	struct:__anon32	access:public
+__anon3::wire_debug_in	protob/types.pb.c	/^    bool wire_debug_in;$/;"	m	struct:__anon3	file:	access:public
+__anon4::wire_debug_out	protob/types.pb.c	/^    bool wire_debug_out;$/;"	m	struct:__anon4	file:	access:public
+__anon5::dest_struct	protob/pb_decode.c	/^    void *dest_struct; \/* Pointer to the destination structure to decode to *\/$/;"	m	struct:__anon5	file:	access:public
+__anon5::field_index	protob/pb_decode.c	/^    unsigned field_index; \/* Zero-based index of the field. *\/$/;"	m	struct:__anon5	file:	access:public
+__anon5::pData	protob/pb_decode.c	/^    void *pData; \/* Pointer where to store current field value *\/$/;"	m	struct:__anon5	file:	access:public
+__anon5::pSize	protob/pb_decode.c	/^    void *pSize; \/* Pointer where to store the size of current array field *\/$/;"	m	struct:__anon5	file:	access:public
+__anon5::pos	protob/pb_decode.c	/^    const pb_field_t *pos; \/* Current position of the iterator *\/$/;"	m	struct:__anon5	file:	access:public
+__anon5::required_field_index	protob/pb_decode.c	/^    unsigned required_field_index; \/* Zero-based index that counts only the required fields *\/$/;"	m	struct:__anon5	file:	access:public
+__anon5::start	protob/pb_decode.c	/^    const pb_field_t *start; \/* Start of the pb_field_t array *\/$/;"	m	struct:__anon5	file:	access:public
+__anon6::bytes	protob/types.pb.h	/^    uint8_t bytes[32];$/;"	m	struct:__anon6	access:public
+__anon6::size	protob/types.pb.h	/^    size_t size;$/;"	m	struct:__anon6	access:public
+__anon7::bytes	protob/types.pb.h	/^    uint8_t bytes[32];$/;"	m	struct:__anon7	access:public
+__anon7::size	protob/types.pb.h	/^    size_t size;$/;"	m	struct:__anon7	access:public
+__anon8::bytes	protob/types.pb.h	/^    uint8_t bytes[33];$/;"	m	struct:__anon8	access:public
+__anon8::size	protob/types.pb.h	/^    size_t size;$/;"	m	struct:__anon8	access:public
+__anon9::bytes	protob/types.pb.h	/^    uint8_t bytes[65];$/;"	m	struct:__anon9	access:public
+__anon9::size	protob/types.pb.h	/^    size_t size;$/;"	m	struct:__anon9	access:public
 _pb_bytes_array_t	protob/pb.h	/^struct _pb_bytes_array_t {$/;"	s
+_pb_bytes_array_t::bytes	protob/pb.h	/^    uint8_t bytes[1];$/;"	m	struct:_pb_bytes_array_t	access:public
+_pb_bytes_array_t::size	protob/pb.h	/^    size_t size;$/;"	m	struct:_pb_bytes_array_t	access:public
 _pb_callback_t	protob/pb.h	/^struct _pb_callback_t {$/;"	s
+_pb_callback_t::__anon33::decode	protob/pb.h	/^        bool (*decode)(pb_istream_t *stream, const pb_field_t *field, void *arg);$/;"	m	union:_pb_callback_t::__anon33	access:public
+_pb_callback_t::__anon33::encode	protob/pb.h	/^        bool (*encode)(pb_ostream_t *stream, const pb_field_t *field, const void *arg);$/;"	m	union:_pb_callback_t::__anon33	access:public
+_pb_callback_t::arg	protob/pb.h	/^    void *arg;$/;"	m	struct:_pb_callback_t	access:public
+_pb_callback_t::funcs	protob/pb.h	/^    } funcs;$/;"	m	struct:_pb_callback_t	typeref:union:_pb_callback_t::__anon33	access:public
 _pb_extension_t	protob/pb.h	/^struct _pb_extension_t {$/;"	s
+_pb_extension_t::dest	protob/pb.h	/^    void *dest;$/;"	m	struct:_pb_extension_t	access:public
+_pb_extension_t::found	protob/pb.h	/^    bool found;$/;"	m	struct:_pb_extension_t	access:public
+_pb_extension_t::next	protob/pb.h	/^    pb_extension_t *next;$/;"	m	struct:_pb_extension_t	access:public
+_pb_extension_t::type	protob/pb.h	/^    const pb_extension_type_t *type;$/;"	m	struct:_pb_extension_t	access:public
 _pb_extension_type_t	protob/pb.h	/^struct _pb_extension_type_t {$/;"	s
+_pb_extension_type_t::arg	protob/pb.h	/^    const void *arg;$/;"	m	struct:_pb_extension_type_t	access:public
+_pb_extension_type_t::decode	protob/pb.h	/^    bool (*decode)(pb_istream_t *stream, pb_extension_t *extension,$/;"	m	struct:_pb_extension_type_t	access:public
+_pb_extension_type_t::encode	protob/pb.h	/^    bool (*encode)(pb_ostream_t *stream, const pb_extension_t *extension);$/;"	m	struct:_pb_extension_type_t	access:public
 _pb_field_t	protob/pb.h	/^struct _pb_field_t {$/;"	s
+_pb_field_t::array_size	protob/pb.h	/^    pb_size_t array_size; \/* Maximum number of entries in array *\/$/;"	m	struct:_pb_field_t	access:public
+_pb_field_t::data_offset	protob/pb.h	/^    pb_size_t data_offset; \/* Offset of field data, relative to previous field. *\/$/;"	m	struct:_pb_field_t	access:public
+_pb_field_t::data_size	protob/pb.h	/^    pb_size_t data_size; \/* Data size in bytes for a single item *\/$/;"	m	struct:_pb_field_t	access:public
+_pb_field_t::ptr	protob/pb.h	/^    const void *ptr;$/;"	m	struct:_pb_field_t	access:public
+_pb_field_t::size_offset	protob/pb.h	/^    pb_ssize_t size_offset; \/* Offset of array size or has-boolean, relative to data *\/$/;"	m	struct:_pb_field_t	access:public
+_pb_field_t::tag	protob/pb.h	/^    pb_size_t tag;$/;"	m	struct:_pb_field_t	access:public
+_pb_field_t::type	protob/pb.h	/^    pb_type_t type;$/;"	m	struct:_pb_field_t	access:public
 _pb_istream_t	protob/pb_decode.h	/^struct _pb_istream_t$/;"	s
+_pb_istream_t::bytes_left	protob/pb_decode.h	/^    size_t bytes_left;$/;"	m	struct:_pb_istream_t	access:public
+_pb_istream_t::callback	protob/pb_decode.h	/^    int *callback;$/;"	m	struct:_pb_istream_t	access:public
+_pb_istream_t::errmsg	protob/pb_decode.h	/^    const char *errmsg;$/;"	m	struct:_pb_istream_t	access:public
+_pb_istream_t::state	protob/pb_decode.h	/^    void *state; \/* Free field for use by callback implementation *\/$/;"	m	struct:_pb_istream_t	access:public
 _pb_ostream_t	protob/pb_encode.h	/^struct _pb_ostream_t$/;"	s
-address	protob/messages.pb.h	/^    char address[35];$/;"	m	struct:_Address
-address	protob/messages.pb.h	/^    char address[35];$/;"	m	struct:_MessageSignature
-address	protob/messages.pb.h	/^    char address[35];$/;"	m	struct:_VerifyMessage
-address	protob/types.pb.h	/^    char address[35];$/;"	m	struct:_TxOutputType
-address_n	protob/messages.pb.h	/^    uint32_t address_n[8];$/;"	m	struct:_CipherKeyValue
-address_n	protob/messages.pb.h	/^    uint32_t address_n[8];$/;"	m	struct:_DecryptMessage
-address_n	protob/messages.pb.h	/^    uint32_t address_n[8];$/;"	m	struct:_EncryptMessage
-address_n	protob/messages.pb.h	/^    uint32_t address_n[8];$/;"	m	struct:_GetAddress
-address_n	protob/messages.pb.h	/^    uint32_t address_n[8];$/;"	m	struct:_GetPublicKey
-address_n	protob/messages.pb.h	/^    uint32_t address_n[8];$/;"	m	struct:_SignMessage
-address_n	protob/types.pb.h	/^    uint32_t address_n[8];$/;"	m	struct:_TxInputType
-address_n	protob/types.pb.h	/^    uint32_t address_n[8];$/;"	m	struct:_TxOutputType
-address_n_count	protob/messages.pb.h	/^    size_t address_n_count;$/;"	m	struct:_CipherKeyValue
-address_n_count	protob/messages.pb.h	/^    size_t address_n_count;$/;"	m	struct:_DecryptMessage
-address_n_count	protob/messages.pb.h	/^    size_t address_n_count;$/;"	m	struct:_EncryptMessage
-address_n_count	protob/messages.pb.h	/^    size_t address_n_count;$/;"	m	struct:_GetAddress
-address_n_count	protob/messages.pb.h	/^    size_t address_n_count;$/;"	m	struct:_GetPublicKey
-address_n_count	protob/messages.pb.h	/^    size_t address_n_count;$/;"	m	struct:_SignMessage
-address_n_count	protob/types.pb.h	/^    size_t address_n_count;$/;"	m	struct:_TxInputType
-address_n_count	protob/types.pb.h	/^    size_t address_n_count;$/;"	m	struct:_TxOutputType
-address_type	protob/types.pb.h	/^    uint32_t address_type;$/;"	m	struct:_CoinType
-allocate_field	protob/pb_decode.c	/^static bool checkreturn allocate_field(pb_istream_t *stream, void *pData, size_t data_size, size_t array_size)$/;"	f	file:
-amount	protob/types.pb.h	/^    uint64_t amount;$/;"	m	struct:_TxOutputBinType
-amount	protob/types.pb.h	/^    uint64_t amount;$/;"	m	struct:_TxOutputType
-arg	protob/pb.h	/^    const void *arg;$/;"	m	struct:_pb_extension_type_t
-arg	protob/pb.h	/^    void *arg;$/;"	m	struct:_pb_callback_t
-array_size	protob/pb.h	/^    pb_size_t array_size; \/* Maximum number of entries in array *\/$/;"	m	struct:_pb_field_t
-ask_on_decrypt	protob/messages.pb.h	/^    bool ask_on_decrypt;$/;"	m	struct:_CipherKeyValue
-ask_on_encrypt	protob/messages.pb.h	/^    bool ask_on_encrypt;$/;"	m	struct:_CipherKeyValue
-bin_outputs	protob/types.pb.h	/^    TxOutputBinType bin_outputs[1];$/;"	m	struct:_TransactionType
-bin_outputs_count	protob/types.pb.h	/^    size_t bin_outputs_count;$/;"	m	struct:_TransactionType
-bootloader_hash	protob/messages.pb.h	/^    Features_bootloader_hash_t bootloader_hash;$/;"	m	struct:_Features
-bootloader_mode	protob/messages.pb.h	/^    bool bootloader_mode;$/;"	m	struct:_Features
-bucket	protob/messages.pb.h	/^    char bucket[33];$/;"	m	struct:_DebugLinkLog
-buf_read	protob/pb_decode.c	/^static bool checkreturn buf_read(pb_istream_t *stream, uint8_t *buf, size_t count)$/;"	f	file:
-buf_write	protob/pb_encode.c	/^static bool checkreturn buf_write(pb_ostream_t *stream, const uint8_t *buf, size_t count)$/;"	f	file:
-button_protection	protob/messages.pb.h	/^    bool button_protection;$/;"	m	struct:_Ping
-bytes	protob/messages.pb.h	/^    uint8_t bytes[0];$/;"	m	struct:__anon27
-bytes	protob/messages.pb.h	/^    uint8_t bytes[1024];$/;"	m	struct:__anon17
-bytes	protob/messages.pb.h	/^    uint8_t bytes[1024];$/;"	m	struct:__anon18
-bytes	protob/messages.pb.h	/^    uint8_t bytes[1024];$/;"	m	struct:__anon20
-bytes	protob/messages.pb.h	/^    uint8_t bytes[1024];$/;"	m	struct:__anon22
-bytes	protob/messages.pb.h	/^    uint8_t bytes[1024];$/;"	m	struct:__anon23
-bytes	protob/messages.pb.h	/^    uint8_t bytes[1024];$/;"	m	struct:__anon30
-bytes	protob/messages.pb.h	/^    uint8_t bytes[128];$/;"	m	struct:__anon19
-bytes	protob/messages.pb.h	/^    uint8_t bytes[128];$/;"	m	struct:__anon24
-bytes	protob/messages.pb.h	/^    uint8_t bytes[20];$/;"	m	struct:__anon25
-bytes	protob/messages.pb.h	/^    uint8_t bytes[256];$/;"	m	struct:__anon29
-bytes	protob/messages.pb.h	/^    uint8_t bytes[256];$/;"	m	struct:__anon32
-bytes	protob/messages.pb.h	/^    uint8_t bytes[32];$/;"	m	struct:__anon26
-bytes	protob/messages.pb.h	/^    uint8_t bytes[65];$/;"	m	struct:__anon21
-bytes	protob/messages.pb.h	/^    uint8_t bytes[65];$/;"	m	struct:__anon28
-bytes	protob/messages.pb.h	/^    uint8_t bytes[65];$/;"	m	struct:__anon31
-bytes	protob/pb.h	/^    uint8_t bytes[1];$/;"	m	struct:_pb_bytes_array_t
-bytes	protob/types.pb.h	/^    uint8_t bytes[1024];$/;"	m	struct:__anon14
-bytes	protob/types.pb.h	/^    uint8_t bytes[32];$/;"	m	struct:__anon12
-bytes	protob/types.pb.h	/^    uint8_t bytes[32];$/;"	m	struct:__anon15
-bytes	protob/types.pb.h	/^    uint8_t bytes[32];$/;"	m	struct:__anon6
-bytes	protob/types.pb.h	/^    uint8_t bytes[32];$/;"	m	struct:__anon7
-bytes	protob/types.pb.h	/^    uint8_t bytes[33];$/;"	m	struct:__anon8
-bytes	protob/types.pb.h	/^    uint8_t bytes[520];$/;"	m	struct:__anon11
-bytes	protob/types.pb.h	/^    uint8_t bytes[520];$/;"	m	struct:__anon16
-bytes	protob/types.pb.h	/^    uint8_t bytes[65];$/;"	m	struct:__anon9
-bytes	protob/types.pb.h	/^    uint8_t bytes[80];$/;"	m	struct:__anon10
-bytes	protob/types.pb.h	/^    uint8_t bytes[80];$/;"	m	struct:__anon13
-bytes_left	protob/pb_decode.h	/^    size_t bytes_left;$/;"	m	struct:_pb_istream_t
-bytes_written	protob/pb_encode.h	/^    size_t bytes_written; \/* Number of bytes written so far. *\/$/;"	m	struct:_pb_ostream_t
-callback	protob/pb_decode.h	/^    int *callback;$/;"	m	struct:_pb_istream_t
-callback	protob/pb_encode.h	/^    int *callback;$/;"	m	struct:_pb_ostream_t
-chain_code	protob/types.pb.h	/^    HDNodeType_chain_code_t chain_code;$/;"	m	struct:_HDNodeType
+_pb_ostream_t::bytes_written	protob/pb_encode.h	/^    size_t bytes_written; \/* Number of bytes written so far. *\/$/;"	m	struct:_pb_ostream_t	access:public
+_pb_ostream_t::callback	protob/pb_encode.h	/^    int *callback;$/;"	m	struct:_pb_ostream_t	access:public
+_pb_ostream_t::errmsg	protob/pb_encode.h	/^    const char *errmsg;$/;"	m	struct:_pb_ostream_t	access:public
+_pb_ostream_t::max_size	protob/pb_encode.h	/^    size_t max_size;      \/* Limit number of output bytes written (or use SIZE_MAX). *\/$/;"	m	struct:_pb_ostream_t	access:public
+_pb_ostream_t::state	protob/pb_encode.h	/^    void *state;          \/* Free field for use by callback implementation. *\/$/;"	m	struct:_pb_ostream_t	access:public
+address	protob/messages.pb.h	/^    char address[35];$/;"	m	struct:_Address	access:public
+address	protob/messages.pb.h	/^    char address[35];$/;"	m	struct:_MessageSignature	access:public
+address	protob/messages.pb.h	/^    char address[35];$/;"	m	struct:_VerifyMessage	access:public
+address	protob/types.pb.h	/^    char address[35];$/;"	m	struct:_TxOutputType	access:public
+address_n	protob/messages.pb.h	/^    uint32_t address_n[8];$/;"	m	struct:_CipherKeyValue	access:public
+address_n	protob/messages.pb.h	/^    uint32_t address_n[8];$/;"	m	struct:_DecryptMessage	access:public
+address_n	protob/messages.pb.h	/^    uint32_t address_n[8];$/;"	m	struct:_EncryptMessage	access:public
+address_n	protob/messages.pb.h	/^    uint32_t address_n[8];$/;"	m	struct:_GetAddress	access:public
+address_n	protob/messages.pb.h	/^    uint32_t address_n[8];$/;"	m	struct:_GetPublicKey	access:public
+address_n	protob/messages.pb.h	/^    uint32_t address_n[8];$/;"	m	struct:_SignMessage	access:public
+address_n	protob/types.pb.h	/^    uint32_t address_n[8];$/;"	m	struct:_TxInputType	access:public
+address_n	protob/types.pb.h	/^    uint32_t address_n[8];$/;"	m	struct:_TxOutputType	access:public
+address_n_count	protob/messages.pb.h	/^    size_t address_n_count;$/;"	m	struct:_CipherKeyValue	access:public
+address_n_count	protob/messages.pb.h	/^    size_t address_n_count;$/;"	m	struct:_DecryptMessage	access:public
+address_n_count	protob/messages.pb.h	/^    size_t address_n_count;$/;"	m	struct:_EncryptMessage	access:public
+address_n_count	protob/messages.pb.h	/^    size_t address_n_count;$/;"	m	struct:_GetAddress	access:public
+address_n_count	protob/messages.pb.h	/^    size_t address_n_count;$/;"	m	struct:_GetPublicKey	access:public
+address_n_count	protob/messages.pb.h	/^    size_t address_n_count;$/;"	m	struct:_SignMessage	access:public
+address_n_count	protob/types.pb.h	/^    size_t address_n_count;$/;"	m	struct:_TxInputType	access:public
+address_n_count	protob/types.pb.h	/^    size_t address_n_count;$/;"	m	struct:_TxOutputType	access:public
+address_type	protob/types.pb.h	/^    uint32_t address_type;$/;"	m	struct:_CoinType	access:public
+allocate_field	protob/pb_decode.c	/^static bool checkreturn allocate_field(pb_istream_t *stream, void *pData, size_t data_size, size_t array_size)$/;"	f	file:	signature:(pb_istream_t *stream, void *pData, size_t data_size, size_t array_size)
+amount	protob/types.pb.h	/^    uint64_t amount;$/;"	m	struct:_TxOutputBinType	access:public
+amount	protob/types.pb.h	/^    uint64_t amount;$/;"	m	struct:_TxOutputType	access:public
+arg	protob/pb.h	/^    const void *arg;$/;"	m	struct:_pb_extension_type_t	access:public
+arg	protob/pb.h	/^    void *arg;$/;"	m	struct:_pb_callback_t	access:public
+array_size	protob/pb.h	/^    pb_size_t array_size; \/* Maximum number of entries in array *\/$/;"	m	struct:_pb_field_t	access:public
+ask_on_decrypt	protob/messages.pb.h	/^    bool ask_on_decrypt;$/;"	m	struct:_CipherKeyValue	access:public
+ask_on_encrypt	protob/messages.pb.h	/^    bool ask_on_encrypt;$/;"	m	struct:_CipherKeyValue	access:public
+bin_outputs	protob/types.pb.h	/^    TxOutputBinType bin_outputs[1];$/;"	m	struct:_TransactionType	access:public
+bin_outputs_count	protob/types.pb.h	/^    size_t bin_outputs_count;$/;"	m	struct:_TransactionType	access:public
+bootloader_hash	protob/messages.pb.h	/^    Features_bootloader_hash_t bootloader_hash;$/;"	m	struct:_Features	access:public
+bootloader_mode	protob/messages.pb.h	/^    bool bootloader_mode;$/;"	m	struct:_Features	access:public
+bucket	protob/messages.pb.h	/^    char bucket[33];$/;"	m	struct:_DebugLinkLog	access:public
+buf_read	protob/pb_decode.c	/^static bool checkreturn buf_read(pb_istream_t *stream, uint8_t *buf, size_t count)$/;"	f	file:	signature:(pb_istream_t *stream, uint8_t *buf, size_t count)
+buf_read	protob/pb_decode.c	/^static bool checkreturn buf_read(pb_istream_t *stream, uint8_t *buf, size_t count);$/;"	p	file:	signature:(pb_istream_t *stream, uint8_t *buf, size_t count)
+buf_write	protob/pb_encode.c	/^static bool checkreturn buf_write(pb_ostream_t *stream, const uint8_t *buf, size_t count)$/;"	f	file:	signature:(pb_ostream_t *stream, const uint8_t *buf, size_t count)
+buf_write	protob/pb_encode.c	/^static bool checkreturn buf_write(pb_ostream_t *stream, const uint8_t *buf, size_t count);$/;"	p	file:	signature:(pb_ostream_t *stream, const uint8_t *buf, size_t count)
+button_protection	protob/messages.pb.h	/^    bool button_protection;$/;"	m	struct:_Ping	access:public
+bytes	protob/messages.pb.h	/^    uint8_t bytes[0];$/;"	m	struct:__anon27	access:public
+bytes	protob/messages.pb.h	/^    uint8_t bytes[1024];$/;"	m	struct:__anon17	access:public
+bytes	protob/messages.pb.h	/^    uint8_t bytes[1024];$/;"	m	struct:__anon18	access:public
+bytes	protob/messages.pb.h	/^    uint8_t bytes[1024];$/;"	m	struct:__anon20	access:public
+bytes	protob/messages.pb.h	/^    uint8_t bytes[1024];$/;"	m	struct:__anon22	access:public
+bytes	protob/messages.pb.h	/^    uint8_t bytes[1024];$/;"	m	struct:__anon23	access:public
+bytes	protob/messages.pb.h	/^    uint8_t bytes[1024];$/;"	m	struct:__anon30	access:public
+bytes	protob/messages.pb.h	/^    uint8_t bytes[128];$/;"	m	struct:__anon19	access:public
+bytes	protob/messages.pb.h	/^    uint8_t bytes[128];$/;"	m	struct:__anon24	access:public
+bytes	protob/messages.pb.h	/^    uint8_t bytes[20];$/;"	m	struct:__anon25	access:public
+bytes	protob/messages.pb.h	/^    uint8_t bytes[256];$/;"	m	struct:__anon29	access:public
+bytes	protob/messages.pb.h	/^    uint8_t bytes[256];$/;"	m	struct:__anon32	access:public
+bytes	protob/messages.pb.h	/^    uint8_t bytes[32];$/;"	m	struct:__anon26	access:public
+bytes	protob/messages.pb.h	/^    uint8_t bytes[65];$/;"	m	struct:__anon21	access:public
+bytes	protob/messages.pb.h	/^    uint8_t bytes[65];$/;"	m	struct:__anon28	access:public
+bytes	protob/messages.pb.h	/^    uint8_t bytes[65];$/;"	m	struct:__anon31	access:public
+bytes	protob/pb.h	/^    uint8_t bytes[1];$/;"	m	struct:_pb_bytes_array_t	access:public
+bytes	protob/types.pb.h	/^    uint8_t bytes[1024];$/;"	m	struct:__anon14	access:public
+bytes	protob/types.pb.h	/^    uint8_t bytes[32];$/;"	m	struct:__anon12	access:public
+bytes	protob/types.pb.h	/^    uint8_t bytes[32];$/;"	m	struct:__anon15	access:public
+bytes	protob/types.pb.h	/^    uint8_t bytes[32];$/;"	m	struct:__anon6	access:public
+bytes	protob/types.pb.h	/^    uint8_t bytes[32];$/;"	m	struct:__anon7	access:public
+bytes	protob/types.pb.h	/^    uint8_t bytes[33];$/;"	m	struct:__anon8	access:public
+bytes	protob/types.pb.h	/^    uint8_t bytes[520];$/;"	m	struct:__anon11	access:public
+bytes	protob/types.pb.h	/^    uint8_t bytes[520];$/;"	m	struct:__anon16	access:public
+bytes	protob/types.pb.h	/^    uint8_t bytes[65];$/;"	m	struct:__anon9	access:public
+bytes	protob/types.pb.h	/^    uint8_t bytes[80];$/;"	m	struct:__anon10	access:public
+bytes	protob/types.pb.h	/^    uint8_t bytes[80];$/;"	m	struct:__anon13	access:public
+bytes_left	protob/pb_decode.h	/^    size_t bytes_left;$/;"	m	struct:_pb_istream_t	access:public
+bytes_written	protob/pb_encode.h	/^    size_t bytes_written; \/* Number of bytes written so far. *\/$/;"	m	struct:_pb_ostream_t	access:public
+callback	protob/pb_decode.h	/^    int *callback;$/;"	m	struct:_pb_istream_t	access:public
+callback	protob/pb_encode.h	/^    int *callback;$/;"	m	struct:_pb_ostream_t	access:public
+chain_code	protob/types.pb.h	/^    HDNodeType_chain_code_t chain_code;$/;"	m	struct:_HDNodeType	access:public
 checkreturn	protob/pb_decode.c	/^typedef bool (*pb_decoder_t)(pb_istream_t *stream, const pb_field_t *field, void *dest) checkreturn;$/;"	t	file:
 checkreturn	protob/pb_decode.c	11;"	d	file:
 checkreturn	protob/pb_decode.c	13;"	d	file:
 checkreturn	protob/pb_encode.c	/^typedef bool (*pb_encoder_t)(pb_ostream_t *stream, const pb_field_t *field, const void *src) checkreturn;$/;"	t	file:
 checkreturn	protob/pb_encode.c	14;"	d	file:
 checkreturn	protob/pb_encode.c	16;"	d	file:
-child_num	protob/types.pb.h	/^    uint32_t child_num;$/;"	m	struct:_HDNodeType
-code	protob/messages.pb.h	/^    ButtonRequestType code;$/;"	m	struct:_ButtonRequest
-code	protob/messages.pb.h	/^    FailureType code;$/;"	m	struct:_Failure
-coin_name	protob/messages.pb.h	/^    char coin_name[17];$/;"	m	struct:_EstimateTxSize
-coin_name	protob/messages.pb.h	/^    char coin_name[17];$/;"	m	struct:_GetAddress
-coin_name	protob/messages.pb.h	/^    char coin_name[17];$/;"	m	struct:_SignMessage
-coin_name	protob/messages.pb.h	/^    char coin_name[17];$/;"	m	struct:_SignTx
-coin_name	protob/messages.pb.h	/^    char coin_name[17];$/;"	m	struct:_SimpleSignTx
-coin_name	protob/types.pb.h	/^    char coin_name[17];$/;"	m	struct:_CoinType
-coin_shortcut	protob/types.pb.h	/^    char coin_shortcut[9];$/;"	m	struct:_CoinType
-coins	protob/messages.pb.h	/^    CoinType coins[4];$/;"	m	struct:_Features
-coins_count	protob/messages.pb.h	/^    size_t coins_count;$/;"	m	struct:_Features
-cpu_sn	protob/messages.pb.h	/^    char cpu_sn[25];$/;"	m	struct:_Features
-cur_dev	firmware.hpp	/^		struct hid_device_info *devs, *cur_dev;$/;"	m	class:FirmwareUsb	typeref:struct:FirmwareUsb::
-data	protob/messages.pb.h	/^    char data[256];$/;"	m	struct:_ButtonRequest
-data_offset	protob/pb.h	/^    pb_size_t data_offset; \/* Offset of field data, relative to previous field. *\/$/;"	m	struct:_pb_field_t
-data_size	protob/pb.h	/^    pb_size_t data_size; \/* Data size in bytes for a single item *\/$/;"	m	struct:_pb_field_t
-decode	protob/pb.h	/^        bool (*decode)(pb_istream_t *stream, const pb_field_t *field, void *arg);$/;"	m	union:_pb_callback_t::__anon33
-decode	protob/pb.h	/^    bool (*decode)(pb_istream_t *stream, pb_extension_t *extension,$/;"	m	struct:_pb_extension_type_t
-decode_callback_field	protob/pb_decode.c	/^static bool checkreturn decode_callback_field(pb_istream_t *stream, pb_wire_type_t wire_type, pb_field_iterator_t *iter)$/;"	f	file:
-decode_extension	protob/pb_decode.c	/^static bool checkreturn decode_extension(pb_istream_t *stream,$/;"	f	file:
-decode_field	protob/pb_decode.c	/^static bool checkreturn decode_field(pb_istream_t *stream, pb_wire_type_t wire_type, pb_field_iterator_t *iter)$/;"	f	file:
-decode_pointer_field	protob/pb_decode.c	/^static bool checkreturn decode_pointer_field(pb_istream_t *stream, pb_wire_type_t wire_type, pb_field_iterator_t *iter)$/;"	f	file:
-decode_static_field	protob/pb_decode.c	/^static bool checkreturn decode_static_field(pb_istream_t *stream, pb_wire_type_t wire_type, pb_field_iterator_t *iter)$/;"	f	file:
-default_extension_decoder	protob/pb_decode.c	/^static bool checkreturn default_extension_decoder(pb_istream_t *stream,$/;"	f	file:
-default_extension_encoder	protob/pb_encode.c	/^static bool checkreturn default_extension_encoder(pb_ostream_t *stream,$/;"	f	file:
-delay_time	protob/messages.pb.h	/^    uint32_t delay_time;$/;"	m	struct:_TestScreen
-depth	protob/types.pb.h	/^    uint32_t depth;$/;"	m	struct:_HDNodeType
-dest	protob/pb.h	/^    void *dest;$/;"	m	struct:_pb_extension_t
-dest_struct	protob/pb_decode.c	/^    void *dest_struct; \/* Pointer to the destination structure to decode to *\/$/;"	m	struct:__anon5	file:
-details	protob/messages.pb.h	/^    TxRequestDetailsType details;$/;"	m	struct:_TxRequest
-device_id	protob/messages.pb.h	/^    char device_id[25];$/;"	m	struct:_Features
-devs	firmware.hpp	/^		struct hid_device_info *devs, *cur_dev;$/;"	m	class:FirmwareUsb	typeref:struct:FirmwareUsb::hid_device_info
-dir	messages.cpp	/^	char dir;$/;"	m	struct:MessagesMap_t	file:
-display_only	protob/messages.pb.h	/^    bool display_only;$/;"	m	struct:_EncryptMessage
-display_random	protob/messages.pb.h	/^    bool display_random;$/;"	m	struct:_ResetDevice
-dummy_field	protob/messages.pb.h	/^    uint8_t dummy_field;$/;"	m	struct:_ButtonAck
-dummy_field	protob/messages.pb.h	/^    uint8_t dummy_field;$/;"	m	struct:_Cancel
-dummy_field	protob/messages.pb.h	/^    uint8_t dummy_field;$/;"	m	struct:_ClearSession
-dummy_field	protob/messages.pb.h	/^    uint8_t dummy_field;$/;"	m	struct:_DebugLinkGetState
-dummy_field	protob/messages.pb.h	/^    uint8_t dummy_field;$/;"	m	struct:_DebugLinkStop
-dummy_field	protob/messages.pb.h	/^    uint8_t dummy_field;$/;"	m	struct:_EntropyRequest
-dummy_field	protob/messages.pb.h	/^    uint8_t dummy_field;$/;"	m	struct:_FirmwareErase
-dummy_field	protob/messages.pb.h	/^    uint8_t dummy_field;$/;"	m	struct:_Initialize
-dummy_field	protob/messages.pb.h	/^    uint8_t dummy_field;$/;"	m	struct:_PassphraseRequest
-dummy_field	protob/messages.pb.h	/^    uint8_t dummy_field;$/;"	m	struct:_WipeDevice
-dummy_field	protob/messages.pb.h	/^    uint8_t dummy_field;$/;"	m	struct:_WordRequest
-encode	protob/pb.h	/^        bool (*encode)(pb_ostream_t *stream, const pb_field_t *field, const void *arg);$/;"	m	union:_pb_callback_t::__anon33
-encode	protob/pb.h	/^    bool (*encode)(pb_ostream_t *stream, const pb_extension_t *extension);$/;"	m	struct:_pb_extension_type_t
-encode_array	protob/pb_encode.c	/^static bool checkreturn encode_array(pb_ostream_t *stream, const pb_field_t *field,$/;"	f	file:
-encode_basic_field	protob/pb_encode.c	/^static bool checkreturn encode_basic_field(pb_ostream_t *stream,$/;"	f	file:
-encode_callback_field	protob/pb_encode.c	/^static bool checkreturn encode_callback_field(pb_ostream_t *stream,$/;"	f	file:
-encode_extension_field	protob/pb_encode.c	/^static bool checkreturn encode_extension_field(pb_ostream_t *stream,$/;"	f	file:
-encode_field	protob/pb_encode.c	/^static bool checkreturn encode_field(pb_ostream_t *stream,$/;"	f	file:
-encrypt	protob/messages.pb.h	/^    bool encrypt;$/;"	m	struct:_CipherKeyValue
-enforce_wordlist	protob/messages.pb.h	/^    bool enforce_wordlist;$/;"	m	struct:_RecoveryDevice
-entropy	protob/messages.pb.h	/^    EntropyAck_entropy_t entropy;$/;"	m	struct:_EntropyAck
-entropy	protob/messages.pb.h	/^    Entropy_entropy_t entropy;$/;"	m	struct:_Entropy
-errmsg	protob/pb_decode.h	/^    const char *errmsg;$/;"	m	struct:_pb_istream_t
-errmsg	protob/pb_encode.h	/^    const char *errmsg;$/;"	m	struct:_pb_ostream_t
-field_index	protob/pb_decode.c	/^    unsigned field_index; \/* Zero-based index of the field. *\/$/;"	m	struct:__anon5	file:
-fields	messages.cpp	/^	const pb_field_t *fields;$/;"	m	struct:MessagesMap_t	file:
-find_extension_field	protob/pb_decode.c	/^static bool checkreturn find_extension_field(pb_field_iterator_t *iter)$/;"	f	file:
-fingerprint	protob/types.pb.h	/^    uint32_t fingerprint;$/;"	m	struct:_HDNodeType
-found	protob/pb.h	/^    bool found;$/;"	m	struct:_pb_extension_t
-funcs	protob/pb.h	/^    } funcs;$/;"	m	struct:_pb_callback_t	typeref:union:_pb_callback_t::__anon33
-handle	firmware.hpp	/^		hid_device *handle;$/;"	m	class:FirmwareUsb
-has_address	protob/messages.pb.h	/^    bool has_address;$/;"	m	struct:_MessageSignature
-has_address	protob/messages.pb.h	/^    bool has_address;$/;"	m	struct:_VerifyMessage
-has_address	protob/types.pb.h	/^    bool has_address;$/;"	m	struct:_TxOutputType
-has_address_type	protob/types.pb.h	/^    bool has_address_type;$/;"	m	struct:_CoinType
-has_ask_on_decrypt	protob/messages.pb.h	/^    bool has_ask_on_decrypt;$/;"	m	struct:_CipherKeyValue
-has_ask_on_encrypt	protob/messages.pb.h	/^    bool has_ask_on_encrypt;$/;"	m	struct:_CipherKeyValue
-has_bootloader_hash	protob/messages.pb.h	/^    bool has_bootloader_hash;$/;"	m	struct:_Features
-has_bootloader_mode	protob/messages.pb.h	/^    bool has_bootloader_mode;$/;"	m	struct:_Features
-has_bucket	protob/messages.pb.h	/^    bool has_bucket;$/;"	m	struct:_DebugLinkLog
-has_button_protection	protob/messages.pb.h	/^    bool has_button_protection;$/;"	m	struct:_Ping
-has_code	protob/messages.pb.h	/^    bool has_code;$/;"	m	struct:_ButtonRequest
-has_code	protob/messages.pb.h	/^    bool has_code;$/;"	m	struct:_Failure
-has_coin_name	protob/messages.pb.h	/^    bool has_coin_name;$/;"	m	struct:_EstimateTxSize
-has_coin_name	protob/messages.pb.h	/^    bool has_coin_name;$/;"	m	struct:_GetAddress
-has_coin_name	protob/messages.pb.h	/^    bool has_coin_name;$/;"	m	struct:_SignMessage
-has_coin_name	protob/messages.pb.h	/^    bool has_coin_name;$/;"	m	struct:_SignTx
-has_coin_name	protob/messages.pb.h	/^    bool has_coin_name;$/;"	m	struct:_SimpleSignTx
-has_coin_name	protob/types.pb.h	/^    bool has_coin_name;$/;"	m	struct:_CoinType
-has_coin_shortcut	protob/types.pb.h	/^    bool has_coin_shortcut;$/;"	m	struct:_CoinType
-has_cpu_sn	protob/messages.pb.h	/^    bool has_cpu_sn;$/;"	m	struct:_Features
-has_data	protob/messages.pb.h	/^    bool has_data;$/;"	m	struct:_ButtonRequest
-has_details	protob/messages.pb.h	/^    bool has_details;$/;"	m	struct:_TxRequest
-has_device_id	protob/messages.pb.h	/^    bool has_device_id;$/;"	m	struct:_Features
-has_display_only	protob/messages.pb.h	/^    bool has_display_only;$/;"	m	struct:_EncryptMessage
-has_display_random	protob/messages.pb.h	/^    bool has_display_random;$/;"	m	struct:_ResetDevice
-has_encrypt	protob/messages.pb.h	/^    bool has_encrypt;$/;"	m	struct:_CipherKeyValue
-has_enforce_wordlist	protob/messages.pb.h	/^    bool has_enforce_wordlist;$/;"	m	struct:_RecoveryDevice
-has_entropy	protob/messages.pb.h	/^    bool has_entropy;$/;"	m	struct:_EntropyAck
-has_imported	protob/messages.pb.h	/^    bool has_imported;$/;"	m	struct:_Features
-has_imported	protob/storage.pb.h	/^    bool has_imported;$/;"	m	struct:_Storage
-has_initialized	protob/messages.pb.h	/^    bool has_initialized;$/;"	m	struct:_Features
-has_inputs_cnt	protob/types.pb.h	/^    bool has_inputs_cnt;$/;"	m	struct:_TransactionType
-has_key	protob/messages.pb.h	/^    bool has_key;$/;"	m	struct:_CipherKeyValue
-has_label	protob/messages.pb.h	/^    bool has_label;$/;"	m	struct:_ApplySettings
-has_label	protob/messages.pb.h	/^    bool has_label;$/;"	m	struct:_Features
-has_label	protob/messages.pb.h	/^    bool has_label;$/;"	m	struct:_LoadDevice
-has_label	protob/messages.pb.h	/^    bool has_label;$/;"	m	struct:_RecoveryDevice
-has_label	protob/messages.pb.h	/^    bool has_label;$/;"	m	struct:_ResetDevice
-has_label	protob/storage.pb.h	/^    bool has_label;$/;"	m	struct:_Storage
-has_language	protob/messages.pb.h	/^    bool has_language;$/;"	m	struct:_ApplySettings
-has_language	protob/messages.pb.h	/^    bool has_language;$/;"	m	struct:_Features
-has_language	protob/messages.pb.h	/^    bool has_language;$/;"	m	struct:_LoadDevice
-has_language	protob/messages.pb.h	/^    bool has_language;$/;"	m	struct:_RecoveryDevice
-has_language	protob/messages.pb.h	/^    bool has_language;$/;"	m	struct:_ResetDevice
-has_language	protob/storage.pb.h	/^    bool has_language;$/;"	m	struct:_Storage
-has_layout	protob/messages.pb.h	/^    bool has_layout;$/;"	m	struct:_DebugLinkState
-has_level	protob/messages.pb.h	/^    bool has_level;$/;"	m	struct:_DebugLinkLog
-has_lock_time	protob/types.pb.h	/^    bool has_lock_time;$/;"	m	struct:_TransactionType
-has_major_version	protob/messages.pb.h	/^    bool has_major_version;$/;"	m	struct:_Features
-has_matrix	protob/messages.pb.h	/^    bool has_matrix;$/;"	m	struct:_DebugLinkState
-has_maxfee_kb	protob/types.pb.h	/^    bool has_maxfee_kb;$/;"	m	struct:_CoinType
-has_message	protob/messages.pb.h	/^    bool has_message;$/;"	m	struct:_DecryptMessage
-has_message	protob/messages.pb.h	/^    bool has_message;$/;"	m	struct:_EncryptMessage
-has_message	protob/messages.pb.h	/^    bool has_message;$/;"	m	struct:_Failure
-has_message	protob/messages.pb.h	/^    bool has_message;$/;"	m	struct:_Ping
-has_message	protob/messages.pb.h	/^    bool has_message;$/;"	m	struct:_Success
-has_message	protob/messages.pb.h	/^    bool has_message;$/;"	m	struct:_VerifyMessage
-has_minor_version	protob/messages.pb.h	/^    bool has_minor_version;$/;"	m	struct:_Features
-has_mnemonic	protob/messages.pb.h	/^    bool has_mnemonic;$/;"	m	struct:_DebugLinkState
-has_mnemonic	protob/messages.pb.h	/^    bool has_mnemonic;$/;"	m	struct:_LoadDevice
-has_mnemonic	protob/storage.pb.h	/^    bool has_mnemonic;$/;"	m	struct:_Storage
-has_multisig	protob/types.pb.h	/^    bool has_multisig;$/;"	m	struct:_TxInputType
-has_node	protob/messages.pb.h	/^    bool has_node;$/;"	m	struct:_DebugLinkState
-has_node	protob/messages.pb.h	/^    bool has_node;$/;"	m	struct:_LoadDevice
-has_node	protob/storage.pb.h	/^    bool has_node;$/;"	m	struct:_Storage
-has_outputs_cnt	protob/types.pb.h	/^    bool has_outputs_cnt;$/;"	m	struct:_TransactionType
-has_passphrase_protection	protob/messages.pb.h	/^    bool has_passphrase_protection;$/;"	m	struct:_DebugLinkState
-has_passphrase_protection	protob/messages.pb.h	/^    bool has_passphrase_protection;$/;"	m	struct:_Features
-has_passphrase_protection	protob/messages.pb.h	/^    bool has_passphrase_protection;$/;"	m	struct:_LoadDevice
-has_passphrase_protection	protob/messages.pb.h	/^    bool has_passphrase_protection;$/;"	m	struct:_Ping
-has_passphrase_protection	protob/messages.pb.h	/^    bool has_passphrase_protection;$/;"	m	struct:_RecoveryDevice
-has_passphrase_protection	protob/messages.pb.h	/^    bool has_passphrase_protection;$/;"	m	struct:_ResetDevice
-has_passphrase_protection	protob/storage.pb.h	/^    bool has_passphrase_protection;$/;"	m	struct:_Storage
-has_patch_version	protob/messages.pb.h	/^    bool has_patch_version;$/;"	m	struct:_Features
-has_payload	protob/messages.pb.h	/^    bool has_payload;$/;"	m	struct:_Success
-has_pin	protob/messages.pb.h	/^    bool has_pin;$/;"	m	struct:_DebugLinkState
-has_pin	protob/messages.pb.h	/^    bool has_pin;$/;"	m	struct:_LoadDevice
-has_pin	protob/storage.pb.h	/^    bool has_pin;$/;"	m	struct:_Storage
-has_pin_failed_attempts	protob/storage.pb.h	/^    bool has_pin_failed_attempts;$/;"	m	struct:_Storage
-has_pin_protection	protob/messages.pb.h	/^    bool has_pin_protection;$/;"	m	struct:_Features
-has_pin_protection	protob/messages.pb.h	/^    bool has_pin_protection;$/;"	m	struct:_Ping
-has_pin_protection	protob/messages.pb.h	/^    bool has_pin_protection;$/;"	m	struct:_RecoveryDevice
-has_pin_protection	protob/messages.pb.h	/^    bool has_pin_protection;$/;"	m	struct:_ResetDevice
-has_private_key	protob/types.pb.h	/^    bool has_private_key;$/;"	m	struct:_HDNodeType
-has_pubkey	protob/messages.pb.h	/^    bool has_pubkey;$/;"	m	struct:_EncryptMessage
-has_public_key	protob/types.pb.h	/^    bool has_public_key;$/;"	m	struct:_HDNodeType
-has_recovery_fake_word	protob/messages.pb.h	/^    bool has_recovery_fake_word;$/;"	m	struct:_DebugLinkState
-has_recovery_word_pos	protob/messages.pb.h	/^    bool has_recovery_word_pos;$/;"	m	struct:_DebugLinkState
-has_remove	protob/messages.pb.h	/^    bool has_remove;$/;"	m	struct:_ChangePin
-has_request_index	protob/types.pb.h	/^    bool has_request_index;$/;"	m	struct:_TxRequestDetailsType
-has_request_type	protob/messages.pb.h	/^    bool has_request_type;$/;"	m	struct:_TxRequest
-has_reset_entropy	protob/messages.pb.h	/^    bool has_reset_entropy;$/;"	m	struct:_DebugLinkState
-has_reset_word	protob/messages.pb.h	/^    bool has_reset_word;$/;"	m	struct:_DebugLinkState
-has_revision	protob/messages.pb.h	/^    bool has_revision;$/;"	m	struct:_Features
-has_script_sig	protob/types.pb.h	/^    bool has_script_sig;$/;"	m	struct:_TxInputType
-has_script_type	protob/types.pb.h	/^    bool has_script_type;$/;"	m	struct:_TxInputType
-has_sequence	protob/types.pb.h	/^    bool has_sequence;$/;"	m	struct:_TxInputType
-has_serialized	protob/messages.pb.h	/^    bool has_serialized;$/;"	m	struct:_TxRequest
-has_serialized_tx	protob/types.pb.h	/^    bool has_serialized_tx;$/;"	m	struct:_TxRequestSerializedType
-has_show_display	protob/messages.pb.h	/^    bool has_show_display;$/;"	m	struct:_GetAddress
-has_signature	protob/messages.pb.h	/^    bool has_signature;$/;"	m	struct:_MessageSignature
-has_signature	protob/messages.pb.h	/^    bool has_signature;$/;"	m	struct:_VerifyMessage
-has_signature	protob/types.pb.h	/^    bool has_signature;$/;"	m	struct:_TxRequestSerializedType
-has_signature_index	protob/types.pb.h	/^    bool has_signature_index;$/;"	m	struct:_TxRequestSerializedType
-has_skip_checksum	protob/messages.pb.h	/^    bool has_skip_checksum;$/;"	m	struct:_LoadDevice
-has_strength	protob/messages.pb.h	/^    bool has_strength;$/;"	m	struct:_ResetDevice
-has_text	protob/messages.pb.h	/^    bool has_text;$/;"	m	struct:_DebugLinkLog
-has_tx	protob/messages.pb.h	/^    bool has_tx;$/;"	m	struct:_TxAck
-has_tx_hash	protob/types.pb.h	/^    bool has_tx_hash;$/;"	m	struct:_TxRequestDetailsType
-has_tx_size	protob/messages.pb.h	/^    bool has_tx_size;$/;"	m	struct:_TxSize
-has_type	protob/messages.pb.h	/^    bool has_type;$/;"	m	struct:_PinMatrixRequest
-has_value	protob/messages.pb.h	/^    bool has_value;$/;"	m	struct:_CipherKeyValue
-has_vendor	protob/messages.pb.h	/^    bool has_vendor;$/;"	m	struct:_Features
-has_version	protob/types.pb.h	/^    bool has_version;$/;"	m	struct:_TransactionType
-has_word_count	protob/messages.pb.h	/^    bool has_word_count;$/;"	m	struct:_RecoveryDevice
-has_xpub	protob/messages.pb.h	/^    bool has_xpub;$/;"	m	struct:_PublicKey
-imported	protob/messages.pb.h	/^    bool imported;$/;"	m	struct:_Features
-imported	protob/storage.pb.h	/^    bool imported;$/;"	m	struct:_Storage
-initialize_pointer_field	protob/pb_decode.c	/^static void initialize_pointer_field(void *pItem, pb_field_iterator_t *iter)$/;"	f	file:
-initialized	protob/messages.pb.h	/^    bool initialized;$/;"	m	struct:_Features
-inputs	protob/messages.pb.h	/^    TxInputType inputs[0];$/;"	m	struct:_SimpleSignTx
-inputs	protob/types.pb.h	/^    TxInputType inputs[1];$/;"	m	struct:_TransactionType
-inputs_cnt	protob/types.pb.h	/^    uint32_t inputs_cnt;$/;"	m	struct:_TransactionType
-inputs_count	protob/messages.pb.h	/^    size_t inputs_count;$/;"	m	struct:_SimpleSignTx
-inputs_count	protob/messages.pb.h	/^    uint32_t inputs_count;$/;"	m	struct:_EstimateTxSize
-inputs_count	protob/messages.pb.h	/^    uint32_t inputs_count;$/;"	m	struct:_SignTx
-inputs_count	protob/types.pb.h	/^    size_t inputs_count;$/;"	m	struct:_TransactionType
-key	protob/messages.pb.h	/^    char key[256];$/;"	m	struct:_CipherKeyValue
-label	protob/messages.pb.h	/^    char label[33];$/;"	m	struct:_ApplySettings
-label	protob/messages.pb.h	/^    char label[33];$/;"	m	struct:_Features
-label	protob/messages.pb.h	/^    char label[33];$/;"	m	struct:_LoadDevice
-label	protob/messages.pb.h	/^    char label[33];$/;"	m	struct:_RecoveryDevice
-label	protob/messages.pb.h	/^    char label[33];$/;"	m	struct:_ResetDevice
-label	protob/storage.pb.h	/^    char label[33];$/;"	m	struct:_Storage
-language	protob/messages.pb.h	/^    char language[17];$/;"	m	struct:_ApplySettings
-language	protob/messages.pb.h	/^    char language[17];$/;"	m	struct:_Features
-language	protob/messages.pb.h	/^    char language[17];$/;"	m	struct:_LoadDevice
-language	protob/messages.pb.h	/^    char language[17];$/;"	m	struct:_RecoveryDevice
-language	protob/messages.pb.h	/^    char language[17];$/;"	m	struct:_ResetDevice
-language	protob/storage.pb.h	/^    char language[17];$/;"	m	struct:_Storage
-layout	protob/messages.pb.h	/^    DebugLinkState_layout_t layout;$/;"	m	struct:_DebugLinkState
-level	protob/messages.pb.h	/^    uint32_t level;$/;"	m	struct:_DebugLinkLog
-lock_time	protob/types.pb.h	/^    uint32_t lock_time;$/;"	m	struct:_TransactionType
-main	firmware.cpp	/^int main(int argc, char *argv[])$/;"	f
-major_version	protob/messages.pb.h	/^    uint32_t major_version;$/;"	m	struct:_Features
-matrix	protob/messages.pb.h	/^    char matrix[10];$/;"	m	struct:_DebugLinkState
-max_size	protob/pb_encode.h	/^    size_t max_size;      \/* Limit number of output bytes written (or use SIZE_MAX). *\/$/;"	m	struct:_pb_ostream_t
-maxfee_kb	protob/types.pb.h	/^    uint64_t maxfee_kb;$/;"	m	struct:_CoinType
-message	protob/messages.pb.h	/^    DecryptMessage_message_t message;$/;"	m	struct:_DecryptMessage
-message	protob/messages.pb.h	/^    EncryptMessage_message_t message;$/;"	m	struct:_EncryptMessage
-message	protob/messages.pb.h	/^    SignMessage_message_t message;$/;"	m	struct:_SignMessage
-message	protob/messages.pb.h	/^    VerifyMessage_message_t message;$/;"	m	struct:_VerifyMessage
-message	protob/messages.pb.h	/^    char message[256];$/;"	m	struct:_Failure
-message	protob/messages.pb.h	/^    char message[256];$/;"	m	struct:_Ping
-message	protob/messages.pb.h	/^    char message[256];$/;"	m	struct:_Success
-minor_version	protob/messages.pb.h	/^    uint32_t minor_version;$/;"	m	struct:_Features
-mnemonic	protob/messages.pb.h	/^    char mnemonic[241];$/;"	m	struct:_DebugLinkState
-mnemonic	protob/messages.pb.h	/^    char mnemonic[241];$/;"	m	struct:_LoadDevice
-mnemonic	protob/storage.pb.h	/^    char mnemonic[241];$/;"	m	struct:_Storage
-msg_id	messages.cpp	/^	uint16_t msg_id;$/;"	m	struct:MessagesMap_t	file:
+child_num	protob/types.pb.h	/^    uint32_t child_num;$/;"	m	struct:_HDNodeType	access:public
+code	protob/messages.pb.h	/^    ButtonRequestType code;$/;"	m	struct:_ButtonRequest	access:public
+code	protob/messages.pb.h	/^    FailureType code;$/;"	m	struct:_Failure	access:public
+coin_name	protob/messages.pb.h	/^    char coin_name[17];$/;"	m	struct:_EstimateTxSize	access:public
+coin_name	protob/messages.pb.h	/^    char coin_name[17];$/;"	m	struct:_GetAddress	access:public
+coin_name	protob/messages.pb.h	/^    char coin_name[17];$/;"	m	struct:_SignMessage	access:public
+coin_name	protob/messages.pb.h	/^    char coin_name[17];$/;"	m	struct:_SignTx	access:public
+coin_name	protob/messages.pb.h	/^    char coin_name[17];$/;"	m	struct:_SimpleSignTx	access:public
+coin_name	protob/types.pb.h	/^    char coin_name[17];$/;"	m	struct:_CoinType	access:public
+coin_shortcut	protob/types.pb.h	/^    char coin_shortcut[9];$/;"	m	struct:_CoinType	access:public
+coins	protob/messages.pb.h	/^    CoinType coins[4];$/;"	m	struct:_Features	access:public
+coins_count	protob/messages.pb.h	/^    size_t coins_count;$/;"	m	struct:_Features	access:public
+cpu_sn	protob/messages.pb.h	/^    char cpu_sn[25];$/;"	m	struct:_Features	access:public
+cur_dev	firmware.hpp	/^		struct hid_device_info *devs, *cur_dev;$/;"	m	class:FirmwareUsb	typeref:struct:FirmwareUsb::	access:private
+data	protob/messages.pb.h	/^    char data[256];$/;"	m	struct:_ButtonRequest	access:public
+data_offset	protob/pb.h	/^    pb_size_t data_offset; \/* Offset of field data, relative to previous field. *\/$/;"	m	struct:_pb_field_t	access:public
+data_size	protob/pb.h	/^    pb_size_t data_size; \/* Data size in bytes for a single item *\/$/;"	m	struct:_pb_field_t	access:public
+decode	protob/pb.h	/^        bool (*decode)(pb_istream_t *stream, const pb_field_t *field, void *arg);$/;"	m	union:_pb_callback_t::__anon33	access:public
+decode	protob/pb.h	/^    bool (*decode)(pb_istream_t *stream, pb_extension_t *extension,$/;"	m	struct:_pb_extension_type_t	access:public
+decode_callback_field	protob/pb_decode.c	/^static bool checkreturn decode_callback_field(pb_istream_t *stream, pb_wire_type_t wire_type, pb_field_iterator_t *iter)$/;"	f	file:	signature:(pb_istream_t *stream, pb_wire_type_t wire_type, pb_field_iterator_t *iter)
+decode_callback_field	protob/pb_decode.c	/^static bool checkreturn decode_callback_field(pb_istream_t *stream, pb_wire_type_t wire_type, pb_field_iterator_t *iter);$/;"	p	file:	signature:(pb_istream_t *stream, pb_wire_type_t wire_type, pb_field_iterator_t *iter)
+decode_extension	protob/pb_decode.c	/^static bool checkreturn decode_extension(pb_istream_t *stream, uint32_t tag, pb_wire_type_t wire_type, pb_field_iterator_t *iter);$/;"	p	file:	signature:(pb_istream_t *stream, uint32_t tag, pb_wire_type_t wire_type, pb_field_iterator_t *iter)
+decode_extension	protob/pb_decode.c	/^static bool checkreturn decode_extension(pb_istream_t *stream,$/;"	f	file:	signature:(pb_istream_t *stream, uint32_t tag, pb_wire_type_t wire_type, pb_field_iterator_t *iter)
+decode_field	protob/pb_decode.c	/^static bool checkreturn decode_field(pb_istream_t *stream, pb_wire_type_t wire_type, pb_field_iterator_t *iter)$/;"	f	file:	signature:(pb_istream_t *stream, pb_wire_type_t wire_type, pb_field_iterator_t *iter)
+decode_field	protob/pb_decode.c	/^static bool checkreturn decode_field(pb_istream_t *stream, pb_wire_type_t wire_type, pb_field_iterator_t *iter);$/;"	p	file:	signature:(pb_istream_t *stream, pb_wire_type_t wire_type, pb_field_iterator_t *iter)
+decode_pointer_field	protob/pb_decode.c	/^static bool checkreturn decode_pointer_field(pb_istream_t *stream, pb_wire_type_t wire_type, pb_field_iterator_t *iter)$/;"	f	file:	signature:(pb_istream_t *stream, pb_wire_type_t wire_type, pb_field_iterator_t *iter)
+decode_static_field	protob/pb_decode.c	/^static bool checkreturn decode_static_field(pb_istream_t *stream, pb_wire_type_t wire_type, pb_field_iterator_t *iter)$/;"	f	file:	signature:(pb_istream_t *stream, pb_wire_type_t wire_type, pb_field_iterator_t *iter)
+decode_static_field	protob/pb_decode.c	/^static bool checkreturn decode_static_field(pb_istream_t *stream, pb_wire_type_t wire_type, pb_field_iterator_t *iter);$/;"	p	file:	signature:(pb_istream_t *stream, pb_wire_type_t wire_type, pb_field_iterator_t *iter)
+default_extension_decoder	protob/pb_decode.c	/^static bool checkreturn default_extension_decoder(pb_istream_t *stream, pb_extension_t *extension, uint32_t tag, pb_wire_type_t wire_type);$/;"	p	file:	signature:(pb_istream_t *stream, pb_extension_t *extension, uint32_t tag, pb_wire_type_t wire_type)
+default_extension_decoder	protob/pb_decode.c	/^static bool checkreturn default_extension_decoder(pb_istream_t *stream,$/;"	f	file:	signature:(pb_istream_t *stream, pb_extension_t *extension, uint32_t tag, pb_wire_type_t wire_type)
+default_extension_encoder	protob/pb_encode.c	/^static bool checkreturn default_extension_encoder(pb_ostream_t *stream, const pb_extension_t *extension);$/;"	p	file:	signature:(pb_ostream_t *stream, const pb_extension_t *extension)
+default_extension_encoder	protob/pb_encode.c	/^static bool checkreturn default_extension_encoder(pb_ostream_t *stream,$/;"	f	file:	signature:(pb_ostream_t *stream, const pb_extension_t *extension)
+delay_time	protob/messages.pb.h	/^    uint32_t delay_time;$/;"	m	struct:_TestScreen	access:public
+depth	protob/types.pb.h	/^    uint32_t depth;$/;"	m	struct:_HDNodeType	access:public
+dest	protob/pb.h	/^    void *dest;$/;"	m	struct:_pb_extension_t	access:public
+dest_struct	protob/pb_decode.c	/^    void *dest_struct; \/* Pointer to the destination structure to decode to *\/$/;"	m	struct:__anon5	file:	access:public
+details	protob/messages.pb.h	/^    TxRequestDetailsType details;$/;"	m	struct:_TxRequest	access:public
+device_id	protob/messages.pb.h	/^    char device_id[25];$/;"	m	struct:_Features	access:public
+devs	firmware.hpp	/^		struct hid_device_info *devs, *cur_dev;$/;"	m	class:FirmwareUsb	typeref:struct:FirmwareUsb::hid_device_info	access:private
+dir	messages.cpp	/^	char dir;$/;"	m	struct:MessagesMap_t	file:	access:public
+display_only	protob/messages.pb.h	/^    bool display_only;$/;"	m	struct:_EncryptMessage	access:public
+display_random	protob/messages.pb.h	/^    bool display_random;$/;"	m	struct:_ResetDevice	access:public
+dummy_field	protob/messages.pb.h	/^    uint8_t dummy_field;$/;"	m	struct:_ButtonAck	access:public
+dummy_field	protob/messages.pb.h	/^    uint8_t dummy_field;$/;"	m	struct:_Cancel	access:public
+dummy_field	protob/messages.pb.h	/^    uint8_t dummy_field;$/;"	m	struct:_ClearSession	access:public
+dummy_field	protob/messages.pb.h	/^    uint8_t dummy_field;$/;"	m	struct:_DebugLinkGetState	access:public
+dummy_field	protob/messages.pb.h	/^    uint8_t dummy_field;$/;"	m	struct:_DebugLinkStop	access:public
+dummy_field	protob/messages.pb.h	/^    uint8_t dummy_field;$/;"	m	struct:_EntropyRequest	access:public
+dummy_field	protob/messages.pb.h	/^    uint8_t dummy_field;$/;"	m	struct:_FirmwareErase	access:public
+dummy_field	protob/messages.pb.h	/^    uint8_t dummy_field;$/;"	m	struct:_Initialize	access:public
+dummy_field	protob/messages.pb.h	/^    uint8_t dummy_field;$/;"	m	struct:_PassphraseRequest	access:public
+dummy_field	protob/messages.pb.h	/^    uint8_t dummy_field;$/;"	m	struct:_WipeDevice	access:public
+dummy_field	protob/messages.pb.h	/^    uint8_t dummy_field;$/;"	m	struct:_WordRequest	access:public
+encode	protob/pb.h	/^        bool (*encode)(pb_ostream_t *stream, const pb_field_t *field, const void *arg);$/;"	m	union:_pb_callback_t::__anon33	access:public
+encode	protob/pb.h	/^    bool (*encode)(pb_ostream_t *stream, const pb_extension_t *extension);$/;"	m	struct:_pb_extension_type_t	access:public
+encode_array	protob/pb_encode.c	/^static bool checkreturn encode_array(pb_ostream_t *stream, const pb_field_t *field, const void *pData, size_t count, pb_encoder_t func);$/;"	p	file:	signature:(pb_ostream_t *stream, const pb_field_t *field, const void *pData, size_t count, pb_encoder_t func)
+encode_array	protob/pb_encode.c	/^static bool checkreturn encode_array(pb_ostream_t *stream, const pb_field_t *field,$/;"	f	file:	signature:(pb_ostream_t *stream, const pb_field_t *field, const void *pData, size_t count, pb_encoder_t func)
+encode_basic_field	protob/pb_encode.c	/^static bool checkreturn encode_basic_field(pb_ostream_t *stream,$/;"	f	file:	signature:(pb_ostream_t *stream, const pb_field_t *field, const void *pData)
+encode_callback_field	protob/pb_encode.c	/^static bool checkreturn encode_callback_field(pb_ostream_t *stream,$/;"	f	file:	signature:(pb_ostream_t *stream, const pb_field_t *field, const void *pData)
+encode_extension_field	protob/pb_encode.c	/^static bool checkreturn encode_extension_field(pb_ostream_t *stream, const pb_field_t *field, const void *pData);$/;"	p	file:	signature:(pb_ostream_t *stream, const pb_field_t *field, const void *pData)
+encode_extension_field	protob/pb_encode.c	/^static bool checkreturn encode_extension_field(pb_ostream_t *stream,$/;"	f	file:	signature:(pb_ostream_t *stream, const pb_field_t *field, const void *pData)
+encode_field	protob/pb_encode.c	/^static bool checkreturn encode_field(pb_ostream_t *stream, const pb_field_t *field, const void *pData);$/;"	p	file:	signature:(pb_ostream_t *stream, const pb_field_t *field, const void *pData)
+encode_field	protob/pb_encode.c	/^static bool checkreturn encode_field(pb_ostream_t *stream,$/;"	f	file:	signature:(pb_ostream_t *stream, const pb_field_t *field, const void *pData)
+encrypt	protob/messages.pb.h	/^    bool encrypt;$/;"	m	struct:_CipherKeyValue	access:public
+enforce_wordlist	protob/messages.pb.h	/^    bool enforce_wordlist;$/;"	m	struct:_RecoveryDevice	access:public
+entropy	protob/messages.pb.h	/^    EntropyAck_entropy_t entropy;$/;"	m	struct:_EntropyAck	access:public
+entropy	protob/messages.pb.h	/^    Entropy_entropy_t entropy;$/;"	m	struct:_Entropy	access:public
+errmsg	protob/pb_decode.h	/^    const char *errmsg;$/;"	m	struct:_pb_istream_t	access:public
+errmsg	protob/pb_encode.h	/^    const char *errmsg;$/;"	m	struct:_pb_ostream_t	access:public
+field_index	protob/pb_decode.c	/^    unsigned field_index; \/* Zero-based index of the field. *\/$/;"	m	struct:__anon5	file:	access:public
+fields	messages.cpp	/^	const pb_field_t *fields;$/;"	m	struct:MessagesMap_t	file:	access:public
+find_extension_field	protob/pb_decode.c	/^static bool checkreturn find_extension_field(pb_field_iterator_t *iter)$/;"	f	file:	signature:(pb_field_iterator_t *iter)
+find_extension_field	protob/pb_decode.c	/^static bool checkreturn find_extension_field(pb_field_iterator_t *iter);$/;"	p	file:	signature:(pb_field_iterator_t *iter)
+fingerprint	protob/types.pb.h	/^    uint32_t fingerprint;$/;"	m	struct:_HDNodeType	access:public
+found	protob/pb.h	/^    bool found;$/;"	m	struct:_pb_extension_t	access:public
+funcs	protob/pb.h	/^    } funcs;$/;"	m	struct:_pb_callback_t	typeref:union:_pb_callback_t::__anon33	access:public
+handle	firmware.hpp	/^		hid_device *handle;$/;"	m	class:FirmwareUsb	access:private
+has_address	protob/messages.pb.h	/^    bool has_address;$/;"	m	struct:_MessageSignature	access:public
+has_address	protob/messages.pb.h	/^    bool has_address;$/;"	m	struct:_VerifyMessage	access:public
+has_address	protob/types.pb.h	/^    bool has_address;$/;"	m	struct:_TxOutputType	access:public
+has_address_type	protob/types.pb.h	/^    bool has_address_type;$/;"	m	struct:_CoinType	access:public
+has_ask_on_decrypt	protob/messages.pb.h	/^    bool has_ask_on_decrypt;$/;"	m	struct:_CipherKeyValue	access:public
+has_ask_on_encrypt	protob/messages.pb.h	/^    bool has_ask_on_encrypt;$/;"	m	struct:_CipherKeyValue	access:public
+has_bootloader_hash	protob/messages.pb.h	/^    bool has_bootloader_hash;$/;"	m	struct:_Features	access:public
+has_bootloader_mode	protob/messages.pb.h	/^    bool has_bootloader_mode;$/;"	m	struct:_Features	access:public
+has_bucket	protob/messages.pb.h	/^    bool has_bucket;$/;"	m	struct:_DebugLinkLog	access:public
+has_button_protection	protob/messages.pb.h	/^    bool has_button_protection;$/;"	m	struct:_Ping	access:public
+has_code	protob/messages.pb.h	/^    bool has_code;$/;"	m	struct:_ButtonRequest	access:public
+has_code	protob/messages.pb.h	/^    bool has_code;$/;"	m	struct:_Failure	access:public
+has_coin_name	protob/messages.pb.h	/^    bool has_coin_name;$/;"	m	struct:_EstimateTxSize	access:public
+has_coin_name	protob/messages.pb.h	/^    bool has_coin_name;$/;"	m	struct:_GetAddress	access:public
+has_coin_name	protob/messages.pb.h	/^    bool has_coin_name;$/;"	m	struct:_SignMessage	access:public
+has_coin_name	protob/messages.pb.h	/^    bool has_coin_name;$/;"	m	struct:_SignTx	access:public
+has_coin_name	protob/messages.pb.h	/^    bool has_coin_name;$/;"	m	struct:_SimpleSignTx	access:public
+has_coin_name	protob/types.pb.h	/^    bool has_coin_name;$/;"	m	struct:_CoinType	access:public
+has_coin_shortcut	protob/types.pb.h	/^    bool has_coin_shortcut;$/;"	m	struct:_CoinType	access:public
+has_cpu_sn	protob/messages.pb.h	/^    bool has_cpu_sn;$/;"	m	struct:_Features	access:public
+has_data	protob/messages.pb.h	/^    bool has_data;$/;"	m	struct:_ButtonRequest	access:public
+has_details	protob/messages.pb.h	/^    bool has_details;$/;"	m	struct:_TxRequest	access:public
+has_device_id	protob/messages.pb.h	/^    bool has_device_id;$/;"	m	struct:_Features	access:public
+has_display_only	protob/messages.pb.h	/^    bool has_display_only;$/;"	m	struct:_EncryptMessage	access:public
+has_display_random	protob/messages.pb.h	/^    bool has_display_random;$/;"	m	struct:_ResetDevice	access:public
+has_encrypt	protob/messages.pb.h	/^    bool has_encrypt;$/;"	m	struct:_CipherKeyValue	access:public
+has_enforce_wordlist	protob/messages.pb.h	/^    bool has_enforce_wordlist;$/;"	m	struct:_RecoveryDevice	access:public
+has_entropy	protob/messages.pb.h	/^    bool has_entropy;$/;"	m	struct:_EntropyAck	access:public
+has_imported	protob/messages.pb.h	/^    bool has_imported;$/;"	m	struct:_Features	access:public
+has_imported	protob/storage.pb.h	/^    bool has_imported;$/;"	m	struct:_Storage	access:public
+has_initialized	protob/messages.pb.h	/^    bool has_initialized;$/;"	m	struct:_Features	access:public
+has_inputs_cnt	protob/types.pb.h	/^    bool has_inputs_cnt;$/;"	m	struct:_TransactionType	access:public
+has_key	protob/messages.pb.h	/^    bool has_key;$/;"	m	struct:_CipherKeyValue	access:public
+has_label	protob/messages.pb.h	/^    bool has_label;$/;"	m	struct:_ApplySettings	access:public
+has_label	protob/messages.pb.h	/^    bool has_label;$/;"	m	struct:_Features	access:public
+has_label	protob/messages.pb.h	/^    bool has_label;$/;"	m	struct:_LoadDevice	access:public
+has_label	protob/messages.pb.h	/^    bool has_label;$/;"	m	struct:_RecoveryDevice	access:public
+has_label	protob/messages.pb.h	/^    bool has_label;$/;"	m	struct:_ResetDevice	access:public
+has_label	protob/storage.pb.h	/^    bool has_label;$/;"	m	struct:_Storage	access:public
+has_language	protob/messages.pb.h	/^    bool has_language;$/;"	m	struct:_ApplySettings	access:public
+has_language	protob/messages.pb.h	/^    bool has_language;$/;"	m	struct:_Features	access:public
+has_language	protob/messages.pb.h	/^    bool has_language;$/;"	m	struct:_LoadDevice	access:public
+has_language	protob/messages.pb.h	/^    bool has_language;$/;"	m	struct:_RecoveryDevice	access:public
+has_language	protob/messages.pb.h	/^    bool has_language;$/;"	m	struct:_ResetDevice	access:public
+has_language	protob/storage.pb.h	/^    bool has_language;$/;"	m	struct:_Storage	access:public
+has_layout	protob/messages.pb.h	/^    bool has_layout;$/;"	m	struct:_DebugLinkState	access:public
+has_level	protob/messages.pb.h	/^    bool has_level;$/;"	m	struct:_DebugLinkLog	access:public
+has_lock_time	protob/types.pb.h	/^    bool has_lock_time;$/;"	m	struct:_TransactionType	access:public
+has_major_version	protob/messages.pb.h	/^    bool has_major_version;$/;"	m	struct:_Features	access:public
+has_matrix	protob/messages.pb.h	/^    bool has_matrix;$/;"	m	struct:_DebugLinkState	access:public
+has_maxfee_kb	protob/types.pb.h	/^    bool has_maxfee_kb;$/;"	m	struct:_CoinType	access:public
+has_message	protob/messages.pb.h	/^    bool has_message;$/;"	m	struct:_DecryptMessage	access:public
+has_message	protob/messages.pb.h	/^    bool has_message;$/;"	m	struct:_EncryptMessage	access:public
+has_message	protob/messages.pb.h	/^    bool has_message;$/;"	m	struct:_Failure	access:public
+has_message	protob/messages.pb.h	/^    bool has_message;$/;"	m	struct:_Ping	access:public
+has_message	protob/messages.pb.h	/^    bool has_message;$/;"	m	struct:_Success	access:public
+has_message	protob/messages.pb.h	/^    bool has_message;$/;"	m	struct:_VerifyMessage	access:public
+has_minor_version	protob/messages.pb.h	/^    bool has_minor_version;$/;"	m	struct:_Features	access:public
+has_mnemonic	protob/messages.pb.h	/^    bool has_mnemonic;$/;"	m	struct:_DebugLinkState	access:public
+has_mnemonic	protob/messages.pb.h	/^    bool has_mnemonic;$/;"	m	struct:_LoadDevice	access:public
+has_mnemonic	protob/storage.pb.h	/^    bool has_mnemonic;$/;"	m	struct:_Storage	access:public
+has_multisig	protob/types.pb.h	/^    bool has_multisig;$/;"	m	struct:_TxInputType	access:public
+has_node	protob/messages.pb.h	/^    bool has_node;$/;"	m	struct:_DebugLinkState	access:public
+has_node	protob/messages.pb.h	/^    bool has_node;$/;"	m	struct:_LoadDevice	access:public
+has_node	protob/storage.pb.h	/^    bool has_node;$/;"	m	struct:_Storage	access:public
+has_outputs_cnt	protob/types.pb.h	/^    bool has_outputs_cnt;$/;"	m	struct:_TransactionType	access:public
+has_passphrase_protection	protob/messages.pb.h	/^    bool has_passphrase_protection;$/;"	m	struct:_DebugLinkState	access:public
+has_passphrase_protection	protob/messages.pb.h	/^    bool has_passphrase_protection;$/;"	m	struct:_Features	access:public
+has_passphrase_protection	protob/messages.pb.h	/^    bool has_passphrase_protection;$/;"	m	struct:_LoadDevice	access:public
+has_passphrase_protection	protob/messages.pb.h	/^    bool has_passphrase_protection;$/;"	m	struct:_Ping	access:public
+has_passphrase_protection	protob/messages.pb.h	/^    bool has_passphrase_protection;$/;"	m	struct:_RecoveryDevice	access:public
+has_passphrase_protection	protob/messages.pb.h	/^    bool has_passphrase_protection;$/;"	m	struct:_ResetDevice	access:public
+has_passphrase_protection	protob/storage.pb.h	/^    bool has_passphrase_protection;$/;"	m	struct:_Storage	access:public
+has_patch_version	protob/messages.pb.h	/^    bool has_patch_version;$/;"	m	struct:_Features	access:public
+has_payload	protob/messages.pb.h	/^    bool has_payload;$/;"	m	struct:_Success	access:public
+has_pin	protob/messages.pb.h	/^    bool has_pin;$/;"	m	struct:_DebugLinkState	access:public
+has_pin	protob/messages.pb.h	/^    bool has_pin;$/;"	m	struct:_LoadDevice	access:public
+has_pin	protob/storage.pb.h	/^    bool has_pin;$/;"	m	struct:_Storage	access:public
+has_pin_failed_attempts	protob/storage.pb.h	/^    bool has_pin_failed_attempts;$/;"	m	struct:_Storage	access:public
+has_pin_protection	protob/messages.pb.h	/^    bool has_pin_protection;$/;"	m	struct:_Features	access:public
+has_pin_protection	protob/messages.pb.h	/^    bool has_pin_protection;$/;"	m	struct:_Ping	access:public
+has_pin_protection	protob/messages.pb.h	/^    bool has_pin_protection;$/;"	m	struct:_RecoveryDevice	access:public
+has_pin_protection	protob/messages.pb.h	/^    bool has_pin_protection;$/;"	m	struct:_ResetDevice	access:public
+has_private_key	protob/types.pb.h	/^    bool has_private_key;$/;"	m	struct:_HDNodeType	access:public
+has_pubkey	protob/messages.pb.h	/^    bool has_pubkey;$/;"	m	struct:_EncryptMessage	access:public
+has_public_key	protob/types.pb.h	/^    bool has_public_key;$/;"	m	struct:_HDNodeType	access:public
+has_recovery_fake_word	protob/messages.pb.h	/^    bool has_recovery_fake_word;$/;"	m	struct:_DebugLinkState	access:public
+has_recovery_word_pos	protob/messages.pb.h	/^    bool has_recovery_word_pos;$/;"	m	struct:_DebugLinkState	access:public
+has_remove	protob/messages.pb.h	/^    bool has_remove;$/;"	m	struct:_ChangePin	access:public
+has_request_index	protob/types.pb.h	/^    bool has_request_index;$/;"	m	struct:_TxRequestDetailsType	access:public
+has_request_type	protob/messages.pb.h	/^    bool has_request_type;$/;"	m	struct:_TxRequest	access:public
+has_reset_entropy	protob/messages.pb.h	/^    bool has_reset_entropy;$/;"	m	struct:_DebugLinkState	access:public
+has_reset_word	protob/messages.pb.h	/^    bool has_reset_word;$/;"	m	struct:_DebugLinkState	access:public
+has_revision	protob/messages.pb.h	/^    bool has_revision;$/;"	m	struct:_Features	access:public
+has_script_sig	protob/types.pb.h	/^    bool has_script_sig;$/;"	m	struct:_TxInputType	access:public
+has_script_type	protob/types.pb.h	/^    bool has_script_type;$/;"	m	struct:_TxInputType	access:public
+has_sequence	protob/types.pb.h	/^    bool has_sequence;$/;"	m	struct:_TxInputType	access:public
+has_serialized	protob/messages.pb.h	/^    bool has_serialized;$/;"	m	struct:_TxRequest	access:public
+has_serialized_tx	protob/types.pb.h	/^    bool has_serialized_tx;$/;"	m	struct:_TxRequestSerializedType	access:public
+has_show_display	protob/messages.pb.h	/^    bool has_show_display;$/;"	m	struct:_GetAddress	access:public
+has_signature	protob/messages.pb.h	/^    bool has_signature;$/;"	m	struct:_MessageSignature	access:public
+has_signature	protob/messages.pb.h	/^    bool has_signature;$/;"	m	struct:_VerifyMessage	access:public
+has_signature	protob/types.pb.h	/^    bool has_signature;$/;"	m	struct:_TxRequestSerializedType	access:public
+has_signature_index	protob/types.pb.h	/^    bool has_signature_index;$/;"	m	struct:_TxRequestSerializedType	access:public
+has_skip_checksum	protob/messages.pb.h	/^    bool has_skip_checksum;$/;"	m	struct:_LoadDevice	access:public
+has_strength	protob/messages.pb.h	/^    bool has_strength;$/;"	m	struct:_ResetDevice	access:public
+has_text	protob/messages.pb.h	/^    bool has_text;$/;"	m	struct:_DebugLinkLog	access:public
+has_tx	protob/messages.pb.h	/^    bool has_tx;$/;"	m	struct:_TxAck	access:public
+has_tx_hash	protob/types.pb.h	/^    bool has_tx_hash;$/;"	m	struct:_TxRequestDetailsType	access:public
+has_tx_size	protob/messages.pb.h	/^    bool has_tx_size;$/;"	m	struct:_TxSize	access:public
+has_type	protob/messages.pb.h	/^    bool has_type;$/;"	m	struct:_PinMatrixRequest	access:public
+has_value	protob/messages.pb.h	/^    bool has_value;$/;"	m	struct:_CipherKeyValue	access:public
+has_vendor	protob/messages.pb.h	/^    bool has_vendor;$/;"	m	struct:_Features	access:public
+has_version	protob/types.pb.h	/^    bool has_version;$/;"	m	struct:_TransactionType	access:public
+has_word_count	protob/messages.pb.h	/^    bool has_word_count;$/;"	m	struct:_RecoveryDevice	access:public
+has_xpub	protob/messages.pb.h	/^    bool has_xpub;$/;"	m	struct:_PublicKey	access:public
+help	firmware.cpp	/^static inline void help(void)$/;"	f	file:	signature:(void)
+imported	protob/messages.pb.h	/^    bool imported;$/;"	m	struct:_Features	access:public
+imported	protob/storage.pb.h	/^    bool imported;$/;"	m	struct:_Storage	access:public
+initialize_pointer_field	protob/pb_decode.c	/^static void initialize_pointer_field(void *pItem, pb_field_iterator_t *iter)$/;"	f	file:	signature:(void *pItem, pb_field_iterator_t *iter)
+initialized	protob/messages.pb.h	/^    bool initialized;$/;"	m	struct:_Features	access:public
+inputs	protob/messages.pb.h	/^    TxInputType inputs[0];$/;"	m	struct:_SimpleSignTx	access:public
+inputs	protob/types.pb.h	/^    TxInputType inputs[1];$/;"	m	struct:_TransactionType	access:public
+inputs_cnt	protob/types.pb.h	/^    uint32_t inputs_cnt;$/;"	m	struct:_TransactionType	access:public
+inputs_count	protob/messages.pb.h	/^    size_t inputs_count;$/;"	m	struct:_SimpleSignTx	access:public
+inputs_count	protob/messages.pb.h	/^    uint32_t inputs_count;$/;"	m	struct:_EstimateTxSize	access:public
+inputs_count	protob/messages.pb.h	/^    uint32_t inputs_count;$/;"	m	struct:_SignTx	access:public
+inputs_count	protob/types.pb.h	/^    size_t inputs_count;$/;"	m	struct:_TransactionType	access:public
+key	protob/messages.pb.h	/^    char key[256];$/;"	m	struct:_CipherKeyValue	access:public
+label	protob/messages.pb.h	/^    char label[33];$/;"	m	struct:_ApplySettings	access:public
+label	protob/messages.pb.h	/^    char label[33];$/;"	m	struct:_Features	access:public
+label	protob/messages.pb.h	/^    char label[33];$/;"	m	struct:_LoadDevice	access:public
+label	protob/messages.pb.h	/^    char label[33];$/;"	m	struct:_RecoveryDevice	access:public
+label	protob/messages.pb.h	/^    char label[33];$/;"	m	struct:_ResetDevice	access:public
+label	protob/storage.pb.h	/^    char label[33];$/;"	m	struct:_Storage	access:public
+language	protob/messages.pb.h	/^    char language[17];$/;"	m	struct:_ApplySettings	access:public
+language	protob/messages.pb.h	/^    char language[17];$/;"	m	struct:_Features	access:public
+language	protob/messages.pb.h	/^    char language[17];$/;"	m	struct:_LoadDevice	access:public
+language	protob/messages.pb.h	/^    char language[17];$/;"	m	struct:_RecoveryDevice	access:public
+language	protob/messages.pb.h	/^    char language[17];$/;"	m	struct:_ResetDevice	access:public
+language	protob/storage.pb.h	/^    char language[17];$/;"	m	struct:_Storage	access:public
+layout	protob/messages.pb.h	/^    DebugLinkState_layout_t layout;$/;"	m	struct:_DebugLinkState	access:public
+level	protob/messages.pb.h	/^    uint32_t level;$/;"	m	struct:_DebugLinkLog	access:public
+lock_time	protob/types.pb.h	/^    uint32_t lock_time;$/;"	m	struct:_TransactionType	access:public
+main	firmware.cpp	/^int main(int argc, char *argv[])$/;"	f	signature:(int argc, char *argv[])
+major_version	protob/messages.pb.h	/^    uint32_t major_version;$/;"	m	struct:_Features	access:public
+matrix	protob/messages.pb.h	/^    char matrix[10];$/;"	m	struct:_DebugLinkState	access:public
+max_size	protob/pb_encode.h	/^    size_t max_size;      \/* Limit number of output bytes written (or use SIZE_MAX). *\/$/;"	m	struct:_pb_ostream_t	access:public
+maxfee_kb	protob/types.pb.h	/^    uint64_t maxfee_kb;$/;"	m	struct:_CoinType	access:public
+message	protob/messages.pb.h	/^    DecryptMessage_message_t message;$/;"	m	struct:_DecryptMessage	access:public
+message	protob/messages.pb.h	/^    EncryptMessage_message_t message;$/;"	m	struct:_EncryptMessage	access:public
+message	protob/messages.pb.h	/^    SignMessage_message_t message;$/;"	m	struct:_SignMessage	access:public
+message	protob/messages.pb.h	/^    VerifyMessage_message_t message;$/;"	m	struct:_VerifyMessage	access:public
+message	protob/messages.pb.h	/^    char message[256];$/;"	m	struct:_Failure	access:public
+message	protob/messages.pb.h	/^    char message[256];$/;"	m	struct:_Ping	access:public
+message	protob/messages.pb.h	/^    char message[256];$/;"	m	struct:_Success	access:public
+minor_version	protob/messages.pb.h	/^    uint32_t minor_version;$/;"	m	struct:_Features	access:public
+mnemonic	protob/messages.pb.h	/^    char mnemonic[241];$/;"	m	struct:_DebugLinkState	access:public
+mnemonic	protob/messages.pb.h	/^    char mnemonic[241];$/;"	m	struct:_LoadDevice	access:public
+mnemonic	protob/storage.pb.h	/^    char mnemonic[241];$/;"	m	struct:_Storage	access:public
+mode	firmware.hpp	/^enum mode {$/;"	g
+msg_id	messages.cpp	/^	uint16_t msg_id;$/;"	m	struct:MessagesMap_t	file:	access:public
 msg_out	messages.cpp	/^static uint8_t msg_out[MSG_OUT_SIZE];$/;"	v	file:
-msg_out_append	messages.cpp	/^inline void msg_out_append(uint8_t c)$/;"	f
+msg_out_append	messages.cpp	/^inline void msg_out_append(uint8_t c)$/;"	f	signature:(uint8_t c)
 msg_out_cur	messages.cpp	/^static uint32_t msg_out_cur = 0;$/;"	v	file:
-msg_out_data	messages.cpp	/^uint8_t *msg_out_data(void)$/;"	f
+msg_out_data	messages.cpp	/^uint8_t *msg_out_data(void)$/;"	f	signature:(void)
+msg_out_data	messages.hpp	/^uint8_t *msg_out_data(void);$/;"	p	signature:(void)
 msg_out_end	messages.cpp	/^static uint32_t msg_out_end = 0;$/;"	v	file:
-msg_out_pad	messages.cpp	/^inline void msg_out_pad(void)$/;"	f
+msg_out_pad	messages.cpp	/^inline void msg_out_pad(void)$/;"	f	signature:(void)
 msg_out_start	messages.cpp	/^static uint32_t msg_out_start = 0;$/;"	v	file:
 msg_resp	firmware.hpp	/^static uint8_t msg_resp[MSG_OUT_SIZE];$/;"	v
 msg_write	messages.hpp	10;"	d
-msg_write_common	messages.cpp	/^bool msg_write_common(char type, uint16_t msg_id, const void *msg_ptr)$/;"	f
-multisig	protob/types.pb.h	/^    MultisigRedeemScriptType multisig;$/;"	m	struct:_TxInputType
-next	protob/pb.h	/^    pb_extension_t *next;$/;"	m	struct:_pb_extension_t
-node	protob/messages.pb.h	/^    HDNodeType node;$/;"	m	struct:_DebugLinkState
-node	protob/messages.pb.h	/^    HDNodeType node;$/;"	m	struct:_LoadDevice
-node	protob/messages.pb.h	/^    HDNodeType node;$/;"	m	struct:_PublicKey
-node	protob/storage.pb.h	/^    HDNodeType node;$/;"	m	struct:_Storage
-outputs	protob/messages.pb.h	/^    TxOutputType outputs[0];$/;"	m	struct:_SimpleSignTx
-outputs	protob/types.pb.h	/^    TxOutputType outputs[1];$/;"	m	struct:_TransactionType
-outputs_cnt	protob/types.pb.h	/^    uint32_t outputs_cnt;$/;"	m	struct:_TransactionType
-outputs_count	protob/messages.pb.h	/^    size_t outputs_count;$/;"	m	struct:_SimpleSignTx
-outputs_count	protob/messages.pb.h	/^    uint32_t outputs_count;$/;"	m	struct:_EstimateTxSize
-outputs_count	protob/messages.pb.h	/^    uint32_t outputs_count;$/;"	m	struct:_SignTx
-outputs_count	protob/types.pb.h	/^    size_t outputs_count;$/;"	m	struct:_TransactionType
-pData	protob/pb_decode.c	/^    void *pData; \/* Pointer where to store current field value *\/$/;"	m	struct:__anon5	file:
-pSize	protob/pb_decode.c	/^    void *pSize; \/* Pointer where to store the size of current array field *\/$/;"	m	struct:__anon5	file:
-passphrase	protob/messages.pb.h	/^    char passphrase[51];$/;"	m	struct:_PassphraseAck
-passphrase_protection	protob/messages.pb.h	/^    bool passphrase_protection;$/;"	m	struct:_DebugLinkState
-passphrase_protection	protob/messages.pb.h	/^    bool passphrase_protection;$/;"	m	struct:_Features
-passphrase_protection	protob/messages.pb.h	/^    bool passphrase_protection;$/;"	m	struct:_LoadDevice
-passphrase_protection	protob/messages.pb.h	/^    bool passphrase_protection;$/;"	m	struct:_Ping
-passphrase_protection	protob/messages.pb.h	/^    bool passphrase_protection;$/;"	m	struct:_RecoveryDevice
-passphrase_protection	protob/messages.pb.h	/^    bool passphrase_protection;$/;"	m	struct:_ResetDevice
-passphrase_protection	protob/storage.pb.h	/^    bool passphrase_protection;$/;"	m	struct:_Storage
-patch_version	protob/messages.pb.h	/^    uint32_t patch_version;$/;"	m	struct:_Features
-payload	protob/messages.pb.h	/^    FirmwareUpload_payload_t payload;$/;"	m	struct:_FirmwareUpload
-payload	protob/messages.pb.h	/^    Success_payload_t payload;$/;"	m	struct:_Success
+msg_write_common	messages.cpp	/^bool msg_write_common(char type, uint16_t msg_id, const void *msg_ptr)$/;"	f	signature:(char type, uint16_t msg_id, const void *msg_ptr)
+msg_write_common	messages.hpp	/^bool msg_write_common(char type, uint16_t msg_id, const void *msg_ptr);$/;"	p	signature:(char type, uint16_t msg_id, const void *msg_ptr)
+multisig	protob/types.pb.h	/^    MultisigRedeemScriptType multisig;$/;"	m	struct:_TxInputType	access:public
+next	protob/pb.h	/^    pb_extension_t *next;$/;"	m	struct:_pb_extension_t	access:public
+node	protob/messages.pb.h	/^    HDNodeType node;$/;"	m	struct:_DebugLinkState	access:public
+node	protob/messages.pb.h	/^    HDNodeType node;$/;"	m	struct:_LoadDevice	access:public
+node	protob/messages.pb.h	/^    HDNodeType node;$/;"	m	struct:_PublicKey	access:public
+node	protob/storage.pb.h	/^    HDNodeType node;$/;"	m	struct:_Storage	access:public
+opts	firmware.hpp	/^static struct option opts[] = {$/;"	v	typeref:struct:option
+outputs	protob/messages.pb.h	/^    TxOutputType outputs[0];$/;"	m	struct:_SimpleSignTx	access:public
+outputs	protob/types.pb.h	/^    TxOutputType outputs[1];$/;"	m	struct:_TransactionType	access:public
+outputs_cnt	protob/types.pb.h	/^    uint32_t outputs_cnt;$/;"	m	struct:_TransactionType	access:public
+outputs_count	protob/messages.pb.h	/^    size_t outputs_count;$/;"	m	struct:_SimpleSignTx	access:public
+outputs_count	protob/messages.pb.h	/^    uint32_t outputs_count;$/;"	m	struct:_EstimateTxSize	access:public
+outputs_count	protob/messages.pb.h	/^    uint32_t outputs_count;$/;"	m	struct:_SignTx	access:public
+outputs_count	protob/types.pb.h	/^    size_t outputs_count;$/;"	m	struct:_TransactionType	access:public
+pData	protob/pb_decode.c	/^    void *pData; \/* Pointer where to store current field value *\/$/;"	m	struct:__anon5	file:	access:public
+pSize	protob/pb_decode.c	/^    void *pSize; \/* Pointer where to store the size of current array field *\/$/;"	m	struct:__anon5	file:	access:public
+passphrase	protob/messages.pb.h	/^    char passphrase[51];$/;"	m	struct:_PassphraseAck	access:public
+passphrase_protection	protob/messages.pb.h	/^    bool passphrase_protection;$/;"	m	struct:_DebugLinkState	access:public
+passphrase_protection	protob/messages.pb.h	/^    bool passphrase_protection;$/;"	m	struct:_Features	access:public
+passphrase_protection	protob/messages.pb.h	/^    bool passphrase_protection;$/;"	m	struct:_LoadDevice	access:public
+passphrase_protection	protob/messages.pb.h	/^    bool passphrase_protection;$/;"	m	struct:_Ping	access:public
+passphrase_protection	protob/messages.pb.h	/^    bool passphrase_protection;$/;"	m	struct:_RecoveryDevice	access:public
+passphrase_protection	protob/messages.pb.h	/^    bool passphrase_protection;$/;"	m	struct:_ResetDevice	access:public
+passphrase_protection	protob/storage.pb.h	/^    bool passphrase_protection;$/;"	m	struct:_Storage	access:public
+patch_version	protob/messages.pb.h	/^    uint32_t patch_version;$/;"	m	struct:_Features	access:public
+payload	protob/messages.pb.h	/^    FirmwareUpload_payload_t payload;$/;"	m	struct:_FirmwareUpload	access:public
+payload	protob/messages.pb.h	/^    Success_payload_t payload;$/;"	m	struct:_Success	access:public
 pb_arraysize	protob/pb.h	365;"	d
 pb_bytes_array_t	protob/pb.h	/^typedef struct _pb_bytes_array_t pb_bytes_array_t;$/;"	t	typeref:struct:_pb_bytes_array_t
-pb_callback_out	messages.cpp	/^static bool pb_callback_out(pb_ostream_t *stream, const uint8_t *buf, size_t count)$/;"	f	file:
+pb_callback_out	messages.cpp	/^static bool pb_callback_out(pb_ostream_t *stream, const uint8_t *buf, size_t count)$/;"	f	file:	signature:(pb_ostream_t *stream, const uint8_t *buf, size_t count)
 pb_callback_t	protob/pb.h	/^typedef struct _pb_callback_t pb_callback_t;$/;"	t	typeref:struct:_pb_callback_t
-pb_close_string_substream	protob/pb_decode.c	/^void pb_close_string_substream(pb_istream_t *stream, pb_istream_t *substream)$/;"	f
-pb_dec_bytes	protob/pb_decode.c	/^static bool checkreturn pb_dec_bytes(pb_istream_t *stream, const pb_field_t *field, void *dest)$/;"	f	file:
-pb_dec_fixed32	protob/pb_decode.c	/^static bool checkreturn pb_dec_fixed32(pb_istream_t *stream, const pb_field_t *field, void *dest)$/;"	f	file:
-pb_dec_fixed64	protob/pb_decode.c	/^static bool checkreturn pb_dec_fixed64(pb_istream_t *stream, const pb_field_t *field, void *dest)$/;"	f	file:
-pb_dec_string	protob/pb_decode.c	/^static bool checkreturn pb_dec_string(pb_istream_t *stream, const pb_field_t *field, void *dest)$/;"	f	file:
-pb_dec_submessage	protob/pb_decode.c	/^static bool checkreturn pb_dec_submessage(pb_istream_t *stream, const pb_field_t *field, void *dest)$/;"	f	file:
-pb_dec_svarint	protob/pb_decode.c	/^static bool checkreturn pb_dec_svarint(pb_istream_t *stream, const pb_field_t *field, void *dest)$/;"	f	file:
-pb_dec_uvarint	protob/pb_decode.c	/^static bool checkreturn pb_dec_uvarint(pb_istream_t *stream, const pb_field_t *field, void *dest)$/;"	f	file:
-pb_dec_varint	protob/pb_decode.c	/^static bool checkreturn pb_dec_varint(pb_istream_t *stream, const pb_field_t *field, void *dest)$/;"	f	file:
-pb_decode	protob/pb_decode.c	/^bool checkreturn pb_decode(pb_istream_t *stream, const pb_field_t fields[], void *dest_struct)$/;"	f
-pb_decode_delimited	protob/pb_decode.c	/^bool pb_decode_delimited(pb_istream_t *stream, const pb_field_t fields[], void *dest_struct)$/;"	f
-pb_decode_fixed32	protob/pb_decode.c	/^bool pb_decode_fixed32(pb_istream_t *stream, void *dest)$/;"	f
-pb_decode_fixed64	protob/pb_decode.c	/^bool pb_decode_fixed64(pb_istream_t *stream, void *dest)$/;"	f
-pb_decode_noinit	protob/pb_decode.c	/^bool checkreturn pb_decode_noinit(pb_istream_t *stream, const pb_field_t fields[], void *dest_struct)$/;"	f
-pb_decode_svarint	protob/pb_decode.c	/^bool pb_decode_svarint(pb_istream_t *stream, int64_t *dest)$/;"	f
-pb_decode_tag	protob/pb_decode.c	/^bool checkreturn pb_decode_tag(pb_istream_t *stream, pb_wire_type_t *wire_type, uint32_t *tag, bool *eof)$/;"	f
-pb_decode_varint	protob/pb_decode.c	/^bool checkreturn pb_decode_varint(pb_istream_t *stream, uint64_t *dest)$/;"	f
-pb_decode_varint32	protob/pb_decode.c	/^static bool checkreturn pb_decode_varint32(pb_istream_t *stream, uint32_t *dest)$/;"	f	file:
+pb_close_string_substream	protob/pb_decode.c	/^void pb_close_string_substream(pb_istream_t *stream, pb_istream_t *substream)$/;"	f	signature:(pb_istream_t *stream, pb_istream_t *substream)
+pb_close_string_substream	protob/pb_decode.h	/^void pb_close_string_substream(pb_istream_t *stream, pb_istream_t *substream);$/;"	p	signature:(pb_istream_t *stream, pb_istream_t *substream)
+pb_dec_bytes	protob/pb_decode.c	/^static bool checkreturn pb_dec_bytes(pb_istream_t *stream, const pb_field_t *field, void *dest)$/;"	f	file:	signature:(pb_istream_t *stream, const pb_field_t *field, void *dest)
+pb_dec_bytes	protob/pb_decode.c	/^static bool checkreturn pb_dec_bytes(pb_istream_t *stream, const pb_field_t *field, void *dest);$/;"	p	file:	signature:(pb_istream_t *stream, const pb_field_t *field, void *dest)
+pb_dec_fixed32	protob/pb_decode.c	/^static bool checkreturn pb_dec_fixed32(pb_istream_t *stream, const pb_field_t *field, void *dest)$/;"	f	file:	signature:(pb_istream_t *stream, const pb_field_t *field, void *dest)
+pb_dec_fixed32	protob/pb_decode.c	/^static bool checkreturn pb_dec_fixed32(pb_istream_t *stream, const pb_field_t *field, void *dest);$/;"	p	file:	signature:(pb_istream_t *stream, const pb_field_t *field, void *dest)
+pb_dec_fixed64	protob/pb_decode.c	/^static bool checkreturn pb_dec_fixed64(pb_istream_t *stream, const pb_field_t *field, void *dest)$/;"	f	file:	signature:(pb_istream_t *stream, const pb_field_t *field, void *dest)
+pb_dec_fixed64	protob/pb_decode.c	/^static bool checkreturn pb_dec_fixed64(pb_istream_t *stream, const pb_field_t *field, void *dest);$/;"	p	file:	signature:(pb_istream_t *stream, const pb_field_t *field, void *dest)
+pb_dec_string	protob/pb_decode.c	/^static bool checkreturn pb_dec_string(pb_istream_t *stream, const pb_field_t *field, void *dest)$/;"	f	file:	signature:(pb_istream_t *stream, const pb_field_t *field, void *dest)
+pb_dec_string	protob/pb_decode.c	/^static bool checkreturn pb_dec_string(pb_istream_t *stream, const pb_field_t *field, void *dest);$/;"	p	file:	signature:(pb_istream_t *stream, const pb_field_t *field, void *dest)
+pb_dec_submessage	protob/pb_decode.c	/^static bool checkreturn pb_dec_submessage(pb_istream_t *stream, const pb_field_t *field, void *dest)$/;"	f	file:	signature:(pb_istream_t *stream, const pb_field_t *field, void *dest)
+pb_dec_submessage	protob/pb_decode.c	/^static bool checkreturn pb_dec_submessage(pb_istream_t *stream, const pb_field_t *field, void *dest);$/;"	p	file:	signature:(pb_istream_t *stream, const pb_field_t *field, void *dest)
+pb_dec_svarint	protob/pb_decode.c	/^static bool checkreturn pb_dec_svarint(pb_istream_t *stream, const pb_field_t *field, void *dest)$/;"	f	file:	signature:(pb_istream_t *stream, const pb_field_t *field, void *dest)
+pb_dec_svarint	protob/pb_decode.c	/^static bool checkreturn pb_dec_svarint(pb_istream_t *stream, const pb_field_t *field, void *dest);$/;"	p	file:	signature:(pb_istream_t *stream, const pb_field_t *field, void *dest)
+pb_dec_uvarint	protob/pb_decode.c	/^static bool checkreturn pb_dec_uvarint(pb_istream_t *stream, const pb_field_t *field, void *dest)$/;"	f	file:	signature:(pb_istream_t *stream, const pb_field_t *field, void *dest)
+pb_dec_uvarint	protob/pb_decode.c	/^static bool checkreturn pb_dec_uvarint(pb_istream_t *stream, const pb_field_t *field, void *dest);$/;"	p	file:	signature:(pb_istream_t *stream, const pb_field_t *field, void *dest)
+pb_dec_varint	protob/pb_decode.c	/^static bool checkreturn pb_dec_varint(pb_istream_t *stream, const pb_field_t *field, void *dest)$/;"	f	file:	signature:(pb_istream_t *stream, const pb_field_t *field, void *dest)
+pb_dec_varint	protob/pb_decode.c	/^static bool checkreturn pb_dec_varint(pb_istream_t *stream, const pb_field_t *field, void *dest);$/;"	p	file:	signature:(pb_istream_t *stream, const pb_field_t *field, void *dest)
+pb_decode	protob/pb_decode.c	/^bool checkreturn pb_decode(pb_istream_t *stream, const pb_field_t fields[], void *dest_struct)$/;"	f	signature:(pb_istream_t *stream, const pb_field_t fields[], void *dest_struct)
+pb_decode	protob/pb_decode.h	/^bool pb_decode(pb_istream_t *stream, const pb_field_t fields[], void *dest_struct);$/;"	p	signature:(pb_istream_t *stream, const pb_field_t fields[], void *dest_struct)
+pb_decode_delimited	protob/pb_decode.c	/^bool pb_decode_delimited(pb_istream_t *stream, const pb_field_t fields[], void *dest_struct)$/;"	f	signature:(pb_istream_t *stream, const pb_field_t fields[], void *dest_struct)
+pb_decode_delimited	protob/pb_decode.h	/^bool pb_decode_delimited(pb_istream_t *stream, const pb_field_t fields[], void *dest_struct);$/;"	p	signature:(pb_istream_t *stream, const pb_field_t fields[], void *dest_struct)
+pb_decode_fixed32	protob/pb_decode.c	/^bool pb_decode_fixed32(pb_istream_t *stream, void *dest)$/;"	f	signature:(pb_istream_t *stream, void *dest)
+pb_decode_fixed32	protob/pb_decode.h	/^bool pb_decode_fixed32(pb_istream_t *stream, void *dest);$/;"	p	signature:(pb_istream_t *stream, void *dest)
+pb_decode_fixed64	protob/pb_decode.c	/^bool pb_decode_fixed64(pb_istream_t *stream, void *dest)$/;"	f	signature:(pb_istream_t *stream, void *dest)
+pb_decode_fixed64	protob/pb_decode.h	/^bool pb_decode_fixed64(pb_istream_t *stream, void *dest);$/;"	p	signature:(pb_istream_t *stream, void *dest)
+pb_decode_noinit	protob/pb_decode.c	/^bool checkreturn pb_decode_noinit(pb_istream_t *stream, const pb_field_t fields[], void *dest_struct)$/;"	f	signature:(pb_istream_t *stream, const pb_field_t fields[], void *dest_struct)
+pb_decode_noinit	protob/pb_decode.h	/^bool pb_decode_noinit(pb_istream_t *stream, const pb_field_t fields[], void *dest_struct);$/;"	p	signature:(pb_istream_t *stream, const pb_field_t fields[], void *dest_struct)
+pb_decode_svarint	protob/pb_decode.c	/^bool pb_decode_svarint(pb_istream_t *stream, int64_t *dest)$/;"	f	signature:(pb_istream_t *stream, int64_t *dest)
+pb_decode_svarint	protob/pb_decode.h	/^bool pb_decode_svarint(pb_istream_t *stream, int64_t *dest);$/;"	p	signature:(pb_istream_t *stream, int64_t *dest)
+pb_decode_tag	protob/pb_decode.c	/^bool checkreturn pb_decode_tag(pb_istream_t *stream, pb_wire_type_t *wire_type, uint32_t *tag, bool *eof)$/;"	f	signature:(pb_istream_t *stream, pb_wire_type_t *wire_type, uint32_t *tag, bool *eof)
+pb_decode_tag	protob/pb_decode.h	/^bool pb_decode_tag(pb_istream_t *stream, pb_wire_type_t *wire_type, uint32_t *tag, bool *eof);$/;"	p	signature:(pb_istream_t *stream, pb_wire_type_t *wire_type, uint32_t *tag, bool *eof)
+pb_decode_varint	protob/pb_decode.c	/^bool checkreturn pb_decode_varint(pb_istream_t *stream, uint64_t *dest)$/;"	f	signature:(pb_istream_t *stream, uint64_t *dest)
+pb_decode_varint	protob/pb_decode.h	/^bool pb_decode_varint(pb_istream_t *stream, uint64_t *dest);$/;"	p	signature:(pb_istream_t *stream, uint64_t *dest)
+pb_decode_varint32	protob/pb_decode.c	/^static bool checkreturn pb_decode_varint32(pb_istream_t *stream, uint32_t *dest)$/;"	f	file:	signature:(pb_istream_t *stream, uint32_t *dest)
+pb_decode_varint32	protob/pb_decode.c	/^static bool checkreturn pb_decode_varint32(pb_istream_t *stream, uint32_t *dest);$/;"	p	file:	signature:(pb_istream_t *stream, uint32_t *dest)
 pb_delta	protob/pb.h	367;"	d
-pb_enc_bytes	protob/pb_encode.c	/^static bool checkreturn pb_enc_bytes(pb_ostream_t *stream, const pb_field_t *field, const void *src)$/;"	f	file:
-pb_enc_fixed32	protob/pb_encode.c	/^static bool checkreturn pb_enc_fixed32(pb_ostream_t *stream, const pb_field_t *field, const void *src)$/;"	f	file:
-pb_enc_fixed64	protob/pb_encode.c	/^static bool checkreturn pb_enc_fixed64(pb_ostream_t *stream, const pb_field_t *field, const void *src)$/;"	f	file:
-pb_enc_string	protob/pb_encode.c	/^static bool checkreturn pb_enc_string(pb_ostream_t *stream, const pb_field_t *field, const void *src)$/;"	f	file:
-pb_enc_submessage	protob/pb_encode.c	/^static bool checkreturn pb_enc_submessage(pb_ostream_t *stream, const pb_field_t *field, const void *src)$/;"	f	file:
-pb_enc_svarint	protob/pb_encode.c	/^static bool checkreturn pb_enc_svarint(pb_ostream_t *stream, const pb_field_t *field, const void *src)$/;"	f	file:
-pb_enc_uvarint	protob/pb_encode.c	/^static bool checkreturn pb_enc_uvarint(pb_ostream_t *stream, const pb_field_t *field, const void *src)$/;"	f	file:
-pb_enc_varint	protob/pb_encode.c	/^static bool checkreturn pb_enc_varint(pb_ostream_t *stream, const pb_field_t *field, const void *src)$/;"	f	file:
-pb_encode	protob/pb_encode.c	/^bool checkreturn pb_encode(pb_ostream_t *stream, const pb_field_t fields[], const void *src_struct)$/;"	f
-pb_encode_delimited	protob/pb_encode.c	/^bool pb_encode_delimited(pb_ostream_t *stream, const pb_field_t fields[], const void *src_struct)$/;"	f
-pb_encode_fixed32	protob/pb_encode.c	/^bool checkreturn pb_encode_fixed32(pb_ostream_t *stream, const void *value)$/;"	f
-pb_encode_fixed64	protob/pb_encode.c	/^bool checkreturn pb_encode_fixed64(pb_ostream_t *stream, const void *value)$/;"	f
-pb_encode_string	protob/pb_encode.c	/^bool checkreturn pb_encode_string(pb_ostream_t *stream, const uint8_t *buffer, size_t size)$/;"	f
-pb_encode_submessage	protob/pb_encode.c	/^bool checkreturn pb_encode_submessage(pb_ostream_t *stream, const pb_field_t fields[], const void *src_struct)$/;"	f
-pb_encode_svarint	protob/pb_encode.c	/^bool checkreturn pb_encode_svarint(pb_ostream_t *stream, int64_t value)$/;"	f
-pb_encode_tag	protob/pb_encode.c	/^bool checkreturn pb_encode_tag(pb_ostream_t *stream, pb_wire_type_t wiretype, uint32_t field_number)$/;"	f
-pb_encode_tag_for_field	protob/pb_encode.c	/^bool checkreturn pb_encode_tag_for_field(pb_ostream_t *stream, const pb_field_t *field)$/;"	f
-pb_encode_varint	protob/pb_encode.c	/^bool checkreturn pb_encode_varint(pb_ostream_t *stream, uint64_t value)$/;"	f
+pb_enc_bytes	protob/pb_encode.c	/^static bool checkreturn pb_enc_bytes(pb_ostream_t *stream, const pb_field_t *field, const void *src)$/;"	f	file:	signature:(pb_ostream_t *stream, const pb_field_t *field, const void *src)
+pb_enc_bytes	protob/pb_encode.c	/^static bool checkreturn pb_enc_bytes(pb_ostream_t *stream, const pb_field_t *field, const void *src);$/;"	p	file:	signature:(pb_ostream_t *stream, const pb_field_t *field, const void *src)
+pb_enc_fixed32	protob/pb_encode.c	/^static bool checkreturn pb_enc_fixed32(pb_ostream_t *stream, const pb_field_t *field, const void *src)$/;"	f	file:	signature:(pb_ostream_t *stream, const pb_field_t *field, const void *src)
+pb_enc_fixed32	protob/pb_encode.c	/^static bool checkreturn pb_enc_fixed32(pb_ostream_t *stream, const pb_field_t *field, const void *src);$/;"	p	file:	signature:(pb_ostream_t *stream, const pb_field_t *field, const void *src)
+pb_enc_fixed64	protob/pb_encode.c	/^static bool checkreturn pb_enc_fixed64(pb_ostream_t *stream, const pb_field_t *field, const void *src)$/;"	f	file:	signature:(pb_ostream_t *stream, const pb_field_t *field, const void *src)
+pb_enc_fixed64	protob/pb_encode.c	/^static bool checkreturn pb_enc_fixed64(pb_ostream_t *stream, const pb_field_t *field, const void *src);$/;"	p	file:	signature:(pb_ostream_t *stream, const pb_field_t *field, const void *src)
+pb_enc_string	protob/pb_encode.c	/^static bool checkreturn pb_enc_string(pb_ostream_t *stream, const pb_field_t *field, const void *src)$/;"	f	file:	signature:(pb_ostream_t *stream, const pb_field_t *field, const void *src)
+pb_enc_string	protob/pb_encode.c	/^static bool checkreturn pb_enc_string(pb_ostream_t *stream, const pb_field_t *field, const void *src);$/;"	p	file:	signature:(pb_ostream_t *stream, const pb_field_t *field, const void *src)
+pb_enc_submessage	protob/pb_encode.c	/^static bool checkreturn pb_enc_submessage(pb_ostream_t *stream, const pb_field_t *field, const void *src)$/;"	f	file:	signature:(pb_ostream_t *stream, const pb_field_t *field, const void *src)
+pb_enc_submessage	protob/pb_encode.c	/^static bool checkreturn pb_enc_submessage(pb_ostream_t *stream, const pb_field_t *field, const void *src);$/;"	p	file:	signature:(pb_ostream_t *stream, const pb_field_t *field, const void *src)
+pb_enc_svarint	protob/pb_encode.c	/^static bool checkreturn pb_enc_svarint(pb_ostream_t *stream, const pb_field_t *field, const void *src)$/;"	f	file:	signature:(pb_ostream_t *stream, const pb_field_t *field, const void *src)
+pb_enc_svarint	protob/pb_encode.c	/^static bool checkreturn pb_enc_svarint(pb_ostream_t *stream, const pb_field_t *field, const void *src);$/;"	p	file:	signature:(pb_ostream_t *stream, const pb_field_t *field, const void *src)
+pb_enc_uvarint	protob/pb_encode.c	/^static bool checkreturn pb_enc_uvarint(pb_ostream_t *stream, const pb_field_t *field, const void *src)$/;"	f	file:	signature:(pb_ostream_t *stream, const pb_field_t *field, const void *src)
+pb_enc_uvarint	protob/pb_encode.c	/^static bool checkreturn pb_enc_uvarint(pb_ostream_t *stream, const pb_field_t *field, const void *src);$/;"	p	file:	signature:(pb_ostream_t *stream, const pb_field_t *field, const void *src)
+pb_enc_varint	protob/pb_encode.c	/^static bool checkreturn pb_enc_varint(pb_ostream_t *stream, const pb_field_t *field, const void *src)$/;"	f	file:	signature:(pb_ostream_t *stream, const pb_field_t *field, const void *src)
+pb_enc_varint	protob/pb_encode.c	/^static bool checkreturn pb_enc_varint(pb_ostream_t *stream, const pb_field_t *field, const void *src);$/;"	p	file:	signature:(pb_ostream_t *stream, const pb_field_t *field, const void *src)
+pb_encode	protob/pb_encode.c	/^bool checkreturn pb_encode(pb_ostream_t *stream, const pb_field_t fields[], const void *src_struct)$/;"	f	signature:(pb_ostream_t *stream, const pb_field_t fields[], const void *src_struct)
+pb_encode	protob/pb_encode.h	/^bool pb_encode(pb_ostream_t *stream, const pb_field_t fields[], const void *src_struct);$/;"	p	signature:(pb_ostream_t *stream, const pb_field_t fields[], const void *src_struct)
+pb_encode_delimited	protob/pb_encode.c	/^bool pb_encode_delimited(pb_ostream_t *stream, const pb_field_t fields[], const void *src_struct)$/;"	f	signature:(pb_ostream_t *stream, const pb_field_t fields[], const void *src_struct)
+pb_encode_delimited	protob/pb_encode.h	/^bool pb_encode_delimited(pb_ostream_t *stream, const pb_field_t fields[], const void *src_struct);$/;"	p	signature:(pb_ostream_t *stream, const pb_field_t fields[], const void *src_struct)
+pb_encode_fixed32	protob/pb_encode.c	/^bool checkreturn pb_encode_fixed32(pb_ostream_t *stream, const void *value)$/;"	f	signature:(pb_ostream_t *stream, const void *value)
+pb_encode_fixed32	protob/pb_encode.h	/^bool pb_encode_fixed32(pb_ostream_t *stream, const void *value);$/;"	p	signature:(pb_ostream_t *stream, const void *value)
+pb_encode_fixed64	protob/pb_encode.c	/^bool checkreturn pb_encode_fixed64(pb_ostream_t *stream, const void *value)$/;"	f	signature:(pb_ostream_t *stream, const void *value)
+pb_encode_fixed64	protob/pb_encode.h	/^bool pb_encode_fixed64(pb_ostream_t *stream, const void *value);$/;"	p	signature:(pb_ostream_t *stream, const void *value)
+pb_encode_string	protob/pb_encode.c	/^bool checkreturn pb_encode_string(pb_ostream_t *stream, const uint8_t *buffer, size_t size)$/;"	f	signature:(pb_ostream_t *stream, const uint8_t *buffer, size_t size)
+pb_encode_string	protob/pb_encode.h	/^bool pb_encode_string(pb_ostream_t *stream, const uint8_t *buffer, size_t size);$/;"	p	signature:(pb_ostream_t *stream, const uint8_t *buffer, size_t size)
+pb_encode_submessage	protob/pb_encode.c	/^bool checkreturn pb_encode_submessage(pb_ostream_t *stream, const pb_field_t fields[], const void *src_struct)$/;"	f	signature:(pb_ostream_t *stream, const pb_field_t fields[], const void *src_struct)
+pb_encode_submessage	protob/pb_encode.h	/^bool pb_encode_submessage(pb_ostream_t *stream, const pb_field_t fields[], const void *src_struct);$/;"	p	signature:(pb_ostream_t *stream, const pb_field_t fields[], const void *src_struct)
+pb_encode_svarint	protob/pb_encode.c	/^bool checkreturn pb_encode_svarint(pb_ostream_t *stream, int64_t value)$/;"	f	signature:(pb_ostream_t *stream, int64_t value)
+pb_encode_svarint	protob/pb_encode.h	/^bool pb_encode_svarint(pb_ostream_t *stream, int64_t value);$/;"	p	signature:(pb_ostream_t *stream, int64_t value)
+pb_encode_tag	protob/pb_encode.c	/^bool checkreturn pb_encode_tag(pb_ostream_t *stream, pb_wire_type_t wiretype, uint32_t field_number)$/;"	f	signature:(pb_ostream_t *stream, pb_wire_type_t wiretype, uint32_t field_number)
+pb_encode_tag	protob/pb_encode.h	/^bool pb_encode_tag(pb_ostream_t *stream, pb_wire_type_t wiretype, uint32_t field_number);$/;"	p	signature:(pb_ostream_t *stream, pb_wire_type_t wiretype, uint32_t field_number)
+pb_encode_tag_for_field	protob/pb_encode.c	/^bool checkreturn pb_encode_tag_for_field(pb_ostream_t *stream, const pb_field_t *field)$/;"	f	signature:(pb_ostream_t *stream, const pb_field_t *field)
+pb_encode_tag_for_field	protob/pb_encode.h	/^bool pb_encode_tag_for_field(pb_ostream_t *stream, const pb_field_t *field);$/;"	p	signature:(pb_ostream_t *stream, const pb_field_t *field)
+pb_encode_varint	protob/pb_encode.c	/^bool checkreturn pb_encode_varint(pb_ostream_t *stream, uint64_t value)$/;"	f	signature:(pb_ostream_t *stream, uint64_t value)
+pb_encode_varint	protob/pb_encode.h	/^bool pb_encode_varint(pb_ostream_t *stream, uint64_t value);$/;"	p	signature:(pb_ostream_t *stream, uint64_t value)
 pb_extension_t	protob/pb.h	/^typedef struct _pb_extension_t pb_extension_t;$/;"	t	typeref:struct:_pb_extension_t
 pb_extension_type_t	protob/pb.h	/^typedef struct _pb_extension_type_t pb_extension_type_t;$/;"	t	typeref:struct:_pb_extension_type_t
-pb_field_find	protob/pb_decode.c	/^static bool checkreturn pb_field_find(pb_field_iterator_t *iter, uint32_t tag)$/;"	f	file:
-pb_field_init	protob/pb_decode.c	/^static void pb_field_init(pb_field_iterator_t *iter, const pb_field_t *fields, void *dest_struct)$/;"	f	file:
+pb_field_find	protob/pb_decode.c	/^static bool checkreturn pb_field_find(pb_field_iterator_t *iter, uint32_t tag)$/;"	f	file:	signature:(pb_field_iterator_t *iter, uint32_t tag)
+pb_field_find	protob/pb_decode.c	/^static bool checkreturn pb_field_find(pb_field_iterator_t *iter, uint32_t tag);$/;"	p	file:	signature:(pb_field_iterator_t *iter, uint32_t tag)
+pb_field_init	protob/pb_decode.c	/^static void pb_field_init(pb_field_iterator_t *iter, const pb_field_t *fields, void *dest_struct)$/;"	f	file:	signature:(pb_field_iterator_t *iter, const pb_field_t *fields, void *dest_struct)
+pb_field_init	protob/pb_decode.c	/^static void pb_field_init(pb_field_iterator_t *iter, const pb_field_t *fields, void *dest_struct);$/;"	p	file:	signature:(pb_field_iterator_t *iter, const pb_field_t *fields, void *dest_struct)
 pb_field_iterator_t	protob/pb_decode.c	/^} pb_field_iterator_t;$/;"	t	typeref:struct:__anon5	file:
-pb_field_next	protob/pb_decode.c	/^static bool pb_field_next(pb_field_iterator_t *iter)$/;"	f	file:
+pb_field_next	protob/pb_decode.c	/^static bool pb_field_next(pb_field_iterator_t *iter)$/;"	f	file:	signature:(pb_field_iterator_t *iter)
+pb_field_next	protob/pb_decode.c	/^static bool pb_field_next(pb_field_iterator_t *iter);$/;"	p	file:	signature:(pb_field_iterator_t *iter)
 pb_field_t	protob/pb.h	/^typedef struct _pb_field_t pb_field_t;$/;"	t	typeref:struct:_pb_field_t
 pb_free	protob/pb.h	357;"	d
-pb_get_encoded_size	protob/pb_encode.c	/^bool pb_get_encoded_size(size_t *size, const pb_field_t fields[], const void *src_struct)$/;"	f
-pb_istream_from_buffer	protob/pb_decode.c	/^pb_istream_t pb_istream_from_buffer(uint8_t *buf, size_t bufsize)$/;"	f
+pb_get_encoded_size	protob/pb_encode.c	/^bool pb_get_encoded_size(size_t *size, const pb_field_t fields[], const void *src_struct)$/;"	f	signature:(size_t *size, const pb_field_t fields[], const void *src_struct)
+pb_get_encoded_size	protob/pb_encode.h	/^bool pb_get_encoded_size(size_t *size, const pb_field_t fields[], const void *src_struct);$/;"	p	signature:(size_t *size, const pb_field_t fields[], const void *src_struct)
+pb_istream_from_buffer	protob/pb_decode.c	/^pb_istream_t pb_istream_from_buffer(uint8_t *buf, size_t bufsize)$/;"	f	signature:(uint8_t *buf, size_t bufsize)
+pb_istream_from_buffer	protob/pb_decode.h	/^pb_istream_t pb_istream_from_buffer(uint8_t *buf, size_t bufsize);$/;"	p	signature:(uint8_t *buf, size_t bufsize)
 pb_istream_t	protob/pb.h	/^typedef struct _pb_istream_t pb_istream_t;$/;"	t	typeref:struct:_pb_istream_t
-pb_make_string_substream	protob/pb_decode.c	/^bool checkreturn pb_make_string_substream(pb_istream_t *stream, pb_istream_t *substream)$/;"	f
+pb_make_string_substream	protob/pb_decode.c	/^bool checkreturn pb_make_string_substream(pb_istream_t *stream, pb_istream_t *substream)$/;"	f	signature:(pb_istream_t *stream, pb_istream_t *substream)
+pb_make_string_substream	protob/pb_decode.h	/^bool pb_make_string_substream(pb_istream_t *stream, pb_istream_t *substream);$/;"	p	signature:(pb_istream_t *stream, pb_istream_t *substream)
 pb_membersize	protob/pb.h	363;"	d
-pb_message_set_to_defaults	protob/pb_decode.c	/^static void pb_message_set_to_defaults(const pb_field_t fields[], void *dest_struct)$/;"	f	file:
-pb_ostream_from_buffer	protob/pb_encode.c	/^pb_ostream_t pb_ostream_from_buffer(uint8_t *buf, size_t bufsize)$/;"	f
+pb_message_set_to_defaults	protob/pb_decode.c	/^static void pb_message_set_to_defaults(const pb_field_t fields[], void *dest_struct)$/;"	f	file:	signature:(const pb_field_t fields[], void *dest_struct)
+pb_message_set_to_defaults	protob/pb_decode.c	/^static void pb_message_set_to_defaults(const pb_field_t fields[], void *dest_struct);$/;"	p	file:	signature:(const pb_field_t fields[], void *dest_struct)
+pb_ostream_from_buffer	protob/pb_encode.c	/^pb_ostream_t pb_ostream_from_buffer(uint8_t *buf, size_t bufsize)$/;"	f	signature:(uint8_t *buf, size_t bufsize)
+pb_ostream_from_buffer	protob/pb_encode.h	/^pb_ostream_t pb_ostream_from_buffer(uint8_t *buf, size_t bufsize);$/;"	p	signature:(uint8_t *buf, size_t bufsize)
 pb_ostream_t	protob/pb.h	/^typedef struct _pb_ostream_t pb_ostream_t;$/;"	t	typeref:struct:_pb_ostream_t
 pb_packed	protob/pb.h	/^} pb_packed;$/;"	v	typeref:struct:_pb_field_t
 pb_packed	protob/pb.h	82;"	d
 pb_packed	protob/pb.h	87;"	d
 pb_packed	protob/pb.h	92;"	d
 pb_packed	protob/pb.h	97;"	d
-pb_read	protob/pb_decode.c	/^bool checkreturn pb_read(pb_istream_t *stream, uint8_t *buf, size_t count)$/;"	f
-pb_readbyte	protob/pb_decode.c	/^static bool checkreturn pb_readbyte(pb_istream_t *stream, uint8_t *buf)$/;"	f	file:
+pb_read	protob/pb_decode.c	/^bool checkreturn pb_read(pb_istream_t *stream, uint8_t *buf, size_t count)$/;"	f	signature:(pb_istream_t *stream, uint8_t *buf, size_t count)
+pb_read	protob/pb_decode.h	/^bool pb_read(pb_istream_t *stream, uint8_t *buf, size_t count);$/;"	p	signature:(pb_istream_t *stream, uint8_t *buf, size_t count)
+pb_readbyte	protob/pb_decode.c	/^static bool checkreturn pb_readbyte(pb_istream_t *stream, uint8_t *buf)$/;"	f	file:	signature:(pb_istream_t *stream, uint8_t *buf)
 pb_realloc	protob/pb.h	354;"	d
-pb_release	protob/pb_decode.c	/^void pb_release(const pb_field_t fields[], void *dest_struct)$/;"	f
+pb_release	protob/pb_decode.c	/^void pb_release(const pb_field_t fields[], void *dest_struct)$/;"	f	signature:(const pb_field_t fields[], void *dest_struct)
+pb_release	protob/pb_decode.h	/^void pb_release(const pb_field_t fields[], void *dest_struct);$/;"	p	signature:(const pb_field_t fields[], void *dest_struct)
 pb_size_t	protob/pb.h	/^    typedef uint16_t pb_size_t;$/;"	t
 pb_size_t	protob/pb.h	/^    typedef uint32_t pb_size_t;$/;"	t
 pb_size_t	protob/pb.h	/^    typedef uint8_t pb_size_t;$/;"	t
-pb_skip_field	protob/pb_decode.c	/^bool checkreturn pb_skip_field(pb_istream_t *stream, pb_wire_type_t wire_type)$/;"	f
-pb_skip_string	protob/pb_decode.c	/^bool checkreturn pb_skip_string(pb_istream_t *stream)$/;"	f
-pb_skip_varint	protob/pb_decode.c	/^bool checkreturn pb_skip_varint(pb_istream_t *stream)$/;"	f
+pb_skip_field	protob/pb_decode.c	/^bool checkreturn pb_skip_field(pb_istream_t *stream, pb_wire_type_t wire_type)$/;"	f	signature:(pb_istream_t *stream, pb_wire_type_t wire_type)
+pb_skip_field	protob/pb_decode.h	/^bool pb_skip_field(pb_istream_t *stream, pb_wire_type_t wire_type);$/;"	p	signature:(pb_istream_t *stream, pb_wire_type_t wire_type)
+pb_skip_string	protob/pb_decode.c	/^bool checkreturn pb_skip_string(pb_istream_t *stream)$/;"	f	signature:(pb_istream_t *stream)
+pb_skip_string	protob/pb_decode.c	/^static bool checkreturn pb_skip_string(pb_istream_t *stream);$/;"	p	file:	signature:(pb_istream_t *stream)
+pb_skip_varint	protob/pb_decode.c	/^bool checkreturn pb_skip_varint(pb_istream_t *stream)$/;"	f	signature:(pb_istream_t *stream)
+pb_skip_varint	protob/pb_decode.c	/^static bool checkreturn pb_skip_varint(pb_istream_t *stream);$/;"	p	file:	signature:(pb_istream_t *stream)
 pb_ssize_t	protob/pb.h	/^    typedef int16_t pb_ssize_t;$/;"	t
 pb_ssize_t	protob/pb.h	/^    typedef int32_t pb_ssize_t;$/;"	t
 pb_ssize_t	protob/pb.h	/^    typedef int8_t pb_ssize_t;$/;"	t
 pb_type_t	protob/pb.h	/^typedef uint8_t pb_type_t;$/;"	t
 pb_wire_type_t	protob/pb.h	/^} pb_wire_type_t;$/;"	t	typeref:enum:__anon34
-pb_write	protob/pb_encode.c	/^bool checkreturn pb_write(pb_ostream_t *stream, const uint8_t *buf, size_t count)$/;"	f
-pin	protob/messages.pb.h	/^    char pin[10];$/;"	m	struct:_DebugLinkState
-pin	protob/messages.pb.h	/^    char pin[10];$/;"	m	struct:_LoadDevice
-pin	protob/messages.pb.h	/^    char pin[10];$/;"	m	struct:_PinMatrixAck
-pin	protob/storage.pb.h	/^    char pin[10];$/;"	m	struct:_Storage
-pin_failed_attempts	protob/storage.pb.h	/^    uint32_t pin_failed_attempts;$/;"	m	struct:_Storage
-pin_protection	protob/messages.pb.h	/^    bool pin_protection;$/;"	m	struct:_Features
-pin_protection	protob/messages.pb.h	/^    bool pin_protection;$/;"	m	struct:_Ping
-pin_protection	protob/messages.pb.h	/^    bool pin_protection;$/;"	m	struct:_RecoveryDevice
-pin_protection	protob/messages.pb.h	/^    bool pin_protection;$/;"	m	struct:_ResetDevice
-pos	protob/pb_decode.c	/^    const pb_field_t *pos; \/* Current position of the iterator *\/$/;"	m	struct:__anon5	file:
-prev_hash	protob/types.pb.h	/^    TxInputType_prev_hash_t prev_hash;$/;"	m	struct:_TxInputType
-prev_index	protob/types.pb.h	/^    uint32_t prev_index;$/;"	m	struct:_TxInputType
-private_key	protob/types.pb.h	/^    HDNodeType_private_key_t private_key;$/;"	m	struct:_HDNodeType
-process_func	messages.cpp	/^	void (*process_func)(void *ptr);$/;"	m	struct:MessagesMap_t	file:
-product_id	firmware.hpp	/^		int product_id ;$/;"	m	class:FirmwareUsb
-ptr	protob/pb.h	/^    const void *ptr;$/;"	m	struct:_pb_field_t
-pubkey	protob/messages.pb.h	/^    EncryptMessage_pubkey_t pubkey;$/;"	m	struct:_EncryptMessage
-pubkeys	protob/types.pb.h	/^    MultisigRedeemScriptType_pubkeys_t pubkeys[5];$/;"	m	struct:_MultisigRedeemScriptType
-pubkeys_count	protob/types.pb.h	/^    size_t pubkeys_count;$/;"	m	struct:_MultisigRedeemScriptType
-public_key	protob/types.pb.h	/^    HDNodeType_public_key_t public_key;$/;"	m	struct:_HDNodeType
-read_raw_value	protob/pb_decode.c	/^static bool checkreturn read_raw_value(pb_istream_t *stream, pb_wire_type_t wire_type, uint8_t *buf, size_t *size)$/;"	f	file:
-recovery_fake_word	protob/messages.pb.h	/^    char recovery_fake_word[12];$/;"	m	struct:_DebugLinkState
-recovery_word_pos	protob/messages.pb.h	/^    uint32_t recovery_word_pos;$/;"	m	struct:_DebugLinkState
-remove	protob/messages.pb.h	/^    bool remove;$/;"	m	struct:_ChangePin
-request_index	protob/types.pb.h	/^    uint32_t request_index;$/;"	m	struct:_TxRequestDetailsType
-request_type	protob/messages.pb.h	/^    RequestType request_type;$/;"	m	struct:_TxRequest
-required_field_index	protob/pb_decode.c	/^    unsigned required_field_index; \/* Zero-based index that counts only the required fields *\/$/;"	m	struct:__anon5	file:
-reset_entropy	protob/messages.pb.h	/^    DebugLinkState_reset_entropy_t reset_entropy;$/;"	m	struct:_DebugLinkState
-reset_word	protob/messages.pb.h	/^    char reset_word[12];$/;"	m	struct:_DebugLinkState
-revision	protob/messages.pb.h	/^    Features_revision_t revision;$/;"	m	struct:_Features
-script_pubkey	protob/types.pb.h	/^    TxOutputBinType_script_pubkey_t script_pubkey;$/;"	m	struct:_TxOutputBinType
-script_sig	protob/types.pb.h	/^    TxInputType_script_sig_t script_sig;$/;"	m	struct:_TxInputType
-script_type	protob/types.pb.h	/^    InputScriptType script_type;$/;"	m	struct:_TxInputType
-script_type	protob/types.pb.h	/^    OutputScriptType script_type;$/;"	m	struct:_TxOutputType
-sequence	protob/types.pb.h	/^    uint32_t sequence;$/;"	m	struct:_TxInputType
-serialized	protob/messages.pb.h	/^    TxRequestSerializedType serialized;$/;"	m	struct:_TxRequest
-serialized_tx	protob/types.pb.h	/^    TxRequestSerializedType_serialized_tx_t serialized_tx;$/;"	m	struct:_TxRequestSerializedType
-show_display	protob/messages.pb.h	/^    bool show_display;$/;"	m	struct:_GetAddress
-signature	protob/messages.pb.h	/^    MessageSignature_signature_t signature;$/;"	m	struct:_MessageSignature
-signature	protob/messages.pb.h	/^    VerifyMessage_signature_t signature;$/;"	m	struct:_VerifyMessage
-signature	protob/types.pb.h	/^    TxRequestSerializedType_signature_t signature;$/;"	m	struct:_TxRequestSerializedType
-signature_index	protob/types.pb.h	/^    uint32_t signature_index;$/;"	m	struct:_TxRequestSerializedType
-signatures	protob/types.pb.h	/^    MultisigRedeemScriptType_signatures_t signatures[4];$/;"	m	struct:_MultisigRedeemScriptType
-signatures_count	protob/types.pb.h	/^    size_t signatures_count;$/;"	m	struct:_MultisigRedeemScriptType
-size	protob/messages.pb.h	/^    size_t size;$/;"	m	struct:__anon17
-size	protob/messages.pb.h	/^    size_t size;$/;"	m	struct:__anon18
-size	protob/messages.pb.h	/^    size_t size;$/;"	m	struct:__anon19
-size	protob/messages.pb.h	/^    size_t size;$/;"	m	struct:__anon20
-size	protob/messages.pb.h	/^    size_t size;$/;"	m	struct:__anon21
-size	protob/messages.pb.h	/^    size_t size;$/;"	m	struct:__anon22
-size	protob/messages.pb.h	/^    size_t size;$/;"	m	struct:__anon23
-size	protob/messages.pb.h	/^    size_t size;$/;"	m	struct:__anon24
-size	protob/messages.pb.h	/^    size_t size;$/;"	m	struct:__anon25
-size	protob/messages.pb.h	/^    size_t size;$/;"	m	struct:__anon26
-size	protob/messages.pb.h	/^    size_t size;$/;"	m	struct:__anon27
-size	protob/messages.pb.h	/^    size_t size;$/;"	m	struct:__anon28
-size	protob/messages.pb.h	/^    size_t size;$/;"	m	struct:__anon29
-size	protob/messages.pb.h	/^    size_t size;$/;"	m	struct:__anon30
-size	protob/messages.pb.h	/^    size_t size;$/;"	m	struct:__anon31
-size	protob/messages.pb.h	/^    size_t size;$/;"	m	struct:__anon32
-size	protob/messages.pb.h	/^    uint32_t size;$/;"	m	struct:_GetEntropy
-size	protob/pb.h	/^    size_t size;$/;"	m	struct:_pb_bytes_array_t
-size	protob/types.pb.h	/^    size_t size;$/;"	m	struct:__anon10
-size	protob/types.pb.h	/^    size_t size;$/;"	m	struct:__anon11
-size	protob/types.pb.h	/^    size_t size;$/;"	m	struct:__anon12
-size	protob/types.pb.h	/^    size_t size;$/;"	m	struct:__anon13
-size	protob/types.pb.h	/^    size_t size;$/;"	m	struct:__anon14
-size	protob/types.pb.h	/^    size_t size;$/;"	m	struct:__anon15
-size	protob/types.pb.h	/^    size_t size;$/;"	m	struct:__anon16
-size	protob/types.pb.h	/^    size_t size;$/;"	m	struct:__anon6
-size	protob/types.pb.h	/^    size_t size;$/;"	m	struct:__anon7
-size	protob/types.pb.h	/^    size_t size;$/;"	m	struct:__anon8
-size	protob/types.pb.h	/^    size_t size;$/;"	m	struct:__anon9
-size_offset	protob/pb.h	/^    pb_ssize_t size_offset; \/* Offset of array size or has-boolean, relative to data *\/$/;"	m	struct:_pb_field_t
-skip_checksum	protob/messages.pb.h	/^    bool skip_checksum;$/;"	m	struct:_LoadDevice
-start	protob/pb_decode.c	/^    const pb_field_t *start; \/* Start of the pb_field_t array *\/$/;"	m	struct:__anon5	file:
-state	protob/pb_decode.h	/^    void *state; \/* Free field for use by callback implementation *\/$/;"	m	struct:_pb_istream_t
-state	protob/pb_encode.h	/^    void *state;          \/* Free field for use by callback implementation. *\/$/;"	m	struct:_pb_ostream_t
-strength	protob/messages.pb.h	/^    uint32_t strength;$/;"	m	struct:_ResetDevice
-tag	protob/pb.h	/^    pb_size_t tag;$/;"	m	struct:_pb_field_t
-text	protob/messages.pb.h	/^    char text[256];$/;"	m	struct:_DebugLinkLog
-transactions	protob/messages.pb.h	/^    TransactionType transactions[0];$/;"	m	struct:_SimpleSignTx
-transactions_count	protob/messages.pb.h	/^    size_t transactions_count;$/;"	m	struct:_SimpleSignTx
-tx	protob/messages.pb.h	/^    TransactionType tx;$/;"	m	struct:_TxAck
-tx_hash	protob/types.pb.h	/^    TxRequestDetailsType_tx_hash_t tx_hash;$/;"	m	struct:_TxRequestDetailsType
-tx_size	protob/messages.pb.h	/^    uint32_t tx_size;$/;"	m	struct:_TxSize
-type	messages.cpp	/^	char type;$/;"	m	struct:MessagesMap_t	file:
-type	protob/messages.pb.h	/^    PinMatrixRequestType type;$/;"	m	struct:_PinMatrixRequest
-type	protob/pb.h	/^    const pb_extension_type_t *type;$/;"	m	struct:_pb_extension_t
-type	protob/pb.h	/^    pb_type_t type;$/;"	m	struct:_pb_field_t
-value	protob/messages.pb.h	/^    CipherKeyValue_value_t value;$/;"	m	struct:_CipherKeyValue
-vendor	protob/messages.pb.h	/^    char vendor[33];$/;"	m	struct:_Features
-vendor_id	firmware.hpp	/^		int vendor_id ;$/;"	m	class:FirmwareUsb
-version	protob/storage.pb.h	/^    uint32_t version;$/;"	m	struct:_Storage
-version	protob/types.pb.h	/^    uint32_t version;$/;"	m	struct:_TransactionType
-wire_debug_in	protob/types.pb.c	/^    bool wire_debug_in;$/;"	m	struct:__anon3	file:
+pb_write	protob/pb_encode.c	/^bool checkreturn pb_write(pb_ostream_t *stream, const uint8_t *buf, size_t count)$/;"	f	signature:(pb_ostream_t *stream, const uint8_t *buf, size_t count)
+pb_write	protob/pb_encode.h	/^bool pb_write(pb_ostream_t *stream, const uint8_t *buf, size_t count);$/;"	p	signature:(pb_ostream_t *stream, const uint8_t *buf, size_t count)
+pin	protob/messages.pb.h	/^    char pin[10];$/;"	m	struct:_DebugLinkState	access:public
+pin	protob/messages.pb.h	/^    char pin[10];$/;"	m	struct:_LoadDevice	access:public
+pin	protob/messages.pb.h	/^    char pin[10];$/;"	m	struct:_PinMatrixAck	access:public
+pin	protob/storage.pb.h	/^    char pin[10];$/;"	m	struct:_Storage	access:public
+pin_failed_attempts	protob/storage.pb.h	/^    uint32_t pin_failed_attempts;$/;"	m	struct:_Storage	access:public
+pin_protection	protob/messages.pb.h	/^    bool pin_protection;$/;"	m	struct:_Features	access:public
+pin_protection	protob/messages.pb.h	/^    bool pin_protection;$/;"	m	struct:_Ping	access:public
+pin_protection	protob/messages.pb.h	/^    bool pin_protection;$/;"	m	struct:_RecoveryDevice	access:public
+pin_protection	protob/messages.pb.h	/^    bool pin_protection;$/;"	m	struct:_ResetDevice	access:public
+pos	protob/pb_decode.c	/^    const pb_field_t *pos; \/* Current position of the iterator *\/$/;"	m	struct:__anon5	file:	access:public
+prev_hash	protob/types.pb.h	/^    TxInputType_prev_hash_t prev_hash;$/;"	m	struct:_TxInputType	access:public
+prev_index	protob/types.pb.h	/^    uint32_t prev_index;$/;"	m	struct:_TxInputType	access:public
+print_version	firmware.cpp	/^static void print_version(void)$/;"	f	file:	signature:(void)
+private_key	protob/types.pb.h	/^    HDNodeType_private_key_t private_key;$/;"	m	struct:_HDNodeType	access:public
+process_func	messages.cpp	/^	void (*process_func)(void *ptr);$/;"	m	struct:MessagesMap_t	file:	access:public
+product_id	firmware.hpp	/^		int product_id ;$/;"	m	class:FirmwareUsb	access:private
+ptr	protob/pb.h	/^    const void *ptr;$/;"	m	struct:_pb_field_t	access:public
+pubkey	protob/messages.pb.h	/^    EncryptMessage_pubkey_t pubkey;$/;"	m	struct:_EncryptMessage	access:public
+pubkeys	protob/types.pb.h	/^    MultisigRedeemScriptType_pubkeys_t pubkeys[5];$/;"	m	struct:_MultisigRedeemScriptType	access:public
+pubkeys_count	protob/types.pb.h	/^    size_t pubkeys_count;$/;"	m	struct:_MultisigRedeemScriptType	access:public
+public_key	protob/types.pb.h	/^    HDNodeType_public_key_t public_key;$/;"	m	struct:_HDNodeType	access:public
+read_raw_value	protob/pb_decode.c	/^static bool checkreturn read_raw_value(pb_istream_t *stream, pb_wire_type_t wire_type, uint8_t *buf, size_t *size)$/;"	f	file:	signature:(pb_istream_t *stream, pb_wire_type_t wire_type, uint8_t *buf, size_t *size)
+read_raw_value	protob/pb_decode.c	/^static bool checkreturn read_raw_value(pb_istream_t *stream, pb_wire_type_t wire_type, uint8_t *buf, size_t *size);$/;"	p	file:	signature:(pb_istream_t *stream, pb_wire_type_t wire_type, uint8_t *buf, size_t *size)
+recovery_fake_word	protob/messages.pb.h	/^    char recovery_fake_word[12];$/;"	m	struct:_DebugLinkState	access:public
+recovery_word_pos	protob/messages.pb.h	/^    uint32_t recovery_word_pos;$/;"	m	struct:_DebugLinkState	access:public
+remove	protob/messages.pb.h	/^    bool remove;$/;"	m	struct:_ChangePin	access:public
+request_index	protob/types.pb.h	/^    uint32_t request_index;$/;"	m	struct:_TxRequestDetailsType	access:public
+request_type	protob/messages.pb.h	/^    RequestType request_type;$/;"	m	struct:_TxRequest	access:public
+required_field_index	protob/pb_decode.c	/^    unsigned required_field_index; \/* Zero-based index that counts only the required fields *\/$/;"	m	struct:__anon5	file:	access:public
+reset_entropy	protob/messages.pb.h	/^    DebugLinkState_reset_entropy_t reset_entropy;$/;"	m	struct:_DebugLinkState	access:public
+reset_word	protob/messages.pb.h	/^    char reset_word[12];$/;"	m	struct:_DebugLinkState	access:public
+revision	protob/messages.pb.h	/^    Features_revision_t revision;$/;"	m	struct:_Features	access:public
+script_pubkey	protob/types.pb.h	/^    TxOutputBinType_script_pubkey_t script_pubkey;$/;"	m	struct:_TxOutputBinType	access:public
+script_sig	protob/types.pb.h	/^    TxInputType_script_sig_t script_sig;$/;"	m	struct:_TxInputType	access:public
+script_type	protob/types.pb.h	/^    InputScriptType script_type;$/;"	m	struct:_TxInputType	access:public
+script_type	protob/types.pb.h	/^    OutputScriptType script_type;$/;"	m	struct:_TxOutputType	access:public
+sequence	protob/types.pb.h	/^    uint32_t sequence;$/;"	m	struct:_TxInputType	access:public
+serialized	protob/messages.pb.h	/^    TxRequestSerializedType serialized;$/;"	m	struct:_TxRequest	access:public
+serialized_tx	protob/types.pb.h	/^    TxRequestSerializedType_serialized_tx_t serialized_tx;$/;"	m	struct:_TxRequestSerializedType	access:public
+show_display	protob/messages.pb.h	/^    bool show_display;$/;"	m	struct:_GetAddress	access:public
+signature	protob/messages.pb.h	/^    MessageSignature_signature_t signature;$/;"	m	struct:_MessageSignature	access:public
+signature	protob/messages.pb.h	/^    VerifyMessage_signature_t signature;$/;"	m	struct:_VerifyMessage	access:public
+signature	protob/types.pb.h	/^    TxRequestSerializedType_signature_t signature;$/;"	m	struct:_TxRequestSerializedType	access:public
+signature_index	protob/types.pb.h	/^    uint32_t signature_index;$/;"	m	struct:_TxRequestSerializedType	access:public
+signatures	protob/types.pb.h	/^    MultisigRedeemScriptType_signatures_t signatures[4];$/;"	m	struct:_MultisigRedeemScriptType	access:public
+signatures_count	protob/types.pb.h	/^    size_t signatures_count;$/;"	m	struct:_MultisigRedeemScriptType	access:public
+size	protob/messages.pb.h	/^    size_t size;$/;"	m	struct:__anon17	access:public
+size	protob/messages.pb.h	/^    size_t size;$/;"	m	struct:__anon18	access:public
+size	protob/messages.pb.h	/^    size_t size;$/;"	m	struct:__anon19	access:public
+size	protob/messages.pb.h	/^    size_t size;$/;"	m	struct:__anon20	access:public
+size	protob/messages.pb.h	/^    size_t size;$/;"	m	struct:__anon21	access:public
+size	protob/messages.pb.h	/^    size_t size;$/;"	m	struct:__anon22	access:public
+size	protob/messages.pb.h	/^    size_t size;$/;"	m	struct:__anon23	access:public
+size	protob/messages.pb.h	/^    size_t size;$/;"	m	struct:__anon24	access:public
+size	protob/messages.pb.h	/^    size_t size;$/;"	m	struct:__anon25	access:public
+size	protob/messages.pb.h	/^    size_t size;$/;"	m	struct:__anon26	access:public
+size	protob/messages.pb.h	/^    size_t size;$/;"	m	struct:__anon27	access:public
+size	protob/messages.pb.h	/^    size_t size;$/;"	m	struct:__anon28	access:public
+size	protob/messages.pb.h	/^    size_t size;$/;"	m	struct:__anon29	access:public
+size	protob/messages.pb.h	/^    size_t size;$/;"	m	struct:__anon30	access:public
+size	protob/messages.pb.h	/^    size_t size;$/;"	m	struct:__anon31	access:public
+size	protob/messages.pb.h	/^    size_t size;$/;"	m	struct:__anon32	access:public
+size	protob/messages.pb.h	/^    uint32_t size;$/;"	m	struct:_GetEntropy	access:public
+size	protob/pb.h	/^    size_t size;$/;"	m	struct:_pb_bytes_array_t	access:public
+size	protob/types.pb.h	/^    size_t size;$/;"	m	struct:__anon10	access:public
+size	protob/types.pb.h	/^    size_t size;$/;"	m	struct:__anon11	access:public
+size	protob/types.pb.h	/^    size_t size;$/;"	m	struct:__anon12	access:public
+size	protob/types.pb.h	/^    size_t size;$/;"	m	struct:__anon13	access:public
+size	protob/types.pb.h	/^    size_t size;$/;"	m	struct:__anon14	access:public
+size	protob/types.pb.h	/^    size_t size;$/;"	m	struct:__anon15	access:public
+size	protob/types.pb.h	/^    size_t size;$/;"	m	struct:__anon16	access:public
+size	protob/types.pb.h	/^    size_t size;$/;"	m	struct:__anon6	access:public
+size	protob/types.pb.h	/^    size_t size;$/;"	m	struct:__anon7	access:public
+size	protob/types.pb.h	/^    size_t size;$/;"	m	struct:__anon8	access:public
+size	protob/types.pb.h	/^    size_t size;$/;"	m	struct:__anon9	access:public
+size_offset	protob/pb.h	/^    pb_ssize_t size_offset; \/* Offset of array size or has-boolean, relative to data *\/$/;"	m	struct:_pb_field_t	access:public
+sizeof	protob/pb.h	/^STATIC_ASSERT(sizeof(int16_t) == 2, INT16_T_WRONG_SIZE)$/;"	p	signature:(int16_t)
+sizeof	protob/pb.h	/^STATIC_ASSERT(sizeof(int32_t) == 4, INT32_T_WRONG_SIZE)$/;"	p	signature:(int32_t)
+sizeof	protob/pb.h	/^STATIC_ASSERT(sizeof(int64_t) == 8, INT64_T_WRONG_SIZE)$/;"	p	signature:(int64_t)
+sizeof	protob/pb.h	/^STATIC_ASSERT(sizeof(int8_t) == 1, INT8_T_WRONG_SIZE)$/;"	p	signature:(int8_t)
+sizeof	protob/pb.h	/^STATIC_ASSERT(sizeof(uint16_t) == 2, UINT16_T_WRONG_SIZE)$/;"	p	signature:(uint16_t)
+sizeof	protob/pb.h	/^STATIC_ASSERT(sizeof(uint32_t) == 4, UINT32_T_WRONG_SIZE)$/;"	p	signature:(uint32_t)
+sizeof	protob/pb.h	/^STATIC_ASSERT(sizeof(uint64_t) == 8, UINT64_T_WRONG_SIZE)$/;"	p	signature:(uint64_t)
+sizeof	protob/pb.h	/^STATIC_ASSERT(sizeof(uint8_t) == 1, UINT8_T_WRONG_SIZE)$/;"	p	signature:(uint8_t)
+skip_checksum	protob/messages.pb.h	/^    bool skip_checksum;$/;"	m	struct:_LoadDevice	access:public
+start	protob/pb_decode.c	/^    const pb_field_t *start; \/* Start of the pb_field_t array *\/$/;"	m	struct:__anon5	file:	access:public
+state	protob/pb_decode.h	/^    void *state; \/* Free field for use by callback implementation *\/$/;"	m	struct:_pb_istream_t	access:public
+state	protob/pb_encode.h	/^    void *state;          \/* Free field for use by callback implementation. *\/$/;"	m	struct:_pb_ostream_t	access:public
+strength	protob/messages.pb.h	/^    uint32_t strength;$/;"	m	struct:_ResetDevice	access:public
+tag	protob/pb.h	/^    pb_size_t tag;$/;"	m	struct:_pb_field_t	access:public
+test	firmware.cpp	/^static void test()$/;"	f	file:	signature:()
+text	protob/messages.pb.h	/^    char text[256];$/;"	m	struct:_DebugLinkLog	access:public
+transactions	protob/messages.pb.h	/^    TransactionType transactions[0];$/;"	m	struct:_SimpleSignTx	access:public
+transactions_count	protob/messages.pb.h	/^    size_t transactions_count;$/;"	m	struct:_SimpleSignTx	access:public
+tx	protob/messages.pb.h	/^    TransactionType tx;$/;"	m	struct:_TxAck	access:public
+tx_hash	protob/types.pb.h	/^    TxRequestDetailsType_tx_hash_t tx_hash;$/;"	m	struct:_TxRequestDetailsType	access:public
+tx_size	protob/messages.pb.h	/^    uint32_t tx_size;$/;"	m	struct:_TxSize	access:public
+type	messages.cpp	/^	char type;$/;"	m	struct:MessagesMap_t	file:	access:public
+type	protob/messages.pb.h	/^    PinMatrixRequestType type;$/;"	m	struct:_PinMatrixRequest	access:public
+type	protob/pb.h	/^    const pb_extension_type_t *type;$/;"	m	struct:_pb_extension_t	access:public
+type	protob/pb.h	/^    pb_type_t type;$/;"	m	struct:_pb_field_t	access:public
+value	protob/messages.pb.h	/^    CipherKeyValue_value_t value;$/;"	m	struct:_CipherKeyValue	access:public
+vendor	protob/messages.pb.h	/^    char vendor[33];$/;"	m	struct:_Features	access:public
+vendor_id	firmware.hpp	/^		int vendor_id ;$/;"	m	class:FirmwareUsb	access:private
+version	protob/storage.pb.h	/^    uint32_t version;$/;"	m	struct:_Storage	access:public
+version	protob/types.pb.h	/^    uint32_t version;$/;"	m	struct:_TransactionType	access:public
+wire_debug_in	protob/types.pb.c	/^    bool wire_debug_in;$/;"	m	struct:__anon3	file:	access:public
 wire_debug_in	protob/types.pb.c	/^const pb_extension_type_t wire_debug_in = {$/;"	v
 wire_debug_in_field	protob/types.pb.c	/^static const pb_field_t wire_debug_in_field = $/;"	v	file:
 wire_debug_in_struct	protob/types.pb.c	/^} wire_debug_in_struct;$/;"	t	typeref:struct:__anon3	file:
 wire_debug_in_tag	protob/types.pb.h	260;"	d
-wire_debug_out	protob/types.pb.c	/^    bool wire_debug_out;$/;"	m	struct:__anon4	file:
+wire_debug_out	protob/types.pb.c	/^    bool wire_debug_out;$/;"	m	struct:__anon4	file:	access:public
 wire_debug_out	protob/types.pb.c	/^const pb_extension_type_t wire_debug_out = {$/;"	v
 wire_debug_out_field	protob/types.pb.c	/^static const pb_field_t wire_debug_out_field = $/;"	v	file:
 wire_debug_out_struct	protob/types.pb.c	/^} wire_debug_out_struct;$/;"	t	typeref:struct:__anon4	file:
 wire_debug_out_tag	protob/types.pb.h	261;"	d
-wire_in	protob/types.pb.c	/^    bool wire_in;$/;"	m	struct:__anon1	file:
+wire_in	protob/types.pb.c	/^    bool wire_in;$/;"	m	struct:__anon1	file:	access:public
 wire_in	protob/types.pb.c	/^const pb_extension_type_t wire_in = {$/;"	v
 wire_in_field	protob/types.pb.c	/^static const pb_field_t wire_in_field = $/;"	v	file:
 wire_in_struct	protob/types.pb.c	/^} wire_in_struct;$/;"	t	typeref:struct:__anon1	file:
 wire_in_tag	protob/types.pb.h	258;"	d
-wire_out	protob/types.pb.c	/^    bool wire_out;$/;"	m	struct:__anon2	file:
+wire_out	protob/types.pb.c	/^    bool wire_out;$/;"	m	struct:__anon2	file:	access:public
 wire_out	protob/types.pb.c	/^const pb_extension_type_t wire_out = {$/;"	v
 wire_out_field	protob/types.pb.c	/^static const pb_field_t wire_out_field = $/;"	v	file:
 wire_out_struct	protob/types.pb.c	/^} wire_out_struct;$/;"	t	typeref:struct:__anon2	file:
 wire_out_tag	protob/types.pb.h	259;"	d
-word	protob/messages.pb.h	/^    char word[12];$/;"	m	struct:_WordAck
-word_count	protob/messages.pb.h	/^    uint32_t word_count;$/;"	m	struct:_RecoveryDevice
-xpub	protob/messages.pb.h	/^    char xpub[113];$/;"	m	struct:_PublicKey
-yes_no	protob/messages.pb.h	/^    bool yes_no;$/;"	m	struct:_DebugLinkDecision
-~FirmwareUsb	firmware.cpp	/^FirmwareUsb::~FirmwareUsb() {$/;"	f	class:FirmwareUsb
+word	protob/messages.pb.h	/^    char word[12];$/;"	m	struct:_WordAck	access:public
+word_count	protob/messages.pb.h	/^    uint32_t word_count;$/;"	m	struct:_RecoveryDevice	access:public
+xpub	protob/messages.pb.h	/^    char xpub[113];$/;"	m	struct:_PublicKey	access:public
+yes_no	protob/messages.pb.h	/^    bool yes_no;$/;"	m	struct:_DebugLinkDecision	access:public
+~FirmwareUsb	firmware.cpp	/^FirmwareUsb::~FirmwareUsb() {$/;"	f	class:FirmwareUsb	signature:()
+~FirmwareUsb	firmware.hpp	/^		~FirmwareUsb();$/;"	p	class:FirmwareUsb	access:public	signature:()
+~TrafficData	traffic.hpp	/^		~TrafficData() {$/;"	f	class:TrafficData	access:public	signature:()

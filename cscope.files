@@ -1,0 +1,13 @@
+./messages.cpp
+./protob/types.pb.c
+./protob/pb_encode.c
+./protob/pb_decode.c
+./protob/messages.pb.c
+./protob/types.pb.h
+./protob/pb_encode.h
+./protob/pb_decode.h
+./protob/messages.pb.h
+./protob/pb.h
+./protob/storage.pb.c
+./protob/storage.pb.h
+./firmware.cpp
