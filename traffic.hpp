@@ -19,6 +19,4 @@ class TrafficData {
 
 };
 
-
-
 #endif //__TRAFFIC_H__

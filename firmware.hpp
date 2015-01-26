@@ -27,7 +27,6 @@ enum mode {
 class FirmwareUsb {
 	public :
 		FirmwareUsb();
-		//FirmwareUsb(TrafficData &data);
 		void ConnectFirmware();
 		void PrintUsbDev();
 		void SendDataFirmware() const;

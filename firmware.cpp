@@ -30,11 +30,6 @@ FirmwareUsb::FirmwareUsb(): product_id(0x534c), vendor_id(0x0001) {
 		throw exception();
 }
 
-/*
-FirmwareUsb::FirmwareUsb(TrafficData &data) {
-	TrafficData *data = new TrafficData(); 
-}
-*/
 void FirmwareUsb::ConnectFirmware() {
 	int res;
 	const int MAX_STR = 255;
@@ -119,7 +114,7 @@ FirmwareUsb::~FirmwareUsb() {
 	hid_exit();
 }
 
-static void print_version(void)
+static void PrintVersion(void)
 {
 	printf("verfiy 0.0.1\n\n");
 	printf("Copyright 2015 kevin for Bidingxing.ltd\n"
@@ -143,7 +138,7 @@ static void test()
 	delete firmware;
 }
 
-static inline void help(void)
+static inline void Help(void)
 {
 	fprintf(stderr, "Usage: dfu-util [options] ...\n"
 			"  -h --help\t\t\tPrint this help message\n"
@@ -167,7 +162,7 @@ int main(int argc, char *argv[])
 	setvbuf(stdout, NULL, _IONBF, 0);
 
 	if(argc == 1)
-		help();
+		Help();
 
 	while(1) {
 		int c, option_index = 0;
@@ -177,7 +172,7 @@ int main(int argc, char *argv[])
 
 		switch(c) {
 			case 'h' :
-				help();
+				Help();
 				break;
 			case 'p' :
 				mode = MODE_PRINTDEV;
@@ -189,20 +184,20 @@ int main(int argc, char *argv[])
 				break;
 			case 'v' :
 				mode = MODE_VERSION;
-				print_version();
+				PrintVersion();
 				break;
 			case 'f' :
 				mode = MODE_FUNC;
 				test();
 				break;
 			default :
-				help();
+				Help();
 				break;
 		}
 	}
 
 	if(mode == MODE_NONE)
-		help();
+		Help();
 
 	return 0;
 }
