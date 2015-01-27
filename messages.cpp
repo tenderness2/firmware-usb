@@ -27,7 +27,11 @@ struct MessagesMap_t {
 
 static const struct MessagesMap_t MessagesMap[] = {
 	//out messages
-	{'n', 'o', MessageType_MessageType_TestScreen,		TestScreen_fields, 0},
+	{'n', 'o', MessageType_MessageType_TestScreen,			TestScreen_fields, 			0},
+	{'n', 'o', MessageType_MessageType_Initialize,          Initialize_fields,          0},
+	{'n', 'o', MessageType_MessageType_Ping,                Ping_fields,                0},
+	{'n', 'o', MessageType_MessageType_FirmwareErase,       FirmwareErase_fields,       0},
+	{'n', 'o', MessageType_MessageType_FirmwareUpload,      FirmwareUpload_fields,      0},
 
 	//end
 	{0, 0, 0, 0, 0}

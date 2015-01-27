@@ -12,7 +12,7 @@ TrafficData::TrafficData(){
 	//firmware->ConnectFirmware();
 }
 
-void TrafficData::ScreenTest(uint32_t time, FirmwareUsb &firmware){
+void TrafficData::ScreenTest(uint32_t time){
 	TestScreen *resp;
 
 	firmware.ConnectFirmware();
@@ -23,6 +23,11 @@ void TrafficData::ScreenTest(uint32_t time, FirmwareUsb &firmware){
 }
 
 void TrafficData::BootInit() {
+	firmware.ConnectFirmware();
+	msg_write(MessageType_MessageType_Initialize, NULL);
+	firmware.SendDataFirmware();
+	msg_write(MessageType_MessageType_FirmwareErase, NULL);
+	firmware.SendDataFirmware();
 }
 
 TrafficData::~TrafficData() {

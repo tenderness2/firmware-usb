@@ -67,22 +67,30 @@ void FirmwareUsb::ConnectFirmware() {
 		cout << "Unable to read indexed string" << endl;
 //	cout << "indexed string : " << usb_str << endl;
 	printf("Indexed String 1: %ls\n", usb_str);
+	
 }
 
 void FirmwareUsb::SendDataFirmware() const {
 
-	int res;
+	int res, i;
 	static uint8_t *data;
-
+	cout << "SendDataFirmware test" << endl;
 	data = msg_out_data();
+	cout << "data: " << endl;
+	for(i = 0; i < 64; i++)
+		printf("%x ", data[i]);
+	printf("\n");
+	cout << "SendDataFirmware test 1" << endl;
 	hid_set_nonblocking(handle, 1);
+	cout << "SendDataFirmware test 2" << endl;
 	res = hid_write(handle, data, 64);
 
+	cout << "SendDataFirmware test 3" << endl;
 	if(res < 0){
 		cout << "Unable to write ";
 		printf("%ls \n", hid_error(handle));
 	}
-	hid_close(handle);
+	//hid_close(handle);
 }
 
 void FirmwareUsb::PrintUsbDev() {
