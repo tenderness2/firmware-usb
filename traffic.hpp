@@ -5,7 +5,14 @@
 #include "firmware.hpp"
 
 static uint8_t msg_resp[MSG_OUT_SIZE];
-#define RESP_INIT(TYPE) TYPE *resp = (TYPE *)msg_resp; memset(resp, 0, sizeof(TYPE));
+//#define RESP_INIT(TYPE) TYPE *resp = (TYPE *)msg_resp; memset(resp, 0, sizeof(TYPE));
+
+template <typename T>
+T *RespInit() {
+	T *resp = (T *)msg_resp;
+	memset(resp, 0, sizeof(T));
+	return resp;
+}
 
 class TrafficData {
 	public :

@@ -14,7 +14,9 @@ void TrafficData::ScreenTest(uint32_t time){
 	cout << "this is TrafficData test" << endl;
 	FirmwareUsb *firmware = new FirmwareUsb();
 	firmware->ConnectFirmware();
-	RESP_INIT(TestScreen);
+	//RESP_INIT(TestScreen);
+	TestScreen *resp;
+	resp = RespInit<TestScreen>();
 	resp->delay_time = time;
 	msg_write(MessageType_MessageType_TestScreen, resp);
 	firmware->SendDataFirmware();
