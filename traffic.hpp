@@ -17,11 +17,13 @@ T *RespInit() {
 class TrafficData {
 	public :
 		TrafficData();
-		void ScreenTest(uint32_t time);
+		void ScreenTest(uint32_t time, FirmwareUsb &firmware);
+		void BootInit();
 		~TrafficData();
 
 	private :
 		FirmwareUsb *firmware;
+		uint32_t msg_id;
 };
 
 #endif //__TRAFFIC_H__

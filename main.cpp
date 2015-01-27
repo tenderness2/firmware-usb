@@ -74,6 +74,7 @@ int main(int argc, char *argv[])
 	enum mode mode = MODE_NONE;
 	setvbuf(stdout, NULL, _IONBF, 0);
 	TrafficData *data = new TrafficData();
+	FirmwareUsb  firmware;
 
 	if(argc == 1)
 		Help();
@@ -94,7 +95,7 @@ int main(int argc, char *argv[])
 				break;
 			case 't' :
 				mode = MODE_SCREEN;
-				data->ScreenTest(atoi(optarg));
+				data->ScreenTest(atoi(optarg), firmware);
 				break;
 			case 'v' :
 				mode = MODE_VERSION;

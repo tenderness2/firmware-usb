@@ -8,19 +8,21 @@ using namespace std;
 
 TrafficData::TrafficData(){
 	cout << "TrafficData init" << endl;
+	//FirmwareUsb *firmware = new FirmwareUsb();
+	//firmware->ConnectFirmware();
 }
 
-void TrafficData::ScreenTest(uint32_t time){
-	cout << "this is TrafficData test" << endl;
-	FirmwareUsb *firmware = new FirmwareUsb();
-	firmware->ConnectFirmware();
-	//RESP_INIT(TestScreen);
+void TrafficData::ScreenTest(uint32_t time, FirmwareUsb &firmware){
 	TestScreen *resp;
+
+	firmware.ConnectFirmware();
 	resp = RespInit<TestScreen>();
 	resp->delay_time = time;
 	msg_write(MessageType_MessageType_TestScreen, resp);
-	firmware->SendDataFirmware();
-	delete firmware;
+	firmware.SendDataFirmware();
+}
+
+void TrafficData::BootInit() {
 }
 
 TrafficData::~TrafficData() {
