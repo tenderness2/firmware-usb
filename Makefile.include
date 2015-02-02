@@ -2,15 +2,21 @@ TOP_DIR       := $(dir $(abspath $(lastword $(MAKEFILE_LIST))))
 
 CC      = g++
 
-OPTFLAGS  = -Os -g
+OPTFLAGS  = -Os -g -std=c++11
 
 CFLAGS   += $(OPTFLAGS) \
             -W \
             -Wall \
 		    -I$(TOP_DIR)\
-			-I$(TOP_DIR)/protob	
+			-I$(TOP_DIR)/protob/	
 
 CLIBS 	  = -lhidapi-libusb
+CLIBS 	 += -lprotobuf
+CLIBS 	 += -lpthread
+CLIBS 	 += -lboost_program_options
+CLIBS 	 += -lboost_system
+
+LOGS	= logs
 
 all: $(NAME)
 
@@ -24,4 +30,4 @@ $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) -o $@ -c $<
 
 clean:
-	rm -f $(OBJS) $(NAME)
+	rm -rf $(OBJS) $(NAME) $(LOGS)

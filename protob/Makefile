@@ -1,10 +1,7 @@
-all: messages.pb.c storage.pb.c types.pb.c
-
-%.pb.c: %.pb %.options
-	nanopb $< -L '#include "%s"' -T
+check: config.pb messages.pb storage.pb types.pb
 
 %.pb: %.proto
-	protoc -I/usr/include -I. $< -o $@
+	protoc  $< --cpp_out=.
 
 clean:
-	rm -f *.pb *.o *.pb.c *.pb.h
+	rm -f *pb.cc *.pb.h
