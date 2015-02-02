@@ -12,9 +12,10 @@ CFLAGS   += $(OPTFLAGS) \
 
 CLIBS 	  = -lhidapi-libusb
 CLIBS 	 += -lprotobuf
-CLIBS 	 += -lpthread
+#CLIBS 	 += -lpthread
 CLIBS 	 += -lboost_program_options
 CLIBS 	 += -lboost_system
+CLIBS 	 += -lboost_thread
 
 LOGS	= logs
 

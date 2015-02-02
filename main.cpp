@@ -12,10 +12,11 @@
 
 #include <iostream>
 #include <stdio.h>
-#include <hidapi/hidapi.h>
 #include "easylogging++.h"
 #include <boost/program_options.hpp>
 #include <boost/chrono/chrono.hpp>
+
+#include "wire.hpp"
 
 _INITIALIZE_EASYLOGGINGPP
 
@@ -36,7 +37,7 @@ void configure_logging()
 	//el::Loggers::getLogger("core.device");
 	//el::Loggers::getLogger("core.config");
 	//el::Loggers::getLogger("core.kernel");
-	//el::Loggers::getLogger("wire.enumerate");
+	el::Loggers::getLogger("wire.enumerate");
 
 	el::Loggers::reconfigureAllLoggers(cfg);
 	//LOG(INFO) << "this is test";
@@ -52,6 +53,7 @@ int main(int argc, char **argv)
 	desc.add_options()
 		("help,h", "program help message")
 		("version,v", "program version")
+		("list,l", "display hid usb device")
 		;
 
 	po::variables_map vm;
@@ -66,6 +68,13 @@ int main(int argc, char **argv)
 	if(vm.count("version")) {
 		std::cout << "program version is 0.1.0" << std::endl;
 		return 1;
+	}
+
+	if(vm.count("list")) {
+		wire::device_info_list list;
+		list = wire::enumerate_connected_devices(0x534c, 0x0001);
+
+		//printf("list path: %s\n", list.path);
 	}
 
 	return 0;
