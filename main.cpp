@@ -15,11 +15,11 @@
 #include "easylogging++.h"
 #include <boost/program_options.hpp>
 #include <boost/chrono/chrono.hpp>
-
+#include <vector>
 #include "wire.hpp"
+#include "core.hpp"
 
 _INITIALIZE_EASYLOGGINGPP
-
 
 void configure_logging()
 {
@@ -34,13 +34,10 @@ void configure_logging()
 	cfg.set(el::Level::Trace, el::ConfigurationType::Format, default_format);
 	cfg.set(el::Level::Verbose, el::ConfigurationType::Format, default_format);
 
-	//el::Loggers::getLogger("core.device");
-	//el::Loggers::getLogger("core.config");
-	//el::Loggers::getLogger("core.kernel");
+	el::Loggers::getLogger("core.device");
 	el::Loggers::getLogger("wire.enumerate");
 
 	el::Loggers::reconfigureAllLoggers(cfg);
-	//LOG(INFO) << "this is test";
 
 }
 
@@ -48,34 +45,60 @@ int main(int argc, char **argv)
 {
 	configure_logging();
 
-	namespace po = boost::program_options;
-	po::options_description desc("Options");
-	desc.add_options()
-		("help,h", "program help message")
-		("version,v", "program version")
-		("list,l", "display hid usb device")
-		;
+	try {
+		namespace po = boost::program_options;
+		po::options_description desc("Options");
+		desc.add_options()
+			("help,h", "program help message")
+			("version,v", "program version")
+			("list,l", "display hid usb device")
+			("path,p", po::value<std::string>(), "set usb path")
+			;
 
-	po::variables_map vm;
-	po::store(po::parse_command_line(argc, argv, desc), vm);
-	po::notify(vm);
+		po::variables_map vm;
+		po::store(po::parse_command_line(argc, argv, desc), vm);
+		po::notify(vm);
 
-	if(vm.count("help") || (argc == 1)) {
-		std::cout << desc << std::endl;
-		return 1;
+		if(vm.count("help") || (argc == 1)) {
+			std::cout << desc << std::endl;
+			return 1;
+		}
+
+		if(vm.count("version")) {
+			std::cout << "program version is 0.1.0" << std::endl;
+			return 1;
+		}
+
+		if(vm.count("list")) {
+			wire::device_info_list list;
+			list = wire::enumerate_connected_devices(0x534c, 0x0001);
+
+			if(list.size())
+			{	
+				std::vector<wire::device_info>::iterator iter;
+				for(iter = list.begin(); iter != list.end(); iter++) {
+					std::cout << "path : " << iter->path << std::endl;	
+					std::wcout << "serial number: " <<  iter->serial_number << std::endl;	
+				}
+			}
+			else
+			{
+				LOG(INFO) << "no device found";
+			}
+		}
+
+		if(vm.count("path")) {
+			auto path = vm["path"].as<std::string>();
+			std::cout << "path : " << path << std::endl;
+			core::device_kernel device(path);	
+			device.open();
+		}
+	} catch(std::exception& e) {
+		LOG(ERROR) << e.what();
+	} catch(...) {
+		LOG(ERROR) << "Unknown Error";
 	}
 
-	if(vm.count("version")) {
-		std::cout << "program version is 0.1.0" << std::endl;
-		return 1;
-	}
-
-	if(vm.count("list")) {
-		wire::device_info_list list;
-		list = wire::enumerate_connected_devices(0x534c, 0x0001);
-
-		//printf("list path: %s\n", list.path);
-	}
 
 	return 0;
 }
