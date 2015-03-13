@@ -89,9 +89,9 @@ int main(int argc, char **argv)
 
 		if(vm.count("path")) {
 			auto path = vm["path"].as<std::string>();
-			std::cout << "path : " << path << std::endl;
-			core::device_kernel device(path);	
-			device.open();
+			//std::cout << "path : " << path << std::endl;
+			std::unique_ptr<core::device_kernel> device(new core::device_kernel(path.c_str()));	
+			device->open();
 		}
 	} catch(std::exception& e) {
 		LOG(ERROR) << e.what();
