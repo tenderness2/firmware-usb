@@ -51,4 +51,58 @@ namespace wire {
 		return list;
 	}
 
+	struct device {
+		
+		device(device const &) = delete;
+		device &operator=(device const &) = delete;
+
+		struct open_error :public std::runtime_error
+		{ using std::runtime_error::runtime_error; };
+
+		struct read_error :public std::runtime_error
+		{ using std::runtime_error::runtime_error; };
+
+		struct write_error :public std::runtime_error
+		{ using std::runtime_error::runtime_error; };
+
+		device(char const *path) 
+		{
+			hid = hid::open_path(path);
+			if(!hid) {
+				throw open_error("HID device open fail !");
+			}
+		}
+
+		~device() {hid::close(hid);}
+
+		private :
+			hid_device *hid;
+	};
+
+	struct device_kernel {
+		using device_path_type = std::string;
+		device_path_type device_path;
+
+		device_kernel(device_path_type const &dp):device_path{dp}
+		{ }
+
+		void open()
+		{
+			if(device.get() == nullptr) {
+				CLOG(INFO, "wire.device") << "opening : " << device_path;
+				device.reset(new wire::device{device_path.c_str()});
+			}
+		}
+
+		void close()
+		{
+			CLOG(INFO, "wire.device") << "closing : " << device_path;
+			device.reset();
+		}
+
+		private :
+			std::unique_ptr<wire::device> device;
+
+	};
+
 }

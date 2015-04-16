@@ -37,7 +37,7 @@ void configure_logging()
 	cfg.set(el::Level::Trace, el::ConfigurationType::Format, default_format);
 	cfg.set(el::Level::Verbose, el::ConfigurationType::Format, default_format);
 
-//	el::Loggers::getLogger("core.device");
+	el::Loggers::getLogger("wire.device");
 	el::Loggers::getLogger("wire.enumerate");
 
 	el::Loggers::reconfigureAllLoggers(cfg);

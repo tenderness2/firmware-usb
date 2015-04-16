@@ -38,9 +38,9 @@ namespace feature {
 		}
 
 		void device_path(std::string path) {
-			std::cout << "path : " << path << std::endl;
-			//std::unique_ptr<core::device_kernel> device(new core::device_kernel(path.c_str())); 
-			//device->open();
+			//std::cout << "path : " << path << std::endl;
+			std::unique_ptr<wire::device_kernel> device(new wire::device_kernel(path.c_str())); 
+			device->open();
 		}
 
 		void test_screen(int time) {
