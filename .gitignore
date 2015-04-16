@@ -1,0 +1,5 @@
+*.o
+*.log
+*.out
+logs
+tags

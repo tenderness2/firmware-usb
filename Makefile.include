@@ -8,7 +8,7 @@ CFLAGS   += $(OPTFLAGS) \
             -W \
             -Wall \
 		    -I$(TOP_DIR)\
-			-I$(TOP_DIR)/protob/	
+			-I$(TOP_DIR)/protob/
 
 CLIBS 	  = -lhidapi-libusb
 CLIBS 	 += -lprotobuf
