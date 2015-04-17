@@ -175,6 +175,30 @@ class Storage : public ::google::protobuf::Message {
   inline bool imported() const;
   inline void set_imported(bool value);
 
+  // optional bytes homescreen = 10;
+  inline bool has_homescreen() const;
+  inline void clear_homescreen();
+  static const int kHomescreenFieldNumber = 10;
+  inline const ::std::string& homescreen() const;
+  inline void set_homescreen(const ::std::string& value);
+  inline void set_homescreen(const char* value);
+  inline void set_homescreen(const void* value, size_t size);
+  inline ::std::string* mutable_homescreen();
+  inline ::std::string* release_homescreen();
+  inline void set_allocated_homescreen(::std::string* homescreen);
+
+  // repeated .AccountLabelsType label_list = 11;
+  inline int label_list_size() const;
+  inline void clear_label_list();
+  static const int kLabelListFieldNumber = 11;
+  inline const ::AccountLabelsType& label_list(int index) const;
+  inline ::AccountLabelsType* mutable_label_list(int index);
+  inline ::AccountLabelsType* add_label_list();
+  inline const ::google::protobuf::RepeatedPtrField< ::AccountLabelsType >&
+      label_list() const;
+  inline ::google::protobuf::RepeatedPtrField< ::AccountLabelsType >*
+      mutable_label_list();
+
   // @@protoc_insertion_point(class_scope:Storage)
  private:
   inline void set_has_version();
@@ -195,6 +219,8 @@ class Storage : public ::google::protobuf::Message {
   inline void clear_has_label();
   inline void set_has_imported();
   inline void clear_has_imported();
+  inline void set_has_homescreen();
+  inline void clear_has_homescreen();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
@@ -205,11 +231,13 @@ class Storage : public ::google::protobuf::Message {
   ::std::string* pin_;
   ::std::string* language_;
   ::std::string* label_;
+  ::std::string* homescreen_;
+  ::google::protobuf::RepeatedPtrField< ::AccountLabelsType > label_list_;
   bool passphrase_protection_;
   bool imported_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(9 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(11 + 31) / 32];
 
   friend void  protobuf_AddDesc_storage_2eproto();
   friend void protobuf_AssignDesc_storage_2eproto();
@@ -629,6 +657,101 @@ inline bool Storage::imported() const {
 inline void Storage::set_imported(bool value) {
   set_has_imported();
   imported_ = value;
+}
+
+// optional bytes homescreen = 10;
+inline bool Storage::has_homescreen() const {
+  return (_has_bits_[0] & 0x00000200u) != 0;
+}
+inline void Storage::set_has_homescreen() {
+  _has_bits_[0] |= 0x00000200u;
+}
+inline void Storage::clear_has_homescreen() {
+  _has_bits_[0] &= ~0x00000200u;
+}
+inline void Storage::clear_homescreen() {
+  if (homescreen_ != &::google::protobuf::internal::kEmptyString) {
+    homescreen_->clear();
+  }
+  clear_has_homescreen();
+}
+inline const ::std::string& Storage::homescreen() const {
+  return *homescreen_;
+}
+inline void Storage::set_homescreen(const ::std::string& value) {
+  set_has_homescreen();
+  if (homescreen_ == &::google::protobuf::internal::kEmptyString) {
+    homescreen_ = new ::std::string;
+  }
+  homescreen_->assign(value);
+}
+inline void Storage::set_homescreen(const char* value) {
+  set_has_homescreen();
+  if (homescreen_ == &::google::protobuf::internal::kEmptyString) {
+    homescreen_ = new ::std::string;
+  }
+  homescreen_->assign(value);
+}
+inline void Storage::set_homescreen(const void* value, size_t size) {
+  set_has_homescreen();
+  if (homescreen_ == &::google::protobuf::internal::kEmptyString) {
+    homescreen_ = new ::std::string;
+  }
+  homescreen_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* Storage::mutable_homescreen() {
+  set_has_homescreen();
+  if (homescreen_ == &::google::protobuf::internal::kEmptyString) {
+    homescreen_ = new ::std::string;
+  }
+  return homescreen_;
+}
+inline ::std::string* Storage::release_homescreen() {
+  clear_has_homescreen();
+  if (homescreen_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = homescreen_;
+    homescreen_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void Storage::set_allocated_homescreen(::std::string* homescreen) {
+  if (homescreen_ != &::google::protobuf::internal::kEmptyString) {
+    delete homescreen_;
+  }
+  if (homescreen) {
+    set_has_homescreen();
+    homescreen_ = homescreen;
+  } else {
+    clear_has_homescreen();
+    homescreen_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// repeated .AccountLabelsType label_list = 11;
+inline int Storage::label_list_size() const {
+  return label_list_.size();
+}
+inline void Storage::clear_label_list() {
+  label_list_.Clear();
+}
+inline const ::AccountLabelsType& Storage::label_list(int index) const {
+  return label_list_.Get(index);
+}
+inline ::AccountLabelsType* Storage::mutable_label_list(int index) {
+  return label_list_.Mutable(index);
+}
+inline ::AccountLabelsType* Storage::add_label_list() {
+  return label_list_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::AccountLabelsType >&
+Storage::label_list() const {
+  return label_list_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::AccountLabelsType >*
+Storage::mutable_label_list() {
+  return &label_list_;
 }
 
 

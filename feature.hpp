@@ -41,6 +41,7 @@ namespace feature {
 			//std::cout << "path : " << path << std::endl;
 			std::unique_ptr<wire::device_kernel> device(new wire::device_kernel(path.c_str())); 
 			device->open();
+			std::cout << "is opeinged !" << std::endl;
 		}
 
 		void test_screen(int time) {

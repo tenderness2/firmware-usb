@@ -32,7 +32,7 @@ void protobuf_AssignDesc_storage_2eproto() {
       "storage.proto");
   GOOGLE_CHECK(file != NULL);
   Storage_descriptor_ = file->message_type(0);
-  static const int Storage_offsets_[9] = {
+  static const int Storage_offsets_[11] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Storage, version_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Storage, node_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Storage, mnemonic_),
@@ -42,6 +42,8 @@ void protobuf_AssignDesc_storage_2eproto() {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Storage, language_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Storage, label_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Storage, imported_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Storage, homescreen_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Storage, label_list_),
   };
   Storage_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -85,13 +87,15 @@ void protobuf_AddDesc_storage_2eproto() {
 
   ::protobuf_AddDesc_types_2eproto();
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-    "\n\rstorage.proto\032\013types.proto\"\303\001\n\007Storage"
+    "\n\rstorage.proto\032\013types.proto\"\377\001\n\007Storage"
     "\022\017\n\007version\030\001 \002(\r\022\031\n\004node\030\002 \001(\0132\013.HDNode"
     "Type\022\020\n\010mnemonic\030\003 \001(\t\022\035\n\025passphrase_pro"
     "tection\030\004 \001(\010\022\033\n\023pin_failed_attempts\030\005 \001"
     "(\r\022\013\n\003pin\030\006 \001(\t\022\020\n\010language\030\007 \001(\t\022\r\n\005lab"
-    "el\030\010 \001(\t\022\020\n\010imported\030\t \001(\010B0\n\037com.satosh"
-    "ilabs.trezor.protobufB\rTrezorStorage", 276);
+    "el\030\010 \001(\t\022\020\n\010imported\030\t \001(\010\022\022\n\nhomescreen"
+    "\030\n \001(\014\022&\n\nlabel_list\030\013 \003(\0132\022.AccountLabe"
+    "lsTypeB*\n\030com.bdx.bwallet.protobufB\016BWal"
+    "letStorage", 330);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "storage.proto", &protobuf_RegisterTypes);
   Storage::default_instance_ = new Storage();
@@ -118,6 +122,8 @@ const int Storage::kPinFieldNumber;
 const int Storage::kLanguageFieldNumber;
 const int Storage::kLabelFieldNumber;
 const int Storage::kImportedFieldNumber;
+const int Storage::kHomescreenFieldNumber;
+const int Storage::kLabelListFieldNumber;
 #endif  // !_MSC_VER
 
 Storage::Storage()
@@ -146,6 +152,7 @@ void Storage::SharedCtor() {
   language_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   label_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   imported_ = false;
+  homescreen_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -165,6 +172,9 @@ void Storage::SharedDtor() {
   }
   if (label_ != &::google::protobuf::internal::kEmptyString) {
     delete label_;
+  }
+  if (homescreen_ != &::google::protobuf::internal::kEmptyString) {
+    delete homescreen_;
   }
   if (this != default_instance_) {
     delete node_;
@@ -223,7 +233,13 @@ void Storage::Clear() {
   }
   if (_has_bits_[8 / 32] & (0xffu << (8 % 32))) {
     imported_ = false;
+    if (has_homescreen()) {
+      if (homescreen_ != &::google::protobuf::internal::kEmptyString) {
+        homescreen_->clear();
+      }
+    }
   }
+  label_list_.Clear();
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
 }
@@ -375,6 +391,35 @@ bool Storage::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
+        if (input->ExpectTag(82)) goto parse_homescreen;
+        break;
+      }
+
+      // optional bytes homescreen = 10;
+      case 10: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_homescreen:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
+                input, this->mutable_homescreen()));
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(90)) goto parse_label_list;
+        break;
+      }
+
+      // repeated .AccountLabelsType label_list = 11;
+      case 11: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_label_list:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+                input, add_label_list()));
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(90)) goto parse_label_list;
         if (input->ExpectAtEnd()) return true;
         break;
       }
@@ -459,6 +504,18 @@ void Storage::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteBool(9, this->imported(), output);
   }
 
+  // optional bytes homescreen = 10;
+  if (has_homescreen()) {
+    ::google::protobuf::internal::WireFormatLite::WriteBytes(
+      10, this->homescreen(), output);
+  }
+
+  // repeated .AccountLabelsType label_list = 11;
+  for (int i = 0; i < this->label_list_size(); i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      11, this->label_list(i), output);
+  }
+
   if (!unknown_fields().empty()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
@@ -534,6 +591,20 @@ void Storage::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(9, this->imported(), target);
   }
 
+  // optional bytes homescreen = 10;
+  if (has_homescreen()) {
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
+        10, this->homescreen(), target);
+  }
+
+  // repeated .AccountLabelsType label_list = 11;
+  for (int i = 0; i < this->label_list_size(); i++) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        11, this->label_list(i), target);
+  }
+
   if (!unknown_fields().empty()) {
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
@@ -606,7 +677,22 @@ int Storage::ByteSize() const {
       total_size += 1 + 1;
     }
 
+    // optional bytes homescreen = 10;
+    if (has_homescreen()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::BytesSize(
+          this->homescreen());
+    }
+
   }
+  // repeated .AccountLabelsType label_list = 11;
+  total_size += 1 * this->label_list_size();
+  for (int i = 0; i < this->label_list_size(); i++) {
+    total_size +=
+      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+        this->label_list(i));
+  }
+
   if (!unknown_fields().empty()) {
     total_size +=
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
@@ -632,6 +718,7 @@ void Storage::MergeFrom(const ::google::protobuf::Message& from) {
 
 void Storage::MergeFrom(const Storage& from) {
   GOOGLE_CHECK_NE(&from, this);
+  label_list_.MergeFrom(from.label_list_);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     if (from.has_version()) {
       set_version(from.version());
@@ -662,6 +749,9 @@ void Storage::MergeFrom(const Storage& from) {
     if (from.has_imported()) {
       set_imported(from.imported());
     }
+    if (from.has_homescreen()) {
+      set_homescreen(from.homescreen());
+    }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
@@ -684,6 +774,9 @@ bool Storage::IsInitialized() const {
   if (has_node()) {
     if (!this->node().IsInitialized()) return false;
   }
+  for (int i = 0; i < label_list_size(); i++) {
+    if (!this->label_list(i).IsInitialized()) return false;
+  }
   return true;
 }
 
@@ -698,6 +791,8 @@ void Storage::Swap(Storage* other) {
     std::swap(language_, other->language_);
     std::swap(label_, other->label_);
     std::swap(imported_, other->imported_);
+    std::swap(homescreen_, other->homescreen_);
+    label_list_.Swap(&other->label_list_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);

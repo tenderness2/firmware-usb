@@ -1,18 +1,18 @@
 /**
- * Messages for TREZOR communication
+ * Messages for BWallet communication
  *
  * @author	Marek Palatinus <slush@satoshilabs.com>
  * @version	1.2
  */
 
 // Sugar for easier handling in Java
-option java_package = "com.satoshilabs.trezor.protobuf";
-option java_outer_classname = "TrezorMessage";
+option java_package = "com.bdx.bwallet.protobuf";
+option java_outer_classname = "BWalletMessage";
 
 import "types.proto";
 
 /**
- * Mapping between Trezor wire identifier (uint) and a protobuf message
+ * Mapping between BWallet wire identifier (uint) and a protobuf message
  */
 enum MessageType {
 	MessageType_Initialize = 0 [(wire_in) = true];
@@ -49,8 +49,6 @@ enum MessageType {
 	MessageType_SignMessage = 38 [(wire_in) = true];
 	MessageType_VerifyMessage = 39 [(wire_in) = true];
 	MessageType_MessageSignature = 40 [(wire_out) = true];
-	MessageType_EncryptMessage = 48 [(wire_in) = true];
-	MessageType_DecryptMessage = 49 [(wire_in) = true];
 	MessageType_PassphraseRequest = 41 [(wire_out) = true];
 	MessageType_PassphraseAck = 42 [(wire_in) = true];
 	MessageType_EstimateTxSize = 43 [(wire_in) = true];
@@ -58,7 +56,17 @@ enum MessageType {
 	MessageType_RecoveryDevice = 45 [(wire_in) = true];
 	MessageType_WordRequest = 46 [(wire_out) = true];
 	MessageType_WordAck = 47 [(wire_in) = true];
-	MessageType_TestScreen = 50 [(wire_in) = true];
+	MessageType_CipheredKeyValue = 48 [(wire_out) = true];
+	MessageType_EncryptMessage = 49 [(wire_in) = true];
+	MessageType_EncryptedMessage = 50 [(wire_out) = true];
+	MessageType_DecryptMessage = 51 [(wire_in) = true];
+	MessageType_DecryptedMessage = 52 [(wire_out) = true];
+	MessageType_SignIdentity = 53 [(wire_in) = true];
+	MessageType_SignedIdentity = 54 [(wire_out) = true];
+	MessageType_AccountLabels = 96 [(wire_out) = true];
+	MessageType_GetAccountLabels = 97 [(wire_in) = true];
+	MessageType_SetAccountLabel = 98 [(wire_in) = true];
+	MessageType_TestScreen = 99 [(wire_in) = true];
 	MessageType_DebugLinkDecision = 100 [(wire_debug_in) = true];
 	MessageType_DebugLinkGetState = 101 [(wire_debug_in) = true];
 	MessageType_DebugLinkState = 102 [(wire_debug_out) = true];
@@ -75,6 +83,7 @@ enum MessageType {
  * @next Features
  */
 message Initialize {
+	optional string language = 1;	 // device language for bootloader mode
 }
 
 /**
@@ -97,7 +106,6 @@ message Features {
 	optional bytes revision = 13;			// SCM revision of firmware
 	optional bytes bootloader_hash = 14;		// hash of the bootloader
 	optional bool imported = 15;			// was storage imported from an external source?
-	optional string cpu_sn = 16;
 }
 
 /**
@@ -117,6 +125,8 @@ message ClearSession {
 message ApplySettings {
 	optional string language = 1;
 	optional string label = 2;
+	optional bool use_passphrase = 3;
+	optional bytes homescreen = 4;
 }
 
 /**
@@ -144,7 +154,6 @@ message Ping {
  */
 message Success {
 	optional string message = 1;	// human readable description of action or request-specific payload
-	optional bytes payload = 2;	// request-specific binary payload
 }
 
 /**
@@ -258,9 +267,10 @@ message PublicKey {
  * @next Failure
  */
 message GetAddress {
-	repeated uint32 address_n = 1;		// BIP-32 path to derive the key from master node
+	repeated uint32 address_n = 1;			// BIP-32 path to derive the key from master node
 	optional string coin_name = 2 [default='Bitcoin'];
 	optional bool show_display = 3;
+	optional MultisigRedeemScriptType multisig = 4;	// Filled if we are showing a multisig address
 }
 
 /**
@@ -400,7 +410,7 @@ message MessageSignature {
 
 /**
  * Request: Ask device to encrypt message
- * @next Success
+ * @next EncryptedMessage
  * @next Failure
  */
 message EncryptMessage {
@@ -408,6 +418,17 @@ message EncryptMessage {
 	optional bytes message = 2;				// message to encrypt
 	optional bool display_only = 3;				// show just on display? (don't send back via wire)
 	repeated uint32 address_n = 4;				// BIP-32 path to derive the signing key from master node
+	optional string coin_name = 5 [default='Bitcoin'];	// coin to use for signing
+}
+
+/**
+ * Response: Encrypted message
+ * @prev EncryptMessage
+ */
+message EncryptedMessage {
+	optional bytes nonce = 1;				// nonce used during encryption
+	optional bytes message = 2;				// encrypted message
+	optional bytes hmac = 3;				// message hmac
 }
 
 /**
@@ -417,12 +438,23 @@ message EncryptMessage {
  */
 message DecryptMessage {
 	repeated uint32 address_n = 1;				// BIP-32 path to derive the decryption key from master node
-	optional bytes message = 2;				// message to decrypt
+	optional bytes nonce = 2;				// nonce used during encryption
+	optional bytes message = 3;				// message to decrypt
+	optional bytes hmac = 4;				// message hmac
+}
+
+/**
+ * Response: Decrypted message
+ * @prev DecryptedMessage
+ */
+message DecryptedMessage {
+	optional bytes message = 1;				// decrypted message
+	optional string address = 2;				// address used to sign the message (if used)
 }
 
 /**
  * Request: Ask device to encrypt or decrypt value of given key
- * @next Success
+ * @next CipheredKeyValue
  * @next Failure
  */
 message CipherKeyValue {
@@ -432,6 +464,14 @@ message CipherKeyValue {
 	optional bool encrypt = 4;		// are we encrypting (True) or decrypting (False)?
 	optional bool ask_on_encrypt = 5;	// should we ask on encrypt operation?
 	optional bool ask_on_decrypt = 6;	// should we ask on decrypt operation?
+}
+
+/**
+ * Response: Return ciphered/deciphered value
+ * @prev CipherKeyValue
+ */
+message CipheredKeyValue {
+	optional bytes value = 1;		// ciphered/deciphered value
 }
 
 //////////////////////////////////
@@ -511,6 +551,32 @@ message TxAck {
 	optional TransactionType tx = 1;
 }
 
+///////////////////////
+// Identity messages //
+///////////////////////
+
+/**
+ * Request: Ask device to sign identity
+ * @next SignedIdentity
+ * @next Failure
+ */
+message SignIdentity {
+    optional IdentityType identity = 1;     // identity
+    optional bytes challenge_hidden = 2;        // non-visible challenge
+    optional string challenge_visual = 3;       // challenge shown on display (e.g. date+time)
+}
+
+/**
+ * Response: Device provides signed identity
+ * @prev SignIdentity
+ */
+message SignedIdentity {
+    optional string address = 1;            // identity address
+    optional bytes public_key = 2;          // identity public key
+    optional bytes signature = 3;           // signature of the identity data
+}
+
+
 /////////////////////////
 // Bootloader messages //
 /////////////////////////
@@ -532,7 +598,6 @@ message FirmwareUpload {
 	required bytes payload = 1;			// firmware to be loaded into device
 }
 
-
 /**
  * Request: Detect screen on the device 
  * @next Success
@@ -541,6 +606,39 @@ message FirmwareUpload {
 
 message TestScreen {
 	required uint32 delay_time = 1 [default=1];
+}
+
+/**
+ * Response: Return coin label or all labels 
+ * @prev GetAccountLabels
+ * @next Success
+ * @next Failure
+ */
+message AccountLabels {
+	optional string coin_name = 1 [default='Bitcoin'];
+	repeated AccountLabelType labels = 2;
+}
+
+/**
+ * Request: Get coin label or all label  
+ * @next AccountLabels
+ * @next Failure
+ */
+message GetAccountLabels {
+	optional string coin_name = 1 [default='Bitcoin'];
+	optional bool all = 2;
+	optional uint32 index = 3;
+}
+
+/**
+ * Response: set coin account label 
+ * @next Success
+ * @next Failure
+ */
+message SetAccountLabel {
+	optional string coin_name = 1 [default='Bitcoin'];
+	optional uint32 index = 2;
+	optional string label = 3;
 }
 
 /////////////////////////////////////////////////////////////
@@ -593,3 +691,4 @@ message DebugLinkLog {
 	optional string bucket = 2;
 	optional string text = 3;
 }
+

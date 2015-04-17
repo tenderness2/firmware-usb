@@ -34,6 +34,7 @@ void protobuf_AssignDesc_types_2eproto();
 void protobuf_ShutdownFile_types_2eproto();
 
 class HDNodeType;
+class HDNodePathType;
 class CoinType;
 class MultisigRedeemScriptType;
 class TxInputType;
@@ -42,6 +43,9 @@ class TxOutputBinType;
 class TransactionType;
 class TxRequestDetailsType;
 class TxRequestSerializedType;
+class IdentityType;
+class AccountLabelsType;
+class AccountLabelType;
 
 enum FailureType {
   Failure_UnexpectedMessage = 1,
@@ -74,11 +78,13 @@ inline bool FailureType_Parse(
 }
 enum OutputScriptType {
   PAYTOADDRESS = 0,
-  PAYTOSCRIPTHASH = 1
+  PAYTOSCRIPTHASH = 1,
+  PAYTOMULTISIG = 2,
+  PAYTOOPRETURN = 3
 };
 bool OutputScriptType_IsValid(int value);
 const OutputScriptType OutputScriptType_MIN = PAYTOADDRESS;
-const OutputScriptType OutputScriptType_MAX = PAYTOSCRIPTHASH;
+const OutputScriptType OutputScriptType_MAX = PAYTOOPRETURN;
 const int OutputScriptType_ARRAYSIZE = OutputScriptType_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* OutputScriptType_descriptor();
@@ -327,6 +333,103 @@ class HDNodeType : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
+class HDNodePathType : public ::google::protobuf::Message {
+ public:
+  HDNodePathType();
+  virtual ~HDNodePathType();
+
+  HDNodePathType(const HDNodePathType& from);
+
+  inline HDNodePathType& operator=(const HDNodePathType& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const HDNodePathType& default_instance();
+
+  void Swap(HDNodePathType* other);
+
+  // implements Message ----------------------------------------------
+
+  HDNodePathType* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const HDNodePathType& from);
+  void MergeFrom(const HDNodePathType& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required .HDNodeType node = 1;
+  inline bool has_node() const;
+  inline void clear_node();
+  static const int kNodeFieldNumber = 1;
+  inline const ::HDNodeType& node() const;
+  inline ::HDNodeType* mutable_node();
+  inline ::HDNodeType* release_node();
+  inline void set_allocated_node(::HDNodeType* node);
+
+  // repeated uint32 address_n = 2;
+  inline int address_n_size() const;
+  inline void clear_address_n();
+  static const int kAddressNFieldNumber = 2;
+  inline ::google::protobuf::uint32 address_n(int index) const;
+  inline void set_address_n(int index, ::google::protobuf::uint32 value);
+  inline void add_address_n(::google::protobuf::uint32 value);
+  inline const ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >&
+      address_n() const;
+  inline ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >*
+      mutable_address_n();
+
+  // @@protoc_insertion_point(class_scope:HDNodePathType)
+ private:
+  inline void set_has_node();
+  inline void clear_has_node();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::HDNodeType* node_;
+  ::google::protobuf::RepeatedField< ::google::protobuf::uint32 > address_n_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
+
+  friend void  protobuf_AddDesc_types_2eproto();
+  friend void protobuf_AssignDesc_types_2eproto();
+  friend void protobuf_ShutdownFile_types_2eproto();
+
+  void InitAsDefaultInstance();
+  static HDNodePathType* default_instance_;
+};
+// -------------------------------------------------------------------
+
 class CoinType : public ::google::protobuf::Message {
  public:
   CoinType();
@@ -405,7 +508,7 @@ class CoinType : public ::google::protobuf::Message {
   inline ::std::string* release_coin_shortcut();
   inline void set_allocated_coin_shortcut(::std::string* coin_shortcut);
 
-  // optional uint32 address_type = 3;
+  // optional uint32 address_type = 3 [default = 0];
   inline bool has_address_type() const;
   inline void clear_address_type();
   static const int kAddressTypeFieldNumber = 3;
@@ -419,6 +522,13 @@ class CoinType : public ::google::protobuf::Message {
   inline ::google::protobuf::uint64 maxfee_kb() const;
   inline void set_maxfee_kb(::google::protobuf::uint64 value);
 
+  // optional uint32 address_type_p2sh = 5 [default = 5];
+  inline bool has_address_type_p2sh() const;
+  inline void clear_address_type_p2sh();
+  static const int kAddressTypeP2ShFieldNumber = 5;
+  inline ::google::protobuf::uint32 address_type_p2sh() const;
+  inline void set_address_type_p2sh(::google::protobuf::uint32 value);
+
   // @@protoc_insertion_point(class_scope:CoinType)
  private:
   inline void set_has_coin_name();
@@ -429,6 +539,8 @@ class CoinType : public ::google::protobuf::Message {
   inline void clear_has_address_type();
   inline void set_has_maxfee_kb();
   inline void clear_has_maxfee_kb();
+  inline void set_has_address_type_p2sh();
+  inline void clear_has_address_type_p2sh();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
@@ -436,9 +548,10 @@ class CoinType : public ::google::protobuf::Message {
   ::std::string* coin_shortcut_;
   ::google::protobuf::uint64 maxfee_kb_;
   ::google::protobuf::uint32 address_type_;
+  ::google::protobuf::uint32 address_type_p2sh_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(5 + 31) / 32];
 
   friend void  protobuf_AddDesc_types_2eproto();
   friend void protobuf_AssignDesc_types_2eproto();
@@ -503,21 +616,17 @@ class MultisigRedeemScriptType : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // repeated bytes pubkeys = 1;
+  // repeated .HDNodePathType pubkeys = 1;
   inline int pubkeys_size() const;
   inline void clear_pubkeys();
   static const int kPubkeysFieldNumber = 1;
-  inline const ::std::string& pubkeys(int index) const;
-  inline ::std::string* mutable_pubkeys(int index);
-  inline void set_pubkeys(int index, const ::std::string& value);
-  inline void set_pubkeys(int index, const char* value);
-  inline void set_pubkeys(int index, const void* value, size_t size);
-  inline ::std::string* add_pubkeys();
-  inline void add_pubkeys(const ::std::string& value);
-  inline void add_pubkeys(const char* value);
-  inline void add_pubkeys(const void* value, size_t size);
-  inline const ::google::protobuf::RepeatedPtrField< ::std::string>& pubkeys() const;
-  inline ::google::protobuf::RepeatedPtrField< ::std::string>* mutable_pubkeys();
+  inline const ::HDNodePathType& pubkeys(int index) const;
+  inline ::HDNodePathType* mutable_pubkeys(int index);
+  inline ::HDNodePathType* add_pubkeys();
+  inline const ::google::protobuf::RepeatedPtrField< ::HDNodePathType >&
+      pubkeys() const;
+  inline ::google::protobuf::RepeatedPtrField< ::HDNodePathType >*
+      mutable_pubkeys();
 
   // repeated bytes signatures = 2;
   inline int signatures_size() const;
@@ -535,16 +644,26 @@ class MultisigRedeemScriptType : public ::google::protobuf::Message {
   inline const ::google::protobuf::RepeatedPtrField< ::std::string>& signatures() const;
   inline ::google::protobuf::RepeatedPtrField< ::std::string>* mutable_signatures();
 
+  // optional uint32 m = 3;
+  inline bool has_m() const;
+  inline void clear_m();
+  static const int kMFieldNumber = 3;
+  inline ::google::protobuf::uint32 m() const;
+  inline void set_m(::google::protobuf::uint32 value);
+
   // @@protoc_insertion_point(class_scope:MultisigRedeemScriptType)
  private:
+  inline void set_has_m();
+  inline void clear_has_m();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-  ::google::protobuf::RepeatedPtrField< ::std::string> pubkeys_;
+  ::google::protobuf::RepeatedPtrField< ::HDNodePathType > pubkeys_;
   ::google::protobuf::RepeatedPtrField< ::std::string> signatures_;
+  ::google::protobuf::uint32 m_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
 
   friend void  protobuf_AddDesc_types_2eproto();
   friend void protobuf_AssignDesc_types_2eproto();
@@ -804,6 +923,27 @@ class TxOutputType : public ::google::protobuf::Message {
   inline ::OutputScriptType script_type() const;
   inline void set_script_type(::OutputScriptType value);
 
+  // optional .MultisigRedeemScriptType multisig = 5;
+  inline bool has_multisig() const;
+  inline void clear_multisig();
+  static const int kMultisigFieldNumber = 5;
+  inline const ::MultisigRedeemScriptType& multisig() const;
+  inline ::MultisigRedeemScriptType* mutable_multisig();
+  inline ::MultisigRedeemScriptType* release_multisig();
+  inline void set_allocated_multisig(::MultisigRedeemScriptType* multisig);
+
+  // optional bytes op_return_data = 6;
+  inline bool has_op_return_data() const;
+  inline void clear_op_return_data();
+  static const int kOpReturnDataFieldNumber = 6;
+  inline const ::std::string& op_return_data() const;
+  inline void set_op_return_data(const ::std::string& value);
+  inline void set_op_return_data(const char* value);
+  inline void set_op_return_data(const void* value, size_t size);
+  inline ::std::string* mutable_op_return_data();
+  inline ::std::string* release_op_return_data();
+  inline void set_allocated_op_return_data(::std::string* op_return_data);
+
   // @@protoc_insertion_point(class_scope:TxOutputType)
  private:
   inline void set_has_address();
@@ -812,16 +952,22 @@ class TxOutputType : public ::google::protobuf::Message {
   inline void clear_has_amount();
   inline void set_has_script_type();
   inline void clear_has_script_type();
+  inline void set_has_multisig();
+  inline void clear_has_multisig();
+  inline void set_has_op_return_data();
+  inline void clear_has_op_return_data();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
   ::std::string* address_;
   ::google::protobuf::RepeatedField< ::google::protobuf::uint32 > address_n_;
   ::google::protobuf::uint64 amount_;
+  ::MultisigRedeemScriptType* multisig_;
+  ::std::string* op_return_data_;
   int script_type_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(6 + 31) / 32];
 
   friend void  protobuf_AddDesc_types_2eproto();
   friend void protobuf_AssignDesc_types_2eproto();
@@ -1287,6 +1433,355 @@ class TxRequestSerializedType : public ::google::protobuf::Message {
   void InitAsDefaultInstance();
   static TxRequestSerializedType* default_instance_;
 };
+// -------------------------------------------------------------------
+
+class IdentityType : public ::google::protobuf::Message {
+ public:
+  IdentityType();
+  virtual ~IdentityType();
+
+  IdentityType(const IdentityType& from);
+
+  inline IdentityType& operator=(const IdentityType& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const IdentityType& default_instance();
+
+  void Swap(IdentityType* other);
+
+  // implements Message ----------------------------------------------
+
+  IdentityType* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const IdentityType& from);
+  void MergeFrom(const IdentityType& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // optional string proto = 1;
+  inline bool has_proto() const;
+  inline void clear_proto();
+  static const int kProtoFieldNumber = 1;
+  inline const ::std::string& proto() const;
+  inline void set_proto(const ::std::string& value);
+  inline void set_proto(const char* value);
+  inline void set_proto(const char* value, size_t size);
+  inline ::std::string* mutable_proto();
+  inline ::std::string* release_proto();
+  inline void set_allocated_proto(::std::string* proto);
+
+  // optional string user = 2;
+  inline bool has_user() const;
+  inline void clear_user();
+  static const int kUserFieldNumber = 2;
+  inline const ::std::string& user() const;
+  inline void set_user(const ::std::string& value);
+  inline void set_user(const char* value);
+  inline void set_user(const char* value, size_t size);
+  inline ::std::string* mutable_user();
+  inline ::std::string* release_user();
+  inline void set_allocated_user(::std::string* user);
+
+  // optional string host = 3;
+  inline bool has_host() const;
+  inline void clear_host();
+  static const int kHostFieldNumber = 3;
+  inline const ::std::string& host() const;
+  inline void set_host(const ::std::string& value);
+  inline void set_host(const char* value);
+  inline void set_host(const char* value, size_t size);
+  inline ::std::string* mutable_host();
+  inline ::std::string* release_host();
+  inline void set_allocated_host(::std::string* host);
+
+  // optional string port = 4;
+  inline bool has_port() const;
+  inline void clear_port();
+  static const int kPortFieldNumber = 4;
+  inline const ::std::string& port() const;
+  inline void set_port(const ::std::string& value);
+  inline void set_port(const char* value);
+  inline void set_port(const char* value, size_t size);
+  inline ::std::string* mutable_port();
+  inline ::std::string* release_port();
+  inline void set_allocated_port(::std::string* port);
+
+  // optional string path = 5;
+  inline bool has_path() const;
+  inline void clear_path();
+  static const int kPathFieldNumber = 5;
+  inline const ::std::string& path() const;
+  inline void set_path(const ::std::string& value);
+  inline void set_path(const char* value);
+  inline void set_path(const char* value, size_t size);
+  inline ::std::string* mutable_path();
+  inline ::std::string* release_path();
+  inline void set_allocated_path(::std::string* path);
+
+  // optional uint32 index = 6 [default = 0];
+  inline bool has_index() const;
+  inline void clear_index();
+  static const int kIndexFieldNumber = 6;
+  inline ::google::protobuf::uint32 index() const;
+  inline void set_index(::google::protobuf::uint32 value);
+
+  // @@protoc_insertion_point(class_scope:IdentityType)
+ private:
+  inline void set_has_proto();
+  inline void clear_has_proto();
+  inline void set_has_user();
+  inline void clear_has_user();
+  inline void set_has_host();
+  inline void clear_has_host();
+  inline void set_has_port();
+  inline void clear_has_port();
+  inline void set_has_path();
+  inline void clear_has_path();
+  inline void set_has_index();
+  inline void clear_has_index();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::std::string* proto_;
+  ::std::string* user_;
+  ::std::string* host_;
+  ::std::string* port_;
+  ::std::string* path_;
+  ::google::protobuf::uint32 index_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(6 + 31) / 32];
+
+  friend void  protobuf_AddDesc_types_2eproto();
+  friend void protobuf_AssignDesc_types_2eproto();
+  friend void protobuf_ShutdownFile_types_2eproto();
+
+  void InitAsDefaultInstance();
+  static IdentityType* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class AccountLabelsType : public ::google::protobuf::Message {
+ public:
+  AccountLabelsType();
+  virtual ~AccountLabelsType();
+
+  AccountLabelsType(const AccountLabelsType& from);
+
+  inline AccountLabelsType& operator=(const AccountLabelsType& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const AccountLabelsType& default_instance();
+
+  void Swap(AccountLabelsType* other);
+
+  // implements Message ----------------------------------------------
+
+  AccountLabelsType* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const AccountLabelsType& from);
+  void MergeFrom(const AccountLabelsType& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required uint32 count = 1;
+  inline bool has_count() const;
+  inline void clear_count();
+  static const int kCountFieldNumber = 1;
+  inline ::google::protobuf::uint32 count() const;
+  inline void set_count(::google::protobuf::uint32 value);
+
+  // repeated .AccountLabelType labels = 2;
+  inline int labels_size() const;
+  inline void clear_labels();
+  static const int kLabelsFieldNumber = 2;
+  inline const ::AccountLabelType& labels(int index) const;
+  inline ::AccountLabelType* mutable_labels(int index);
+  inline ::AccountLabelType* add_labels();
+  inline const ::google::protobuf::RepeatedPtrField< ::AccountLabelType >&
+      labels() const;
+  inline ::google::protobuf::RepeatedPtrField< ::AccountLabelType >*
+      mutable_labels();
+
+  // @@protoc_insertion_point(class_scope:AccountLabelsType)
+ private:
+  inline void set_has_count();
+  inline void clear_has_count();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::RepeatedPtrField< ::AccountLabelType > labels_;
+  ::google::protobuf::uint32 count_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
+
+  friend void  protobuf_AddDesc_types_2eproto();
+  friend void protobuf_AssignDesc_types_2eproto();
+  friend void protobuf_ShutdownFile_types_2eproto();
+
+  void InitAsDefaultInstance();
+  static AccountLabelsType* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class AccountLabelType : public ::google::protobuf::Message {
+ public:
+  AccountLabelType();
+  virtual ~AccountLabelType();
+
+  AccountLabelType(const AccountLabelType& from);
+
+  inline AccountLabelType& operator=(const AccountLabelType& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const AccountLabelType& default_instance();
+
+  void Swap(AccountLabelType* other);
+
+  // implements Message ----------------------------------------------
+
+  AccountLabelType* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const AccountLabelType& from);
+  void MergeFrom(const AccountLabelType& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required uint32 index = 1;
+  inline bool has_index() const;
+  inline void clear_index();
+  static const int kIndexFieldNumber = 1;
+  inline ::google::protobuf::uint32 index() const;
+  inline void set_index(::google::protobuf::uint32 value);
+
+  // required string label = 2;
+  inline bool has_label() const;
+  inline void clear_label();
+  static const int kLabelFieldNumber = 2;
+  inline const ::std::string& label() const;
+  inline void set_label(const ::std::string& value);
+  inline void set_label(const char* value);
+  inline void set_label(const char* value, size_t size);
+  inline ::std::string* mutable_label();
+  inline ::std::string* release_label();
+  inline void set_allocated_label(::std::string* label);
+
+  // @@protoc_insertion_point(class_scope:AccountLabelType)
+ private:
+  inline void set_has_index();
+  inline void clear_has_index();
+  inline void set_has_label();
+  inline void clear_has_label();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::std::string* label_;
+  ::google::protobuf::uint32 index_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
+
+  friend void  protobuf_AddDesc_types_2eproto();
+  friend void protobuf_AssignDesc_types_2eproto();
+  friend void protobuf_ShutdownFile_types_2eproto();
+
+  void InitAsDefaultInstance();
+  static AccountLabelType* default_instance_;
+};
 // ===================================================================
 
 static const int kWireInFieldNumber = 50002;
@@ -1588,6 +2083,73 @@ inline void HDNodeType::set_allocated_public_key(::std::string* public_key) {
 
 // -------------------------------------------------------------------
 
+// HDNodePathType
+
+// required .HDNodeType node = 1;
+inline bool HDNodePathType::has_node() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void HDNodePathType::set_has_node() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void HDNodePathType::clear_has_node() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void HDNodePathType::clear_node() {
+  if (node_ != NULL) node_->::HDNodeType::Clear();
+  clear_has_node();
+}
+inline const ::HDNodeType& HDNodePathType::node() const {
+  return node_ != NULL ? *node_ : *default_instance_->node_;
+}
+inline ::HDNodeType* HDNodePathType::mutable_node() {
+  set_has_node();
+  if (node_ == NULL) node_ = new ::HDNodeType;
+  return node_;
+}
+inline ::HDNodeType* HDNodePathType::release_node() {
+  clear_has_node();
+  ::HDNodeType* temp = node_;
+  node_ = NULL;
+  return temp;
+}
+inline void HDNodePathType::set_allocated_node(::HDNodeType* node) {
+  delete node_;
+  node_ = node;
+  if (node) {
+    set_has_node();
+  } else {
+    clear_has_node();
+  }
+}
+
+// repeated uint32 address_n = 2;
+inline int HDNodePathType::address_n_size() const {
+  return address_n_.size();
+}
+inline void HDNodePathType::clear_address_n() {
+  address_n_.Clear();
+}
+inline ::google::protobuf::uint32 HDNodePathType::address_n(int index) const {
+  return address_n_.Get(index);
+}
+inline void HDNodePathType::set_address_n(int index, ::google::protobuf::uint32 value) {
+  address_n_.Set(index, value);
+}
+inline void HDNodePathType::add_address_n(::google::protobuf::uint32 value) {
+  address_n_.Add(value);
+}
+inline const ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >&
+HDNodePathType::address_n() const {
+  return address_n_;
+}
+inline ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >*
+HDNodePathType::mutable_address_n() {
+  return &address_n_;
+}
+
+// -------------------------------------------------------------------
+
 // CoinType
 
 // optional string coin_name = 1;
@@ -1730,7 +2292,7 @@ inline void CoinType::set_allocated_coin_shortcut(::std::string* coin_shortcut) 
   }
 }
 
-// optional uint32 address_type = 3;
+// optional uint32 address_type = 3 [default = 0];
 inline bool CoinType::has_address_type() const {
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
@@ -1774,50 +2336,53 @@ inline void CoinType::set_maxfee_kb(::google::protobuf::uint64 value) {
   maxfee_kb_ = value;
 }
 
+// optional uint32 address_type_p2sh = 5 [default = 5];
+inline bool CoinType::has_address_type_p2sh() const {
+  return (_has_bits_[0] & 0x00000010u) != 0;
+}
+inline void CoinType::set_has_address_type_p2sh() {
+  _has_bits_[0] |= 0x00000010u;
+}
+inline void CoinType::clear_has_address_type_p2sh() {
+  _has_bits_[0] &= ~0x00000010u;
+}
+inline void CoinType::clear_address_type_p2sh() {
+  address_type_p2sh_ = 5u;
+  clear_has_address_type_p2sh();
+}
+inline ::google::protobuf::uint32 CoinType::address_type_p2sh() const {
+  return address_type_p2sh_;
+}
+inline void CoinType::set_address_type_p2sh(::google::protobuf::uint32 value) {
+  set_has_address_type_p2sh();
+  address_type_p2sh_ = value;
+}
+
 // -------------------------------------------------------------------
 
 // MultisigRedeemScriptType
 
-// repeated bytes pubkeys = 1;
+// repeated .HDNodePathType pubkeys = 1;
 inline int MultisigRedeemScriptType::pubkeys_size() const {
   return pubkeys_.size();
 }
 inline void MultisigRedeemScriptType::clear_pubkeys() {
   pubkeys_.Clear();
 }
-inline const ::std::string& MultisigRedeemScriptType::pubkeys(int index) const {
+inline const ::HDNodePathType& MultisigRedeemScriptType::pubkeys(int index) const {
   return pubkeys_.Get(index);
 }
-inline ::std::string* MultisigRedeemScriptType::mutable_pubkeys(int index) {
+inline ::HDNodePathType* MultisigRedeemScriptType::mutable_pubkeys(int index) {
   return pubkeys_.Mutable(index);
 }
-inline void MultisigRedeemScriptType::set_pubkeys(int index, const ::std::string& value) {
-  pubkeys_.Mutable(index)->assign(value);
-}
-inline void MultisigRedeemScriptType::set_pubkeys(int index, const char* value) {
-  pubkeys_.Mutable(index)->assign(value);
-}
-inline void MultisigRedeemScriptType::set_pubkeys(int index, const void* value, size_t size) {
-  pubkeys_.Mutable(index)->assign(
-    reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* MultisigRedeemScriptType::add_pubkeys() {
+inline ::HDNodePathType* MultisigRedeemScriptType::add_pubkeys() {
   return pubkeys_.Add();
 }
-inline void MultisigRedeemScriptType::add_pubkeys(const ::std::string& value) {
-  pubkeys_.Add()->assign(value);
-}
-inline void MultisigRedeemScriptType::add_pubkeys(const char* value) {
-  pubkeys_.Add()->assign(value);
-}
-inline void MultisigRedeemScriptType::add_pubkeys(const void* value, size_t size) {
-  pubkeys_.Add()->assign(reinterpret_cast<const char*>(value), size);
-}
-inline const ::google::protobuf::RepeatedPtrField< ::std::string>&
+inline const ::google::protobuf::RepeatedPtrField< ::HDNodePathType >&
 MultisigRedeemScriptType::pubkeys() const {
   return pubkeys_;
 }
-inline ::google::protobuf::RepeatedPtrField< ::std::string>*
+inline ::google::protobuf::RepeatedPtrField< ::HDNodePathType >*
 MultisigRedeemScriptType::mutable_pubkeys() {
   return &pubkeys_;
 }
@@ -1864,6 +2429,28 @@ MultisigRedeemScriptType::signatures() const {
 inline ::google::protobuf::RepeatedPtrField< ::std::string>*
 MultisigRedeemScriptType::mutable_signatures() {
   return &signatures_;
+}
+
+// optional uint32 m = 3;
+inline bool MultisigRedeemScriptType::has_m() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void MultisigRedeemScriptType::set_has_m() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void MultisigRedeemScriptType::clear_has_m() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void MultisigRedeemScriptType::clear_m() {
+  m_ = 0u;
+  clear_has_m();
+}
+inline ::google::protobuf::uint32 MultisigRedeemScriptType::m() const {
+  return m_;
+}
+inline void MultisigRedeemScriptType::set_m(::google::protobuf::uint32 value) {
+  set_has_m();
+  m_ = value;
 }
 
 // -------------------------------------------------------------------
@@ -2282,6 +2869,114 @@ inline void TxOutputType::set_script_type(::OutputScriptType value) {
   assert(::OutputScriptType_IsValid(value));
   set_has_script_type();
   script_type_ = value;
+}
+
+// optional .MultisigRedeemScriptType multisig = 5;
+inline bool TxOutputType::has_multisig() const {
+  return (_has_bits_[0] & 0x00000010u) != 0;
+}
+inline void TxOutputType::set_has_multisig() {
+  _has_bits_[0] |= 0x00000010u;
+}
+inline void TxOutputType::clear_has_multisig() {
+  _has_bits_[0] &= ~0x00000010u;
+}
+inline void TxOutputType::clear_multisig() {
+  if (multisig_ != NULL) multisig_->::MultisigRedeemScriptType::Clear();
+  clear_has_multisig();
+}
+inline const ::MultisigRedeemScriptType& TxOutputType::multisig() const {
+  return multisig_ != NULL ? *multisig_ : *default_instance_->multisig_;
+}
+inline ::MultisigRedeemScriptType* TxOutputType::mutable_multisig() {
+  set_has_multisig();
+  if (multisig_ == NULL) multisig_ = new ::MultisigRedeemScriptType;
+  return multisig_;
+}
+inline ::MultisigRedeemScriptType* TxOutputType::release_multisig() {
+  clear_has_multisig();
+  ::MultisigRedeemScriptType* temp = multisig_;
+  multisig_ = NULL;
+  return temp;
+}
+inline void TxOutputType::set_allocated_multisig(::MultisigRedeemScriptType* multisig) {
+  delete multisig_;
+  multisig_ = multisig;
+  if (multisig) {
+    set_has_multisig();
+  } else {
+    clear_has_multisig();
+  }
+}
+
+// optional bytes op_return_data = 6;
+inline bool TxOutputType::has_op_return_data() const {
+  return (_has_bits_[0] & 0x00000020u) != 0;
+}
+inline void TxOutputType::set_has_op_return_data() {
+  _has_bits_[0] |= 0x00000020u;
+}
+inline void TxOutputType::clear_has_op_return_data() {
+  _has_bits_[0] &= ~0x00000020u;
+}
+inline void TxOutputType::clear_op_return_data() {
+  if (op_return_data_ != &::google::protobuf::internal::kEmptyString) {
+    op_return_data_->clear();
+  }
+  clear_has_op_return_data();
+}
+inline const ::std::string& TxOutputType::op_return_data() const {
+  return *op_return_data_;
+}
+inline void TxOutputType::set_op_return_data(const ::std::string& value) {
+  set_has_op_return_data();
+  if (op_return_data_ == &::google::protobuf::internal::kEmptyString) {
+    op_return_data_ = new ::std::string;
+  }
+  op_return_data_->assign(value);
+}
+inline void TxOutputType::set_op_return_data(const char* value) {
+  set_has_op_return_data();
+  if (op_return_data_ == &::google::protobuf::internal::kEmptyString) {
+    op_return_data_ = new ::std::string;
+  }
+  op_return_data_->assign(value);
+}
+inline void TxOutputType::set_op_return_data(const void* value, size_t size) {
+  set_has_op_return_data();
+  if (op_return_data_ == &::google::protobuf::internal::kEmptyString) {
+    op_return_data_ = new ::std::string;
+  }
+  op_return_data_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* TxOutputType::mutable_op_return_data() {
+  set_has_op_return_data();
+  if (op_return_data_ == &::google::protobuf::internal::kEmptyString) {
+    op_return_data_ = new ::std::string;
+  }
+  return op_return_data_;
+}
+inline ::std::string* TxOutputType::release_op_return_data() {
+  clear_has_op_return_data();
+  if (op_return_data_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = op_return_data_;
+    op_return_data_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void TxOutputType::set_allocated_op_return_data(::std::string* op_return_data) {
+  if (op_return_data_ != &::google::protobuf::internal::kEmptyString) {
+    delete op_return_data_;
+  }
+  if (op_return_data) {
+    set_has_op_return_data();
+    op_return_data_ = op_return_data;
+  } else {
+    clear_has_op_return_data();
+    op_return_data_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
 }
 
 // -------------------------------------------------------------------
@@ -2806,6 +3501,529 @@ inline void TxRequestSerializedType::set_allocated_serialized_tx(::std::string* 
   } else {
     clear_has_serialized_tx();
     serialized_tx_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// -------------------------------------------------------------------
+
+// IdentityType
+
+// optional string proto = 1;
+inline bool IdentityType::has_proto() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void IdentityType::set_has_proto() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void IdentityType::clear_has_proto() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void IdentityType::clear_proto() {
+  if (proto_ != &::google::protobuf::internal::kEmptyString) {
+    proto_->clear();
+  }
+  clear_has_proto();
+}
+inline const ::std::string& IdentityType::proto() const {
+  return *proto_;
+}
+inline void IdentityType::set_proto(const ::std::string& value) {
+  set_has_proto();
+  if (proto_ == &::google::protobuf::internal::kEmptyString) {
+    proto_ = new ::std::string;
+  }
+  proto_->assign(value);
+}
+inline void IdentityType::set_proto(const char* value) {
+  set_has_proto();
+  if (proto_ == &::google::protobuf::internal::kEmptyString) {
+    proto_ = new ::std::string;
+  }
+  proto_->assign(value);
+}
+inline void IdentityType::set_proto(const char* value, size_t size) {
+  set_has_proto();
+  if (proto_ == &::google::protobuf::internal::kEmptyString) {
+    proto_ = new ::std::string;
+  }
+  proto_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* IdentityType::mutable_proto() {
+  set_has_proto();
+  if (proto_ == &::google::protobuf::internal::kEmptyString) {
+    proto_ = new ::std::string;
+  }
+  return proto_;
+}
+inline ::std::string* IdentityType::release_proto() {
+  clear_has_proto();
+  if (proto_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = proto_;
+    proto_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void IdentityType::set_allocated_proto(::std::string* proto) {
+  if (proto_ != &::google::protobuf::internal::kEmptyString) {
+    delete proto_;
+  }
+  if (proto) {
+    set_has_proto();
+    proto_ = proto;
+  } else {
+    clear_has_proto();
+    proto_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// optional string user = 2;
+inline bool IdentityType::has_user() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void IdentityType::set_has_user() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void IdentityType::clear_has_user() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void IdentityType::clear_user() {
+  if (user_ != &::google::protobuf::internal::kEmptyString) {
+    user_->clear();
+  }
+  clear_has_user();
+}
+inline const ::std::string& IdentityType::user() const {
+  return *user_;
+}
+inline void IdentityType::set_user(const ::std::string& value) {
+  set_has_user();
+  if (user_ == &::google::protobuf::internal::kEmptyString) {
+    user_ = new ::std::string;
+  }
+  user_->assign(value);
+}
+inline void IdentityType::set_user(const char* value) {
+  set_has_user();
+  if (user_ == &::google::protobuf::internal::kEmptyString) {
+    user_ = new ::std::string;
+  }
+  user_->assign(value);
+}
+inline void IdentityType::set_user(const char* value, size_t size) {
+  set_has_user();
+  if (user_ == &::google::protobuf::internal::kEmptyString) {
+    user_ = new ::std::string;
+  }
+  user_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* IdentityType::mutable_user() {
+  set_has_user();
+  if (user_ == &::google::protobuf::internal::kEmptyString) {
+    user_ = new ::std::string;
+  }
+  return user_;
+}
+inline ::std::string* IdentityType::release_user() {
+  clear_has_user();
+  if (user_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = user_;
+    user_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void IdentityType::set_allocated_user(::std::string* user) {
+  if (user_ != &::google::protobuf::internal::kEmptyString) {
+    delete user_;
+  }
+  if (user) {
+    set_has_user();
+    user_ = user;
+  } else {
+    clear_has_user();
+    user_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// optional string host = 3;
+inline bool IdentityType::has_host() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void IdentityType::set_has_host() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void IdentityType::clear_has_host() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void IdentityType::clear_host() {
+  if (host_ != &::google::protobuf::internal::kEmptyString) {
+    host_->clear();
+  }
+  clear_has_host();
+}
+inline const ::std::string& IdentityType::host() const {
+  return *host_;
+}
+inline void IdentityType::set_host(const ::std::string& value) {
+  set_has_host();
+  if (host_ == &::google::protobuf::internal::kEmptyString) {
+    host_ = new ::std::string;
+  }
+  host_->assign(value);
+}
+inline void IdentityType::set_host(const char* value) {
+  set_has_host();
+  if (host_ == &::google::protobuf::internal::kEmptyString) {
+    host_ = new ::std::string;
+  }
+  host_->assign(value);
+}
+inline void IdentityType::set_host(const char* value, size_t size) {
+  set_has_host();
+  if (host_ == &::google::protobuf::internal::kEmptyString) {
+    host_ = new ::std::string;
+  }
+  host_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* IdentityType::mutable_host() {
+  set_has_host();
+  if (host_ == &::google::protobuf::internal::kEmptyString) {
+    host_ = new ::std::string;
+  }
+  return host_;
+}
+inline ::std::string* IdentityType::release_host() {
+  clear_has_host();
+  if (host_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = host_;
+    host_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void IdentityType::set_allocated_host(::std::string* host) {
+  if (host_ != &::google::protobuf::internal::kEmptyString) {
+    delete host_;
+  }
+  if (host) {
+    set_has_host();
+    host_ = host;
+  } else {
+    clear_has_host();
+    host_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// optional string port = 4;
+inline bool IdentityType::has_port() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void IdentityType::set_has_port() {
+  _has_bits_[0] |= 0x00000008u;
+}
+inline void IdentityType::clear_has_port() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+inline void IdentityType::clear_port() {
+  if (port_ != &::google::protobuf::internal::kEmptyString) {
+    port_->clear();
+  }
+  clear_has_port();
+}
+inline const ::std::string& IdentityType::port() const {
+  return *port_;
+}
+inline void IdentityType::set_port(const ::std::string& value) {
+  set_has_port();
+  if (port_ == &::google::protobuf::internal::kEmptyString) {
+    port_ = new ::std::string;
+  }
+  port_->assign(value);
+}
+inline void IdentityType::set_port(const char* value) {
+  set_has_port();
+  if (port_ == &::google::protobuf::internal::kEmptyString) {
+    port_ = new ::std::string;
+  }
+  port_->assign(value);
+}
+inline void IdentityType::set_port(const char* value, size_t size) {
+  set_has_port();
+  if (port_ == &::google::protobuf::internal::kEmptyString) {
+    port_ = new ::std::string;
+  }
+  port_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* IdentityType::mutable_port() {
+  set_has_port();
+  if (port_ == &::google::protobuf::internal::kEmptyString) {
+    port_ = new ::std::string;
+  }
+  return port_;
+}
+inline ::std::string* IdentityType::release_port() {
+  clear_has_port();
+  if (port_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = port_;
+    port_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void IdentityType::set_allocated_port(::std::string* port) {
+  if (port_ != &::google::protobuf::internal::kEmptyString) {
+    delete port_;
+  }
+  if (port) {
+    set_has_port();
+    port_ = port;
+  } else {
+    clear_has_port();
+    port_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// optional string path = 5;
+inline bool IdentityType::has_path() const {
+  return (_has_bits_[0] & 0x00000010u) != 0;
+}
+inline void IdentityType::set_has_path() {
+  _has_bits_[0] |= 0x00000010u;
+}
+inline void IdentityType::clear_has_path() {
+  _has_bits_[0] &= ~0x00000010u;
+}
+inline void IdentityType::clear_path() {
+  if (path_ != &::google::protobuf::internal::kEmptyString) {
+    path_->clear();
+  }
+  clear_has_path();
+}
+inline const ::std::string& IdentityType::path() const {
+  return *path_;
+}
+inline void IdentityType::set_path(const ::std::string& value) {
+  set_has_path();
+  if (path_ == &::google::protobuf::internal::kEmptyString) {
+    path_ = new ::std::string;
+  }
+  path_->assign(value);
+}
+inline void IdentityType::set_path(const char* value) {
+  set_has_path();
+  if (path_ == &::google::protobuf::internal::kEmptyString) {
+    path_ = new ::std::string;
+  }
+  path_->assign(value);
+}
+inline void IdentityType::set_path(const char* value, size_t size) {
+  set_has_path();
+  if (path_ == &::google::protobuf::internal::kEmptyString) {
+    path_ = new ::std::string;
+  }
+  path_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* IdentityType::mutable_path() {
+  set_has_path();
+  if (path_ == &::google::protobuf::internal::kEmptyString) {
+    path_ = new ::std::string;
+  }
+  return path_;
+}
+inline ::std::string* IdentityType::release_path() {
+  clear_has_path();
+  if (path_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = path_;
+    path_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void IdentityType::set_allocated_path(::std::string* path) {
+  if (path_ != &::google::protobuf::internal::kEmptyString) {
+    delete path_;
+  }
+  if (path) {
+    set_has_path();
+    path_ = path;
+  } else {
+    clear_has_path();
+    path_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// optional uint32 index = 6 [default = 0];
+inline bool IdentityType::has_index() const {
+  return (_has_bits_[0] & 0x00000020u) != 0;
+}
+inline void IdentityType::set_has_index() {
+  _has_bits_[0] |= 0x00000020u;
+}
+inline void IdentityType::clear_has_index() {
+  _has_bits_[0] &= ~0x00000020u;
+}
+inline void IdentityType::clear_index() {
+  index_ = 0u;
+  clear_has_index();
+}
+inline ::google::protobuf::uint32 IdentityType::index() const {
+  return index_;
+}
+inline void IdentityType::set_index(::google::protobuf::uint32 value) {
+  set_has_index();
+  index_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// AccountLabelsType
+
+// required uint32 count = 1;
+inline bool AccountLabelsType::has_count() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void AccountLabelsType::set_has_count() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void AccountLabelsType::clear_has_count() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void AccountLabelsType::clear_count() {
+  count_ = 0u;
+  clear_has_count();
+}
+inline ::google::protobuf::uint32 AccountLabelsType::count() const {
+  return count_;
+}
+inline void AccountLabelsType::set_count(::google::protobuf::uint32 value) {
+  set_has_count();
+  count_ = value;
+}
+
+// repeated .AccountLabelType labels = 2;
+inline int AccountLabelsType::labels_size() const {
+  return labels_.size();
+}
+inline void AccountLabelsType::clear_labels() {
+  labels_.Clear();
+}
+inline const ::AccountLabelType& AccountLabelsType::labels(int index) const {
+  return labels_.Get(index);
+}
+inline ::AccountLabelType* AccountLabelsType::mutable_labels(int index) {
+  return labels_.Mutable(index);
+}
+inline ::AccountLabelType* AccountLabelsType::add_labels() {
+  return labels_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::AccountLabelType >&
+AccountLabelsType::labels() const {
+  return labels_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::AccountLabelType >*
+AccountLabelsType::mutable_labels() {
+  return &labels_;
+}
+
+// -------------------------------------------------------------------
+
+// AccountLabelType
+
+// required uint32 index = 1;
+inline bool AccountLabelType::has_index() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void AccountLabelType::set_has_index() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void AccountLabelType::clear_has_index() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void AccountLabelType::clear_index() {
+  index_ = 0u;
+  clear_has_index();
+}
+inline ::google::protobuf::uint32 AccountLabelType::index() const {
+  return index_;
+}
+inline void AccountLabelType::set_index(::google::protobuf::uint32 value) {
+  set_has_index();
+  index_ = value;
+}
+
+// required string label = 2;
+inline bool AccountLabelType::has_label() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void AccountLabelType::set_has_label() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void AccountLabelType::clear_has_label() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void AccountLabelType::clear_label() {
+  if (label_ != &::google::protobuf::internal::kEmptyString) {
+    label_->clear();
+  }
+  clear_has_label();
+}
+inline const ::std::string& AccountLabelType::label() const {
+  return *label_;
+}
+inline void AccountLabelType::set_label(const ::std::string& value) {
+  set_has_label();
+  if (label_ == &::google::protobuf::internal::kEmptyString) {
+    label_ = new ::std::string;
+  }
+  label_->assign(value);
+}
+inline void AccountLabelType::set_label(const char* value) {
+  set_has_label();
+  if (label_ == &::google::protobuf::internal::kEmptyString) {
+    label_ = new ::std::string;
+  }
+  label_->assign(value);
+}
+inline void AccountLabelType::set_label(const char* value, size_t size) {
+  set_has_label();
+  if (label_ == &::google::protobuf::internal::kEmptyString) {
+    label_ = new ::std::string;
+  }
+  label_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* AccountLabelType::mutable_label() {
+  set_has_label();
+  if (label_ == &::google::protobuf::internal::kEmptyString) {
+    label_ = new ::std::string;
+  }
+  return label_;
+}
+inline ::std::string* AccountLabelType::release_label() {
+  clear_has_label();
+  if (label_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = label_;
+    label_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void AccountLabelType::set_allocated_label(::std::string* label) {
+  if (label_ != &::google::protobuf::internal::kEmptyString) {
+    delete label_;
+  }
+  if (label) {
+    set_has_label();
+    label_ = label;
+  } else {
+    clear_has_label();
+    label_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   }
 }
 

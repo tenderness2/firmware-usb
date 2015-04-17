@@ -1,13 +1,13 @@
 /**
- * Storage area of TREZOR
+ * Storage area of BWallet
  *
  * @author	Marek Palatinus <slush@satoshilabs.com>
  * @version	1
  */
 
 // Sugar for easier handling in Java
-option java_package = "com.satoshilabs.trezor.protobuf";
-option java_outer_classname = "TrezorStorage";
+option java_package = "com.bdx.bwallet.protobuf";
+option java_outer_classname = "BWalletStorage";
 
 import "types.proto";
 
@@ -24,4 +24,6 @@ message Storage {
 	optional string language = 7;			// current language
 	optional string label = 8;			// device label
 	optional bool imported = 9;			// was storage imported from an external source?
+	optional bytes homescreen = 10;			// image used as homescreen (logo + label is used when not set)
+	repeated AccountLabelsType  label_list = 11; //storage all coin account label  
 }

@@ -66,17 +66,25 @@ class SignMessage;
 class VerifyMessage;
 class MessageSignature;
 class EncryptMessage;
+class EncryptedMessage;
 class DecryptMessage;
+class DecryptedMessage;
 class CipherKeyValue;
+class CipheredKeyValue;
 class EstimateTxSize;
 class TxSize;
 class SignTx;
 class SimpleSignTx;
 class TxRequest;
 class TxAck;
+class SignIdentity;
+class SignedIdentity;
 class FirmwareErase;
 class FirmwareUpload;
 class TestScreen;
+class AccountLabels;
+class GetAccountLabels;
+class SetAccountLabel;
 class DebugLinkDecision;
 class DebugLinkGetState;
 class DebugLinkState;
@@ -118,8 +126,6 @@ enum MessageType {
   MessageType_SignMessage = 38,
   MessageType_VerifyMessage = 39,
   MessageType_MessageSignature = 40,
-  MessageType_EncryptMessage = 48,
-  MessageType_DecryptMessage = 49,
   MessageType_PassphraseRequest = 41,
   MessageType_PassphraseAck = 42,
   MessageType_EstimateTxSize = 43,
@@ -127,7 +133,17 @@ enum MessageType {
   MessageType_RecoveryDevice = 45,
   MessageType_WordRequest = 46,
   MessageType_WordAck = 47,
-  MessageType_TestScreen = 50,
+  MessageType_CipheredKeyValue = 48,
+  MessageType_EncryptMessage = 49,
+  MessageType_EncryptedMessage = 50,
+  MessageType_DecryptMessage = 51,
+  MessageType_DecryptedMessage = 52,
+  MessageType_SignIdentity = 53,
+  MessageType_SignedIdentity = 54,
+  MessageType_AccountLabels = 96,
+  MessageType_GetAccountLabels = 97,
+  MessageType_SetAccountLabel = 98,
+  MessageType_TestScreen = 99,
   MessageType_DebugLinkDecision = 100,
   MessageType_DebugLinkGetState = 101,
   MessageType_DebugLinkState = 102,
@@ -205,14 +221,29 @@ class Initialize : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
+  // optional string language = 1;
+  inline bool has_language() const;
+  inline void clear_language();
+  static const int kLanguageFieldNumber = 1;
+  inline const ::std::string& language() const;
+  inline void set_language(const ::std::string& value);
+  inline void set_language(const char* value);
+  inline void set_language(const char* value, size_t size);
+  inline ::std::string* mutable_language();
+  inline ::std::string* release_language();
+  inline void set_allocated_language(::std::string* language);
+
   // @@protoc_insertion_point(class_scope:Initialize)
  private:
+  inline void set_has_language();
+  inline void clear_has_language();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
+  ::std::string* language_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[1];
+  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
 
   friend void  protobuf_AddDesc_messages_2eproto();
   friend void protobuf_AssignDesc_messages_2eproto();
@@ -417,18 +448,6 @@ class Features : public ::google::protobuf::Message {
   inline bool imported() const;
   inline void set_imported(bool value);
 
-  // optional string cpu_sn = 16;
-  inline bool has_cpu_sn() const;
-  inline void clear_cpu_sn();
-  static const int kCpuSnFieldNumber = 16;
-  inline const ::std::string& cpu_sn() const;
-  inline void set_cpu_sn(const ::std::string& value);
-  inline void set_cpu_sn(const char* value);
-  inline void set_cpu_sn(const char* value, size_t size);
-  inline ::std::string* mutable_cpu_sn();
-  inline ::std::string* release_cpu_sn();
-  inline void set_allocated_cpu_sn(::std::string* cpu_sn);
-
   // @@protoc_insertion_point(class_scope:Features)
  private:
   inline void set_has_vendor();
@@ -459,8 +478,6 @@ class Features : public ::google::protobuf::Message {
   inline void clear_has_bootloader_hash();
   inline void set_has_imported();
   inline void clear_has_imported();
-  inline void set_has_cpu_sn();
-  inline void clear_has_cpu_sn();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
@@ -478,11 +495,10 @@ class Features : public ::google::protobuf::Message {
   ::google::protobuf::RepeatedPtrField< ::CoinType > coins_;
   ::std::string* revision_;
   ::std::string* bootloader_hash_;
-  ::std::string* cpu_sn_;
   bool imported_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(16 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(15 + 31) / 32];
 
   friend void  protobuf_AddDesc_messages_2eproto();
   friend void protobuf_AssignDesc_messages_2eproto();
@@ -643,20 +659,45 @@ class ApplySettings : public ::google::protobuf::Message {
   inline ::std::string* release_label();
   inline void set_allocated_label(::std::string* label);
 
+  // optional bool use_passphrase = 3;
+  inline bool has_use_passphrase() const;
+  inline void clear_use_passphrase();
+  static const int kUsePassphraseFieldNumber = 3;
+  inline bool use_passphrase() const;
+  inline void set_use_passphrase(bool value);
+
+  // optional bytes homescreen = 4;
+  inline bool has_homescreen() const;
+  inline void clear_homescreen();
+  static const int kHomescreenFieldNumber = 4;
+  inline const ::std::string& homescreen() const;
+  inline void set_homescreen(const ::std::string& value);
+  inline void set_homescreen(const char* value);
+  inline void set_homescreen(const void* value, size_t size);
+  inline ::std::string* mutable_homescreen();
+  inline ::std::string* release_homescreen();
+  inline void set_allocated_homescreen(::std::string* homescreen);
+
   // @@protoc_insertion_point(class_scope:ApplySettings)
  private:
   inline void set_has_language();
   inline void clear_has_language();
   inline void set_has_label();
   inline void clear_has_label();
+  inline void set_has_use_passphrase();
+  inline void clear_has_use_passphrase();
+  inline void set_has_homescreen();
+  inline void clear_has_homescreen();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
   ::std::string* language_;
   ::std::string* label_;
+  ::std::string* homescreen_;
+  bool use_passphrase_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
 
   friend void  protobuf_AddDesc_messages_2eproto();
   friend void protobuf_AssignDesc_messages_2eproto();
@@ -932,32 +973,17 @@ class Success : public ::google::protobuf::Message {
   inline ::std::string* release_message();
   inline void set_allocated_message(::std::string* message);
 
-  // optional bytes payload = 2;
-  inline bool has_payload() const;
-  inline void clear_payload();
-  static const int kPayloadFieldNumber = 2;
-  inline const ::std::string& payload() const;
-  inline void set_payload(const ::std::string& value);
-  inline void set_payload(const char* value);
-  inline void set_payload(const void* value, size_t size);
-  inline ::std::string* mutable_payload();
-  inline ::std::string* release_payload();
-  inline void set_allocated_payload(::std::string* payload);
-
   // @@protoc_insertion_point(class_scope:Success)
  private:
   inline void set_has_message();
   inline void clear_has_message();
-  inline void set_has_payload();
-  inline void clear_has_payload();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
   ::std::string* message_;
-  ::std::string* payload_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
 
   friend void  protobuf_AddDesc_messages_2eproto();
   friend void protobuf_AssignDesc_messages_2eproto();
@@ -2072,22 +2098,34 @@ class GetAddress : public ::google::protobuf::Message {
   inline bool show_display() const;
   inline void set_show_display(bool value);
 
+  // optional .MultisigRedeemScriptType multisig = 4;
+  inline bool has_multisig() const;
+  inline void clear_multisig();
+  static const int kMultisigFieldNumber = 4;
+  inline const ::MultisigRedeemScriptType& multisig() const;
+  inline ::MultisigRedeemScriptType* mutable_multisig();
+  inline ::MultisigRedeemScriptType* release_multisig();
+  inline void set_allocated_multisig(::MultisigRedeemScriptType* multisig);
+
   // @@protoc_insertion_point(class_scope:GetAddress)
  private:
   inline void set_has_coin_name();
   inline void clear_has_coin_name();
   inline void set_has_show_display();
   inline void clear_has_show_display();
+  inline void set_has_multisig();
+  inline void clear_has_multisig();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
   ::google::protobuf::RepeatedField< ::google::protobuf::uint32 > address_n_;
   ::std::string* coin_name_;
   static ::std::string* _default_coin_name_;
+  ::MultisigRedeemScriptType* multisig_;
   bool show_display_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
 
   friend void  protobuf_AddDesc_messages_2eproto();
   friend void protobuf_AssignDesc_messages_2eproto();
@@ -3458,6 +3496,18 @@ class EncryptMessage : public ::google::protobuf::Message {
   inline ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >*
       mutable_address_n();
 
+  // optional string coin_name = 5 [default = "Bitcoin"];
+  inline bool has_coin_name() const;
+  inline void clear_coin_name();
+  static const int kCoinNameFieldNumber = 5;
+  inline const ::std::string& coin_name() const;
+  inline void set_coin_name(const ::std::string& value);
+  inline void set_coin_name(const char* value);
+  inline void set_coin_name(const char* value, size_t size);
+  inline ::std::string* mutable_coin_name();
+  inline ::std::string* release_coin_name();
+  inline void set_allocated_coin_name(::std::string* coin_name);
+
   // @@protoc_insertion_point(class_scope:EncryptMessage)
  private:
   inline void set_has_pubkey();
@@ -3466,16 +3516,20 @@ class EncryptMessage : public ::google::protobuf::Message {
   inline void clear_has_message();
   inline void set_has_display_only();
   inline void clear_has_display_only();
+  inline void set_has_coin_name();
+  inline void clear_has_coin_name();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
   ::std::string* pubkey_;
   ::std::string* message_;
   ::google::protobuf::RepeatedField< ::google::protobuf::uint32 > address_n_;
+  ::std::string* coin_name_;
+  static ::std::string* _default_coin_name_;
   bool display_only_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(5 + 31) / 32];
 
   friend void  protobuf_AddDesc_messages_2eproto();
   friend void protobuf_AssignDesc_messages_2eproto();
@@ -3483,6 +3537,123 @@ class EncryptMessage : public ::google::protobuf::Message {
 
   void InitAsDefaultInstance();
   static EncryptMessage* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class EncryptedMessage : public ::google::protobuf::Message {
+ public:
+  EncryptedMessage();
+  virtual ~EncryptedMessage();
+
+  EncryptedMessage(const EncryptedMessage& from);
+
+  inline EncryptedMessage& operator=(const EncryptedMessage& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const EncryptedMessage& default_instance();
+
+  void Swap(EncryptedMessage* other);
+
+  // implements Message ----------------------------------------------
+
+  EncryptedMessage* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const EncryptedMessage& from);
+  void MergeFrom(const EncryptedMessage& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // optional bytes nonce = 1;
+  inline bool has_nonce() const;
+  inline void clear_nonce();
+  static const int kNonceFieldNumber = 1;
+  inline const ::std::string& nonce() const;
+  inline void set_nonce(const ::std::string& value);
+  inline void set_nonce(const char* value);
+  inline void set_nonce(const void* value, size_t size);
+  inline ::std::string* mutable_nonce();
+  inline ::std::string* release_nonce();
+  inline void set_allocated_nonce(::std::string* nonce);
+
+  // optional bytes message = 2;
+  inline bool has_message() const;
+  inline void clear_message();
+  static const int kMessageFieldNumber = 2;
+  inline const ::std::string& message() const;
+  inline void set_message(const ::std::string& value);
+  inline void set_message(const char* value);
+  inline void set_message(const void* value, size_t size);
+  inline ::std::string* mutable_message();
+  inline ::std::string* release_message();
+  inline void set_allocated_message(::std::string* message);
+
+  // optional bytes hmac = 3;
+  inline bool has_hmac() const;
+  inline void clear_hmac();
+  static const int kHmacFieldNumber = 3;
+  inline const ::std::string& hmac() const;
+  inline void set_hmac(const ::std::string& value);
+  inline void set_hmac(const char* value);
+  inline void set_hmac(const void* value, size_t size);
+  inline ::std::string* mutable_hmac();
+  inline ::std::string* release_hmac();
+  inline void set_allocated_hmac(::std::string* hmac);
+
+  // @@protoc_insertion_point(class_scope:EncryptedMessage)
+ private:
+  inline void set_has_nonce();
+  inline void clear_has_nonce();
+  inline void set_has_message();
+  inline void clear_has_message();
+  inline void set_has_hmac();
+  inline void clear_has_hmac();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::std::string* nonce_;
+  ::std::string* message_;
+  ::std::string* hmac_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
+
+  friend void  protobuf_AddDesc_messages_2eproto();
+  friend void protobuf_AssignDesc_messages_2eproto();
+  friend void protobuf_ShutdownFile_messages_2eproto();
+
+  void InitAsDefaultInstance();
+  static EncryptedMessage* default_instance_;
 };
 // -------------------------------------------------------------------
 
@@ -3552,10 +3723,22 @@ class DecryptMessage : public ::google::protobuf::Message {
   inline ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >*
       mutable_address_n();
 
-  // optional bytes message = 2;
+  // optional bytes nonce = 2;
+  inline bool has_nonce() const;
+  inline void clear_nonce();
+  static const int kNonceFieldNumber = 2;
+  inline const ::std::string& nonce() const;
+  inline void set_nonce(const ::std::string& value);
+  inline void set_nonce(const char* value);
+  inline void set_nonce(const void* value, size_t size);
+  inline ::std::string* mutable_nonce();
+  inline ::std::string* release_nonce();
+  inline void set_allocated_nonce(::std::string* nonce);
+
+  // optional bytes message = 3;
   inline bool has_message() const;
   inline void clear_message();
-  static const int kMessageFieldNumber = 2;
+  static const int kMessageFieldNumber = 3;
   inline const ::std::string& message() const;
   inline void set_message(const ::std::string& value);
   inline void set_message(const char* value);
@@ -3564,15 +3747,135 @@ class DecryptMessage : public ::google::protobuf::Message {
   inline ::std::string* release_message();
   inline void set_allocated_message(::std::string* message);
 
+  // optional bytes hmac = 4;
+  inline bool has_hmac() const;
+  inline void clear_hmac();
+  static const int kHmacFieldNumber = 4;
+  inline const ::std::string& hmac() const;
+  inline void set_hmac(const ::std::string& value);
+  inline void set_hmac(const char* value);
+  inline void set_hmac(const void* value, size_t size);
+  inline ::std::string* mutable_hmac();
+  inline ::std::string* release_hmac();
+  inline void set_allocated_hmac(::std::string* hmac);
+
   // @@protoc_insertion_point(class_scope:DecryptMessage)
  private:
+  inline void set_has_nonce();
+  inline void clear_has_nonce();
   inline void set_has_message();
   inline void clear_has_message();
+  inline void set_has_hmac();
+  inline void clear_has_hmac();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
   ::google::protobuf::RepeatedField< ::google::protobuf::uint32 > address_n_;
+  ::std::string* nonce_;
   ::std::string* message_;
+  ::std::string* hmac_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
+
+  friend void  protobuf_AddDesc_messages_2eproto();
+  friend void protobuf_AssignDesc_messages_2eproto();
+  friend void protobuf_ShutdownFile_messages_2eproto();
+
+  void InitAsDefaultInstance();
+  static DecryptMessage* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class DecryptedMessage : public ::google::protobuf::Message {
+ public:
+  DecryptedMessage();
+  virtual ~DecryptedMessage();
+
+  DecryptedMessage(const DecryptedMessage& from);
+
+  inline DecryptedMessage& operator=(const DecryptedMessage& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const DecryptedMessage& default_instance();
+
+  void Swap(DecryptedMessage* other);
+
+  // implements Message ----------------------------------------------
+
+  DecryptedMessage* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const DecryptedMessage& from);
+  void MergeFrom(const DecryptedMessage& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // optional bytes message = 1;
+  inline bool has_message() const;
+  inline void clear_message();
+  static const int kMessageFieldNumber = 1;
+  inline const ::std::string& message() const;
+  inline void set_message(const ::std::string& value);
+  inline void set_message(const char* value);
+  inline void set_message(const void* value, size_t size);
+  inline ::std::string* mutable_message();
+  inline ::std::string* release_message();
+  inline void set_allocated_message(::std::string* message);
+
+  // optional string address = 2;
+  inline bool has_address() const;
+  inline void clear_address();
+  static const int kAddressFieldNumber = 2;
+  inline const ::std::string& address() const;
+  inline void set_address(const ::std::string& value);
+  inline void set_address(const char* value);
+  inline void set_address(const char* value, size_t size);
+  inline ::std::string* mutable_address();
+  inline ::std::string* release_address();
+  inline void set_allocated_address(::std::string* address);
+
+  // @@protoc_insertion_point(class_scope:DecryptedMessage)
+ private:
+  inline void set_has_message();
+  inline void clear_has_message();
+  inline void set_has_address();
+  inline void clear_has_address();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::std::string* message_;
+  ::std::string* address_;
 
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
@@ -3582,7 +3885,7 @@ class DecryptMessage : public ::google::protobuf::Message {
   friend void protobuf_ShutdownFile_messages_2eproto();
 
   void InitAsDefaultInstance();
-  static DecryptMessage* default_instance_;
+  static DecryptedMessage* default_instance_;
 };
 // -------------------------------------------------------------------
 
@@ -3728,6 +4031,93 @@ class CipherKeyValue : public ::google::protobuf::Message {
 
   void InitAsDefaultInstance();
   static CipherKeyValue* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class CipheredKeyValue : public ::google::protobuf::Message {
+ public:
+  CipheredKeyValue();
+  virtual ~CipheredKeyValue();
+
+  CipheredKeyValue(const CipheredKeyValue& from);
+
+  inline CipheredKeyValue& operator=(const CipheredKeyValue& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const CipheredKeyValue& default_instance();
+
+  void Swap(CipheredKeyValue* other);
+
+  // implements Message ----------------------------------------------
+
+  CipheredKeyValue* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const CipheredKeyValue& from);
+  void MergeFrom(const CipheredKeyValue& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // optional bytes value = 1;
+  inline bool has_value() const;
+  inline void clear_value();
+  static const int kValueFieldNumber = 1;
+  inline const ::std::string& value() const;
+  inline void set_value(const ::std::string& value);
+  inline void set_value(const char* value);
+  inline void set_value(const void* value, size_t size);
+  inline ::std::string* mutable_value();
+  inline ::std::string* release_value();
+  inline void set_allocated_value(::std::string* value);
+
+  // @@protoc_insertion_point(class_scope:CipheredKeyValue)
+ private:
+  inline void set_has_value();
+  inline void clear_has_value();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::std::string* value_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
+
+  friend void  protobuf_AddDesc_messages_2eproto();
+  friend void protobuf_AssignDesc_messages_2eproto();
+  friend void protobuf_ShutdownFile_messages_2eproto();
+
+  void InitAsDefaultInstance();
+  static CipheredKeyValue* default_instance_;
 };
 // -------------------------------------------------------------------
 
@@ -4346,6 +4736,237 @@ class TxAck : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
+class SignIdentity : public ::google::protobuf::Message {
+ public:
+  SignIdentity();
+  virtual ~SignIdentity();
+
+  SignIdentity(const SignIdentity& from);
+
+  inline SignIdentity& operator=(const SignIdentity& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const SignIdentity& default_instance();
+
+  void Swap(SignIdentity* other);
+
+  // implements Message ----------------------------------------------
+
+  SignIdentity* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const SignIdentity& from);
+  void MergeFrom(const SignIdentity& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // optional .IdentityType identity = 1;
+  inline bool has_identity() const;
+  inline void clear_identity();
+  static const int kIdentityFieldNumber = 1;
+  inline const ::IdentityType& identity() const;
+  inline ::IdentityType* mutable_identity();
+  inline ::IdentityType* release_identity();
+  inline void set_allocated_identity(::IdentityType* identity);
+
+  // optional bytes challenge_hidden = 2;
+  inline bool has_challenge_hidden() const;
+  inline void clear_challenge_hidden();
+  static const int kChallengeHiddenFieldNumber = 2;
+  inline const ::std::string& challenge_hidden() const;
+  inline void set_challenge_hidden(const ::std::string& value);
+  inline void set_challenge_hidden(const char* value);
+  inline void set_challenge_hidden(const void* value, size_t size);
+  inline ::std::string* mutable_challenge_hidden();
+  inline ::std::string* release_challenge_hidden();
+  inline void set_allocated_challenge_hidden(::std::string* challenge_hidden);
+
+  // optional string challenge_visual = 3;
+  inline bool has_challenge_visual() const;
+  inline void clear_challenge_visual();
+  static const int kChallengeVisualFieldNumber = 3;
+  inline const ::std::string& challenge_visual() const;
+  inline void set_challenge_visual(const ::std::string& value);
+  inline void set_challenge_visual(const char* value);
+  inline void set_challenge_visual(const char* value, size_t size);
+  inline ::std::string* mutable_challenge_visual();
+  inline ::std::string* release_challenge_visual();
+  inline void set_allocated_challenge_visual(::std::string* challenge_visual);
+
+  // @@protoc_insertion_point(class_scope:SignIdentity)
+ private:
+  inline void set_has_identity();
+  inline void clear_has_identity();
+  inline void set_has_challenge_hidden();
+  inline void clear_has_challenge_hidden();
+  inline void set_has_challenge_visual();
+  inline void clear_has_challenge_visual();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::IdentityType* identity_;
+  ::std::string* challenge_hidden_;
+  ::std::string* challenge_visual_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
+
+  friend void  protobuf_AddDesc_messages_2eproto();
+  friend void protobuf_AssignDesc_messages_2eproto();
+  friend void protobuf_ShutdownFile_messages_2eproto();
+
+  void InitAsDefaultInstance();
+  static SignIdentity* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class SignedIdentity : public ::google::protobuf::Message {
+ public:
+  SignedIdentity();
+  virtual ~SignedIdentity();
+
+  SignedIdentity(const SignedIdentity& from);
+
+  inline SignedIdentity& operator=(const SignedIdentity& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const SignedIdentity& default_instance();
+
+  void Swap(SignedIdentity* other);
+
+  // implements Message ----------------------------------------------
+
+  SignedIdentity* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const SignedIdentity& from);
+  void MergeFrom(const SignedIdentity& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // optional string address = 1;
+  inline bool has_address() const;
+  inline void clear_address();
+  static const int kAddressFieldNumber = 1;
+  inline const ::std::string& address() const;
+  inline void set_address(const ::std::string& value);
+  inline void set_address(const char* value);
+  inline void set_address(const char* value, size_t size);
+  inline ::std::string* mutable_address();
+  inline ::std::string* release_address();
+  inline void set_allocated_address(::std::string* address);
+
+  // optional bytes public_key = 2;
+  inline bool has_public_key() const;
+  inline void clear_public_key();
+  static const int kPublicKeyFieldNumber = 2;
+  inline const ::std::string& public_key() const;
+  inline void set_public_key(const ::std::string& value);
+  inline void set_public_key(const char* value);
+  inline void set_public_key(const void* value, size_t size);
+  inline ::std::string* mutable_public_key();
+  inline ::std::string* release_public_key();
+  inline void set_allocated_public_key(::std::string* public_key);
+
+  // optional bytes signature = 3;
+  inline bool has_signature() const;
+  inline void clear_signature();
+  static const int kSignatureFieldNumber = 3;
+  inline const ::std::string& signature() const;
+  inline void set_signature(const ::std::string& value);
+  inline void set_signature(const char* value);
+  inline void set_signature(const void* value, size_t size);
+  inline ::std::string* mutable_signature();
+  inline ::std::string* release_signature();
+  inline void set_allocated_signature(::std::string* signature);
+
+  // @@protoc_insertion_point(class_scope:SignedIdentity)
+ private:
+  inline void set_has_address();
+  inline void clear_has_address();
+  inline void set_has_public_key();
+  inline void clear_has_public_key();
+  inline void set_has_signature();
+  inline void clear_has_signature();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::std::string* address_;
+  ::std::string* public_key_;
+  ::std::string* signature_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
+
+  friend void  protobuf_AddDesc_messages_2eproto();
+  friend void protobuf_AssignDesc_messages_2eproto();
+  friend void protobuf_ShutdownFile_messages_2eproto();
+
+  void InitAsDefaultInstance();
+  static SignedIdentity* default_instance_;
+};
+// -------------------------------------------------------------------
+
 class FirmwareErase : public ::google::protobuf::Message {
  public:
   FirmwareErase();
@@ -4584,6 +5205,328 @@ class TestScreen : public ::google::protobuf::Message {
 
   void InitAsDefaultInstance();
   static TestScreen* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class AccountLabels : public ::google::protobuf::Message {
+ public:
+  AccountLabels();
+  virtual ~AccountLabels();
+
+  AccountLabels(const AccountLabels& from);
+
+  inline AccountLabels& operator=(const AccountLabels& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const AccountLabels& default_instance();
+
+  void Swap(AccountLabels* other);
+
+  // implements Message ----------------------------------------------
+
+  AccountLabels* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const AccountLabels& from);
+  void MergeFrom(const AccountLabels& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // optional string coin_name = 1 [default = "Bitcoin"];
+  inline bool has_coin_name() const;
+  inline void clear_coin_name();
+  static const int kCoinNameFieldNumber = 1;
+  inline const ::std::string& coin_name() const;
+  inline void set_coin_name(const ::std::string& value);
+  inline void set_coin_name(const char* value);
+  inline void set_coin_name(const char* value, size_t size);
+  inline ::std::string* mutable_coin_name();
+  inline ::std::string* release_coin_name();
+  inline void set_allocated_coin_name(::std::string* coin_name);
+
+  // repeated .AccountLabelType labels = 2;
+  inline int labels_size() const;
+  inline void clear_labels();
+  static const int kLabelsFieldNumber = 2;
+  inline const ::AccountLabelType& labels(int index) const;
+  inline ::AccountLabelType* mutable_labels(int index);
+  inline ::AccountLabelType* add_labels();
+  inline const ::google::protobuf::RepeatedPtrField< ::AccountLabelType >&
+      labels() const;
+  inline ::google::protobuf::RepeatedPtrField< ::AccountLabelType >*
+      mutable_labels();
+
+  // @@protoc_insertion_point(class_scope:AccountLabels)
+ private:
+  inline void set_has_coin_name();
+  inline void clear_has_coin_name();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::std::string* coin_name_;
+  static ::std::string* _default_coin_name_;
+  ::google::protobuf::RepeatedPtrField< ::AccountLabelType > labels_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
+
+  friend void  protobuf_AddDesc_messages_2eproto();
+  friend void protobuf_AssignDesc_messages_2eproto();
+  friend void protobuf_ShutdownFile_messages_2eproto();
+
+  void InitAsDefaultInstance();
+  static AccountLabels* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class GetAccountLabels : public ::google::protobuf::Message {
+ public:
+  GetAccountLabels();
+  virtual ~GetAccountLabels();
+
+  GetAccountLabels(const GetAccountLabels& from);
+
+  inline GetAccountLabels& operator=(const GetAccountLabels& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const GetAccountLabels& default_instance();
+
+  void Swap(GetAccountLabels* other);
+
+  // implements Message ----------------------------------------------
+
+  GetAccountLabels* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const GetAccountLabels& from);
+  void MergeFrom(const GetAccountLabels& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // optional string coin_name = 1 [default = "Bitcoin"];
+  inline bool has_coin_name() const;
+  inline void clear_coin_name();
+  static const int kCoinNameFieldNumber = 1;
+  inline const ::std::string& coin_name() const;
+  inline void set_coin_name(const ::std::string& value);
+  inline void set_coin_name(const char* value);
+  inline void set_coin_name(const char* value, size_t size);
+  inline ::std::string* mutable_coin_name();
+  inline ::std::string* release_coin_name();
+  inline void set_allocated_coin_name(::std::string* coin_name);
+
+  // optional bool all = 2;
+  inline bool has_all() const;
+  inline void clear_all();
+  static const int kAllFieldNumber = 2;
+  inline bool all() const;
+  inline void set_all(bool value);
+
+  // optional uint32 index = 3;
+  inline bool has_index() const;
+  inline void clear_index();
+  static const int kIndexFieldNumber = 3;
+  inline ::google::protobuf::uint32 index() const;
+  inline void set_index(::google::protobuf::uint32 value);
+
+  // @@protoc_insertion_point(class_scope:GetAccountLabels)
+ private:
+  inline void set_has_coin_name();
+  inline void clear_has_coin_name();
+  inline void set_has_all();
+  inline void clear_has_all();
+  inline void set_has_index();
+  inline void clear_has_index();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::std::string* coin_name_;
+  static ::std::string* _default_coin_name_;
+  bool all_;
+  ::google::protobuf::uint32 index_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
+
+  friend void  protobuf_AddDesc_messages_2eproto();
+  friend void protobuf_AssignDesc_messages_2eproto();
+  friend void protobuf_ShutdownFile_messages_2eproto();
+
+  void InitAsDefaultInstance();
+  static GetAccountLabels* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class SetAccountLabel : public ::google::protobuf::Message {
+ public:
+  SetAccountLabel();
+  virtual ~SetAccountLabel();
+
+  SetAccountLabel(const SetAccountLabel& from);
+
+  inline SetAccountLabel& operator=(const SetAccountLabel& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const SetAccountLabel& default_instance();
+
+  void Swap(SetAccountLabel* other);
+
+  // implements Message ----------------------------------------------
+
+  SetAccountLabel* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const SetAccountLabel& from);
+  void MergeFrom(const SetAccountLabel& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // optional string coin_name = 1 [default = "Bitcoin"];
+  inline bool has_coin_name() const;
+  inline void clear_coin_name();
+  static const int kCoinNameFieldNumber = 1;
+  inline const ::std::string& coin_name() const;
+  inline void set_coin_name(const ::std::string& value);
+  inline void set_coin_name(const char* value);
+  inline void set_coin_name(const char* value, size_t size);
+  inline ::std::string* mutable_coin_name();
+  inline ::std::string* release_coin_name();
+  inline void set_allocated_coin_name(::std::string* coin_name);
+
+  // optional uint32 index = 2;
+  inline bool has_index() const;
+  inline void clear_index();
+  static const int kIndexFieldNumber = 2;
+  inline ::google::protobuf::uint32 index() const;
+  inline void set_index(::google::protobuf::uint32 value);
+
+  // optional string label = 3;
+  inline bool has_label() const;
+  inline void clear_label();
+  static const int kLabelFieldNumber = 3;
+  inline const ::std::string& label() const;
+  inline void set_label(const ::std::string& value);
+  inline void set_label(const char* value);
+  inline void set_label(const char* value, size_t size);
+  inline ::std::string* mutable_label();
+  inline ::std::string* release_label();
+  inline void set_allocated_label(::std::string* label);
+
+  // @@protoc_insertion_point(class_scope:SetAccountLabel)
+ private:
+  inline void set_has_coin_name();
+  inline void clear_has_coin_name();
+  inline void set_has_index();
+  inline void clear_has_index();
+  inline void set_has_label();
+  inline void clear_has_label();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::std::string* coin_name_;
+  static ::std::string* _default_coin_name_;
+  ::std::string* label_;
+  ::google::protobuf::uint32 index_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
+
+  friend void  protobuf_AddDesc_messages_2eproto();
+  friend void protobuf_AssignDesc_messages_2eproto();
+  friend void protobuf_ShutdownFile_messages_2eproto();
+
+  void InitAsDefaultInstance();
+  static SetAccountLabel* default_instance_;
 };
 // -------------------------------------------------------------------
 
@@ -5138,6 +6081,76 @@ class DebugLinkLog : public ::google::protobuf::Message {
 // ===================================================================
 
 // Initialize
+
+// optional string language = 1;
+inline bool Initialize::has_language() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void Initialize::set_has_language() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void Initialize::clear_has_language() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void Initialize::clear_language() {
+  if (language_ != &::google::protobuf::internal::kEmptyString) {
+    language_->clear();
+  }
+  clear_has_language();
+}
+inline const ::std::string& Initialize::language() const {
+  return *language_;
+}
+inline void Initialize::set_language(const ::std::string& value) {
+  set_has_language();
+  if (language_ == &::google::protobuf::internal::kEmptyString) {
+    language_ = new ::std::string;
+  }
+  language_->assign(value);
+}
+inline void Initialize::set_language(const char* value) {
+  set_has_language();
+  if (language_ == &::google::protobuf::internal::kEmptyString) {
+    language_ = new ::std::string;
+  }
+  language_->assign(value);
+}
+inline void Initialize::set_language(const char* value, size_t size) {
+  set_has_language();
+  if (language_ == &::google::protobuf::internal::kEmptyString) {
+    language_ = new ::std::string;
+  }
+  language_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* Initialize::mutable_language() {
+  set_has_language();
+  if (language_ == &::google::protobuf::internal::kEmptyString) {
+    language_ = new ::std::string;
+  }
+  return language_;
+}
+inline ::std::string* Initialize::release_language() {
+  clear_has_language();
+  if (language_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = language_;
+    language_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void Initialize::set_allocated_language(::std::string* language) {
+  if (language_ != &::google::protobuf::internal::kEmptyString) {
+    delete language_;
+  }
+  if (language) {
+    set_has_language();
+    language_ = language;
+  } else {
+    clear_has_language();
+    language_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
 
 // -------------------------------------------------------------------
 
@@ -5764,76 +6777,6 @@ inline void Features::set_imported(bool value) {
   imported_ = value;
 }
 
-// optional string cpu_sn = 16;
-inline bool Features::has_cpu_sn() const {
-  return (_has_bits_[0] & 0x00008000u) != 0;
-}
-inline void Features::set_has_cpu_sn() {
-  _has_bits_[0] |= 0x00008000u;
-}
-inline void Features::clear_has_cpu_sn() {
-  _has_bits_[0] &= ~0x00008000u;
-}
-inline void Features::clear_cpu_sn() {
-  if (cpu_sn_ != &::google::protobuf::internal::kEmptyString) {
-    cpu_sn_->clear();
-  }
-  clear_has_cpu_sn();
-}
-inline const ::std::string& Features::cpu_sn() const {
-  return *cpu_sn_;
-}
-inline void Features::set_cpu_sn(const ::std::string& value) {
-  set_has_cpu_sn();
-  if (cpu_sn_ == &::google::protobuf::internal::kEmptyString) {
-    cpu_sn_ = new ::std::string;
-  }
-  cpu_sn_->assign(value);
-}
-inline void Features::set_cpu_sn(const char* value) {
-  set_has_cpu_sn();
-  if (cpu_sn_ == &::google::protobuf::internal::kEmptyString) {
-    cpu_sn_ = new ::std::string;
-  }
-  cpu_sn_->assign(value);
-}
-inline void Features::set_cpu_sn(const char* value, size_t size) {
-  set_has_cpu_sn();
-  if (cpu_sn_ == &::google::protobuf::internal::kEmptyString) {
-    cpu_sn_ = new ::std::string;
-  }
-  cpu_sn_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* Features::mutable_cpu_sn() {
-  set_has_cpu_sn();
-  if (cpu_sn_ == &::google::protobuf::internal::kEmptyString) {
-    cpu_sn_ = new ::std::string;
-  }
-  return cpu_sn_;
-}
-inline ::std::string* Features::release_cpu_sn() {
-  clear_has_cpu_sn();
-  if (cpu_sn_ == &::google::protobuf::internal::kEmptyString) {
-    return NULL;
-  } else {
-    ::std::string* temp = cpu_sn_;
-    cpu_sn_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    return temp;
-  }
-}
-inline void Features::set_allocated_cpu_sn(::std::string* cpu_sn) {
-  if (cpu_sn_ != &::google::protobuf::internal::kEmptyString) {
-    delete cpu_sn_;
-  }
-  if (cpu_sn) {
-    set_has_cpu_sn();
-    cpu_sn_ = cpu_sn;
-  } else {
-    clear_has_cpu_sn();
-    cpu_sn_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  }
-}
-
 // -------------------------------------------------------------------
 
 // ClearSession
@@ -5979,6 +6922,98 @@ inline void ApplySettings::set_allocated_label(::std::string* label) {
   } else {
     clear_has_label();
     label_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// optional bool use_passphrase = 3;
+inline bool ApplySettings::has_use_passphrase() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void ApplySettings::set_has_use_passphrase() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void ApplySettings::clear_has_use_passphrase() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void ApplySettings::clear_use_passphrase() {
+  use_passphrase_ = false;
+  clear_has_use_passphrase();
+}
+inline bool ApplySettings::use_passphrase() const {
+  return use_passphrase_;
+}
+inline void ApplySettings::set_use_passphrase(bool value) {
+  set_has_use_passphrase();
+  use_passphrase_ = value;
+}
+
+// optional bytes homescreen = 4;
+inline bool ApplySettings::has_homescreen() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void ApplySettings::set_has_homescreen() {
+  _has_bits_[0] |= 0x00000008u;
+}
+inline void ApplySettings::clear_has_homescreen() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+inline void ApplySettings::clear_homescreen() {
+  if (homescreen_ != &::google::protobuf::internal::kEmptyString) {
+    homescreen_->clear();
+  }
+  clear_has_homescreen();
+}
+inline const ::std::string& ApplySettings::homescreen() const {
+  return *homescreen_;
+}
+inline void ApplySettings::set_homescreen(const ::std::string& value) {
+  set_has_homescreen();
+  if (homescreen_ == &::google::protobuf::internal::kEmptyString) {
+    homescreen_ = new ::std::string;
+  }
+  homescreen_->assign(value);
+}
+inline void ApplySettings::set_homescreen(const char* value) {
+  set_has_homescreen();
+  if (homescreen_ == &::google::protobuf::internal::kEmptyString) {
+    homescreen_ = new ::std::string;
+  }
+  homescreen_->assign(value);
+}
+inline void ApplySettings::set_homescreen(const void* value, size_t size) {
+  set_has_homescreen();
+  if (homescreen_ == &::google::protobuf::internal::kEmptyString) {
+    homescreen_ = new ::std::string;
+  }
+  homescreen_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* ApplySettings::mutable_homescreen() {
+  set_has_homescreen();
+  if (homescreen_ == &::google::protobuf::internal::kEmptyString) {
+    homescreen_ = new ::std::string;
+  }
+  return homescreen_;
+}
+inline ::std::string* ApplySettings::release_homescreen() {
+  clear_has_homescreen();
+  if (homescreen_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = homescreen_;
+    homescreen_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void ApplySettings::set_allocated_homescreen(::std::string* homescreen) {
+  if (homescreen_ != &::google::protobuf::internal::kEmptyString) {
+    delete homescreen_;
+  }
+  if (homescreen) {
+    set_has_homescreen();
+    homescreen_ = homescreen;
+  } else {
+    clear_has_homescreen();
+    homescreen_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   }
 }
 
@@ -6219,76 +7254,6 @@ inline void Success::set_allocated_message(::std::string* message) {
   } else {
     clear_has_message();
     message_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  }
-}
-
-// optional bytes payload = 2;
-inline bool Success::has_payload() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
-}
-inline void Success::set_has_payload() {
-  _has_bits_[0] |= 0x00000002u;
-}
-inline void Success::clear_has_payload() {
-  _has_bits_[0] &= ~0x00000002u;
-}
-inline void Success::clear_payload() {
-  if (payload_ != &::google::protobuf::internal::kEmptyString) {
-    payload_->clear();
-  }
-  clear_has_payload();
-}
-inline const ::std::string& Success::payload() const {
-  return *payload_;
-}
-inline void Success::set_payload(const ::std::string& value) {
-  set_has_payload();
-  if (payload_ == &::google::protobuf::internal::kEmptyString) {
-    payload_ = new ::std::string;
-  }
-  payload_->assign(value);
-}
-inline void Success::set_payload(const char* value) {
-  set_has_payload();
-  if (payload_ == &::google::protobuf::internal::kEmptyString) {
-    payload_ = new ::std::string;
-  }
-  payload_->assign(value);
-}
-inline void Success::set_payload(const void* value, size_t size) {
-  set_has_payload();
-  if (payload_ == &::google::protobuf::internal::kEmptyString) {
-    payload_ = new ::std::string;
-  }
-  payload_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* Success::mutable_payload() {
-  set_has_payload();
-  if (payload_ == &::google::protobuf::internal::kEmptyString) {
-    payload_ = new ::std::string;
-  }
-  return payload_;
-}
-inline ::std::string* Success::release_payload() {
-  clear_has_payload();
-  if (payload_ == &::google::protobuf::internal::kEmptyString) {
-    return NULL;
-  } else {
-    ::std::string* temp = payload_;
-    payload_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    return temp;
-  }
-}
-inline void Success::set_allocated_payload(::std::string* payload) {
-  if (payload_ != &::google::protobuf::internal::kEmptyString) {
-    delete payload_;
-  }
-  if (payload) {
-    set_has_payload();
-    payload_ = payload;
-  } else {
-    clear_has_payload();
-    payload_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   }
 }
 
@@ -7033,6 +7998,44 @@ inline bool GetAddress::show_display() const {
 inline void GetAddress::set_show_display(bool value) {
   set_has_show_display();
   show_display_ = value;
+}
+
+// optional .MultisigRedeemScriptType multisig = 4;
+inline bool GetAddress::has_multisig() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void GetAddress::set_has_multisig() {
+  _has_bits_[0] |= 0x00000008u;
+}
+inline void GetAddress::clear_has_multisig() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+inline void GetAddress::clear_multisig() {
+  if (multisig_ != NULL) multisig_->::MultisigRedeemScriptType::Clear();
+  clear_has_multisig();
+}
+inline const ::MultisigRedeemScriptType& GetAddress::multisig() const {
+  return multisig_ != NULL ? *multisig_ : *default_instance_->multisig_;
+}
+inline ::MultisigRedeemScriptType* GetAddress::mutable_multisig() {
+  set_has_multisig();
+  if (multisig_ == NULL) multisig_ = new ::MultisigRedeemScriptType;
+  return multisig_;
+}
+inline ::MultisigRedeemScriptType* GetAddress::release_multisig() {
+  clear_has_multisig();
+  ::MultisigRedeemScriptType* temp = multisig_;
+  multisig_ = NULL;
+  return temp;
+}
+inline void GetAddress::set_allocated_multisig(::MultisigRedeemScriptType* multisig) {
+  delete multisig_;
+  multisig_ = multisig;
+  if (multisig) {
+    set_has_multisig();
+  } else {
+    clear_has_multisig();
+  }
 }
 
 // -------------------------------------------------------------------
@@ -8817,6 +9820,290 @@ EncryptMessage::mutable_address_n() {
   return &address_n_;
 }
 
+// optional string coin_name = 5 [default = "Bitcoin"];
+inline bool EncryptMessage::has_coin_name() const {
+  return (_has_bits_[0] & 0x00000010u) != 0;
+}
+inline void EncryptMessage::set_has_coin_name() {
+  _has_bits_[0] |= 0x00000010u;
+}
+inline void EncryptMessage::clear_has_coin_name() {
+  _has_bits_[0] &= ~0x00000010u;
+}
+inline void EncryptMessage::clear_coin_name() {
+  if (coin_name_ != _default_coin_name_) {
+    coin_name_->assign(*_default_coin_name_);
+  }
+  clear_has_coin_name();
+}
+inline const ::std::string& EncryptMessage::coin_name() const {
+  return *coin_name_;
+}
+inline void EncryptMessage::set_coin_name(const ::std::string& value) {
+  set_has_coin_name();
+  if (coin_name_ == _default_coin_name_) {
+    coin_name_ = new ::std::string;
+  }
+  coin_name_->assign(value);
+}
+inline void EncryptMessage::set_coin_name(const char* value) {
+  set_has_coin_name();
+  if (coin_name_ == _default_coin_name_) {
+    coin_name_ = new ::std::string;
+  }
+  coin_name_->assign(value);
+}
+inline void EncryptMessage::set_coin_name(const char* value, size_t size) {
+  set_has_coin_name();
+  if (coin_name_ == _default_coin_name_) {
+    coin_name_ = new ::std::string;
+  }
+  coin_name_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* EncryptMessage::mutable_coin_name() {
+  set_has_coin_name();
+  if (coin_name_ == _default_coin_name_) {
+    coin_name_ = new ::std::string(*_default_coin_name_);
+  }
+  return coin_name_;
+}
+inline ::std::string* EncryptMessage::release_coin_name() {
+  clear_has_coin_name();
+  if (coin_name_ == _default_coin_name_) {
+    return NULL;
+  } else {
+    ::std::string* temp = coin_name_;
+    coin_name_ = const_cast< ::std::string*>(_default_coin_name_);
+    return temp;
+  }
+}
+inline void EncryptMessage::set_allocated_coin_name(::std::string* coin_name) {
+  if (coin_name_ != _default_coin_name_) {
+    delete coin_name_;
+  }
+  if (coin_name) {
+    set_has_coin_name();
+    coin_name_ = coin_name;
+  } else {
+    clear_has_coin_name();
+    coin_name_ = const_cast< ::std::string*>(_default_coin_name_);
+  }
+}
+
+// -------------------------------------------------------------------
+
+// EncryptedMessage
+
+// optional bytes nonce = 1;
+inline bool EncryptedMessage::has_nonce() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void EncryptedMessage::set_has_nonce() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void EncryptedMessage::clear_has_nonce() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void EncryptedMessage::clear_nonce() {
+  if (nonce_ != &::google::protobuf::internal::kEmptyString) {
+    nonce_->clear();
+  }
+  clear_has_nonce();
+}
+inline const ::std::string& EncryptedMessage::nonce() const {
+  return *nonce_;
+}
+inline void EncryptedMessage::set_nonce(const ::std::string& value) {
+  set_has_nonce();
+  if (nonce_ == &::google::protobuf::internal::kEmptyString) {
+    nonce_ = new ::std::string;
+  }
+  nonce_->assign(value);
+}
+inline void EncryptedMessage::set_nonce(const char* value) {
+  set_has_nonce();
+  if (nonce_ == &::google::protobuf::internal::kEmptyString) {
+    nonce_ = new ::std::string;
+  }
+  nonce_->assign(value);
+}
+inline void EncryptedMessage::set_nonce(const void* value, size_t size) {
+  set_has_nonce();
+  if (nonce_ == &::google::protobuf::internal::kEmptyString) {
+    nonce_ = new ::std::string;
+  }
+  nonce_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* EncryptedMessage::mutable_nonce() {
+  set_has_nonce();
+  if (nonce_ == &::google::protobuf::internal::kEmptyString) {
+    nonce_ = new ::std::string;
+  }
+  return nonce_;
+}
+inline ::std::string* EncryptedMessage::release_nonce() {
+  clear_has_nonce();
+  if (nonce_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = nonce_;
+    nonce_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void EncryptedMessage::set_allocated_nonce(::std::string* nonce) {
+  if (nonce_ != &::google::protobuf::internal::kEmptyString) {
+    delete nonce_;
+  }
+  if (nonce) {
+    set_has_nonce();
+    nonce_ = nonce;
+  } else {
+    clear_has_nonce();
+    nonce_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// optional bytes message = 2;
+inline bool EncryptedMessage::has_message() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void EncryptedMessage::set_has_message() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void EncryptedMessage::clear_has_message() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void EncryptedMessage::clear_message() {
+  if (message_ != &::google::protobuf::internal::kEmptyString) {
+    message_->clear();
+  }
+  clear_has_message();
+}
+inline const ::std::string& EncryptedMessage::message() const {
+  return *message_;
+}
+inline void EncryptedMessage::set_message(const ::std::string& value) {
+  set_has_message();
+  if (message_ == &::google::protobuf::internal::kEmptyString) {
+    message_ = new ::std::string;
+  }
+  message_->assign(value);
+}
+inline void EncryptedMessage::set_message(const char* value) {
+  set_has_message();
+  if (message_ == &::google::protobuf::internal::kEmptyString) {
+    message_ = new ::std::string;
+  }
+  message_->assign(value);
+}
+inline void EncryptedMessage::set_message(const void* value, size_t size) {
+  set_has_message();
+  if (message_ == &::google::protobuf::internal::kEmptyString) {
+    message_ = new ::std::string;
+  }
+  message_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* EncryptedMessage::mutable_message() {
+  set_has_message();
+  if (message_ == &::google::protobuf::internal::kEmptyString) {
+    message_ = new ::std::string;
+  }
+  return message_;
+}
+inline ::std::string* EncryptedMessage::release_message() {
+  clear_has_message();
+  if (message_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = message_;
+    message_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void EncryptedMessage::set_allocated_message(::std::string* message) {
+  if (message_ != &::google::protobuf::internal::kEmptyString) {
+    delete message_;
+  }
+  if (message) {
+    set_has_message();
+    message_ = message;
+  } else {
+    clear_has_message();
+    message_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// optional bytes hmac = 3;
+inline bool EncryptedMessage::has_hmac() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void EncryptedMessage::set_has_hmac() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void EncryptedMessage::clear_has_hmac() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void EncryptedMessage::clear_hmac() {
+  if (hmac_ != &::google::protobuf::internal::kEmptyString) {
+    hmac_->clear();
+  }
+  clear_has_hmac();
+}
+inline const ::std::string& EncryptedMessage::hmac() const {
+  return *hmac_;
+}
+inline void EncryptedMessage::set_hmac(const ::std::string& value) {
+  set_has_hmac();
+  if (hmac_ == &::google::protobuf::internal::kEmptyString) {
+    hmac_ = new ::std::string;
+  }
+  hmac_->assign(value);
+}
+inline void EncryptedMessage::set_hmac(const char* value) {
+  set_has_hmac();
+  if (hmac_ == &::google::protobuf::internal::kEmptyString) {
+    hmac_ = new ::std::string;
+  }
+  hmac_->assign(value);
+}
+inline void EncryptedMessage::set_hmac(const void* value, size_t size) {
+  set_has_hmac();
+  if (hmac_ == &::google::protobuf::internal::kEmptyString) {
+    hmac_ = new ::std::string;
+  }
+  hmac_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* EncryptedMessage::mutable_hmac() {
+  set_has_hmac();
+  if (hmac_ == &::google::protobuf::internal::kEmptyString) {
+    hmac_ = new ::std::string;
+  }
+  return hmac_;
+}
+inline ::std::string* EncryptedMessage::release_hmac() {
+  clear_has_hmac();
+  if (hmac_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = hmac_;
+    hmac_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void EncryptedMessage::set_allocated_hmac(::std::string* hmac) {
+  if (hmac_ != &::google::protobuf::internal::kEmptyString) {
+    delete hmac_;
+  }
+  if (hmac) {
+    set_has_hmac();
+    hmac_ = hmac;
+  } else {
+    clear_has_hmac();
+    hmac_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
 // -------------------------------------------------------------------
 
 // DecryptMessage
@@ -8846,15 +10133,85 @@ DecryptMessage::mutable_address_n() {
   return &address_n_;
 }
 
-// optional bytes message = 2;
-inline bool DecryptMessage::has_message() const {
+// optional bytes nonce = 2;
+inline bool DecryptMessage::has_nonce() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
-inline void DecryptMessage::set_has_message() {
+inline void DecryptMessage::set_has_nonce() {
   _has_bits_[0] |= 0x00000002u;
 }
-inline void DecryptMessage::clear_has_message() {
+inline void DecryptMessage::clear_has_nonce() {
   _has_bits_[0] &= ~0x00000002u;
+}
+inline void DecryptMessage::clear_nonce() {
+  if (nonce_ != &::google::protobuf::internal::kEmptyString) {
+    nonce_->clear();
+  }
+  clear_has_nonce();
+}
+inline const ::std::string& DecryptMessage::nonce() const {
+  return *nonce_;
+}
+inline void DecryptMessage::set_nonce(const ::std::string& value) {
+  set_has_nonce();
+  if (nonce_ == &::google::protobuf::internal::kEmptyString) {
+    nonce_ = new ::std::string;
+  }
+  nonce_->assign(value);
+}
+inline void DecryptMessage::set_nonce(const char* value) {
+  set_has_nonce();
+  if (nonce_ == &::google::protobuf::internal::kEmptyString) {
+    nonce_ = new ::std::string;
+  }
+  nonce_->assign(value);
+}
+inline void DecryptMessage::set_nonce(const void* value, size_t size) {
+  set_has_nonce();
+  if (nonce_ == &::google::protobuf::internal::kEmptyString) {
+    nonce_ = new ::std::string;
+  }
+  nonce_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* DecryptMessage::mutable_nonce() {
+  set_has_nonce();
+  if (nonce_ == &::google::protobuf::internal::kEmptyString) {
+    nonce_ = new ::std::string;
+  }
+  return nonce_;
+}
+inline ::std::string* DecryptMessage::release_nonce() {
+  clear_has_nonce();
+  if (nonce_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = nonce_;
+    nonce_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void DecryptMessage::set_allocated_nonce(::std::string* nonce) {
+  if (nonce_ != &::google::protobuf::internal::kEmptyString) {
+    delete nonce_;
+  }
+  if (nonce) {
+    set_has_nonce();
+    nonce_ = nonce;
+  } else {
+    clear_has_nonce();
+    nonce_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// optional bytes message = 3;
+inline bool DecryptMessage::has_message() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void DecryptMessage::set_has_message() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void DecryptMessage::clear_has_message() {
+  _has_bits_[0] &= ~0x00000004u;
 }
 inline void DecryptMessage::clear_message() {
   if (message_ != &::google::protobuf::internal::kEmptyString) {
@@ -8913,6 +10270,220 @@ inline void DecryptMessage::set_allocated_message(::std::string* message) {
   } else {
     clear_has_message();
     message_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// optional bytes hmac = 4;
+inline bool DecryptMessage::has_hmac() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void DecryptMessage::set_has_hmac() {
+  _has_bits_[0] |= 0x00000008u;
+}
+inline void DecryptMessage::clear_has_hmac() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+inline void DecryptMessage::clear_hmac() {
+  if (hmac_ != &::google::protobuf::internal::kEmptyString) {
+    hmac_->clear();
+  }
+  clear_has_hmac();
+}
+inline const ::std::string& DecryptMessage::hmac() const {
+  return *hmac_;
+}
+inline void DecryptMessage::set_hmac(const ::std::string& value) {
+  set_has_hmac();
+  if (hmac_ == &::google::protobuf::internal::kEmptyString) {
+    hmac_ = new ::std::string;
+  }
+  hmac_->assign(value);
+}
+inline void DecryptMessage::set_hmac(const char* value) {
+  set_has_hmac();
+  if (hmac_ == &::google::protobuf::internal::kEmptyString) {
+    hmac_ = new ::std::string;
+  }
+  hmac_->assign(value);
+}
+inline void DecryptMessage::set_hmac(const void* value, size_t size) {
+  set_has_hmac();
+  if (hmac_ == &::google::protobuf::internal::kEmptyString) {
+    hmac_ = new ::std::string;
+  }
+  hmac_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* DecryptMessage::mutable_hmac() {
+  set_has_hmac();
+  if (hmac_ == &::google::protobuf::internal::kEmptyString) {
+    hmac_ = new ::std::string;
+  }
+  return hmac_;
+}
+inline ::std::string* DecryptMessage::release_hmac() {
+  clear_has_hmac();
+  if (hmac_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = hmac_;
+    hmac_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void DecryptMessage::set_allocated_hmac(::std::string* hmac) {
+  if (hmac_ != &::google::protobuf::internal::kEmptyString) {
+    delete hmac_;
+  }
+  if (hmac) {
+    set_has_hmac();
+    hmac_ = hmac;
+  } else {
+    clear_has_hmac();
+    hmac_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// -------------------------------------------------------------------
+
+// DecryptedMessage
+
+// optional bytes message = 1;
+inline bool DecryptedMessage::has_message() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void DecryptedMessage::set_has_message() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void DecryptedMessage::clear_has_message() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void DecryptedMessage::clear_message() {
+  if (message_ != &::google::protobuf::internal::kEmptyString) {
+    message_->clear();
+  }
+  clear_has_message();
+}
+inline const ::std::string& DecryptedMessage::message() const {
+  return *message_;
+}
+inline void DecryptedMessage::set_message(const ::std::string& value) {
+  set_has_message();
+  if (message_ == &::google::protobuf::internal::kEmptyString) {
+    message_ = new ::std::string;
+  }
+  message_->assign(value);
+}
+inline void DecryptedMessage::set_message(const char* value) {
+  set_has_message();
+  if (message_ == &::google::protobuf::internal::kEmptyString) {
+    message_ = new ::std::string;
+  }
+  message_->assign(value);
+}
+inline void DecryptedMessage::set_message(const void* value, size_t size) {
+  set_has_message();
+  if (message_ == &::google::protobuf::internal::kEmptyString) {
+    message_ = new ::std::string;
+  }
+  message_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* DecryptedMessage::mutable_message() {
+  set_has_message();
+  if (message_ == &::google::protobuf::internal::kEmptyString) {
+    message_ = new ::std::string;
+  }
+  return message_;
+}
+inline ::std::string* DecryptedMessage::release_message() {
+  clear_has_message();
+  if (message_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = message_;
+    message_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void DecryptedMessage::set_allocated_message(::std::string* message) {
+  if (message_ != &::google::protobuf::internal::kEmptyString) {
+    delete message_;
+  }
+  if (message) {
+    set_has_message();
+    message_ = message;
+  } else {
+    clear_has_message();
+    message_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// optional string address = 2;
+inline bool DecryptedMessage::has_address() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void DecryptedMessage::set_has_address() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void DecryptedMessage::clear_has_address() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void DecryptedMessage::clear_address() {
+  if (address_ != &::google::protobuf::internal::kEmptyString) {
+    address_->clear();
+  }
+  clear_has_address();
+}
+inline const ::std::string& DecryptedMessage::address() const {
+  return *address_;
+}
+inline void DecryptedMessage::set_address(const ::std::string& value) {
+  set_has_address();
+  if (address_ == &::google::protobuf::internal::kEmptyString) {
+    address_ = new ::std::string;
+  }
+  address_->assign(value);
+}
+inline void DecryptedMessage::set_address(const char* value) {
+  set_has_address();
+  if (address_ == &::google::protobuf::internal::kEmptyString) {
+    address_ = new ::std::string;
+  }
+  address_->assign(value);
+}
+inline void DecryptedMessage::set_address(const char* value, size_t size) {
+  set_has_address();
+  if (address_ == &::google::protobuf::internal::kEmptyString) {
+    address_ = new ::std::string;
+  }
+  address_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* DecryptedMessage::mutable_address() {
+  set_has_address();
+  if (address_ == &::google::protobuf::internal::kEmptyString) {
+    address_ = new ::std::string;
+  }
+  return address_;
+}
+inline ::std::string* DecryptedMessage::release_address() {
+  clear_has_address();
+  if (address_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = address_;
+    address_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void DecryptedMessage::set_allocated_address(::std::string* address) {
+  if (address_ != &::google::protobuf::internal::kEmptyString) {
+    delete address_;
+  }
+  if (address) {
+    set_has_address();
+    address_ = address;
+  } else {
+    clear_has_address();
+    address_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   }
 }
 
@@ -9149,6 +10720,80 @@ inline bool CipherKeyValue::ask_on_decrypt() const {
 inline void CipherKeyValue::set_ask_on_decrypt(bool value) {
   set_has_ask_on_decrypt();
   ask_on_decrypt_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// CipheredKeyValue
+
+// optional bytes value = 1;
+inline bool CipheredKeyValue::has_value() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void CipheredKeyValue::set_has_value() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void CipheredKeyValue::clear_has_value() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void CipheredKeyValue::clear_value() {
+  if (value_ != &::google::protobuf::internal::kEmptyString) {
+    value_->clear();
+  }
+  clear_has_value();
+}
+inline const ::std::string& CipheredKeyValue::value() const {
+  return *value_;
+}
+inline void CipheredKeyValue::set_value(const ::std::string& value) {
+  set_has_value();
+  if (value_ == &::google::protobuf::internal::kEmptyString) {
+    value_ = new ::std::string;
+  }
+  value_->assign(value);
+}
+inline void CipheredKeyValue::set_value(const char* value) {
+  set_has_value();
+  if (value_ == &::google::protobuf::internal::kEmptyString) {
+    value_ = new ::std::string;
+  }
+  value_->assign(value);
+}
+inline void CipheredKeyValue::set_value(const void* value, size_t size) {
+  set_has_value();
+  if (value_ == &::google::protobuf::internal::kEmptyString) {
+    value_ = new ::std::string;
+  }
+  value_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* CipheredKeyValue::mutable_value() {
+  set_has_value();
+  if (value_ == &::google::protobuf::internal::kEmptyString) {
+    value_ = new ::std::string;
+  }
+  return value_;
+}
+inline ::std::string* CipheredKeyValue::release_value() {
+  clear_has_value();
+  if (value_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = value_;
+    value_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void CipheredKeyValue::set_allocated_value(::std::string* value) {
+  if (value_ != &::google::protobuf::internal::kEmptyString) {
+    delete value_;
+  }
+  if (value) {
+    set_has_value();
+    value_ = value;
+  } else {
+    clear_has_value();
+    value_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
 }
 
 // -------------------------------------------------------------------
@@ -9709,6 +11354,402 @@ inline void TxAck::set_allocated_tx(::TransactionType* tx) {
 
 // -------------------------------------------------------------------
 
+// SignIdentity
+
+// optional .IdentityType identity = 1;
+inline bool SignIdentity::has_identity() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void SignIdentity::set_has_identity() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void SignIdentity::clear_has_identity() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void SignIdentity::clear_identity() {
+  if (identity_ != NULL) identity_->::IdentityType::Clear();
+  clear_has_identity();
+}
+inline const ::IdentityType& SignIdentity::identity() const {
+  return identity_ != NULL ? *identity_ : *default_instance_->identity_;
+}
+inline ::IdentityType* SignIdentity::mutable_identity() {
+  set_has_identity();
+  if (identity_ == NULL) identity_ = new ::IdentityType;
+  return identity_;
+}
+inline ::IdentityType* SignIdentity::release_identity() {
+  clear_has_identity();
+  ::IdentityType* temp = identity_;
+  identity_ = NULL;
+  return temp;
+}
+inline void SignIdentity::set_allocated_identity(::IdentityType* identity) {
+  delete identity_;
+  identity_ = identity;
+  if (identity) {
+    set_has_identity();
+  } else {
+    clear_has_identity();
+  }
+}
+
+// optional bytes challenge_hidden = 2;
+inline bool SignIdentity::has_challenge_hidden() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void SignIdentity::set_has_challenge_hidden() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void SignIdentity::clear_has_challenge_hidden() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void SignIdentity::clear_challenge_hidden() {
+  if (challenge_hidden_ != &::google::protobuf::internal::kEmptyString) {
+    challenge_hidden_->clear();
+  }
+  clear_has_challenge_hidden();
+}
+inline const ::std::string& SignIdentity::challenge_hidden() const {
+  return *challenge_hidden_;
+}
+inline void SignIdentity::set_challenge_hidden(const ::std::string& value) {
+  set_has_challenge_hidden();
+  if (challenge_hidden_ == &::google::protobuf::internal::kEmptyString) {
+    challenge_hidden_ = new ::std::string;
+  }
+  challenge_hidden_->assign(value);
+}
+inline void SignIdentity::set_challenge_hidden(const char* value) {
+  set_has_challenge_hidden();
+  if (challenge_hidden_ == &::google::protobuf::internal::kEmptyString) {
+    challenge_hidden_ = new ::std::string;
+  }
+  challenge_hidden_->assign(value);
+}
+inline void SignIdentity::set_challenge_hidden(const void* value, size_t size) {
+  set_has_challenge_hidden();
+  if (challenge_hidden_ == &::google::protobuf::internal::kEmptyString) {
+    challenge_hidden_ = new ::std::string;
+  }
+  challenge_hidden_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* SignIdentity::mutable_challenge_hidden() {
+  set_has_challenge_hidden();
+  if (challenge_hidden_ == &::google::protobuf::internal::kEmptyString) {
+    challenge_hidden_ = new ::std::string;
+  }
+  return challenge_hidden_;
+}
+inline ::std::string* SignIdentity::release_challenge_hidden() {
+  clear_has_challenge_hidden();
+  if (challenge_hidden_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = challenge_hidden_;
+    challenge_hidden_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void SignIdentity::set_allocated_challenge_hidden(::std::string* challenge_hidden) {
+  if (challenge_hidden_ != &::google::protobuf::internal::kEmptyString) {
+    delete challenge_hidden_;
+  }
+  if (challenge_hidden) {
+    set_has_challenge_hidden();
+    challenge_hidden_ = challenge_hidden;
+  } else {
+    clear_has_challenge_hidden();
+    challenge_hidden_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// optional string challenge_visual = 3;
+inline bool SignIdentity::has_challenge_visual() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void SignIdentity::set_has_challenge_visual() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void SignIdentity::clear_has_challenge_visual() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void SignIdentity::clear_challenge_visual() {
+  if (challenge_visual_ != &::google::protobuf::internal::kEmptyString) {
+    challenge_visual_->clear();
+  }
+  clear_has_challenge_visual();
+}
+inline const ::std::string& SignIdentity::challenge_visual() const {
+  return *challenge_visual_;
+}
+inline void SignIdentity::set_challenge_visual(const ::std::string& value) {
+  set_has_challenge_visual();
+  if (challenge_visual_ == &::google::protobuf::internal::kEmptyString) {
+    challenge_visual_ = new ::std::string;
+  }
+  challenge_visual_->assign(value);
+}
+inline void SignIdentity::set_challenge_visual(const char* value) {
+  set_has_challenge_visual();
+  if (challenge_visual_ == &::google::protobuf::internal::kEmptyString) {
+    challenge_visual_ = new ::std::string;
+  }
+  challenge_visual_->assign(value);
+}
+inline void SignIdentity::set_challenge_visual(const char* value, size_t size) {
+  set_has_challenge_visual();
+  if (challenge_visual_ == &::google::protobuf::internal::kEmptyString) {
+    challenge_visual_ = new ::std::string;
+  }
+  challenge_visual_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* SignIdentity::mutable_challenge_visual() {
+  set_has_challenge_visual();
+  if (challenge_visual_ == &::google::protobuf::internal::kEmptyString) {
+    challenge_visual_ = new ::std::string;
+  }
+  return challenge_visual_;
+}
+inline ::std::string* SignIdentity::release_challenge_visual() {
+  clear_has_challenge_visual();
+  if (challenge_visual_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = challenge_visual_;
+    challenge_visual_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void SignIdentity::set_allocated_challenge_visual(::std::string* challenge_visual) {
+  if (challenge_visual_ != &::google::protobuf::internal::kEmptyString) {
+    delete challenge_visual_;
+  }
+  if (challenge_visual) {
+    set_has_challenge_visual();
+    challenge_visual_ = challenge_visual;
+  } else {
+    clear_has_challenge_visual();
+    challenge_visual_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// -------------------------------------------------------------------
+
+// SignedIdentity
+
+// optional string address = 1;
+inline bool SignedIdentity::has_address() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void SignedIdentity::set_has_address() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void SignedIdentity::clear_has_address() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void SignedIdentity::clear_address() {
+  if (address_ != &::google::protobuf::internal::kEmptyString) {
+    address_->clear();
+  }
+  clear_has_address();
+}
+inline const ::std::string& SignedIdentity::address() const {
+  return *address_;
+}
+inline void SignedIdentity::set_address(const ::std::string& value) {
+  set_has_address();
+  if (address_ == &::google::protobuf::internal::kEmptyString) {
+    address_ = new ::std::string;
+  }
+  address_->assign(value);
+}
+inline void SignedIdentity::set_address(const char* value) {
+  set_has_address();
+  if (address_ == &::google::protobuf::internal::kEmptyString) {
+    address_ = new ::std::string;
+  }
+  address_->assign(value);
+}
+inline void SignedIdentity::set_address(const char* value, size_t size) {
+  set_has_address();
+  if (address_ == &::google::protobuf::internal::kEmptyString) {
+    address_ = new ::std::string;
+  }
+  address_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* SignedIdentity::mutable_address() {
+  set_has_address();
+  if (address_ == &::google::protobuf::internal::kEmptyString) {
+    address_ = new ::std::string;
+  }
+  return address_;
+}
+inline ::std::string* SignedIdentity::release_address() {
+  clear_has_address();
+  if (address_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = address_;
+    address_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void SignedIdentity::set_allocated_address(::std::string* address) {
+  if (address_ != &::google::protobuf::internal::kEmptyString) {
+    delete address_;
+  }
+  if (address) {
+    set_has_address();
+    address_ = address;
+  } else {
+    clear_has_address();
+    address_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// optional bytes public_key = 2;
+inline bool SignedIdentity::has_public_key() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void SignedIdentity::set_has_public_key() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void SignedIdentity::clear_has_public_key() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void SignedIdentity::clear_public_key() {
+  if (public_key_ != &::google::protobuf::internal::kEmptyString) {
+    public_key_->clear();
+  }
+  clear_has_public_key();
+}
+inline const ::std::string& SignedIdentity::public_key() const {
+  return *public_key_;
+}
+inline void SignedIdentity::set_public_key(const ::std::string& value) {
+  set_has_public_key();
+  if (public_key_ == &::google::protobuf::internal::kEmptyString) {
+    public_key_ = new ::std::string;
+  }
+  public_key_->assign(value);
+}
+inline void SignedIdentity::set_public_key(const char* value) {
+  set_has_public_key();
+  if (public_key_ == &::google::protobuf::internal::kEmptyString) {
+    public_key_ = new ::std::string;
+  }
+  public_key_->assign(value);
+}
+inline void SignedIdentity::set_public_key(const void* value, size_t size) {
+  set_has_public_key();
+  if (public_key_ == &::google::protobuf::internal::kEmptyString) {
+    public_key_ = new ::std::string;
+  }
+  public_key_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* SignedIdentity::mutable_public_key() {
+  set_has_public_key();
+  if (public_key_ == &::google::protobuf::internal::kEmptyString) {
+    public_key_ = new ::std::string;
+  }
+  return public_key_;
+}
+inline ::std::string* SignedIdentity::release_public_key() {
+  clear_has_public_key();
+  if (public_key_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = public_key_;
+    public_key_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void SignedIdentity::set_allocated_public_key(::std::string* public_key) {
+  if (public_key_ != &::google::protobuf::internal::kEmptyString) {
+    delete public_key_;
+  }
+  if (public_key) {
+    set_has_public_key();
+    public_key_ = public_key;
+  } else {
+    clear_has_public_key();
+    public_key_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// optional bytes signature = 3;
+inline bool SignedIdentity::has_signature() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void SignedIdentity::set_has_signature() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void SignedIdentity::clear_has_signature() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void SignedIdentity::clear_signature() {
+  if (signature_ != &::google::protobuf::internal::kEmptyString) {
+    signature_->clear();
+  }
+  clear_has_signature();
+}
+inline const ::std::string& SignedIdentity::signature() const {
+  return *signature_;
+}
+inline void SignedIdentity::set_signature(const ::std::string& value) {
+  set_has_signature();
+  if (signature_ == &::google::protobuf::internal::kEmptyString) {
+    signature_ = new ::std::string;
+  }
+  signature_->assign(value);
+}
+inline void SignedIdentity::set_signature(const char* value) {
+  set_has_signature();
+  if (signature_ == &::google::protobuf::internal::kEmptyString) {
+    signature_ = new ::std::string;
+  }
+  signature_->assign(value);
+}
+inline void SignedIdentity::set_signature(const void* value, size_t size) {
+  set_has_signature();
+  if (signature_ == &::google::protobuf::internal::kEmptyString) {
+    signature_ = new ::std::string;
+  }
+  signature_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* SignedIdentity::mutable_signature() {
+  set_has_signature();
+  if (signature_ == &::google::protobuf::internal::kEmptyString) {
+    signature_ = new ::std::string;
+  }
+  return signature_;
+}
+inline ::std::string* SignedIdentity::release_signature() {
+  clear_has_signature();
+  if (signature_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = signature_;
+    signature_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void SignedIdentity::set_allocated_signature(::std::string* signature) {
+  if (signature_ != &::google::protobuf::internal::kEmptyString) {
+    delete signature_;
+  }
+  if (signature) {
+    set_has_signature();
+    signature_ = signature;
+  } else {
+    clear_has_signature();
+    signature_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// -------------------------------------------------------------------
+
 // FirmwareErase
 
 // -------------------------------------------------------------------
@@ -9809,6 +11850,389 @@ inline ::google::protobuf::uint32 TestScreen::delay_time() const {
 inline void TestScreen::set_delay_time(::google::protobuf::uint32 value) {
   set_has_delay_time();
   delay_time_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// AccountLabels
+
+// optional string coin_name = 1 [default = "Bitcoin"];
+inline bool AccountLabels::has_coin_name() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void AccountLabels::set_has_coin_name() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void AccountLabels::clear_has_coin_name() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void AccountLabels::clear_coin_name() {
+  if (coin_name_ != _default_coin_name_) {
+    coin_name_->assign(*_default_coin_name_);
+  }
+  clear_has_coin_name();
+}
+inline const ::std::string& AccountLabels::coin_name() const {
+  return *coin_name_;
+}
+inline void AccountLabels::set_coin_name(const ::std::string& value) {
+  set_has_coin_name();
+  if (coin_name_ == _default_coin_name_) {
+    coin_name_ = new ::std::string;
+  }
+  coin_name_->assign(value);
+}
+inline void AccountLabels::set_coin_name(const char* value) {
+  set_has_coin_name();
+  if (coin_name_ == _default_coin_name_) {
+    coin_name_ = new ::std::string;
+  }
+  coin_name_->assign(value);
+}
+inline void AccountLabels::set_coin_name(const char* value, size_t size) {
+  set_has_coin_name();
+  if (coin_name_ == _default_coin_name_) {
+    coin_name_ = new ::std::string;
+  }
+  coin_name_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* AccountLabels::mutable_coin_name() {
+  set_has_coin_name();
+  if (coin_name_ == _default_coin_name_) {
+    coin_name_ = new ::std::string(*_default_coin_name_);
+  }
+  return coin_name_;
+}
+inline ::std::string* AccountLabels::release_coin_name() {
+  clear_has_coin_name();
+  if (coin_name_ == _default_coin_name_) {
+    return NULL;
+  } else {
+    ::std::string* temp = coin_name_;
+    coin_name_ = const_cast< ::std::string*>(_default_coin_name_);
+    return temp;
+  }
+}
+inline void AccountLabels::set_allocated_coin_name(::std::string* coin_name) {
+  if (coin_name_ != _default_coin_name_) {
+    delete coin_name_;
+  }
+  if (coin_name) {
+    set_has_coin_name();
+    coin_name_ = coin_name;
+  } else {
+    clear_has_coin_name();
+    coin_name_ = const_cast< ::std::string*>(_default_coin_name_);
+  }
+}
+
+// repeated .AccountLabelType labels = 2;
+inline int AccountLabels::labels_size() const {
+  return labels_.size();
+}
+inline void AccountLabels::clear_labels() {
+  labels_.Clear();
+}
+inline const ::AccountLabelType& AccountLabels::labels(int index) const {
+  return labels_.Get(index);
+}
+inline ::AccountLabelType* AccountLabels::mutable_labels(int index) {
+  return labels_.Mutable(index);
+}
+inline ::AccountLabelType* AccountLabels::add_labels() {
+  return labels_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::AccountLabelType >&
+AccountLabels::labels() const {
+  return labels_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::AccountLabelType >*
+AccountLabels::mutable_labels() {
+  return &labels_;
+}
+
+// -------------------------------------------------------------------
+
+// GetAccountLabels
+
+// optional string coin_name = 1 [default = "Bitcoin"];
+inline bool GetAccountLabels::has_coin_name() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void GetAccountLabels::set_has_coin_name() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void GetAccountLabels::clear_has_coin_name() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void GetAccountLabels::clear_coin_name() {
+  if (coin_name_ != _default_coin_name_) {
+    coin_name_->assign(*_default_coin_name_);
+  }
+  clear_has_coin_name();
+}
+inline const ::std::string& GetAccountLabels::coin_name() const {
+  return *coin_name_;
+}
+inline void GetAccountLabels::set_coin_name(const ::std::string& value) {
+  set_has_coin_name();
+  if (coin_name_ == _default_coin_name_) {
+    coin_name_ = new ::std::string;
+  }
+  coin_name_->assign(value);
+}
+inline void GetAccountLabels::set_coin_name(const char* value) {
+  set_has_coin_name();
+  if (coin_name_ == _default_coin_name_) {
+    coin_name_ = new ::std::string;
+  }
+  coin_name_->assign(value);
+}
+inline void GetAccountLabels::set_coin_name(const char* value, size_t size) {
+  set_has_coin_name();
+  if (coin_name_ == _default_coin_name_) {
+    coin_name_ = new ::std::string;
+  }
+  coin_name_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* GetAccountLabels::mutable_coin_name() {
+  set_has_coin_name();
+  if (coin_name_ == _default_coin_name_) {
+    coin_name_ = new ::std::string(*_default_coin_name_);
+  }
+  return coin_name_;
+}
+inline ::std::string* GetAccountLabels::release_coin_name() {
+  clear_has_coin_name();
+  if (coin_name_ == _default_coin_name_) {
+    return NULL;
+  } else {
+    ::std::string* temp = coin_name_;
+    coin_name_ = const_cast< ::std::string*>(_default_coin_name_);
+    return temp;
+  }
+}
+inline void GetAccountLabels::set_allocated_coin_name(::std::string* coin_name) {
+  if (coin_name_ != _default_coin_name_) {
+    delete coin_name_;
+  }
+  if (coin_name) {
+    set_has_coin_name();
+    coin_name_ = coin_name;
+  } else {
+    clear_has_coin_name();
+    coin_name_ = const_cast< ::std::string*>(_default_coin_name_);
+  }
+}
+
+// optional bool all = 2;
+inline bool GetAccountLabels::has_all() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void GetAccountLabels::set_has_all() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void GetAccountLabels::clear_has_all() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void GetAccountLabels::clear_all() {
+  all_ = false;
+  clear_has_all();
+}
+inline bool GetAccountLabels::all() const {
+  return all_;
+}
+inline void GetAccountLabels::set_all(bool value) {
+  set_has_all();
+  all_ = value;
+}
+
+// optional uint32 index = 3;
+inline bool GetAccountLabels::has_index() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void GetAccountLabels::set_has_index() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void GetAccountLabels::clear_has_index() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void GetAccountLabels::clear_index() {
+  index_ = 0u;
+  clear_has_index();
+}
+inline ::google::protobuf::uint32 GetAccountLabels::index() const {
+  return index_;
+}
+inline void GetAccountLabels::set_index(::google::protobuf::uint32 value) {
+  set_has_index();
+  index_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// SetAccountLabel
+
+// optional string coin_name = 1 [default = "Bitcoin"];
+inline bool SetAccountLabel::has_coin_name() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void SetAccountLabel::set_has_coin_name() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void SetAccountLabel::clear_has_coin_name() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void SetAccountLabel::clear_coin_name() {
+  if (coin_name_ != _default_coin_name_) {
+    coin_name_->assign(*_default_coin_name_);
+  }
+  clear_has_coin_name();
+}
+inline const ::std::string& SetAccountLabel::coin_name() const {
+  return *coin_name_;
+}
+inline void SetAccountLabel::set_coin_name(const ::std::string& value) {
+  set_has_coin_name();
+  if (coin_name_ == _default_coin_name_) {
+    coin_name_ = new ::std::string;
+  }
+  coin_name_->assign(value);
+}
+inline void SetAccountLabel::set_coin_name(const char* value) {
+  set_has_coin_name();
+  if (coin_name_ == _default_coin_name_) {
+    coin_name_ = new ::std::string;
+  }
+  coin_name_->assign(value);
+}
+inline void SetAccountLabel::set_coin_name(const char* value, size_t size) {
+  set_has_coin_name();
+  if (coin_name_ == _default_coin_name_) {
+    coin_name_ = new ::std::string;
+  }
+  coin_name_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* SetAccountLabel::mutable_coin_name() {
+  set_has_coin_name();
+  if (coin_name_ == _default_coin_name_) {
+    coin_name_ = new ::std::string(*_default_coin_name_);
+  }
+  return coin_name_;
+}
+inline ::std::string* SetAccountLabel::release_coin_name() {
+  clear_has_coin_name();
+  if (coin_name_ == _default_coin_name_) {
+    return NULL;
+  } else {
+    ::std::string* temp = coin_name_;
+    coin_name_ = const_cast< ::std::string*>(_default_coin_name_);
+    return temp;
+  }
+}
+inline void SetAccountLabel::set_allocated_coin_name(::std::string* coin_name) {
+  if (coin_name_ != _default_coin_name_) {
+    delete coin_name_;
+  }
+  if (coin_name) {
+    set_has_coin_name();
+    coin_name_ = coin_name;
+  } else {
+    clear_has_coin_name();
+    coin_name_ = const_cast< ::std::string*>(_default_coin_name_);
+  }
+}
+
+// optional uint32 index = 2;
+inline bool SetAccountLabel::has_index() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void SetAccountLabel::set_has_index() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void SetAccountLabel::clear_has_index() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void SetAccountLabel::clear_index() {
+  index_ = 0u;
+  clear_has_index();
+}
+inline ::google::protobuf::uint32 SetAccountLabel::index() const {
+  return index_;
+}
+inline void SetAccountLabel::set_index(::google::protobuf::uint32 value) {
+  set_has_index();
+  index_ = value;
+}
+
+// optional string label = 3;
+inline bool SetAccountLabel::has_label() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void SetAccountLabel::set_has_label() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void SetAccountLabel::clear_has_label() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void SetAccountLabel::clear_label() {
+  if (label_ != &::google::protobuf::internal::kEmptyString) {
+    label_->clear();
+  }
+  clear_has_label();
+}
+inline const ::std::string& SetAccountLabel::label() const {
+  return *label_;
+}
+inline void SetAccountLabel::set_label(const ::std::string& value) {
+  set_has_label();
+  if (label_ == &::google::protobuf::internal::kEmptyString) {
+    label_ = new ::std::string;
+  }
+  label_->assign(value);
+}
+inline void SetAccountLabel::set_label(const char* value) {
+  set_has_label();
+  if (label_ == &::google::protobuf::internal::kEmptyString) {
+    label_ = new ::std::string;
+  }
+  label_->assign(value);
+}
+inline void SetAccountLabel::set_label(const char* value, size_t size) {
+  set_has_label();
+  if (label_ == &::google::protobuf::internal::kEmptyString) {
+    label_ = new ::std::string;
+  }
+  label_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* SetAccountLabel::mutable_label() {
+  set_has_label();
+  if (label_ == &::google::protobuf::internal::kEmptyString) {
+    label_ = new ::std::string;
+  }
+  return label_;
+}
+inline ::std::string* SetAccountLabel::release_label() {
+  clear_has_label();
+  if (label_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = label_;
+    label_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void SetAccountLabel::set_allocated_label(::std::string* label) {
+  if (label_ != &::google::protobuf::internal::kEmptyString) {
+    delete label_;
+  }
+  if (label) {
+    set_has_label();
+    label_ = label;
+  } else {
+    clear_has_label();
+    label_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
 }
 
 // -------------------------------------------------------------------

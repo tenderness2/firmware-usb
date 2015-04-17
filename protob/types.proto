@@ -1,13 +1,13 @@
 /**
- * Types for TREZOR communication
+ * Types for BWallet communication
  *
  * @author	Marek Palatinus <slush@satoshilabs.com>
  * @version	1.2
  */
 
 // Sugar for easier handling in Java
-option java_package = "com.satoshilabs.trezor.protobuf";
-option java_outer_classname = "TrezorType";
+option java_package = "com.bdx.bwallet.protobuf";
+option java_outer_classname = "BWalletType";
 
 import "google/protobuf/descriptor.proto";
 
@@ -15,10 +15,10 @@ import "google/protobuf/descriptor.proto";
  * Options for specifying message direction and type of wire (normal/debug)
  */
 extend google.protobuf.EnumValueOptions {
-	optional bool wire_in = 50002;		// message can be transmitted via wire from PC to TREZOR
-	optional bool wire_out = 50003;		// message can be transmitted via wire from TREZOR to PC
-	optional bool wire_debug_in = 50004;	// message can be transmitted via debug wire from PC to TREZOR
-	optional bool wire_debug_out = 50005;	// message can be transmitted via debug wire from TREZOR to PC
+	optional bool wire_in = 50002;		// message can be transmitted via wire from PC to BWallet
+	optional bool wire_out = 50003;		// message can be transmitted via wire from BWallet to PC
+	optional bool wire_debug_in = 50004;	// message can be transmitted via debug wire from PC to BWallet
+	optional bool wire_debug_out = 50005;	// message can be transmitted via debug wire from BWallet to PC
 }
 
 /**
@@ -47,6 +47,8 @@ enum FailureType {
 enum OutputScriptType {
 	PAYTOADDRESS = 0;
 	PAYTOSCRIPTHASH = 1;
+	PAYTOMULTISIG = 2;
+	PAYTOOPRETURN = 3;
 }
 
 /**
@@ -113,6 +115,11 @@ message HDNodeType {
 	optional bytes public_key = 6;
 }
 
+message HDNodePathType {
+	required HDNodeType node = 1;						// BIP-32 node in deserialized form
+	repeated uint32 address_n = 2;						// BIP-32 path to derive the key from node
+}
+
 /**
  * Structure representing Coin
  * @used_in Features
@@ -120,8 +127,9 @@ message HDNodeType {
 message CoinType {
 	optional string coin_name = 1;
 	optional string coin_shortcut = 2;
-	optional uint32 address_type = 3;
+	optional uint32 address_type = 3 [default=0];
 	optional uint64 maxfee_kb = 4;
+	optional uint32 address_type_p2sh = 5 [default=5];
 }
 
 /**
@@ -129,8 +137,9 @@ message CoinType {
  * @used_in TxInputType
  */
 message MultisigRedeemScriptType {
-	repeated bytes pubkeys = 1;						// pubkeys from multisig address (sorted lexicographically)
+	repeated HDNodePathType pubkeys = 1;						// pubkeys from multisig address (sorted lexicographically)
 	repeated bytes signatures = 2;						// existing signatures for partially signed input
+	optional uint32 m = 3;							// "m" from n, how many valid signatures is necessary for spending
 }
 
 /**
@@ -158,6 +167,8 @@ message TxOutputType {
 	repeated uint32 address_n = 2;			// BIP-32 path to derive the key from master node; has higher priority than "address"
 	required uint64 amount = 3;			// amount to spend in satoshis
 	required OutputScriptType script_type = 4;	// output script type
+	optional MultisigRedeemScriptType multisig = 5; // defines multisig address; script_type must be PAYTOMULTISIG
+	optional bytes op_return_data = 6;		// defines op_return data; script_type must be PAYTOOPRETURN, amount must be 0
 }
 
 /**
@@ -201,3 +212,35 @@ message TxRequestSerializedType {
 	optional bytes signature = 2;		// signature of the signature_index input
 	optional bytes serialized_tx = 3;	// part of serialized and signed transaction
 }
+
+/**
+ * Structure representing identity data
+ * @used_in IdentityType
+ */
+message IdentityType {
+    optional string proto = 1;          // proto part of URI
+    optional string user = 2;           // user part of URI
+    optional string host = 3;           // host part of URI
+    optional string port = 4;           // port part of URI
+    optional string path = 5;           // path part of URI
+    optional uint32 index = 6 [default=0];      // identity index
+}
+
+/**
+ * Structure representing coin data
+ * @used_in storage or get coin account labels
+ */
+message AccountLabelsType {
+	required uint32 count = 1;
+	repeated AccountLabelType labels = 2;  // account label and index 
+}
+
+/**
+ * Structure representing  coin data to map --> key
+ * @used_in storage or get coin account label
+ */
+message AccountLabelType {
+	required uint32 index = 1;    // account label index 
+	required string label = 2;   // account label 
+}
+

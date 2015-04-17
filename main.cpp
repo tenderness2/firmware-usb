@@ -18,6 +18,7 @@
 #include "easylogging++.h"
 #include "hid.hpp"
 #include "wire.hpp"
+#include "wire_proto.hpp"
 #include "feature.hpp"
 
 static const auto sleep_time = boost::chrono::seconds(10);
