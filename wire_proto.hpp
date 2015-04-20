@@ -20,7 +20,7 @@ namespace protobuf
 	struct wire_proto {
 		typedef pb::Message pbuf_type;
 		typedef pb::Message *pbuf_type_ptr;
-		//typedef wire::message wire_type;
+		typedef wire::message wire_type;
 
 		wire_proto(state &s): protobuf_state(s){}
 
@@ -40,6 +40,28 @@ namespace protobuf
 					protobuf_state.descriptor_pool.FindMessageTypeByName(name);
 			}
 		}
+
+		pbuf_type_ptr wire_to_protobuf(wire_type const &wire)
+		{
+			auto descriptor = descriptor_index.at(wire.id);
+			auto prototype = protobuf_state.message_factory.GetPrototype(descriptor);
+
+			pbuf_type_ptr pbuf = prototype->New();
+			pbuf->ParseFromArray(wire.data.data(), wire.data.size());
+
+			return pbuf;
+		}
+
+		void protobuf_to_wire(pbuf_type const &pbuf, wire_type &wire)
+		{
+			auto size = pbuf.ByteSize();
+			auto name = pbuf.GetDescriptor()->name();
+
+			wire.id = find_wire_id(name);
+			wire.data.resize(size);
+			pbuf.SerializeToArray(wire.data.data(), wire.data.size());
+		}
+
 
 		private:
 			typedef std::map<int, pb::Descriptor const *> id_map;

@@ -32,3 +32,6 @@ $(NAME): $(OBJS)
 
 clean:
 	rm -rf $(OBJS) $(NAME) $(LOGS)
+
+main : 
+	rm main.o

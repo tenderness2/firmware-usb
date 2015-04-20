@@ -1,4 +1,4 @@
-
+#include <netinet/in.h>
 #include <string>
 #include <cstdint>
 #include <vector>
@@ -85,7 +85,7 @@ namespace wire {
 			}
 			size_type n = read_report_form_buffer(data, len);
 			if(n < len) 
-				read_bufferd(data + n, len - n);
+				read_buffered(data + n, len - n);
 		}
 
 		void write(char_type const *data, size_type len)
@@ -98,7 +98,7 @@ namespace wire {
 		private :
 			size_type read_report_form_buffer(char_type *data, size_type len)
 			{
-				size_type n = min(read_buffer.size(), len);
+				size_type n = std::min(read_buffer.size(), len);
 				auto r1 = read_buffer.begin();
 				auto r2 = read_buffer.begin() + n;
 				
@@ -122,10 +122,35 @@ namespace wire {
 
 				if(r > 0) {
 					char_type rn = report[0];
-					size_type n = min(static_cast<size_type>(rn))
+					size_type n = std::min(static_cast<size_type>(rn), static_cast<size_type>(r - 1));
+					std::copy(report.begin() + 1, report.begin() + 1 + n, back_inserter(read_buffer));
 				}
 			}
+
+			size_type write_report(char_type const *data, size_type len)
+			{
+				report_type report;
+				report.fill(0x00);
+				report[0] = report.size() - 1;
+
+				size_type n = std::min(report.size() - 1, len);
+				std::copy(data, data + n, report.begin() + 1);
+
+				int r = hid::write(hid, report.data(), report.size());
+
+				if(r < 0) 
+					throw write_error{"HID device write failed"};
+				if(r < static_cast<int>(report.size())) 
+					throw write_error{"HID device write was insufficient"};
+
+				return n;
+			}
+
+			typedef std::vector<char_type> buffer_type;
+			typedef std::array<char_type, 64> report_type;
+
 			hid_device *hid;
+			buffer_type read_buffer;
 
 	};
 
@@ -166,17 +191,17 @@ namespace wire {
 			device::char_type buf[6];
 			std::uint32_t size;
 
-			device.read_bufferd(buf, 1);
+			device.read_buffered(buf, 1);
 			while(buf[0] != '#'){
-				device,read_bufferd(buf, 1);
+				device.read_buffered(buf, 1);
 			}
 
-			device.read_bufferd(buf, 1);
+			device.read_buffered(buf, 1);
 			if(buf[0] != '#') {
-				throw header_read_error{"header bytes ar malformed"}
+				throw header_read_error{"header bytes ar malformed"};
 			}
 
-			device.read_bufferd(buf, 6);
+			device.read_buffered(buf, 6);
 
 			id = ntohs((buf[0] << 0) | (buf[1] << 8));
 			size = ntohl((buf[2] << 0) | (buf[3] << 8) |
@@ -187,7 +212,7 @@ namespace wire {
 				throw header_read_error{"message is too big"};
 
 			data.resize(size);
-			device.read_bufferd(data.data(), data.size());
+			device.read_buffered(data.data(), data.size());
 		}
 
 		void write_to(device &device) const
