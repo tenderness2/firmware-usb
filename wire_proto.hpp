@@ -76,4 +76,5 @@ namespace protobuf
 				throw std::invalid_argument("missing wire id for message");
 			}
 	};
+
 }

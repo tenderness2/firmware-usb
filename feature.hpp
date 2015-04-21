@@ -8,6 +8,7 @@ namespace feature {
 	namespace po = boost::program_options;
 
 	struct device_feature {
+
 		device_feature(){ hid::init(); };
 		void help(po::options_description &desc) {
 			std::cout << desc << std::endl;
@@ -41,16 +42,20 @@ namespace feature {
 			//std::cout << "path : " << path << std::endl;
 			std::unique_ptr<wire::device_kernel> device(new wire::device_kernel(path.c_str())); 
 			device->open();
-			std::cout << "is opeinged !" << std::endl;
+			std::cout << "is opened !" << std::endl;
 		}
 
 		void test_screen(int time) {
-			
+			protobuf_ptr pbuf{}
+
 		}
 
 		~device_feature(){ hid::exit(); };
 
 		private :
+			wire::message wire_in;
+			wire::message wire_out;	
+			using protobuf_ptr = std::unique_ptr<protobuf::pb::Message>;
 			
 	};
 }
