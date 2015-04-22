@@ -252,6 +252,5 @@ namespace wire {
 
 		private :
 			std::unique_ptr<wire::device> device;
-
 	};
 }

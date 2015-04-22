@@ -46,7 +46,6 @@ namespace feature {
 		}
 
 		void test_screen(int time) {
-			protobuf_ptr pbuf{}
 
 		}
 

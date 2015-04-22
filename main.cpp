@@ -17,8 +17,10 @@
 #include <vector>
 #include "easylogging++.h"
 #include "hid.hpp"
+#include "utils.hpp"
 #include "wire.hpp"
 #include "wire_proto.hpp"
+#include "json_codec.hpp"
 #include "feature.hpp"
 
 static const auto sleep_time = boost::chrono::seconds(10);
