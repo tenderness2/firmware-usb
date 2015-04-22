@@ -16,6 +16,7 @@ CLIBS 	 += -lprotobuf
 CLIBS 	 += -lboost_program_options
 CLIBS 	 += -lboost_system
 CLIBS 	 += -lboost_thread
+CLIBS 	 += -ljsoncpp
 
 LOGS	= logs
 

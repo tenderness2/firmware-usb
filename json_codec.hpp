@@ -24,7 +24,7 @@ namespace protobuf {
 		{
 			auto name = val["type"];
 			auto data = val["message"];
-
+			std::cout <<"name: " << name << std::endl;
 			if(!name.isString()) {
 				throw std::invalid_argument("expecting JSON string");
 			}
@@ -387,4 +387,33 @@ namespace protobuf {
 				}
 			}
 	};
+/*
+	struct kernel {
+
+		kernel() : pb_state{},
+			pb_wire_codec{pb_state},
+			pb_json_codec{pb_state}
+		{}  
+
+		~kernel() {}
+
+		void json_to_wire(Json::Value const &json, wire::message &wire)
+		{   
+			protobuf_ptr pbuf{pb_json_codec.typed_json_to_protobuf(json)};
+			pb_wire_codec.protobuf_to_wire(*pbuf, wire);
+		}   
+
+		void wire_to_json(wire::message const &wire, Json::Value &json)
+		{   
+			protobuf_ptr pbuf{pb_wire_codec.wire_to_protobuf(wire)};
+			json = pb_json_codec.protobuf_to_typed_json(*pbuf);
+		}   
+
+		private:
+		using protobuf_ptr = std::unique_ptr<protobuf::pb::Message>;
+		state pb_state;
+		wire_proto pb_wire_codec;
+		json_codec pb_json_codec;    
+	};  
+	*/
 }

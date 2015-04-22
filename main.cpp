@@ -21,6 +21,7 @@
 #include "wire.hpp"
 #include "wire_proto.hpp"
 #include "json_codec.hpp"
+#include "core.hpp"
 #include "feature.hpp"
 
 static const auto sleep_time = boost::chrono::seconds(10);
@@ -40,7 +41,8 @@ void configure_logging()
 	cfg.set(el::Level::Trace, el::ConfigurationType::Format, default_format);
 	cfg.set(el::Level::Verbose, el::ConfigurationType::Format, default_format);
 
-	el::Loggers::getLogger("wire.device");
+	el::Loggers::getLogger("core.device");
+	el::Loggers::getLogger("core.kernel");
 	el::Loggers::getLogger("wire.enumerate");
 
 	el::Loggers::reconfigureAllLoggers(cfg);

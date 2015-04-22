@@ -56,7 +56,7 @@ namespace protobuf
 		{
 			auto size = pbuf.ByteSize();
 			auto name = pbuf.GetDescriptor()->name();
-
+			std::cout << "wire name : " << name << std::endl;
 			wire.id = find_wire_id(name);
 			wire.data.resize(size);
 			pbuf.SerializeToArray(wire.data.data(), wire.data.size());
