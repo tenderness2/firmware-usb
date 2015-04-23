@@ -10,7 +10,7 @@ namespace core {
 
         void open()
         {   
-        if(device.get() == nullptr) {
+        	if(device.get() == nullptr) {
                 CLOG(INFO, "core.device") << "opening : " << device_path;
                 device.reset(new wire::device{device_path.c_str()});
             }   
@@ -48,7 +48,9 @@ namespace core {
 		kernel() : pb_state{},
 			pb_wire_codec{pb_state},
 			pb_json_codec{pb_state}
-		{}  
+		{
+			pb_wire_codec.load_protobuf_state();
+		}  
 
 		~kernel() {}
 
@@ -65,9 +67,9 @@ namespace core {
 		}   
 
 		private:
-		using protobuf_ptr = std::unique_ptr<protobuf::pb::Message>;
-		protobuf::state pb_state;
-		protobuf::wire_proto pb_wire_codec;
-		protobuf::json_codec pb_json_codec;    
+			using protobuf_ptr = std::unique_ptr<protobuf::pb::Message>;
+			protobuf::state pb_state;
+			protobuf::wire_proto pb_wire_codec;
+			protobuf::json_codec pb_json_codec;    
 	};  
 }

@@ -3,6 +3,7 @@
 #include <google/protobuf/dynamic_message.h>
 #include <google/protobuf/descriptor.h>
 #include <google/protobuf/descriptor.pb.h>
+//#include "protob/messages.pb.h"
 
 namespace protobuf 
 {
@@ -44,6 +45,7 @@ namespace protobuf
 		pbuf_type_ptr wire_to_protobuf(wire_type const &wire)
 		{
 			auto descriptor = descriptor_index.at(wire.id);
+			std::cout <<"wire out id : " << wire.id<< std::endl;
 			auto prototype = protobuf_state.message_factory.GetPrototype(descriptor);
 
 			pbuf_type_ptr pbuf = prototype->New();

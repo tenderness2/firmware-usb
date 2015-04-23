@@ -57,7 +57,7 @@ namespace protobuf {
 				for(int i = 0; i < md->field_count(); i++){
 					auto fd = md->field(i);
 					auto fname = fd->name();
-
+					
 					try{
 						if(fd->is_repeated()) {
 							val[fname] = serialize_repeated_field(msg, *ref, *fd);
@@ -144,8 +144,10 @@ namespace protobuf {
 					case pb::FieldDescriptor::TYPE_BOOL:
 						return ref.GetBool(msg, &fd);
 
-					case pb::FieldDescriptor::TYPE_STRING:
-						return ref.GetString(msg, &fd);
+					case pb::FieldDescriptor::TYPE_STRING:{
+						std::cout << "stirng is ok ------" << std::endl;
+						return ref.GetString(msg, &fd);									  
+					}
 
 					case pb::FieldDescriptor::TYPE_BYTES:
 						return utils::hex_encode(ref.GetString(msg, &fd));

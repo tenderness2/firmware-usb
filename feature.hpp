@@ -9,9 +9,36 @@ namespace feature {
 
 	namespace po = boost::program_options;
 
+	struct message_feature {
+
+		message_feature(std::string const &dp) : device_path(dp) {}
+
+		Json::Value message_communication(Json::Value const &json)
+		{
+			wire::message wire_in;
+			wire::message wire_out;	
+			std::unique_ptr<core::kernel> kernel(new core::kernel());
+			std::unique_ptr<core::device_kernel> device(new core::device_kernel(device_path.c_str()));
+			//core::device_kernel *device;
+
+			//device->open();
+			Json::Value json_message;
+			kernel->json_to_wire(json, wire_in);
+			device->call(wire_in, wire_out);
+			kernel->wire_to_json(wire_out, json_message);
+
+			return json_message;
+		}
+
+		private :
+			std::string device_path;
+
+	};
+
 	struct device_feature {
 
-		device_feature(){ hid::init(); };
+		device_feature() { hid::init();}
+
 		void help(po::options_description &desc) {
 			std::cout << desc << std::endl;
 		}
@@ -41,40 +68,23 @@ namespace feature {
 		}
 		
 		void device_path(std::string path) {
-			std::unique_ptr<core::device_kernel> device(new core::device_kernel(path.c_str())); 
-			//std::cout << "path : " << path << std::endl;
-			device->open();
-			std::cout << "is opened !" << std::endl;
+			msg.reset(new message_feature(path));
 		}
 
 		void test_screen(int time) {
-			 std::unique_ptr<core::kernel> kernel(new core::kernel());
-			 Json::Value json_message;
+			 Json::Value json_message, recv_json;
 			 json_message["type"] = Json::Value("TestScreen");
 
 			 Json::Value message;
 			 message["delay_time"] = Json::Value(time);
-
 			 json_message["message"] = Json::Value(message);
-
-			 wire::message wire_in;
-			 wire::message wire_out;
-			 std::unique_ptr<core::device_kernel> device(new core::device_kernel("0002:003c:00")); 
-			 device->open();
-			//std::cout << "path : " << path << std::endl;
-			
-			 kernel->json_to_wire(json_message, wire_in);
-			 device->call(wire_in, wire_out);
-			 kernel->wire_to_json(wire_out, json_message);
-
+			 recv_json = msg->message_communication(json_message);
+			 std::cout << "recv_json : " << recv_json.toStyledString() << std::endl;
 		}
 
 		~device_feature(){ hid::exit(); };
 
 		private :
-			wire::message wire_in;
-			wire::message wire_out;	
-			using protobuf_ptr = std::unique_ptr<protobuf::pb::Message>;
-			
+			std::unique_ptr<message_feature> msg;	
 	};
 }
