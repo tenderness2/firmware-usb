@@ -11,7 +11,7 @@ namespace feature {
 
 	struct message_feature {
 
-		message_feature(std::string const &dp) : device_path(dp) {}
+		message_feature(std::string const &dp) : device_path{dp} {}
 
 		Json::Value message_communication(Json::Value const &json)
 		{
