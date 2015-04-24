@@ -22,7 +22,7 @@
 #include "wire_proto.hpp"
 #include "json_codec.hpp"
 #include "core.hpp"
-#include "feature.hpp"
+#include "command.hpp"
 
 static const auto sleep_time = boost::chrono::seconds(10);
 
@@ -57,7 +57,7 @@ int main(int argc, char **argv)
 		namespace po = boost::program_options;
 		using namespace hid;
 		using namespace wire;
-		std::unique_ptr<feature::device_feature>  action(new feature::device_feature);
+		std::unique_ptr<command::device_command>  cmd(new command::device_command);
 
 		po::options_description desc("Options");
 		desc.add_options()
@@ -73,28 +73,28 @@ int main(int argc, char **argv)
 		po::notify(vm);
 
 		if(vm.count("help") || (argc == 1)) {
-			action->help(desc);
+			cmd->help(desc);
 			return 1;
 		}
 
 		if(vm.count("version")) {
-			action->version();
+			cmd->version();
 			return 1;
 		}
 
 		if(vm.count("list")) {
-			action->list_usb();
+			cmd->list_usb();
 			return 1;
 		}
 
 		if(vm.count("path")) {
 			auto path = vm["path"].as<std::string>();
-			action->device_path(path);
+			cmd->device_path(path);
 		}
 		
 		if(vm.count("test_screen")) {
 			int time = vm["test_screen"].as<int>();	
-			action->test_screen(time);
+			cmd->test_screen(time);
 		}
 	} catch(std::exception& e) {
 		LOG(ERROR) << e.what();

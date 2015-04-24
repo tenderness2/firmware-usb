@@ -5,13 +5,13 @@
 #include <jsoncpp/json/json.h>
 #include "protob/messages.pb.h"
 
-namespace feature {
+namespace command {
 
 	namespace po = boost::program_options;
 
-	struct message_feature {
+	struct message_command {
 
-		message_feature(std::string const &dp) : device_path{dp} {}
+		message_command(std::string const &dp) : device_path{dp} {}
 
 		Json::Value message_communication(Json::Value const &json)
 		{
@@ -19,9 +19,7 @@ namespace feature {
 			wire::message wire_out;	
 			std::unique_ptr<core::kernel> kernel(new core::kernel());
 			std::unique_ptr<core::device_kernel> device(new core::device_kernel(device_path.c_str()));
-			//core::device_kernel *device;
 
-			//device->open();
 			Json::Value json_message;
 			kernel->json_to_wire(json, wire_in);
 			device->call(wire_in, wire_out);
@@ -35,9 +33,9 @@ namespace feature {
 
 	};
 
-	struct device_feature {
+	struct device_command {
 
-		device_feature() { hid::init();}
+		device_command() { hid::init();}
 
 		void help(po::options_description &desc) {
 			std::cout << desc << std::endl;
@@ -57,7 +55,6 @@ namespace feature {
 					std::cout << "path : " << iter->path << std::endl;  
 					std::wcout << "serial number: " <<  iter->serial_number << std::endl;   
 				}
-
 			}
 			else
 			{
@@ -68,7 +65,7 @@ namespace feature {
 		}
 		
 		void device_path(std::string path) {
-			msg.reset(new message_feature(path));
+			msg.reset(new message_command(path));
 		}
 
 		void test_screen(int time) {
@@ -82,9 +79,9 @@ namespace feature {
 			 std::cout << "recv_json : " << recv_json.toStyledString() << std::endl;
 		}
 
-		~device_feature(){ hid::exit(); };
+		~device_command(){ hid::exit(); };
 
 		private :
-			std::unique_ptr<message_feature> msg;	
+			std::unique_ptr<message_command> msg;	
 	};
 }

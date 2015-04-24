@@ -24,19 +24,14 @@ namespace wire {
 
 	typedef std::vector<device_info> device_info_list;
 
-	bool is_device_supported(hid_device_info const *info) 
-	{
-		return((0x534c == info->vendor_id) && (0x0001 == info->product_id));
-	}
-
 	device_info_list enumerate_connected_devices()
 	{
 		device_info_list list;
 		auto *infos = hid::enumerate(0x00, 0x00);
 
 		for(auto i = infos; i != nullptr; i = i->next) {
-			if(!is_device_supported(i)) 
-				continue;
+		//	if(!is_device_supported(i)) 
+		//		continue;
 
 			if(i->interface_number > 0){
 				CLOG(DEBUG, "wire.enumerate") << "skipping, invaild device";
