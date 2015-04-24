@@ -72,10 +72,13 @@ namespace core {
 			pb_json_codec{pb_state}
 		{
 			pb_wire_codec.load_protobuf_state();
-			hid::init();
+			//hid::init();
 		}  
 
-		~kernel() { hid::exit(); }
+		~kernel() 
+		{ 
+			//hid::exit(); 
+		}
 
 		device_enumeration_type enumerate_devices()
 		{

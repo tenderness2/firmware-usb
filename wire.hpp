@@ -44,10 +44,8 @@ namespace wire {
 								//i->serial_number, 
 								i->path});
 
-			hid::free_enumeration(infos);
-			std::cout << "list is core------5 " << std::endl;
-
 		}
+		hid::free_enumeration(infos);
 		return list;
 	}
 

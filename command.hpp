@@ -15,7 +15,7 @@ namespace command {
 
 		Json::Value message_communication(Json::Value const &json)
 		{
-			/*
+			/*	
 			wire::message wire_in;
 			wire::message wire_out;	
 			std::unique_ptr<core::kernel> kernel(new core::kernel());
@@ -37,7 +37,7 @@ namespace command {
 
 	struct device_command {
 
-		device_command() {  }
+		device_command() { hid::init();}
 
 		void help(po::options_description &desc) {
 			std::cout << desc << std::endl;
@@ -48,12 +48,12 @@ namespace command {
 		}
 
 		void list_usb() {
-			std::unique_ptr<core::kernel> kernel(new core::kernel());
+			std::unique_ptr<core::kernel> kernel{new core::kernel};
 			auto devices = kernel->enumerate_devices();
 			
 			if(devices.size()) {
 				for(auto const &i: devices) {
-					std::cout << "path : " << i.first.path << std::endl;
+					std::cout << " found device, path is : " << i.first.path << std::endl;
 				}
 
 			} else {
@@ -73,7 +73,11 @@ namespace command {
 			 //std::cout << "recv_json : " << recv_json.toStyledString() << std::endl;
 		}
 
-		~device_command(){  std:: cout << "exit "<< std::endl; };
+		~device_command()
+		{  
+		//	std:: cout << "exit "<< std::endl; 
+			hid::exit(); 
+		};
 
 	};
 }
