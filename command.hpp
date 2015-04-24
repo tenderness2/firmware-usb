@@ -11,10 +11,11 @@ namespace command {
 
 	struct message_command {
 
-		message_command(std::string const &dp) : device_path{dp} {}
+		message_command() {}
 
 		Json::Value message_communication(Json::Value const &json)
 		{
+			/*
 			wire::message wire_in;
 			wire::message wire_out;	
 			std::unique_ptr<core::kernel> kernel(new core::kernel());
@@ -26,16 +27,17 @@ namespace command {
 			kernel->wire_to_json(wire_out, json_message);
 
 			return json_message;
+			*/
 		}
 
 		private :
-			std::string device_path;
+			//std::string device_path;
 
 	};
 
 	struct device_command {
 
-		device_command() { hid::init();}
+		device_command() {  }
 
 		void help(po::options_description &desc) {
 			std::cout << desc << std::endl;
@@ -46,26 +48,18 @@ namespace command {
 		}
 
 		void list_usb() {
-			wire::device_info_list list;
-			list = wire::enumerate_connected_devices();
-			if(list.size())
-			{
-				std::vector<wire::device_info>::iterator iter;
-				for(iter = list.begin(); iter != list.end(); iter++) {
-					std::cout << "path : " << iter->path << std::endl;  
-					std::wcout << "serial number: " <<  iter->serial_number << std::endl;   
+			std::unique_ptr<core::kernel> kernel(new core::kernel());
+			auto devices = kernel->enumerate_devices();
+			
+			if(devices.size()) {
+				for(auto const &i: devices) {
+					std::cout << "path : " << i.first.path << std::endl;
 				}
-			}
-			else
-			{
+
+			} else {
 				LOG(INFO) << "no device found";
-
 			}
-
-		}
-		
-		void device_path(std::string path) {
-			msg.reset(new message_command(path));
+			
 		}
 
 		void test_screen(int time) {
@@ -75,13 +69,11 @@ namespace command {
 			 Json::Value message;
 			 message["delay_time"] = Json::Value(time);
 			 json_message["message"] = Json::Value(message);
-			 recv_json = msg->message_communication(json_message);
-			 std::cout << "recv_json : " << recv_json.toStyledString() << std::endl;
+			 //recv_json = msg->message_communication(json_message);
+			 //std::cout << "recv_json : " << recv_json.toStyledString() << std::endl;
 		}
 
-		~device_command(){ hid::exit(); };
+		~device_command(){  std:: cout << "exit "<< std::endl; };
 
-		private :
-			std::unique_ptr<message_command> msg;	
 	};
 }

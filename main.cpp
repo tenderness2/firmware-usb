@@ -86,14 +86,9 @@ int main(int argc, char **argv)
 			cmd->list_usb();
 			return 1;
 		}
-
-		if(vm.count("path")) {
-			auto path = vm["path"].as<std::string>();
-			cmd->device_path(path);
-		}
 		
 		if(vm.count("test_screen")) {
-			int time = vm["test_screen"].as<int>();	
+			auto time = vm["test_screen"].as<int>();	
 			cmd->test_screen(time);
 		}
 	} catch(std::exception& e) {
