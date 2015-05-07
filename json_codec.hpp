@@ -24,7 +24,7 @@ namespace protobuf {
 		{
 			auto name = val["type"];
 			auto data = val["message"];
-			std::cout <<"name: " << name << std::endl;
+		//	std::cout <<"name: " << name << std::endl;
 			if(!name.isString()) {
 				throw std::invalid_argument("expecting JSON string");
 			}

@@ -10,16 +10,13 @@ namespace command {
 	namespace po = boost::program_options;
 
 	struct message_command {
-
-		message_command() {}
-
 		Json::Value message_communication(Json::Value const &json)
 		{
-			/*	
 			wire::message wire_in;
 			wire::message wire_out;	
 			std::unique_ptr<core::kernel> kernel(new core::kernel());
-			std::unique_ptr<core::device_kernel> device(new core::device_kernel(device_path.c_str()));
+			auto dev = kernel->enumerate_devices();
+			std::unique_ptr<core::device_kernel> device(new core::device_kernel(dev[0].first.path.c_str()));
 
 			Json::Value json_message;
 			kernel->json_to_wire(json, wire_in);
@@ -27,18 +24,17 @@ namespace command {
 			kernel->wire_to_json(wire_out, json_message);
 
 			return json_message;
-			*/
 		}
-
-		private :
-			//std::string device_path;
-
 	};
 
 	struct device_command {
-
-		device_command() { hid::init();}
-
+		
+		device_command() 
+		{
+			if(msg.get() == nullptr) {
+				msg.reset(new message_command);
+			}
+		}
 		void help(po::options_description &desc) {
 			std::cout << desc << std::endl;
 		}
@@ -55,11 +51,9 @@ namespace command {
 				for(auto const &i: devices) {
 					std::cout << " found device, path is : " << i.first.path << std::endl;
 				}
-
 			} else {
 				LOG(INFO) << "no device found";
-			}
-			
+			}	
 		}
 
 		void test_screen(int time) {
@@ -69,15 +63,17 @@ namespace command {
 			 Json::Value message;
 			 message["delay_time"] = Json::Value(time);
 			 json_message["message"] = Json::Value(message);
-			 //recv_json = msg->message_communication(json_message);
-			 //std::cout << "recv_json : " << recv_json.toStyledString() << std::endl;
+			 recv_json = msg->message_communication(json_message);
+			 std::cout << "recv_json : " << recv_json.toStyledString() << std::endl;
+		}
+		
+		~device_command() 
+		{
+			msg.reset();
 		}
 
-		~device_command()
-		{  
-		//	std:: cout << "exit "<< std::endl; 
-			hid::exit(); 
-		};
-
+		private :
+			std::unique_ptr<message_command> msg;
+			
 	};
 }

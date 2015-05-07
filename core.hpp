@@ -50,7 +50,7 @@ namespace core {
 		}
 
 		private :
-		std::unique_ptr<wire::device> device;
+			std::unique_ptr<wire::device> device;
 	};
 
 	struct kernel {
@@ -72,12 +72,12 @@ namespace core {
 			pb_json_codec{pb_state}
 		{
 			pb_wire_codec.load_protobuf_state();
-			//hid::init();
+			hid::init();
 		}  
 
 		~kernel() 
 		{ 
-			//hid::exit(); 
+			hid::exit(); 
 		}
 
 		device_enumeration_type enumerate_devices()
@@ -125,7 +125,7 @@ namespace core {
 			return get_device_kernel(session_it->first);
 		}
 
-		session_id_type accquire_session(device_path_type const &device_path)
+		session_id_type acquire_session(device_path_type const &device_path)
 		{
 			lock_type lock{mutex};
 			CLOG(INFO, "core.kernel") << "accquire session for: " << device_path;
@@ -148,11 +148,11 @@ namespace core {
 			}
 		}
 
-		session_id_type open_and_accquire_session(device_path_type const &device_path)
+		session_id_type open_and_acquire_session(device_path_type const &device_path)
 		{
 			lock_type lock{mutex};
 			get_device_kernel(device_path)->open();
-			return accquire_session(device_path);
+			return acquire_session(device_path);
 		}
 
 		void close_and_release_session(session_id_type const &session_id)
@@ -203,7 +203,5 @@ namespace core {
 					return is_device_supported(i);
 			});
 		}
-
-
 	};  
 }

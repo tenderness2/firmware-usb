@@ -57,7 +57,7 @@ int main(int argc, char **argv)
 		namespace po = boost::program_options;
 		using namespace hid;
 		using namespace wire;
-		std::unique_ptr<command::device_command>  cmd(new command::device_command);
+		std::unique_ptr<command::device_command>  cmd{new command::device_command};
 
 		po::options_description desc("Options");
 		desc.add_options()
