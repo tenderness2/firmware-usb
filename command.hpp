@@ -35,15 +35,19 @@ namespace command {
 				msg.reset(new message_command);
 			}
 		}
-		void help(po::options_description &desc) {
+
+		void help(po::options_description &desc) 
+		{
 			std::cout << desc << std::endl;
 		}
 
-		void version() {
+		void version() 
+		{
 			std::cout << "program version is 0.1.0" << std::endl;
 		}
 
-		void list_usb() {
+		void list_usb() 
+		{
 			std::unique_ptr<core::kernel> kernel{new core::kernel};
 			auto devices = kernel->enumerate_devices();
 			
@@ -56,15 +60,33 @@ namespace command {
 			}	
 		}
 
-		void test_screen(int time) {
-			 Json::Value json_message, recv_json;
+		void test_screen(int time) 
+		{
 			 json_message["type"] = Json::Value("TestScreen");
 
-			 Json::Value message;
 			 message["delay_time"] = Json::Value(time);
 			 json_message["message"] = Json::Value(message);
 			 recv_json = msg->message_communication(json_message);
 			 std::cout << "recv_json : " << recv_json.toStyledString() << std::endl;
+		}
+
+		void get_features() 
+		{
+			json_message["type"] = Json::Value("Initialize");			
+			recv_json = msg->message_communication(json_message);
+			std::cout << "recv_json : " << recv_json.toStyledString() << std::endl;
+		}
+
+		void set_label(std::string label)
+		{
+			json_message["type"] = Json::Value("ApplySettings");
+			message["label"] = Json::Value(label);
+			json_message["message"] = Json::Value(message);
+			recv_json = msg->message_communication(json_message);
+			std::cout << "recv_json : " << recv_json.toStyledString() << std::endl;	
+			json_message["type"] = Json::Value("ButtonAck");
+			recv_json = msg->message_communication(json_message);
+			std::cout << "recv_json : " << recv_json.toStyledString() << std::endl;
 		}
 		
 		~device_command() 
@@ -74,6 +96,6 @@ namespace command {
 
 		private :
 			std::unique_ptr<message_command> msg;
-			
+			Json::Value json_message, message, recv_json;
 	};
 }

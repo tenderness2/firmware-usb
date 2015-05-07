@@ -64,8 +64,10 @@ int main(int argc, char **argv)
 			("help,h", "program help message")
 			("version,v", "program version")
 			("list,l", "display hid usb device")
-			("path,p", po::value<std::string>(), "set usb path")
+			//("path,p", po::value<std::string>(), "set usb path")
 			("test_screen,t", po::value<int>(), "test home screen")
+			("get_features", "Retrieve device features and settings")
+			("set_label", po::value<std::string>(), "Set new wallet label")
 			;
 
 		po::variables_map vm;
@@ -90,6 +92,18 @@ int main(int argc, char **argv)
 		if(vm.count("test_screen")) {
 			auto time = vm["test_screen"].as<int>();	
 			cmd->test_screen(time);
+			return 1;
+		}
+
+		if(vm.count("get_features")) {
+			cmd->get_features();
+			return 1;
+		}
+
+		if(vm.count("set_label")) {
+			auto label = vm["set_label"].as<std::string>();
+			cmd->set_label(label);
+			return 1;
 		}
 	} catch(std::exception& e) {
 		LOG(ERROR) << e.what();

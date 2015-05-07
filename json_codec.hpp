@@ -145,7 +145,6 @@ namespace protobuf {
 						return ref.GetBool(msg, &fd);
 
 					case pb::FieldDescriptor::TYPE_STRING:{
-						std::cout << "stirng is ok ------" << std::endl;
 						return ref.GetString(msg, &fd);									  
 					}
 
