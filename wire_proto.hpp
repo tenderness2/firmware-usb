@@ -45,7 +45,6 @@ namespace protobuf
 		pbuf_type_ptr wire_to_protobuf(wire_type const &wire)
 		{
 			auto descriptor = descriptor_index.at(wire.id);
-			//std::cout <<"wire out id : " << wire.id<< std::endl;
 			auto prototype = protobuf_state.message_factory.GetPrototype(descriptor);
 
 			pbuf_type_ptr pbuf = prototype->New();
@@ -58,7 +57,6 @@ namespace protobuf
 		{
 			auto size = pbuf.ByteSize();
 			auto name = pbuf.GetDescriptor()->name();
-			//std::cout << "wire name : " << name << std::endl;
 			wire.id = find_wire_id(name);
 			wire.data.resize(size);
 			pbuf.SerializeToArray(wire.data.data(), wire.data.size());

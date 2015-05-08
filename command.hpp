@@ -64,8 +64,8 @@ namespace command {
 		{
 			 json_message["type"] = Json::Value("TestScreen");
 
-			 message["delay_time"] = Json::Value(time);
-			 json_message["message"] = Json::Value(message);
+			 messages["delay_time"] = Json::Value(time);
+			 json_message["message"] = Json::Value(messages);
 			 recv_json = msg->message_communication(json_message);
 			 std::cout << "recv_json : " << recv_json.toStyledString() << std::endl;
 		}
@@ -74,18 +74,27 @@ namespace command {
 		{
 			json_message["type"] = Json::Value("Initialize");			
 			recv_json = msg->message_communication(json_message);
-			std::cout << "recv_json : " << recv_json.toStyledString() << std::endl;
 		}
 
 		void set_label(std::string label)
 		{
 			json_message["type"] = Json::Value("ApplySettings");
-			message["label"] = Json::Value(label);
-			json_message["message"] = Json::Value(message);
+			messages["label"] = Json::Value(label);
+			json_message["message"] = Json::Value(messages);
 			recv_json = msg->message_communication(json_message);
-			std::cout << "recv_json : " << recv_json.toStyledString() << std::endl;	
-			json_message["type"] = Json::Value("ButtonAck");
-			recv_json = msg->message_communication(json_message);
+			if(!recv_json["type"].asString().compare("ButtonRequest")){
+				json_message["type"] = Json::Value("ButtonAck");
+				recv_json = msg->message_communication(json_message);
+			}
+			if(!recv_json["type"].asString().compare("PinMatrixRequest")){
+				std::string pin;
+				std::cout << "Input Pin :";
+				std::cin >> pin;	
+				json_message["type"] = Json::Value("PinMatrixAck");
+				messages["pin"] = Json::Value(pin);
+				json_message["message"] = Json::Value(messages);
+				recv_json = msg->message_communication(json_message);
+			}
 			std::cout << "recv_json : " << recv_json.toStyledString() << std::endl;
 		}
 		
@@ -96,6 +105,6 @@ namespace command {
 
 		private :
 			std::unique_ptr<message_command> msg;
-			Json::Value json_message, message, recv_json;
+			Json::Value json_message, messages, recv_json;
 	};
 }
