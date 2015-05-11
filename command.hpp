@@ -31,8 +31,8 @@ namespace command {
 		
 		device_command() 
 		{
-			if(msg.get() == nullptr) {
-				msg.reset(new message_command);
+			if(msg_cmd.get() == nullptr) {
+				msg_cmd.reset(new message_command);
 			}
 		}
 
@@ -64,47 +64,47 @@ namespace command {
 		{
 			 json_message["type"] = Json::Value("TestScreen");
 
-			 messages["delay_time"] = Json::Value(time);
-			 json_message["message"] = Json::Value(messages);
-			 recv_json = msg->message_communication(json_message);
+			 msg["delay_time"] = Json::Value(time);
+			 json_message["message"] = Json::Value(msg);
+			 recv_json = msg_cmd->message_communication(json_message);
 			 std::cout << "recv_json : " << recv_json.toStyledString() << std::endl;
 		}
 
 		void get_features() 
 		{
 			json_message["type"] = Json::Value("Initialize");			
-			recv_json = msg->message_communication(json_message);
+			recv_json = msg_cmd->message_communication(json_message);
 		}
 
 		void set_label(std::string label)
 		{
 			json_message["type"] = Json::Value("ApplySettings");
-			messages["label"] = Json::Value(label);
-			json_message["message"] = Json::Value(messages);
-			recv_json = msg->message_communication(json_message);
+			msg["label"] = Json::Value(label);
+			json_message["message"] = Json::Value(msg);
+			recv_json = msg_cmd->message_communication(json_message);
 			if(!recv_json["type"].asString().compare("ButtonRequest")){
 				json_message["type"] = Json::Value("ButtonAck");
-				recv_json = msg->message_communication(json_message);
+				recv_json = msg_cmd->message_communication(json_message);
 			}
 			if(!recv_json["type"].asString().compare("PinMatrixRequest")){
 				std::string pin;
 				std::cout << "Input Pin :";
 				std::cin >> pin;	
 				json_message["type"] = Json::Value("PinMatrixAck");
-				messages["pin"] = Json::Value(pin);
-				json_message["message"] = Json::Value(messages);
-				recv_json = msg->message_communication(json_message);
+				msg["pin"] = Json::Value(pin);
+				json_message["message"] = Json::Value(msg);
+				recv_json = msg_cmd->message_communication(json_message);
 			}
 			std::cout << "recv_json : " << recv_json.toStyledString() << std::endl;
 		}
 		
 		~device_command() 
 		{
-			msg.reset();
+			msg_cmd.reset();
 		}
 
 		private :
-			std::unique_ptr<message_command> msg;
-			Json::Value json_message, messages, recv_json;
+			std::unique_ptr<message_command> msg_cmd;
+			Json::Value json_message, msg, recv_json;
 	};
 }
