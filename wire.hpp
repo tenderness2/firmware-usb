@@ -177,7 +177,7 @@ namespace wire {
 
 			id = ntohs((buf[0] << 0) | (buf[1] << 8));
 			size = ntohl((buf[2] << 0) | (buf[3] << 8) |
-				   		 (buf[4] << 16) | (buf[4] << 24));
+				   		 (buf[4] << 16) | (buf[5] << 24));
 
 			static const std::uint32_t max_size = 1024*1024;
 			if(size > max_size)

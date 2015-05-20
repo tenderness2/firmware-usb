@@ -32,11 +32,13 @@ void configure_logging()
 {
 	const auto default_format = "%datetime %level [%logger] %msg";
 	const auto max_log_file_size = "2097152"; // 2mb, log gets truncated after that
+	const auto log_path = "/var/log/myfirmware.log";
 
 	el::Configurations cfg;
 	cfg.setToDefault();
 	cfg.setGlobally(el::ConfigurationType::MaxLogFileSize, max_log_file_size);
 	cfg.setGlobally(el::ConfigurationType::Format, default_format);
+	cfg.setGlobally(el::ConfigurationType::Filename,log_path);
 	cfg.set(el::Level::Debug, el::ConfigurationType::Format, default_format);
 	cfg.set(el::Level::Trace, el::ConfigurationType::Format, default_format);
 	cfg.set(el::Level::Verbose, el::ConfigurationType::Format, default_format);
@@ -68,6 +70,7 @@ int main(int argc, char **argv)
 			("test_screen,t", po::value<int>(), "test home screen")
 			("get_features", "Retrieve device features and settings")
 			("set_label", po::value<std::string>(), "Set new wallet label")
+			("sign_tx", "Sign Bitcoin Tx")
 			;
 
 		po::variables_map vm;
@@ -103,6 +106,12 @@ int main(int argc, char **argv)
 		if(vm.count("set_label")) {
 			auto label = vm["set_label"].as<std::string>();
 			cmd->set_label(label);
+			return 1;
+		}
+		
+		if(vm.count("sign_tx"))
+		{
+			cmd->sign_tx();
 			return 1;
 		}
 	} catch(std::exception& e) {

@@ -3,7 +3,9 @@
 #include <string>
 #include <boost/program_options.hpp>
 #include <jsoncpp/json/json.h>
-#include "protob/messages.pb.h"
+//#include "protob/messages.pb.h"
+//#include "protob/config.pb.h"
+
 
 namespace command {
 
@@ -15,6 +17,7 @@ namespace command {
 			wire::message wire_in;
 			wire::message wire_out;	
 			std::unique_ptr<core::kernel> kernel(new core::kernel());
+			//kernel->set_config();
 			auto dev = kernel->enumerate_devices();
 			std::unique_ptr<core::device_kernel> device(new core::device_kernel(dev[0].first.path.c_str()));
 
@@ -74,6 +77,7 @@ namespace command {
 		{
 			json_message["type"] = Json::Value("Initialize");			
 			recv_json = msg_cmd->message_communication(json_message);
+			std::cout << "recv_json : " << recv_json.toStyledString() << std::endl;
 		}
 
 		void set_label(std::string label)
@@ -96,6 +100,27 @@ namespace command {
 				recv_json = msg_cmd->message_communication(json_message);
 			}
 			std::cout << "recv_json : " << recv_json.toStyledString() << std::endl;
+		}
+
+		void sign_tx()
+		{
+			json_message["type"] = Json::Value("SignTx");
+			msg["outputs_count"] = Json::Value(2);
+			msg["inputs_count"] = Json::Value(1);
+			//msg["has_coin_name"] = Json::Value(true);
+			msg["coin_name"] = Json::Value("Bitcoin");
+			json_message["message"] = Json::Value(msg);
+			recv_json = msg_cmd->message_communication(json_message);
+			std::cout << "recv_json : " << recv_json.toStyledString() << std::endl;
+			if(!recv_json["type"].asString().compare("TxRequest")) {
+				json_message["type"] = Json::Value("SignTx");
+				msg["inputs"] = Json::Value(1);
+				msg["prev_hash"] = Json::Value("44bd70d901b76dfc07bc76eede4b0a0f28e145d5f9baf27f3ee414e87bf1ace5");
+				msg["prev_index"] = Json::Value(1);
+				//msg["add"]
+				
+			}
+			
 		}
 		
 		~device_command() 
