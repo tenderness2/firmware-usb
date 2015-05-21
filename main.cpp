@@ -70,7 +70,7 @@ int main(int argc, char **argv)
 			("test_screen,t", po::value<int>(), "test home screen")
 			("get_features", "Retrieve device features and settings")
 			("set_label", po::value<std::string>(), "Set new wallet label")
-			("sign_tx", "Sign Bitcoin Tx")
+			("sign_tx,s", "Sign Bitcoin Tx")
 			;
 
 		po::variables_map vm;

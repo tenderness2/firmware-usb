@@ -1,0 +1,32 @@
+{
+	"sign_tx" : {
+		"type" : "SignTx",
+		"message" : { "coin_name" : "Bitcoin", "inputs_count" : 1, "outputs_count" : 2}
+	},
+
+	"tx_ack1" : {
+		"type" : "TxAck",
+		"message" : { "has_tx" : true, "tx" : {"inputs" : [ {"prev_hash" : "44bd70d901b76dfc07bc76eede4b0a0f28e145d5f9baf27f3ee414e87bf1ace5", "prev_index" : 0, "address_n" : [ 2147483692, 2147483648, 2147483650, 1, 3 ]}]}}
+	},
+
+	"tx_ack2" : {
+		"type" : "TxAck",
+		"message" : {"has_tx" : true, "tx" : {"inputs_cnt" : 1, "lock_time" : 0, "outputs_cnt" : 2, "version" : 1 }}
+	},
+
+	"tx_ack3" : {
+		"type" : "TxAck",
+		"message" : { "has_tx" : true, "tx" : {"inputs" : [ { "prev_hash" : "0829854282e62a4e1fe856e5eddb7791f8f22f4528457317363445879a1bde6e", "prev_index" : 1, "sequence" : 4294967295, "script_sig" : "483045022100e544663a4653930db977fef878d559aa4efb9fd886270b8fdbf421750883de7c02206c909e78d1ae4afd94adbdfb60f78de9fc37743aab98640dc7b9f02de1c80c660121020996966240fe17cec0ebb40d76ac2e27814a67d41ef41c73e3797b66f2727a55"}]}}
+	},
+
+	"tx_ack4" : {
+		"type" : "TxAck",
+		"message" : { "has_tx" : true, "tx" : {"bin_outputs" : [ { "amount" : 30000, "script_pubkey" : "76a9144c2d4910bd5cfc2663bb4ab8b7e4f5d0a84eea6488ac"}]}}
+	},
+
+	"tx_ack5" : {
+		"type" : "TxAck",
+		"message" : { "has_tx" : true, "tx" : {"bin_outputs" : [ { "amount" : 10000, "script_pubkey" : "76a9144c2d4910bd5cfc2663bb4ab8b7e4f5d0a84eea6488ac"}]}}
+	}
+}
+
