@@ -4,6 +4,7 @@
 #include <boost/program_options.hpp>
 #include <jsoncpp/json/json.h>
 #include <fstream>
+#include <sstream>
 #include <cassert>
 
 namespace command {
@@ -64,54 +65,56 @@ namespace command {
 
 		void test_screen(int time) 
 		{
+			/*
 			 json_msg["type"] = Json::Value("TestScreen");
 
 			 msg["delay_time"] = Json::Value(time);
 			 json_msg["message"] = Json::Value(msg);
-			 recv_json = msg_cmd->message_communication(json_msg);
-			 std::cout << "recv_json : " << recv_json.toStyledString() << std::endl;
+			 recv_msg = msg_cmd->message_communication(json_msg);
+			 std::cout << "recv_msg : " << recv_msg.toStyledString() << std::endl;
+			 */
 		}
 
 		void get_features() 
 		{
+			/*
 			json_msg["type"] = Json::Value("Initialize");			
-			recv_json = msg_cmd->message_communication(json_msg);
-			std::cout << "recv_json : " << recv_json.toStyledString() << std::endl;
+			recv_msg = msg_cmd->message_communication(json_msg);
+			std::cout << "recv_msg : " << recv_msg.toStyledString() << std::endl;
+			*/
 		}
 
 		void set_label(std::string label)
 		{
+			/*
 			json_msg["type"] = Json::Value("ApplySettings");
 			msg["label"] = Json::Value(label);
 			json_msg["message"] = Json::Value(msg);
-			recv_json = msg_cmd->message_communication(json_msg);
-			if(!recv_json["type"].asString().compare("ButtonRequest")){
+			recv_msg = msg_cmd->message_communication(json_msg);
+			if(!recv_msg["type"].asString().compare("ButtonRequest")){
 				json_msg["type"] = Json::Value("ButtonAck");
-				recv_json = msg_cmd->message_communication(json_msg);
+				recv_msg = msg_cmd->message_communication(json_msg);
 			}
-			if(!recv_json["type"].asString().compare("PinMatrixRequest")){
+			if(!recv_msg["type"].asString().compare("PinMatrixRequest")){
 				std::string pin;
 				std::cout << "Input Pin :";
 				std::cin >> pin;	
 				json_msg["type"] = Json::Value("PinMatrixAck");
 				msg["pin"] = Json::Value(pin);
 				json_msg["message"] = Json::Value(msg);
-				recv_json = msg_cmd->message_communication(json_msg);
+				recv_msg = msg_cmd->message_communication(json_msg);
 			}
-			std::cout << "recv_json : " << recv_json.toStyledString() << std::endl;
+			std::cout << "recv_msg : " << recv_msg.toStyledString() << std::endl;
+			*/
 		}
 
 		void sign_tx()
 		{
-			if(json_init()){
-				if(send_json_message("sign_tx", "TxRequest", "")) {
-					if(send_json_message("tx_ack1", "TxRequest", "TXMETA")) {
-						if(send_json_message("tx_ack2", "TxRequest", "TXINPUT")){
-							std::cout << "recv_json : " << recv_json.toStyledString() << std::endl;
-						}
-					}
-				}
-			}
+
+			if(!json_init())
+				LOG(INFO) << "parse Sign Tx json message fail";
+			
+			send_json_message("sign_tx");
 		}
 		
 		~device_command() 
@@ -120,46 +123,67 @@ namespace command {
 		}
 
 		private :
+			enum {
+				TXINPUT = 1,
+				TXOUTPUT = 2,
+				TXMETA = 3,	
+			};
+
+			std::unique_ptr<message_command> msg_cmd;
+			Json::Value json_msg;
+			Json::Reader reader;
+			std::ifstream input;
 
 			bool json_init()
 			{
 				input.open("./json/SignTx.json");
 				assert(input.is_open());
-				if(!reader.parse(input, json_msg, false)) {
-					LOG(INFO) << "parse Sign Tx json message fail";
-					return false;	
-				}
+				if(!reader.parse(input, json_msg, false)) 
+					return false;
 
 				return true;
 			}
 
-			void json_clear()
+			void parse_receive_message(Json::Value msg)
 			{
-				msg.clear();
-				recv_json.clear();	
-			}
+				Json::Value type_msg, rx_msg;
+				std::ostringstream req_index;
+				std::string send_msg;
+				
+				std::cout << "recv_msg : " << msg.toStyledString() << std::endl;
+				type_msg = msg["message"];
+				rx_msg = type_msg["details"];
+				req_index << rx_msg["request_index"].asInt();
 
-			bool send_json_message(const std::string &signtx, const std::string &type, const std::string &request_type)
-			{
-				json_clear();
-				msg = json_msg[signtx];
-				recv_json = msg_cmd->message_communication(msg);
-				if(!recv_json["type"].asString().compare(type))  {
-					if(!request_type.empty()) {
-						Json::Value rec_msg = recv_json["message"];
-						if(!rec_msg["request_type"].asString().compare("TXOUTPUT")) {
-							return true;
-						}
-					}
-					return true;
+				if(!type_msg["request_type"].asString().compare("TXINPUT")) {
+					if(rx_msg["tx_hash"].type() != Json::nullValue)
+						send_msg = "tx_inputs" + req_index.str();
+					else
+						send_msg = "txinit_inputs" + req_index.str();
 				}
-				return false;
+
+				if(!type_msg["request_type"].asString().compare("TXOUTPUT")) {
+					if(rx_msg["tx_hash"].type() != Json::nullValue)
+						send_msg = "tx_outputs" + req_index.str();
+					else
+						send_msg = "tx_binoutputs" + req_index.str();
+				}
+
+				if(!type_msg["request_type"].asString().compare("TXMETA")) {
+					send_msg = "tx_meta" + req_index.str();
+				}
+				//std::cout << "send_msg: " << send_msg << std::endl;
+
+				send_json_message(send_msg);
 			}
 
+			void send_json_message(const std::string &msg)
+			{
+				Json::Value tx_msg, recv_msg;
+				tx_msg = json_msg[msg];
+				recv_msg = msg_cmd->message_communication(tx_msg);
+				parse_receive_message(recv_msg);
+			}
 
-			std::unique_ptr<message_command> msg_cmd;
-			Json::Value json_msg, msg, recv_json;
-			Json::Reader reader;
-			std::ifstream input;
 	};
 }
