@@ -123,12 +123,6 @@ namespace command {
 		}
 
 		private :
-			enum {
-				TXINPUT = 1,
-				TXOUTPUT = 2,
-				TXMETA = 3,	
-			};
-
 			std::unique_ptr<message_command> msg_cmd;
 			Json::Value json_msg;
 			Json::Reader reader;
@@ -144,7 +138,7 @@ namespace command {
 				return true;
 			}
 
-			void parse_receive_message(Json::Value msg)
+			std::string parse_receive_message(const Json::Value msg)
 			{
 				Json::Value type_msg, rx_msg;
 				std::ostringstream req_index;
@@ -172,17 +166,20 @@ namespace command {
 				if(!type_msg["request_type"].asString().compare("TXMETA")) {
 					send_msg = "tx_meta" + req_index.str();
 				}
-				//std::cout << "send_msg: " << send_msg << std::endl;
 
-				send_json_message(send_msg);
+
+				return send_msg;		
 			}
 
 			void send_json_message(const std::string &msg)
 			{
 				Json::Value tx_msg, recv_msg;
+				std::string send_msg;
 				tx_msg = json_msg[msg];
 				recv_msg = msg_cmd->message_communication(tx_msg);
-				parse_receive_message(recv_msg);
+				send_msg = parse_receive_message(recv_msg);
+				if(send_msg.empty())
+					send_json_message(send_msg);
 			}
 
 	};
