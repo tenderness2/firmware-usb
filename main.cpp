@@ -66,11 +66,10 @@ int main(int argc, char **argv)
 			("help,h", "program help message")
 			("version,v", "program version")
 			("list,l", "display hid usb device")
-			//("path,p", po::value<std::string>(), "set usb path")
-			("test_screen,t", po::value<int>(), "test home screen")
-			("get_features", "Retrieve device features and settings")
+			("test_screen,t", po::value<std::string>(), "test home screen")
+			("get_features", po::value<std::string>(),"Retrieve device features and settings")
 			("set_label", po::value<std::string>(), "Set new wallet label")
-			("sign_tx,s", "Sign Bitcoin Tx")
+			("sign_tx,s", po::value<std::string>(), "Sign Bitcoin Tx")
 			;
 
 		po::variables_map vm;
@@ -93,25 +92,27 @@ int main(int argc, char **argv)
 		}
 		
 		if(vm.count("test_screen")) {
-			auto time = vm["test_screen"].as<int>();	
-			cmd->test_screen(time);
+			auto  cmd_json = vm["test_screen"].as<std::string>();	
+			cmd->test_screen(cmd_json);
 			return 1;
 		}
 
 		if(vm.count("get_features")) {
-			cmd->get_features();
+			auto  cmd_json = vm["get_features"].as<std::string>();	
+			cmd->get_features(cmd_json);
 			return 1;
 		}
 
 		if(vm.count("set_label")) {
-			auto label = vm["set_label"].as<std::string>();
-			cmd->set_label(label);
+			auto cmd_json = vm["set_label"].as<std::string>();
+			cmd->set_label(cmd_json);
 			return 1;
 		}
 		
 		if(vm.count("sign_tx"))
 		{
-			cmd->sign_tx();
+			auto cmd_json = vm["sign_tx"].as<std::string>();
+			cmd->sign_tx(cmd_json);
 			return 1;
 		}
 	} catch(std::exception& e) {

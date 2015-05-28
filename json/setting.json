@@ -1,0 +1,12 @@
+{
+	"setting" : {
+		"type" : "ApplySettings",
+		"message" : {
+			"label" : "kevin"
+		}
+	},
+
+	"button_ack" : {
+		"type" : "ButtonAck"
+	}
+}

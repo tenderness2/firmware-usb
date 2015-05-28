@@ -1,0 +1,8 @@
+{
+	"testscreen" : {
+		"type" : "TestScreen",
+		"message" : {
+			"delay_time" : 1
+		}
+	}
+}
