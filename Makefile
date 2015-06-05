@@ -1,7 +1,7 @@
 ####################################################
 # Generic makefile - Makefile
 # for compiling and linking C++ projects on Linux 
-# Author: George Foot  Modified:Jackie Lee
+# Author: kevin
 ####################################################
 ### Customising
 #
@@ -11,7 +11,7 @@
 # command line of course, if you prefer to do it that way.
 #
 #
-EXECUTABLE := main    # 可执行文件名
+EXECUTABLE := firmware    # 可执行文件名
 LIBDIR:=              # 静态库目录
 INCLUDES :=.           # 头文件目录
 INCLUDES += protob           # 头文件目录

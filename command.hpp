@@ -46,7 +46,7 @@ namespace command {
 
 		void version() 
 		{
-			std::cout << "program version is 0.1.0" << std::endl;
+			std::cout << "bwallet offline tools version 0.1.1" << std::endl;
 		}
 
 		void list_usb() 
