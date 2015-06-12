@@ -1,0 +1,92 @@
+{
+	"multisig" : {
+		"type" : "SignTx",
+		"message" : { "coin_name" : "Bitcoin", "inputs_count" : 1, "outputs_count" : 1}
+	},
+
+	"txinit_inputs0" : {
+		"type" : "TxAck",
+		"message" : { 
+			"has_tx" : true, 
+			"tx": {
+					"inputs": [
+					 {
+						"address_n": [3], 
+						"prev_hash": "d35c1a16d1567fd9ba2cfd101f04962e086782c79d2d111aa0db2e5eddc277cd",
+						"prev_index": 1,
+						"sequence": 4294967295,
+						"script_type": "SPENDMULTISIG",
+						"multisig": {
+							"pubkeys": [
+							{
+								"node": {
+									"depth": 0,
+									"fingerprint": 0,
+									"child_num": 0,
+									"chain_code": "4bacb71334560b017a606d46e1f3cd4b3981b1ff53fbb51a52096c65a93bc4d7",
+									"public_key": "03813d4edd75c2df74c436d15d0ec5e92dd84ff4a5818f797f3d7058b521e2cac4"
+								},
+								"address_n": [1] 
+							},
+							{
+								"node": {
+									"depth": 0,
+									"fingerprint": 0,
+									"child_num": 0,
+									"chain_code": "4bacb71334560b017a606d46e1f3cd4b3981b1ff53fbb51a52096c65a93bc4d7",
+									"public_key": "03813d4edd75c2df74c436d15d0ec5e92dd84ff4a5818f797f3d7058b521e2cac4"
+
+								},
+								"address_n": [2] 
+							},
+							{
+								"node": {
+									"depth": 0,
+									"fingerprint": 0,
+									"child_num": 0,
+									"chain_code": "4bacb71334560b017a606d46e1f3cd4b3981b1ff53fbb51a52096c65a93bc4d7",
+									"public_key": "03813d4edd75c2df74c436d15d0ec5e92dd84ff4a5818f797f3d7058b521e2cac4"
+								},
+								"address_n": [3] 
+							}
+							],
+								"signatures": ["304402207812857bfa9dad33ef27f5f11d54d2ffe9a1ca6f9a2a314656eee687f4dddff2022018202c525c8c2aee7cecbda02dd39951957d4f3f85d1d226e201623de9bbf6d2", "", ""], 
+								"m": 2
+						}
+					}
+					]
+				}
+			}
+	},
+
+	"tx_meta0" : {
+		"type" : "TxAck",
+		"message" : {"has_tx" : true, "tx" : {"version" : 1, "lock_time" : 0, "inputs_cnt" : 1, "outputs_cnt" : 2}}
+	},
+
+	"tx_inputs0" : {
+		"type" : "TxAck",
+		"message" : { "has_tx" : true, "tx" : {"inputs" : [ { "prev_hash" : "caefb4ff535425de8aabab8f65f10bde75cd9fc903e14ca05ec7500e1095f8cc", "prev_index" : 0, "sequence" : 4294967295, "script_sig" : "483045022100ff63c903853b7ac1cbf43e0ab481f7573a98df4f3b6beb1233762bf5caa838ed02202db143dbfcc92befe0708e1f8feb9cd66fd83f9da54f4b90903150c673c3c4b201210351bf316f216ace0f4a16938fbe661fddd6d364c402b4db3b2f91f446ef81688c", "script_type": "SPENDADDRESS"}]}}
+	},
+	
+
+	"txbin_outputs0" : {
+		"type" : "TxAck",
+		"message" : { "has_tx" : true, "tx" : {"bin_outputs" : [ { "amount" : 40000, "script_pubkey" : "76a914a66708f367f056aefe5b24115af6186a5368effb88ac"}]}}
+	},
+
+	"txbin_outputs1" : {
+		"type" : "TxAck",
+		"message" : { "has_tx" : true, "tx" : {"bin_outputs" : [ { "amount" : 20000, "script_pubkey" : "a914e46068416983835a54c9ea1d58764baa1d0c073787"}]}}
+	},
+
+	"tx_outputs0" : {
+		"type": "TxAck",
+		"message" : {"has_tx" : true, "tx": {"outputs": [{"script_type" : "PAYTOADDRESS", "address" : "1GtUfgt8yC8L5uyqEX441snqZxAt6Zv1wY", "amount": 10000 }]}}
+	},
+	
+	"button_ack" : {
+		"type": "ButtonAck"
+	}
+}
+

@@ -126,10 +126,10 @@ namespace command {
 				while(!send_msg.empty()) {
 					msg.clear();
 					msg = send_json_message(send_msg);
-					std::cout << "signtx_msg porecss : " << msg.toStyledString() << std::endl;
+				//	std::cout << "signtx_msg porecss : " << msg.toStyledString() << std::endl;
 					send_msg = parse_signtx_message(msg);
 				}
-				std::cout << "signtx_msg : " << msg.toStyledString() << std::endl;
+				//std::cout << "signtx_msg : " << msg.toStyledString() << std::endl;
 			} catch(std::exception& e) {
 				LOG(ERROR) << e.what();
 			}
@@ -201,6 +201,7 @@ namespace command {
 				if(!type_msg["request_type"].asString().compare("TXMETA")) {
 					send_msg = "tx_meta" + req_index.str();
 				}
+				std::cout << "send_msg : " << send_msg << std::endl;
 
 				return send_msg;		
 			}
@@ -218,7 +219,9 @@ namespace command {
 		{
 			Json::Value tx_msg, recv_msg;
 			tx_msg = json_msg[msg];
+			std::cout << "tx_msg : " << tx_msg.toStyledString() << std::endl;
 			recv_msg = msg_cmd->message_communication(tx_msg);
+			std::cout << "recv_msg : " << recv_msg.toStyledString() << std::endl;
 
 			return recv_msg;
 		}
