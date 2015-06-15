@@ -21,6 +21,7 @@ namespace http_client {
 		}
 
 		CLOG(INFO, "http_client") << "requesting " << url;
+		curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0);
 		curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
 		curl_easy_setopt(curl, CURLOPT_CONNECTTIMEOUT, 10);
 		curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_to_stream);

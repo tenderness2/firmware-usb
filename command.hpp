@@ -72,11 +72,10 @@ namespace command {
 		void test_screen(std::string const &cmd) 
 		{
 			try {
-				Json::Value msg;
 				if(!json_init(cmd))
 					throw std::runtime_error{"parse json message fail"};
-				msg = write_json_message(cmd);
-				std::cout << "testscreen_msg : " << msg.toStyledString() << std::endl;
+
+				write_config_json(cmd);
 			} catch(std::exception& e) {
 				LOG(ERROR) << e.what();
 			}
@@ -85,12 +84,9 @@ namespace command {
 		void get_features(std::string const &cmd) 
 		{
 			try {
-				Json::Value msg;
 				if(!json_init(cmd))
 					throw std::runtime_error{"parse json message fail"};
-				msg = write_json_message(cmd);
-				std::cout << "initialize_msg : " << msg.toStyledString() << std::endl;
-
+				write_config_json(cmd);
 			} catch(std::exception& e) {
 				LOG(ERROR) << e.what();
 			}
@@ -99,20 +95,10 @@ namespace command {
 		void set_label(std::string const &cmd)
 		{
 			try {
-				Json::Value msg, pin_msg;
 				if(!json_init(cmd)) 
 					throw std::runtime_error{"parse json message fail"};
 
-				msg = write_json_message(cmd);
-				std::cout << "setlabel_msg : " << msg.toStyledString() << std::endl;
-				if(!msg["type"].asString().compare("ButtonRequest")){
-					msg.clear();
-					msg = write_json_message("button_ack");
-					if(!msg["type"].asString().compare("PinMatrixRequest")){
-						msg = pin_request();
-						std::cout << "read_msg : " << msg.toStyledString() << std::endl;
-					}
-				}
+				write_config_json(cmd);
 			} catch(std::exception& e) {
 				LOG(ERROR) << e.what();
 			}
@@ -122,7 +108,6 @@ namespace command {
 		{
 			try {
 				Json::Value url_data;
-				Json::Reader stream;
 
 				if(!json_init(cmd))
 					throw std::runtime_error{"parse json message fail"};
@@ -130,23 +115,13 @@ namespace command {
 				auto url = json_msg[cmd]["url"].asString() + json_msg[cmd]["prev_hash"].asString();	
 				auto url_stream = http_client::request_url_to_string(url);
 
-				if(!stream.parse(url_stream, url_data, false))
+				if(!reader.parse(url_stream, url_data, false))
 					throw std::runtime_error{"parse http client json message fail"};
 
-				std::cout << url_data.toStyledString() << std::endl;
+				write_signtx_init();
 
-				init_signtx(cmd);
+				//std::cout << url_data.toStyledString() << std::endl;
 					
-				/*
-				if(json_init(cmd))
-					msg = write_json_message(cmd);
-				write_msg = parse_signtx_message(msg);
-				while(!write_msg.empty()) {
-					msg.clear();
-					msg = write_json_message(write_msg);
-					write_msg = parse_signtx_message(msg);
-				}
-				*/
 			} catch(std::exception& e) {
 				LOG(ERROR) << e.what();
 			}
@@ -163,10 +138,10 @@ namespace command {
 			Json::Reader reader;
 			std::ifstream input;
 
-		bool json_init(std::string const &cmd_json)
+		bool json_init(std::string const &json_cfg)
 		{
 			std::string path;
-			path = "./json/" + cmd_json + ".json";
+			path = "./json/" + json_cfg + ".json";
 			input.open(path);
 			assert(input.is_open());
 			if(!reader.parse(input, json_msg, false)) {
@@ -176,83 +151,120 @@ namespace command {
 			return true;
 		}
 
-		Json::Value init_signtx(std::string const &path)
+		void write_signtx_init()
 		{
-			Json::Value msg, read_msg;
-			msg["type"] = Json::Value("SignTx");
-			msg["message"]["coin_name"] = json_msg[path]["coin_name"];
-			msg["message"]["inputs_count"] = json_msg[path]["inputs_count"];
-			msg["message"]["outputs_count"] = json_msg[path]["outputs_count"];
-			read_msg = msg_cmd->message_communication(msg);
-			
-			return read_msg;
+			Json::Value msg;
+			msg["type"] = json_msg["type"];
+			msg["message"]["coin_name"] = json_msg["coin_name"];
+			msg["message"]["inputs_count"] = json_msg["inputs_count"];
+			msg["message"]["outputs_count"] = json_msg["outputs_count"];
+			write_type_json(msg);
 		}
 
-		Json::Value pin_request()
+		void write_txinit_inputs(int index)
 		{
-			Json::Value msg, pin_msg;
+			
+		}
+
+		void write_tx_meta(int index)
+		{
+
+		}
+
+		void write_tx_inputs(int index)
+		{
+			
+		}
+
+		void write_tx_outputs(int index)
+		{
+
+		}
+
+		void write_txbin_outputs(int index)
+		{
+			
+		}
+
+		void write_button_ack()
+		{
+			Json::Value button_msg;
+			button_msg["type"] = Json::Value("ButtonAck");
+			write_type_json(button_msg);
+		}
+
+		void write_pin_ack()
+		{
+			Json::Value pin_msg;
 			std::string pin;
-			std::cout << "Input Pin :";
+			std::cout << "Please Input Pin :";
 			std::cin >> pin;	
 			pin_msg["type"] = Json::Value("PinMatrixAck");
 			pin_msg["message"]["pin"] = Json::Value(pin);
+			write_type_json(pin_msg);
 			//std::cout << "pin_msg : " << pin_msg.toStyledString() << std::endl;
-			msg = msg_cmd->message_communication(pin_msg);
-
-			return msg;
 		}
 
-		std::string parse_signtx_message(Json::Value const &msg)
+		void parse_read_message(Json::Value const &msg)
 		{
-			Json::Value type_msg, details_msg;
-			std::ostringstream req_index;
-			std::string write_msg;
+			int req_index;
 
-			type_msg = msg["message"];
-			details_msg = type_msg["details"];
-			req_index << details_msg["request_index"].asInt();
-
+			auto type_msg = msg["message"];
+			auto details_msg = type_msg["details"];
 			if(!msg["type"].asString().compare("TxRequest")) {
+				req_index = type_msg["details"]["request_index"].asInt();
+
 				if(!type_msg["request_type"].asString().compare("TXINPUT")) {
-					if(details_msg["tx_hash"].type() != Json::nullValue)
-						write_msg = "tx_inputs" + req_index.str();
-					else
-						write_msg = "txinit_inputs" + req_index.str();
+					if(details_msg["tx_hash"].type() != Json::nullValue) {
+						write_tx_inputs(req_index);
+					} else {
+						write_txinit_inputs(req_index);
+					}
 				}
 
 				if(!type_msg["request_type"].asString().compare("TXOUTPUT")) {
-					if(details_msg["tx_hash"].type() == Json::nullValue)
-						write_msg = "tx_outputs" + req_index.str();
-					else
-						write_msg = "txbin_outputs" + req_index.str();
+					if(details_msg["tx_hash"].type() == Json::nullValue) {
+						write_tx_outputs(req_index);
+					} else {
+						write_txbin_outputs(req_index);
+					}
 				}
 
 				if(!type_msg["request_type"].asString().compare("TXMETA")) {
-					write_msg = "tx_meta" + req_index.str();
+					write_tx_meta(req_index);
 				}
-				std::cout << "write_msg : " << write_msg << std::endl;
-
-				return write_msg;		
 			}
 
 			if(!msg["type"].asString().compare("ButtonRequest")) {
-				write_msg = "button_ack";
-				return write_msg;				
+				write_button_ack();
 			}
 
-			return nullptr;
+			if(!msg["type"].asString().compare("PinMatrixRequest")) {
+				write_pin_ack();
+			}
+
+			if(msg["type"].type() == Json::nullValue) {
+					throw std::runtime_error{"unkown json message type"};	
+			}
 
 		}
 
-		Json::Value write_json_message(std::string const &msg)
+		void write_type_json(Json::Value const &msg)
+		{
+			Json::Value read_msg;
+			read_msg = msg_cmd->message_communication(msg);
+			std::cout << "read_msg : " << read_msg.toStyledString() << std::endl;
+			parse_read_message(read_msg);	
+		}
+
+		void write_config_json(std::string const &msg)
 		{
 			Json::Value tx_msg, read_msg;
 			tx_msg = json_msg[msg];
 			std::cout << "tx_msg : " << tx_msg.toStyledString() << std::endl;
 			read_msg = msg_cmd->message_communication(tx_msg);
 			std::cout << "read_msg : " << read_msg.toStyledString() << std::endl;
-
-			return read_msg;
+			parse_read_message(read_msg);
 		}
 	};
 }

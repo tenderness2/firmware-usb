@@ -1,6 +1,7 @@
 *.o
 *.log
 *.out
+*.d
 logs
 tags
 firmware

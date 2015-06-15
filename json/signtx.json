@@ -1,11 +1,12 @@
 {
-	"signtx" : {
-		"url" : "https://insight.bitpay.com/api/tx/",
-		"prev_hash" : "0829854282e62a4e1fe856e5eddb7791f8f22f4528457317363445879a1bde6e",
-		"prev_index" : 1,
-	 	"coin_name"  : "Bitcoin",
-		"inputs_count" : 1,
-		"outputs_count" : 2
-	}
+	"type" : "SignTx",
+	"url" : "https://insight.bitpay.com/api/tx/",
+	"prev_hash" : "0829854282e62a4e1fe856e5eddb7791f8f22f4528457317363445879a1bde6e",
+	"prev_index" : 1,
+	"coin_name"  : "Bitcoin",
+	"inputs_count" : 1,
+	"outputs_count" : 2,
+	"payout_address" : [],
+	"amount"  : []
 }
 
