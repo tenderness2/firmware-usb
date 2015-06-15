@@ -24,6 +24,7 @@
 #include "core.hpp"
 #include "command.hpp"
 
+
 static const auto sleep_time = boost::chrono::seconds(10);
 
 _INITIALIZE_EASYLOGGINGPP
@@ -46,6 +47,7 @@ void configure_logging()
 	el::Loggers::getLogger("core.device");
 	el::Loggers::getLogger("core.kernel");
 	el::Loggers::getLogger("wire.enumerate");
+	el::Loggers::getLogger("http_client");
 
 	el::Loggers::reconfigureAllLoggers(cfg);
 

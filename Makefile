@@ -24,6 +24,7 @@ LIBS    += -lboost_program_options
 LIBS    += -lboost_system
 LIBS    += -lboost_thread
 LIBS    += -ljsoncpp
+LIBS    += -lcurl
 #
 # # Now alter any implicit rules' variables if you like, e.g.:
 
