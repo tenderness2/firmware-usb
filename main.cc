@@ -62,7 +62,7 @@ int main(int argc, char **argv)
 		using namespace hid;
 		using namespace wire;
 		std::unique_ptr<command::device_command>  cmd{new command::device_command};
-
+		
 		po::options_description desc("Options");
 		desc.add_options()
 			("help,h", "program help message")
