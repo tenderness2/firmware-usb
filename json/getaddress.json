@@ -1,0 +1,10 @@
+{
+	"getaddress" : {
+		"type" : "GetAddress",
+		"message" : {
+			"coin_name" : "Dogecoin",
+			"address_n" : [2147483692, 2147483648, 2147483648, 0, 0],
+			"show_display" : true
+		}
+	}
+}

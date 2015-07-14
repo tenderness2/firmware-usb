@@ -72,6 +72,7 @@ int main(int argc, char **argv)
 			("get_features", po::value<std::string>(),"Retrieve device features and settings")
 			("set_label", po::value<std::string>(), "Set new wallet label")
 			("sign_tx,s", po::value<std::string>(), "Sign Bitcoin Tx")
+			("get_address,g", po::value<std::string>(), "Get Coin Address")
 			;
 
 		po::variables_map vm;
@@ -115,6 +116,13 @@ int main(int argc, char **argv)
 		{
 			auto cmd_json = vm["sign_tx"].as<std::string>();
 			cmd->sign_tx(cmd_json);
+			return 1;
+		}
+
+		if(vm.count("get_address"))
+		{
+			auto cmd_json = vm["get_address"].as<std::string>();
+			cmd->get_address(cmd_json);
 			return 1;
 		}
 	} catch(std::exception& e) {

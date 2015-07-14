@@ -1,12 +1,13 @@
 {
 	"type" : "SignTx",
 	"url" : "https://insight.bitpay.com/api/tx/",
-	"prev_hash" : "0829854282e62a4e1fe856e5eddb7791f8f22f4528457317363445879a1bde6e",
-	"prev_index" : 1,
+	"prev_hash" : "891cc13d3c92c0d92cb35cfb81cd3783ae0c54f989f93b982a513a4e0494439d",
+	//"prev_index" : 0,
 	"coin_name"  : "Bitcoin",
 	"inputs_count" : 1,
 	"outputs_count" : 2,
-	"payout_address" : [],
-	"amount"  : []
+	"payout_address" : "1ReGW5zrDR8PR1dqf94oKU5Z2y6bXbHiv",
+	"address_n" : [2147483692, 2147483648, 2147483648, 1, 6],
+	"amount"  : 10000
 }
 
